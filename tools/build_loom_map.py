@@ -62,6 +62,7 @@ def collect(workspace):
             "title": title_match.group(1).strip() if title_match else rel.stem,
             "status": frontmatter.get("status", ""),
             "summary": first_paragraph(text),
+            "body": _FRONTMATTER.sub("", text, count=1).strip(),
         })
         for raw in _MD_LINK.findall(text):
             if _EXTERNAL.match(raw):
@@ -81,11 +82,15 @@ def embed_json(data):
     return json.dumps(data, ensure_ascii=False).replace("<", "\\u003c")
 
 
+def without_bodies(data):
+    return {**data, "nodes": [{k: v for k, v in n.items() if k != "body"} for n in data["nodes"]]}
+
+
 def render(data, nav=""):
     template = (Path(__file__).parent / "loom_map_template.html").read_text(encoding="utf-8")
     return (template
             .replace("<!--__NAV__-->", nav)
-            .replace("/*__DATA__*/null", embed_json(data)))
+            .replace("/*__DATA__*/null", embed_json(without_bodies(data))))
 
 
 def build(workspace, output, title, nav=""):

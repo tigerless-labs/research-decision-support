@@ -3,7 +3,9 @@ from build_loom_site import assemble, build_site
 
 from conftest import XSS_TITLE
 
-PAGES = ["index.html", "read.html", "compare.html", "ideas.html", "design.html", "map.html"]
+NAV_PAGES = ["index.html", "read.html", "compare.html", "ideas.html", "design.html",
+             "decisions.html", "map.html"]
+PAGES = NAV_PAGES + ["card.html"]
 
 
 def test_directions_come_from_synthesis_links(workspace):
@@ -57,7 +59,7 @@ def test_pages_carry_data_and_nav(workspace, tmp_path):
     build_site(workspace, tmp_path / "site", "demo")
     for page in PAGES:
         html = (tmp_path / "site" / page).read_text(encoding="utf-8")
-        for target in PAGES:
+        for target in NAV_PAGES:
             assert target in html, (page, target)
     read = (tmp_path / "site" / "read.html").read_text(encoding="utf-8")
     assert "Alpha paper" in read
@@ -65,4 +67,16 @@ def test_pages_carry_data_and_nav(workspace, tmp_path):
     ideas = (tmp_path / "site" / "ideas.html").read_text(encoding="utf-8")
     assert "My idea" in ideas and "候选" in ideas
     design = (tmp_path / "site" / "design.html").read_text(encoding="utf-8")
-    assert "The spine" in design and "ADR: pick alpha" in design
+    assert "The spine" in design
+    decisions = (tmp_path / "site" / "decisions.html").read_text(encoding="utf-8")
+    assert "ADR: pick alpha" in decisions and "accepted" in decisions
+
+
+def test_card_viewer_embeds_bodies_and_renderer(workspace, tmp_path):
+    build_site(workspace, tmp_path / "site", "demo")
+    card = (tmp_path / "site" / "card.html").read_text(encoding="utf-8")
+    assert "Second paragraph." in card
+    assert "marked v" in card and "DOMPurify" in card
+    for page in ["index.html", "read.html", "map.html"]:
+        html = (tmp_path / "site" / page).read_text(encoding="utf-8")
+        assert "Second paragraph." not in html, page

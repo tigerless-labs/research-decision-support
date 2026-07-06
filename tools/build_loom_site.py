@@ -2,12 +2,13 @@ import os
 import sys
 from pathlib import Path
 
-from build_loom_map import collect, embed_json
+from build_loom_map import collect, embed_json, without_bodies
 from build_loom_map import render as render_map
 
-SITE_PAGES = ["index", "read", "compare", "ideas", "design"]
+SITE_PAGES = ["index", "read", "compare", "ideas", "design", "decisions"]
 NAV_LINKS = [("index", "Overview"), ("read", "Read"), ("compare", "Compare"),
-             ("ideas", "Ideas"), ("design", "Design"), ("map", "Map")]
+             ("ideas", "Ideas"), ("design", "Design"), ("decisions", "Decisions"),
+             ("map", "Map")]
 
 
 def assemble(data):
@@ -40,18 +41,25 @@ def build_site(workspace, outdir, title):
     site = assemble(collect(workspace))
     site["title"] = title
     site["workspace_rel"] = Path(os.path.relpath(workspace, outdir.resolve())).as_posix()
-    template = (Path(__file__).parent / "loom_site_template.html").read_text(encoding="utf-8")
+    tools = Path(__file__).parent
+    template = (tools / "loom_site_template.html").read_text(encoding="utf-8")
     for page in SITE_PAGES:
         html = (template
                 .replace("<!--__NAV__-->", nav_html(page, with_theme=True))
                 .replace('"__PAGE__"', f'"{page}"')
-                .replace("/*__DATA__*/null", embed_json(site)))
+                .replace("/*__DATA__*/null", embed_json(without_bodies(site))))
         (outdir / f"{page}.html").write_text(html, encoding="utf-8")
+    card = ((tools / "loom_card_template.html").read_text(encoding="utf-8")
+            .replace("<!--__NAV__-->", nav_html("", with_theme=True))
+            .replace("/*__MARKED__*/", (tools / "vendor/marked.min.js").read_text(encoding="utf-8"))
+            .replace("/*__PURIFY__*/", (tools / "vendor/purify.min.js").read_text(encoding="utf-8"))
+            .replace("/*__DATA__*/null", embed_json(site)))
+    (outdir / "card.html").write_text(card, encoding="utf-8")
     map_data = {k: site[k] for k in ("nodes", "edges", "layers")}
     map_data["title"] = title
     (outdir / "map.html").write_text(render_map(map_data, nav_html("map", with_theme=False)),
                                      encoding="utf-8")
-    print(f"ok: {outdir} — index/read/compare/ideas/design/map · {len(site['nodes'])} cards, "
+    print(f"ok: {outdir} — {'/'.join(SITE_PAGES)}/map + card viewer · {len(site['nodes'])} cards, "
           f"{len(site['directions'])} directions, {len(site['unassigned'])} unassigned, "
           f"{len(site['edges'])} links")
 

@@ -154,7 +154,7 @@ dialog .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10
 </style>
 </head>
 <body>
-<nav class="sitenav"><span class="brand">🧶 loom</span><a href="index.html">Overview</a><a href="read.html">Read</a><a href="compare.html">Compare</a><a href="ideas.html" class="on">Ideas</a><a href="design.html">Design</a><a href="map.html">Map</a><span class="spacer"></span><button id="theme-toggle">◐ theme</button></nav>
+<nav class="sitenav"><span class="brand">🧶 loom</span><a href="index.html">Overview</a><a href="read.html">Read</a><a href="compare.html">Compare</a><a href="ideas.html" class="on">Ideas</a><a href="design.html">Design</a><a href="decisions.html">Decisions</a><a href="map.html">Map</a><span class="spacer"></span><button id="theme-toggle">◐ theme</button></nav>
 <header>
   <h1 id="title"></h1>
   <p class="tagline" id="tagline"></p>
@@ -180,7 +180,7 @@ const DATA = {"nodes": [{"id": "design/architecture.md", "layer": "design", "sub
 const STATUSES = ["unread", "skimmed", "read"];
 const nodeById = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
 const sources = DATA.nodes.filter(n => n.layer === "sources");
-const cardHref = id => DATA.workspace_rel + "/" + id;
+const cardHref = id => "card.html#" + encodeURIComponent(id);
 
 const DRAFT_KEY = "loom-draft:" + DATA.title;
 let drafts = {};
@@ -207,7 +207,8 @@ const el = (tag, cls, text) => {
 };
 
 document.getElementById("title").textContent = DATA.title +
-  ({ index: "", read: " — read", compare: " — directions", ideas: " — ideas", design: " — design" })[PAGE];
+  ({ index: "", read: " — read", compare: " — directions", ideas: " — ideas",
+     design: " — design", decisions: " — decisions" })[PAGE];
 document.title = document.getElementById("title").textContent;
 
 const TAGLINES = {
@@ -219,8 +220,10 @@ const TAGLINES = {
     "(plus your browser drafts, marked). The unassigned pile is your to-do.",
   ideas: "Your claims, in your words — each cites the sources that earned it and shows which " +
     "design elements use it. An idea no design uses yet is either a gap or a cut.",
-  design: "What you built and what it stands on: every element lists the ideas it assembles; " +
-    "decisions act on elements and are recorded here.",
+  design: "What you built and what it stands on: every element lists the ideas it assembles " +
+    "and the decisions that act on it.",
+  decisions: "The contested points and how they landed: drivers → options → trade-offs → ADR. " +
+    "Append-only — a new decision supersedes, history stays.",
 };
 document.getElementById("tagline").textContent = TAGLINES[PAGE];
 
@@ -262,7 +265,9 @@ function renderIndex() {
     ["compare.html", "Compare", DATA.directions.length,
       "directions · " + DATA.unassigned.length + " sources unassigned"],
     ["ideas.html", "Ideas", ideas.length, unusedIdeas + " not yet used by any design"],
-    ["design.html", "Design", designs.length, decisions.length + " decisions on record"],
+    ["design.html", "Design", designs.length, "elements assembled from adopted ideas"],
+    ["decisions.html", "Decisions", decisions.length,
+      decisions.filter(n => /open|proposed/.test(n.status)).length + " still open"],
     ["map.html", "Map", DATA.edges.length, "provenance links across " + DATA.nodes.length + " cards"],
   ];
   tiles.forEach(([href, k, n, d]) => {
@@ -509,7 +514,6 @@ function renderIdeas() {
 
 function renderDesign() {
   const designs = DATA.nodes.filter(n => n.layer === "design");
-  const decisions = DATA.nodes.filter(n => n.layer === "decisions");
   designs.forEach(n => {
     const card = el("div", "card");
     const head = el("div", "card-head");
@@ -526,29 +530,48 @@ function renderDesign() {
   });
   if (!designs.length) main.append(el("p", "empty",
     "No design cards yet — assemble adopted ideas into a spine and modules."));
+}
 
-  const section = el("section", "direction");
-  const h2 = el("h2", "", "Decisions");
-  h2.append(el("span", "count", " " + decisions.length));
-  section.append(h2);
+function renderDecisions() {
+  const decisions = DATA.nodes.filter(n => n.layer === "decisions");
+  const OPEN = /open|proposed|存疑/, groups = [
+    ["Open", decisions.filter(n => OPEN.test(n.status))],
+    ["Settled", decisions.filter(n => !OPEN.test(n.status))],
+  ];
   if (!decisions.length) {
-    section.append(el("p", "", "No decisions recorded yet — when a design point is contested, " +
-      "work it through options and trade-offs and land it as an ADR."));
+    main.append(el("p", "empty",
+      "No decisions recorded yet — when a design point is contested, work it through " +
+      "drivers, options and trade-offs, then land it as an ADR. ADRs are append-only: " +
+      "a new decision supersedes the old one, history stays."));
+    return;
   }
-  decisions.forEach(n => {
-    const row = el("div", "member");
-    const a = el("a", "", n.title);
-    a.href = cardHref(n.id);
-    row.append(a);
-    if (n.status) row.append(el("span", "badge" + statusClass(n.status), n.status));
-    outOf(n.id, "design").forEach(d => row.append(chipLink(d)));
-    section.append(row);
+  groups.forEach(([label, list]) => {
+    if (!list.length) return;
+    const section = el("section", "direction");
+    const h2 = el("h2", "", label);
+    h2.append(el("span", "count", " " + list.length));
+    section.append(h2);
+    list.forEach(n => {
+      const card = el("div", "card");
+      const head = el("div", "card-head");
+      const title = el("a", "t", n.title);
+      title.href = cardHref(n.id);
+      head.append(title);
+      if (n.status) head.append(el("span", "badge" + statusClass(n.status), n.status));
+      card.append(head);
+      if (n.summary) card.append(el("p", "summary", n.summary));
+      const acts = outOf(n.id, "design");
+      if (acts.length) card.append(relRow("acts on", acts));
+      const evidence = outOf(n.id, "sources").concat(outOf(n.id, "ideas"));
+      if (evidence.length) card.append(relRow("evidence", evidence));
+      section.append(card);
+    });
+    main.append(section);
   });
-  main.append(section);
 }
 
 ({ index: renderIndex, read: renderRead, compare: renderCompare,
-   ideas: renderIdeas, design: renderDesign })[PAGE]();
+   ideas: renderIdeas, design: renderDesign, decisions: renderDecisions })[PAGE]();
 
 document.getElementById("export-copy").addEventListener("click", () => {
   const text = document.getElementById("export-text");

@@ -94,10 +94,16 @@ python3 tools/build_loom_site.py docs/research-loom -o loom-site --title my-proj
   cards (plus drafts, marked); the unassigned pile is your reading to-do.
 - **Ideas** — your claims with their receipts: what each cites, which design elements
   use it, and which ideas no design uses yet.
-- **Design** — every element with the ideas it assembles and the decisions that act on
-  it; the decision/ADR ledger lives here.
+- **Design** — every element with the ideas it assembles and the decisions that act on it.
+- **Decisions** — the ADR ledger: open vs settled, each linked to the design elements
+  it acts on and the evidence behind it.
 - **Map** — the provenance graph: hover a card to light up its direct links.
 - **Overview** — where you are: counts, directions, progress.
+
+Every card title opens in a built-in reader that renders the markdown properly
+([marked](https://github.com/markedjs/marked) + [DOMPurify](https://github.com/cure53/DOMPurify),
+MIT, embedded at build time — still zero network requests), with cross-card links staying
+inside the reader and a "linked from / links to" trail under each card.
 
 The [demo](docs/site/index.html) is generated from the autoharness example. It's not
 academia-specific — anything that is "read materials → make a defensible call"
@@ -150,7 +156,8 @@ python3 tools/build_loom_site.py docs/research-loom -o loom-site
 SKILL.md                 the skill (drop into ~/.claude/skills/research-loom/)
 templates/               card templates: idea, direction MOC, design, decision worksheet, ADR
 references/note-types.md the three-card contract + frontmatter spec
-tools/build_loom_site.py workspace → workbench: overview / read / compare / ideas / design / map
+tools/build_loom_site.py workspace → workbench: overview / read / compare / ideas / design /
+                         decisions / map, + card reader (embedded marked+DOMPurify)
 tools/build_loom_map.py  workspace → the provenance map page alone
 tools/check_doc_links.py dangling-link validator
 examples/autoharness/    real 97-card workspace from a live project
