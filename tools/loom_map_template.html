@@ -91,6 +91,7 @@ footer a { color: var(--ink-2); }
 </style>
 </head>
 <body>
+<!--__NAV__-->
 <header>
   <h1 id="title">research-loom map</h1>
   <p class="tagline">Five structural layers, not pipeline steps. Every design element traces back
@@ -255,13 +256,15 @@ function unlight() {
   edgeEls.forEach(({ path }) => path.setAttribute("class", "edge"));
   applySearch();
 }
+const esc = s => String(s).replace(/[&<>"']/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 function showTip(n, evt) {
   const outs = (outEdges[n.id] || []).length, ins = (inEdges[n.id] || []).length;
-  tooltip.innerHTML = `<div class="t">${n.title}</div>` +
-    `<div class="m">${n.layer}${n.subtype ? " / " + n.subtype : ""}` +
-    `${n.status ? " · status: " + n.status : ""}</div>` +
+  tooltip.innerHTML = `<div class="t">${esc(n.title)}</div>` +
+    `<div class="m">${esc(n.layer)}${n.subtype ? " / " + esc(n.subtype) : ""}` +
+    `${n.status ? " · status: " + esc(n.status) : ""}</div>` +
     `<div class="m">cites ${outs} · cited by ${ins}</div>` +
-    `<div class="m">${n.id}</div>`;
+    `<div class="m">${esc(n.id)}</div>`;
   tooltip.style.display = "block";
   const x = Math.min(evt.clientX + 14, innerWidth - 360);
   tooltip.style.left = x + "px";

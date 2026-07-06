@@ -8,6 +8,8 @@ _MD_LINK = re.compile(r"\]\(\s*([^)\s]+?\.md)(?:#[^)]*)?\s*\)")
 _EXTERNAL = re.compile(r"^[a-z][a-z0-9+.-]*://")
 _FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 _TITLE = re.compile(r"^#\s+(.+)$", re.MULTILINE)
+_LINK_TEXT = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+_SUMMARY_LIMIT = 280
 
 
 def parse_frontmatter(text):
@@ -22,6 +24,20 @@ def parse_frontmatter(text):
     return fields
 
 
+def first_paragraph(text):
+    body = _FRONTMATTER.sub("", text, count=1)
+    collected = []
+    for line in body.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith(("#", "|", ">", "---", "```")):
+            if collected:
+                break
+            continue
+        collected.append(stripped)
+    paragraph = _LINK_TEXT.sub(r"\1", " ".join(collected))
+    return paragraph.replace("**", "").strip()[:_SUMMARY_LIMIT]
+
+
 def card_files(workspace):
     for md in sorted(workspace.rglob("*.md")):
         rel = md.relative_to(workspace)
@@ -31,7 +47,7 @@ def card_files(workspace):
 
 
 def collect(workspace):
-    workspace = workspace.resolve()
+    workspace = Path(workspace).resolve()
     nodes, edges = [], []
     known = {str(rel) for _, rel in card_files(workspace)}
     for md, rel in card_files(workspace):
@@ -45,6 +61,7 @@ def collect(workspace):
             "subtype": subtype,
             "title": title_match.group(1).strip() if title_match else rel.stem,
             "status": frontmatter.get("status", ""),
+            "summary": first_paragraph(text),
         })
         for raw in _MD_LINK.findall(text):
             if _EXTERNAL.match(raw):
@@ -60,13 +77,22 @@ def collect(workspace):
     return {"nodes": nodes, "edges": unique_edges, "layers": LAYERS}
 
 
-def build(workspace, output, title):
+def embed_json(data):
+    return json.dumps(data, ensure_ascii=False).replace("<", "\\u003c")
+
+
+def render(data, nav=""):
+    template = (Path(__file__).parent / "loom_map_template.html").read_text(encoding="utf-8")
+    return (template
+            .replace("<!--__NAV__-->", nav)
+            .replace("/*__DATA__*/null", embed_json(data)))
+
+
+def build(workspace, output, title, nav=""):
     data = collect(Path(workspace))
     data["title"] = title
-    template = (Path(__file__).parent / "loom_map_template.html").read_text(encoding="utf-8")
-    html = template.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False))
     Path(output).parent.mkdir(parents=True, exist_ok=True)
-    Path(output).write_text(html, encoding="utf-8")
+    Path(output).write_text(render(data, nav), encoding="utf-8")
     counts = {layer: sum(1 for n in data["nodes"] if n["layer"] == layer) for layer in LAYERS}
     print(f"ok: {output} — {len(data['nodes'])} cards, {len(data['edges'])} provenance links, {counts}")
 

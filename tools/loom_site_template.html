@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>loom</title>
+<style>
+:root {
+  --surface: #fcfcfb; --page: #f9f9f7;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
+  --c-design: #008300; --c-decisions: #4a3aa7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1a1a19; --page: #0d0d0d;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
+    --c-design: #008300; --c-decisions: #9085e9;
+  }
+}
+:root[data-theme="light"] {
+  --surface: #fcfcfb; --page: #f9f9f7;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
+  --c-design: #008300; --c-decisions: #4a3aa7;
+}
+:root[data-theme="dark"] {
+  --surface: #1a1a19; --page: #0d0d0d;
+  --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+  --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
+  --c-design: #008300; --c-decisions: #9085e9;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--page); color: var(--ink);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: inherit; }
+.sitenav {
+  max-width: 1160px; margin: 0 auto; padding: 14px 24px 0;
+  display: flex; gap: 4px; align-items: center;
+}
+.sitenav .brand { font-weight: 700; margin-right: 10px; }
+.sitenav a {
+  text-decoration: none; color: var(--ink-2); padding: 5px 11px; border-radius: 999px;
+  border: 1px solid transparent;
+}
+.sitenav a.on { background: var(--surface); border-color: var(--grid); color: var(--ink); }
+.sitenav .spacer { flex: 1; }
+.sitenav button {
+  background: none; border: none; color: var(--muted); cursor: pointer; font: inherit;
+}
+header { max-width: 1160px; margin: 0 auto; padding: 22px 24px 0; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.tagline { color: var(--ink-2); margin: 0 0 16px; max-width: 76ch; }
+main { max-width: 1160px; margin: 0 auto; padding: 0 24px 48px; }
+footer {
+  max-width: 1160px; margin: 0 auto; padding: 0 24px 32px;
+  color: var(--muted); font-size: 12px;
+}
+.controls { display: flex; gap: 8px; align-items: center; margin: 0 0 18px; flex-wrap: wrap; }
+.controls input[type=search], .controls select, .note-row input {
+  background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 7px 11px; font: inherit;
+}
+.controls input[type=search] { width: 240px; }
+.controls .counter { color: var(--muted); font-size: 12.5px; margin-left: auto; }
+button.action {
+  background: var(--surface); color: var(--ink-2); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer; font: inherit;
+}
+button.action:hover { color: var(--ink); }
+.card {
+  background: var(--surface); border: 1px solid var(--grid); border-radius: 12px;
+  padding: 13px 16px; margin-bottom: 10px;
+}
+.card-head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.card-head a.t { font-weight: 600; text-decoration: none; }
+.card-head a.t:hover { text-decoration: underline; }
+.badge {
+  font-size: 11px; color: var(--ink-2); border: 1px solid var(--grid);
+  border-radius: 999px; padding: 1px 8px; white-space: nowrap;
+}
+.badge.dir { border-color: color-mix(in srgb, var(--c-synthesis) 45%, transparent); color: var(--c-synthesis); }
+.badge.draft { border-style: dashed; }
+.card-head select {
+  margin-left: auto; background: none; color: var(--ink-2); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 3px 6px; font: inherit; font-size: 12px;
+}
+.card.s-read { border-left: 3px solid var(--c-design); }
+.card.s-skimmed { border-left: 3px solid var(--c-ideas); }
+.summary { color: var(--ink-2); margin: 7px 0 0; font-size: 13px; }
+.note-row { display: flex; gap: 8px; margin-top: 9px; }
+.note-row input { flex: 1; font-size: 13px; padding: 5px 10px; }
+.note-row input.dirs { flex: 0 1 260px; }
+section.direction { margin-bottom: 26px; }
+section.direction h2 { font-size: 16px; margin: 0 0 2px; display: flex; gap: 8px; align-items: baseline; }
+section.direction h2 a { text-decoration: none; }
+section.direction h2 a:hover { text-decoration: underline; }
+section.direction h2 .count { color: var(--muted); font-size: 13px; font-weight: 400; }
+section.direction > p { color: var(--ink-2); margin: 2px 0 10px; font-size: 13px; max-width: 86ch; }
+.member {
+  display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap;
+  padding: 7px 12px; border: 1px solid var(--grid); border-radius: 10px;
+  background: var(--surface); margin-bottom: 6px;
+}
+.member a { text-decoration: none; }
+.member a:hover { text-decoration: underline; }
+.member .note { color: var(--muted); font-size: 12.5px; font-style: italic; }
+.chip { font-size: 11px; border-radius: 999px; padding: 1px 8px; color: #fff; }
+.chip.read { background: var(--c-design); }
+.chip.skimmed { background: var(--c-ideas); }
+.chip.unread { background: none; color: var(--muted); border: 1px solid var(--grid); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 22px; }
+.tile {
+  background: var(--surface); border: 1px solid var(--grid); border-radius: 12px;
+  padding: 15px 17px; text-decoration: none; display: block;
+}
+.tile:hover { border-color: var(--ink-2); }
+.tile .k { font-weight: 700; font-size: 17px; }
+.tile .n { font-size: 26px; font-variant-numeric: tabular-nums; margin: 5px 0 1px; }
+.tile .d { color: var(--ink-2); font-size: 12.5px; }
+.layerstrip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 22px; }
+.layer-card {
+  background: var(--surface); border: 1px solid var(--grid); border-radius: 10px;
+  padding: 10px 13px; border-top: 3px solid var(--chip); font-size: 12.5px;
+}
+.layer-card .name { font-weight: 600; display: flex; justify-content: space-between; }
+.layer-card .count { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.empty { color: var(--muted); font-style: italic; }
+dialog {
+  background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 12px; padding: 20px; max-width: 640px; width: 90vw;
+}
+dialog::backdrop { background: rgba(0,0,0,0.35); }
+dialog h2 { margin: 0 0 6px; font-size: 16px; }
+dialog p { color: var(--ink-2); margin: 0 0 10px; font-size: 13px; }
+dialog textarea {
+  width: 100%; height: 260px; background: var(--page); color: var(--ink);
+  border: 1px solid var(--grid); border-radius: 8px; padding: 10px; font: 12px/1.5 monospace;
+}
+dialog .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+</style>
+</head>
+<body>
+<!--__NAV__-->
+<header>
+  <h1 id="title"></h1>
+  <p class="tagline" id="tagline"></p>
+</header>
+<main id="main"></main>
+<footer>Generated by <a href="https://github.com/tigerless-ai/research-loom">research-loom</a> ·
+self-contained HTML, no dependencies · your edits here are drafts (saved in this browser) —
+export them and apply back to the cards.</footer>
+<dialog id="export-dialog">
+  <h2>Draft patch</h2>
+  <p>Everything you tagged in this browser, as one patch. Paste it to your agent (or apply by
+  hand) to write the drafts back into the cards — the markdown stays the single source of truth.</p>
+  <textarea id="export-text" readonly></textarea>
+  <div class="row">
+    <button class="action" id="export-copy">Copy</button>
+    <button class="action" id="export-close">Close</button>
+  </div>
+</dialog>
+<script>
+const PAGE = "__PAGE__";
+const DATA = /*__DATA__*/null;
+
+const STATUSES = ["unread", "skimmed", "read"];
+const nodeById = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+const sources = DATA.nodes.filter(n => n.layer === "sources");
+const cardHref = id => DATA.workspace_rel + "/" + id;
+
+const DRAFT_KEY = "loom-draft:" + DATA.title;
+let drafts = {};
+try { drafts = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}"); } catch (e) { drafts = {}; }
+const draftOf = id => drafts[id] || {};
+function setDraft(id, patch) {
+  const next = { ...draftOf(id), ...patch };
+  Object.keys(next).forEach(k => { if (!next[k]) delete next[k]; });
+  if (Object.keys(next).length) drafts[id] = next; else delete drafts[id];
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts));
+}
+const statusOf = n => draftOf(n.id).status || n.status || "unread";
+const draftDirs = id => (draftOf(id).dirs || "").split(",").map(s => s.trim()).filter(Boolean);
+
+const linkedDirs = {};
+DATA.directions.forEach(d => d.members.forEach(m => (linkedDirs[m] = linkedDirs[m] || []).push(d.title)));
+const dirsOf = id => [...new Set([...(linkedDirs[id] || []), ...draftDirs(id)])];
+
+const el = (tag, cls, text) => {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+document.getElementById("title").textContent = DATA.title +
+  ({ index: "", read: " — read", compare: " — directions" })[PAGE];
+document.title = document.getElementById("title").textContent;
+
+const TAGLINES = {
+  index: "Read, tag, judge — then weave what you kept into a design you can defend. " +
+    "Every conclusion stays traceable to the source that earned it.",
+  read: "Work through your sources: skim the digest, tag a direction, leave a one-line take. " +
+    "Tags made here are drafts until exported back into the cards.",
+  compare: "Your sources clustered by direction — membership comes from the synthesis cards " +
+    "(plus your browser drafts, marked). The unassigned pile is your to-do.",
+};
+document.getElementById("tagline").textContent = TAGLINES[PAGE];
+
+const main = document.getElementById("main");
+
+function statusChip(n) {
+  return el("span", "chip " + statusOf(n), statusOf(n));
+}
+
+function renderIndex() {
+  const grid = el("div", "grid");
+  const readCount = sources.filter(n => statusOf(n) !== "unread").length;
+  const tiles = [
+    ["read.html", "Read", sources.length, readCount + " of " + sources.length + " sources read — continue"],
+    ["compare.html", "Compare", DATA.directions.length,
+      "directions · " + DATA.unassigned.length + " sources unassigned"],
+    ["map.html", "Map", DATA.edges.length, "provenance links across " + DATA.nodes.length + " cards"],
+  ];
+  tiles.forEach(([href, k, n, d]) => {
+    const tile = el("a", "tile");
+    tile.href = href;
+    tile.append(el("div", "k", k), el("div", "n", String(n)), el("div", "d", d));
+    grid.append(tile);
+  });
+  main.append(grid);
+
+  const strip = el("div", "layerstrip");
+  DATA.layers.forEach(layer => {
+    const card = el("div", "layer-card");
+    card.style.setProperty("--chip",
+      getComputedStyle(document.documentElement).getPropertyValue("--c-" + layer));
+    const name = el("div", "name");
+    name.append(el("span", "", layer.toUpperCase()),
+      el("span", "count", String(DATA.nodes.filter(n => n.layer === layer).length)));
+    card.append(name);
+    strip.append(card);
+  });
+  main.append(strip);
+
+  if (DATA.directions.length) {
+    const section = el("section", "direction");
+    section.append(el("h2", "", "Directions"));
+    DATA.directions.forEach(d => {
+      const row = el("div", "member");
+      const link = el("a", "", d.title);
+      link.href = cardHref(d.id);
+      row.append(link, el("span", "badge", d.members.length + " sources"));
+      section.append(row);
+    });
+    main.append(section);
+  }
+}
+
+function renderRead() {
+  const controls = el("div", "controls");
+  const search = el("input");
+  search.type = "search"; search.placeholder = "Search title or summary…";
+  const selType = el("select"), selDir = el("select"), selStatus = el("select");
+  const opt = (sel, value, label) => {
+    const o = el("option", "", label || value); o.value = value; sel.append(o);
+  };
+  opt(selType, "", "all types");
+  [...new Set(sources.map(n => n.subtype).filter(Boolean))].forEach(t => opt(selType, t));
+  opt(selDir, "", "all directions");
+  DATA.directions.forEach(d => opt(selDir, d.title));
+  opt(selDir, "__none__", "unassigned");
+  opt(selStatus, "", "any status");
+  STATUSES.forEach(s => opt(selStatus, s));
+  const exportBtn = el("button", "action", "Export drafts");
+  const counter = el("span", "counter");
+  controls.append(search, selType, selDir, selStatus, exportBtn, counter);
+  main.append(controls);
+
+  const datalist = el("datalist");
+  datalist.id = "known-directions";
+  DATA.directions.forEach(d => opt(datalist, d.title));
+  main.append(datalist);
+
+  const rows = sources.map(n => {
+    const card = el("div", "card");
+    const head = el("div", "card-head");
+    const title = el("a", "t", n.title);
+    title.href = cardHref(n.id);
+    head.append(title);
+    if (n.subtype) head.append(el("span", "badge", n.subtype));
+    (linkedDirs[n.id] || []).forEach(d => head.append(el("span", "badge dir", d)));
+    draftDirs(n.id).forEach(d => head.append(el("span", "badge dir draft", d + " ✎")));
+    const sel = el("select");
+    STATUSES.forEach(s => {
+      const o = el("option", "", s); o.value = s; sel.append(o);
+    });
+    sel.value = statusOf(n);
+    sel.addEventListener("change", () => {
+      setDraft(n.id, { status: sel.value === "unread" ? "" : sel.value });
+      paint();
+    });
+    head.append(sel);
+    card.append(head);
+    if (n.summary) card.append(el("p", "summary", n.summary));
+    const noteRow = el("div", "note-row");
+    const note = el("input");
+    note.placeholder = "Your take — one line…";
+    note.value = draftOf(n.id).note || "";
+    note.addEventListener("change", () => setDraft(n.id, { note: note.value.trim() }));
+    const dirs = el("input", "dirs");
+    dirs.placeholder = "tag directions, comma-sep";
+    dirs.setAttribute("list", "known-directions");
+    dirs.value = draftOf(n.id).dirs || "";
+    dirs.addEventListener("change", () => { setDraft(n.id, { dirs: dirs.value.trim() }); paint(); });
+    noteRow.append(note, dirs);
+    card.append(noteRow);
+    main.append(card);
+    return { n, card };
+  });
+
+  function paint() {
+    const q = search.value.trim().toLowerCase();
+    let visible = 0;
+    rows.forEach(({ n, card }) => {
+      card.className = "card s-" + statusOf(n);
+      const inType = !selType.value || n.subtype === selType.value;
+      const inDir = !selDir.value ||
+        (selDir.value === "__none__" ? dirsOf(n.id).length === 0 : dirsOf(n.id).includes(selDir.value));
+      const inStatus = !selStatus.value || statusOf(n) === selStatus.value;
+      const inSearch = !q || (n.title + " " + n.summary).toLowerCase().includes(q);
+      const show = inType && inDir && inStatus && inSearch;
+      card.style.display = show ? "" : "none";
+      if (show) visible += 1;
+      const badges = card.querySelectorAll(".badge.dir");
+      badges.forEach(b => b.remove());
+      const head = card.querySelector(".card-head"), sel = head.querySelector("select");
+      (linkedDirs[n.id] || []).forEach(d => head.insertBefore(el("span", "badge dir", d), sel));
+      draftDirs(n.id).forEach(d => head.insertBefore(el("span", "badge dir draft", d + " ✎"), sel));
+    });
+    const done = sources.filter(n => statusOf(n) !== "unread").length;
+    counter.textContent = visible + " / " + sources.length + " shown · " + done + " read or skimmed";
+  }
+  [search, selType, selDir, selStatus].forEach(c => c.addEventListener("input", paint));
+  paint();
+
+  exportBtn.addEventListener("click", () => {
+    const lines = ["# loom drafts — " + DATA.title, ""];
+    Object.keys(drafts).sort().forEach(id => {
+      const d = drafts[id];
+      lines.push("## " + id);
+      if (d.status) lines.push("status: " + d.status);
+      if (d.dirs) lines.push("directions: " + d.dirs);
+      if (d.note) lines.push("note: " + d.note);
+      lines.push("");
+    });
+    document.getElementById("export-text").value =
+      Object.keys(drafts).length ? lines.join("\n") : "(no drafts yet)";
+    document.getElementById("export-dialog").showModal();
+  });
+}
+
+function renderCompare() {
+  DATA.directions.forEach(d => {
+    const draftMembers = sources.map(n => n.id)
+      .filter(id => !d.members.includes(id) && draftDirs(id).includes(d.title));
+    const section = el("section", "direction");
+    const h2 = el("h2");
+    const link = el("a", "", d.title);
+    link.href = cardHref(d.id);
+    h2.append(link, el("span", "count", (d.members.length + draftMembers.length) + " sources"));
+    section.append(h2);
+    if (d.summary) section.append(el("p", "", d.summary));
+    [...d.members.map(id => [id, false]), ...draftMembers.map(id => [id, true])].forEach(([id, isDraft]) => {
+      const n = nodeById[id];
+      if (!n) return;
+      const row = el("div", "member");
+      const a = el("a", "", n.title);
+      a.href = cardHref(id);
+      row.append(a);
+      if (n.subtype) row.append(el("span", "badge", n.subtype));
+      if (isDraft) row.append(el("span", "badge draft", "draft ✎"));
+      row.append(statusChip(n));
+      const note = draftOf(id).note;
+      if (note) row.append(el("span", "note", "“" + note + "”"));
+      section.append(row);
+    });
+    main.append(section);
+  });
+
+  const leftover = DATA.unassigned.filter(id => draftDirs(id).length === 0);
+  const section = el("section", "direction");
+  const h2 = el("h2", "", "Unassigned");
+  h2.append(el("span", "count", " " + leftover.length + " sources"));
+  section.append(h2);
+  section.append(el("p", "", leftover.length
+    ? "Not yet claimed by any direction — tag them on the Read page or link them from a synthesis card."
+    : "Everything is claimed by at least one direction."));
+  leftover.forEach(id => {
+    const n = nodeById[id];
+    const row = el("div", "member");
+    const a = el("a", "", n.title);
+    a.href = cardHref(id);
+    row.append(a);
+    if (n.subtype) row.append(el("span", "badge", n.subtype));
+    row.append(statusChip(n));
+    section.append(row);
+  });
+  main.append(section);
+}
+
+({ index: renderIndex, read: renderRead, compare: renderCompare })[PAGE]();
+
+document.getElementById("export-copy").addEventListener("click", () => {
+  const text = document.getElementById("export-text");
+  text.select();
+  navigator.clipboard ? navigator.clipboard.writeText(text.value) : document.execCommand("copy");
+});
+document.getElementById("export-close").addEventListener("click", () =>
+  document.getElementById("export-dialog").close());
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const current = root.dataset.theme || (dark ? "dark" : "light");
+  root.dataset.theme = current === "dark" ? "light" : "dark";
+});
+</script>
+</body>
+</html>
