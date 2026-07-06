@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>research-loom map</title>
+<style>
+:root {
+  --surface: #fcfcfb; --page: #f9f9f7;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
+  --c-design: #008300; --c-decisions: #4a3aa7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1a1a19; --page: #0d0d0d;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
+    --c-design: #008300; --c-decisions: #9085e9;
+  }
+}
+:root[data-theme="light"] {
+  --surface: #fcfcfb; --page: #f9f9f7;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
+  --c-design: #008300; --c-decisions: #4a3aa7;
+}
+:root[data-theme="dark"] {
+  --surface: #1a1a19; --page: #0d0d0d;
+  --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+  --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
+  --c-design: #008300; --c-decisions: #9085e9;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--page); color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+header { max-width: 1640px; margin: 0 auto; padding: 28px 24px 0; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.tagline { color: var(--ink-2); margin: 0 0 18px; max-width: 72ch; }
+.controls { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.controls input {
+  background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 7px 12px; width: 260px; font: inherit;
+}
+.controls button {
+  background: var(--surface); color: var(--ink-2); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer; font: inherit;
+}
+.hint { color: var(--muted); font-size: 12px; }
+.model { max-width: 1640px; margin: 0 auto 8px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.layer-card {
+  background: var(--surface); border: 1px solid var(--grid); border-radius: 10px;
+  padding: 12px 14px; border-top: 3px solid var(--chip);
+}
+.layer-card .name { font-weight: 600; display: flex; justify-content: space-between; align-items: baseline; }
+.layer-card .count { color: var(--ink-2); font-variant-numeric: tabular-nums; font-size: 13px; }
+.layer-card .desc { color: var(--ink-2); font-size: 12px; margin-top: 4px; }
+.model-note { max-width: 1640px; margin: 0 auto 14px; padding: 0 24px; color: var(--muted); font-size: 12px; }
+.graph-wrap { max-width: 1640px; margin: 0 auto 40px; padding: 0 24px; overflow-x: auto; }
+.graph-card { background: var(--surface); border: 1px solid var(--grid); border-radius: 12px; }
+svg { display: block; }
+.edge { fill: none; stroke-width: 1.1; opacity: 0.30; }
+.edge.lit { opacity: 0.95; stroke-width: 1.8; }
+.edge.dim { opacity: 0.05; }
+.node rect { fill: var(--surface); stroke: var(--ring); rx: 5; }
+.node .bar { rx: 1.5; }
+.node text { fill: var(--ink); font-size: 11.5px; }
+.node .st { fill: var(--muted); font-size: 10px; }
+.node { cursor: pointer; }
+.node.dim { opacity: 0.18; }
+.node.lit rect:first-of-type { stroke: var(--ink-2); stroke-width: 1.2; }
+.node.hit rect:first-of-type { stroke: var(--c-ideas); stroke-width: 1.6; }
+.col-label { fill: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+#tooltip {
+  position: fixed; pointer-events: none; z-index: 10; display: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 8px 11px; max-width: 340px; font-size: 12.5px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+}
+#tooltip .t { font-weight: 600; margin-bottom: 2px; }
+#tooltip .m { color: var(--ink-2); }
+footer { max-width: 1640px; margin: 0 auto; padding: 0 24px 32px; color: var(--muted); font-size: 12px; }
+footer a { color: var(--ink-2); }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">research-loom map</h1>
+  <p class="tagline">Five structural layers, not pipeline steps. Every design element traces back
+  through the ideas it was distilled from to the sources that earned it — hover any card to walk
+  its provenance chain.</p>
+  <div class="controls">
+    <input id="search" type="search" placeholder="Search cards…" aria-label="Search cards">
+    <button id="theme">◐ theme</button>
+    <span class="hint">hover = provenance chain · click = pin</span>
+  </div>
+</header>
+<section class="model" id="model"></section>
+<p class="model-note">provenance direction: decisions act on design · design assembles ideas ·
+ideas cite sources · synthesis organizes sources into directions</p>
+<div class="graph-wrap"><div class="graph-card"><svg id="graph"></svg></div></div>
+<div id="tooltip"></div>
+<footer>Generated by <a href="https://github.com/tigerless-ai/research-loom">research-loom</a> ·
+self-contained HTML, no dependencies.</footer>
+<script>
+const DATA = /*__DATA__*/null;
+
+const LAYER_META = {
+  sources:   { label: "SOURCES",   desc: "one card per paper / repo / post — what it claims, facts only" },
+  synthesis: { label: "SYNTHESIS", desc: "sources clustered into directions — concept matrix + my verdict" },
+  ideas:     { label: "IDEAS",     desc: "my claims in my words, atomic, each citing its sources" },
+  design:    { label: "DESIGN",    desc: "ideas woven into a spine + modules, provenance-linked" },
+  decisions: { label: "DECISIONS", desc: "contested points: drivers → options → trade-offs → ADR" },
+};
+
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const layerColor = layer => css("--c-" + layer);
+
+document.getElementById("title").textContent = DATA.title + " — research-loom map";
+document.title = DATA.title + " — research-loom map";
+
+const model = document.getElementById("model");
+DATA.layers.forEach(layer => {
+  const count = DATA.nodes.filter(n => n.layer === layer).length;
+  const card = document.createElement("div");
+  card.className = "layer-card";
+  card.style.setProperty("--chip", layerColor(layer));
+  card.innerHTML = `<div class="name"><span>${LAYER_META[layer].label}</span>` +
+    `<span class="count">${count}</span></div><div class="desc">${LAYER_META[layer].desc}</div>`;
+  model.appendChild(card);
+});
+
+const NODE_W = 232, ROW_H = 26, COL_GAP = 108, PAD_X = 36, PAD_TOP = 46, PAD_BOT = 24;
+const byLayer = {};
+DATA.layers.forEach(l => byLayer[l] = DATA.nodes.filter(n => n.layer === l));
+const maxRows = Math.max(...DATA.layers.map(l => byLayer[l].length));
+const H = Math.max(560, PAD_TOP + PAD_BOT + maxRows * ROW_H);
+const W = PAD_X * 2 + DATA.layers.length * NODE_W + (DATA.layers.length - 1) * COL_GAP;
+
+const nodeById = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+const outEdges = {}, inEdges = {};
+DATA.edges.forEach(e => {
+  (outEdges[e.from] = outEdges[e.from] || []).push(e.to);
+  (inEdges[e.to] = inEdges[e.to] || []).push(e.from);
+});
+
+const colIndex = Object.fromEntries(DATA.layers.map((l, i) => [l, i]));
+DATA.layers.forEach(l => byLayer[l].forEach((n, i) => n.row = i));
+for (let pass = 0; pass < 4; pass++) {
+  const order = pass % 2 ? [...DATA.layers].reverse() : DATA.layers;
+  order.forEach(layer => {
+    byLayer[layer].forEach(n => {
+      const neighbors = [...(outEdges[n.id] || []), ...(inEdges[n.id] || [])]
+        .map(id => nodeById[id]).filter(m => m.layer !== layer);
+      n.bary = neighbors.length
+        ? neighbors.reduce((s, m) => s + m.row / Math.max(1, byLayer[m.layer].length - 1), 0) / neighbors.length
+        : n.row / Math.max(1, byLayer[layer].length - 1);
+    });
+    byLayer[layer].sort((a, b) => a.bary - b.bary).forEach((n, i) => n.row = i);
+  });
+}
+DATA.nodes.forEach(n => {
+  const rows = byLayer[n.layer].length;
+  const span = H - PAD_TOP - PAD_BOT;
+  n.x = PAD_X + colIndex[n.layer] * (NODE_W + COL_GAP);
+  n.y = PAD_TOP + (rows === 1 ? span / 2 : n.row * (span - ROW_H) / (rows - 1)) ;
+});
+
+const svg = document.getElementById("graph");
+svg.setAttribute("width", W); svg.setAttribute("height", H);
+svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs) => {
+  const node = document.createElementNS(NS, tag);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  return node;
+};
+
+DATA.layers.forEach(layer => {
+  const x = PAD_X + colIndex[layer] * (NODE_W + COL_GAP);
+  const label = el("text", { x: x + 4, y: 26, class: "col-label" });
+  label.textContent = LAYER_META[layer].label;
+  svg.appendChild(label);
+});
+
+const edgeGroup = el("g", {}); svg.appendChild(edgeGroup);
+const edgeEls = DATA.edges.map(e => {
+  const a = nodeById[e.from], b = nodeById[e.to];
+  const leftward = colIndex[b.layer] <= colIndex[a.layer];
+  const x1 = leftward ? a.x : a.x + NODE_W;
+  const x2 = leftward ? b.x + NODE_W : b.x;
+  const y1 = a.y + 9, y2 = b.y + 9;
+  const dx = Math.max(40, Math.abs(x2 - x1) * 0.45) * (leftward ? -1 : 1);
+  const path = el("path", {
+    d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`,
+    class: "edge", stroke: layerColor(a.layer),
+  });
+  edgeGroup.appendChild(path);
+  return { e, path };
+});
+
+const trunc = (s, units) => {
+  let used = 0, out = "";
+  for (const ch of s) {
+    used += /[⺀-꓏가-힣豈-﫿＀-￯]/.test(ch) ? 2 : 1;
+    if (used > units) return out + "…";
+    out += ch;
+  }
+  return out;
+};
+
+const tooltip = document.getElementById("tooltip");
+let pinned = null;
+const nodeGroup = el("g", {}); svg.appendChild(nodeGroup);
+const nodeEls = DATA.nodes.map(n => {
+  const g = el("g", { class: "node", transform: `translate(${n.x},${n.y})` });
+  g.appendChild(el("rect", { width: NODE_W, height: 19, y: 0 }));
+  g.appendChild(el("rect", { class: "bar", width: 3, height: 13, x: 5, y: 3, fill: layerColor(n.layer) }));
+  const label = el("text", { x: 13, y: 13.5 });
+  label.textContent = trunc(n.title, n.subtype ? 29 : 34);
+  g.appendChild(label);
+  if (n.subtype) {
+    const st = el("text", { x: NODE_W - 6, y: 13.5, "text-anchor": "end", class: "st" });
+    st.textContent = n.subtype;
+    g.appendChild(st);
+  }
+  nodeGroup.appendChild(g);
+  g.addEventListener("mouseenter", evt => { if (!pinned) light(n); showTip(n, evt); });
+  g.addEventListener("mousemove", evt => showTip(n, evt));
+  g.addEventListener("mouseleave", () => { if (!pinned) unlight(); hideTip(); });
+  g.addEventListener("click", evt => {
+    evt.stopPropagation();
+    pinned = pinned === n ? null : n;
+    pinned ? light(pinned) : unlight();
+  });
+  return { n, g };
+});
+document.body.addEventListener("click", () => { pinned = null; unlight(); });
+
+function chain(id, edgesMap) {
+  const seen = new Set([id]); const queue = [id];
+  while (queue.length) {
+    for (const next of (edgesMap[queue.shift()] || [])) {
+      if (!seen.has(next)) { seen.add(next); queue.push(next); }
+    }
+  }
+  return seen;
+}
+function light(n) {
+  const keep = new Set([...chain(n.id, outEdges), ...chain(n.id, inEdges)]);
+  nodeEls.forEach(({ n: m, g }) => g.setAttribute("class", "node " + (keep.has(m.id) ? "lit" : "dim")));
+  edgeEls.forEach(({ e, path }) => path.setAttribute("class",
+    "edge " + (keep.has(e.from) && keep.has(e.to) ? "lit" : "dim")));
+}
+function unlight() {
+  nodeEls.forEach(({ g }) => g.setAttribute("class", "node"));
+  edgeEls.forEach(({ path }) => path.setAttribute("class", "edge"));
+  applySearch();
+}
+function showTip(n, evt) {
+  const outs = (outEdges[n.id] || []).length, ins = (inEdges[n.id] || []).length;
+  tooltip.innerHTML = `<div class="t">${n.title}</div>` +
+    `<div class="m">${n.layer}${n.subtype ? " / " + n.subtype : ""}` +
+    `${n.status ? " · status: " + n.status : ""}</div>` +
+    `<div class="m">cites ${outs} · cited by ${ins}</div>` +
+    `<div class="m">${n.id}</div>`;
+  tooltip.style.display = "block";
+  const x = Math.min(evt.clientX + 14, innerWidth - 360);
+  tooltip.style.left = x + "px";
+  tooltip.style.top = Math.min(evt.clientY + 14, innerHeight - 110) + "px";
+}
+function hideTip() { tooltip.style.display = "none"; }
+
+const searchBox = document.getElementById("search");
+function applySearch() {
+  const q = searchBox.value.trim().toLowerCase();
+  nodeEls.forEach(({ n, g }) => {
+    const hit = q && (n.title.toLowerCase().includes(q) || n.id.toLowerCase().includes(q));
+    if (!pinned) g.setAttribute("class", "node" + (hit ? " hit" : q ? " dim" : ""));
+  });
+}
+searchBox.addEventListener("input", applySearch);
+
+document.getElementById("theme").addEventListener("click", evt => {
+  evt.stopPropagation();
+  const root = document.documentElement;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const current = root.dataset.theme || (dark ? "dark" : "light");
+  root.dataset.theme = current === "dark" ? "light" : "dark";
+  repaint();
+});
+function repaint() {
+  edgeEls.forEach(({ e, path }) => path.setAttribute("stroke", layerColor(nodeById[e.from].layer)));
+  nodeEls.forEach(({ n, g }) => g.querySelector(".bar").setAttribute("fill", layerColor(n.layer)));
+  document.querySelectorAll(".layer-card").forEach((card, i) =>
+    card.style.setProperty("--chip", layerColor(DATA.layers[i])));
+}
+</script>
+</body>
+</html>

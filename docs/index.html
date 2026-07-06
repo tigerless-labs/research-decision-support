@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>research-loom map</title>
+<style>
+:root {
+  --surface: #fcfcfb; --page: #f9f9f7;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
+  --c-design: #008300; --c-decisions: #4a3aa7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1a1a19; --page: #0d0d0d;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
+    --c-design: #008300; --c-decisions: #9085e9;
+  }
+}
+:root[data-theme="light"] {
+  --surface: #fcfcfb; --page: #f9f9f7;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
+  --c-design: #008300; --c-decisions: #4a3aa7;
+}
+:root[data-theme="dark"] {
+  --surface: #1a1a19; --page: #0d0d0d;
+  --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+  --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
+  --c-design: #008300; --c-decisions: #9085e9;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--page); color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+header { max-width: 1640px; margin: 0 auto; padding: 28px 24px 0; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.tagline { color: var(--ink-2); margin: 0 0 18px; max-width: 72ch; }
+.controls { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.controls input {
+  background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 7px 12px; width: 260px; font: inherit;
+}
+.controls button {
+  background: var(--surface); color: var(--ink-2); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer; font: inherit;
+}
+.hint { color: var(--muted); font-size: 12px; }
+.model { max-width: 1640px; margin: 0 auto 8px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.layer-card {
+  background: var(--surface); border: 1px solid var(--grid); border-radius: 10px;
+  padding: 12px 14px; border-top: 3px solid var(--chip);
+}
+.layer-card .name { font-weight: 600; display: flex; justify-content: space-between; align-items: baseline; }
+.layer-card .count { color: var(--ink-2); font-variant-numeric: tabular-nums; font-size: 13px; }
+.layer-card .desc { color: var(--ink-2); font-size: 12px; margin-top: 4px; }
+.model-note { max-width: 1640px; margin: 0 auto 14px; padding: 0 24px; color: var(--muted); font-size: 12px; }
+.graph-wrap { max-width: 1640px; margin: 0 auto 40px; padding: 0 24px; overflow-x: auto; }
+.graph-card { background: var(--surface); border: 1px solid var(--grid); border-radius: 12px; }
+svg { display: block; }
+.edge { fill: none; stroke-width: 1.1; opacity: 0.30; }
+.edge.lit { opacity: 0.95; stroke-width: 1.8; }
+.edge.dim { opacity: 0.05; }
+.node rect { fill: var(--surface); stroke: var(--ring); rx: 5; }
+.node .bar { rx: 1.5; }
+.node text { fill: var(--ink); font-size: 11.5px; }
+.node .st { fill: var(--muted); font-size: 10px; }
+.node { cursor: pointer; }
+.node.dim { opacity: 0.18; }
+.node.lit rect:first-of-type { stroke: var(--ink-2); stroke-width: 1.2; }
+.node.hit rect:first-of-type { stroke: var(--c-ideas); stroke-width: 1.6; }
+.col-label { fill: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+#tooltip {
+  position: fixed; pointer-events: none; z-index: 10; display: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 8px 11px; max-width: 340px; font-size: 12.5px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+}
+#tooltip .t { font-weight: 600; margin-bottom: 2px; }
+#tooltip .m { color: var(--ink-2); }
+footer { max-width: 1640px; margin: 0 auto; padding: 0 24px 32px; color: var(--muted); font-size: 12px; }
+footer a { color: var(--ink-2); }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">research-loom map</h1>
+  <p class="tagline">Five structural layers, not pipeline steps. Every design element traces back
+  through the ideas it was distilled from to the sources that earned it — hover any card to walk
+  its provenance chain.</p>
+  <div class="controls">
+    <input id="search" type="search" placeholder="Search cards…" aria-label="Search cards">
+    <button id="theme">◐ theme</button>
+    <span class="hint">hover = provenance chain · click = pin</span>
+  </div>
+</header>
+<section class="model" id="model"></section>
+<p class="model-note">provenance direction: decisions act on design · design assembles ideas ·
+ideas cite sources · synthesis organizes sources into directions</p>
+<div class="graph-wrap"><div class="graph-card"><svg id="graph"></svg></div></div>
+<div id="tooltip"></div>
+<footer>Generated by <a href="https://github.com/tigerless-ai/research-loom">research-loom</a> ·
+self-contained HTML, no dependencies.</footer>
+<script>
+const DATA = {"nodes": [{"id": "design/architecture.md", "layer": "design", "subtype": "", "title": "代码架构：autoharness 作为单个 Claude Code plugin", "status": ""}, {"id": "design/cap.md", "layer": "design", "subtype": "", "title": "模块设计：CAP 捕获（哑管 + 脱敏出口 + 触发）", "status": ""}, {"id": "design/mng.md", "layer": "design", "subtype": "", "title": "模块设计：MNG 生命周期（调用率排序 + 缓刑护新 + 只有容量竞争淘汰）", "status": ""}, {"id": "design/ref.md", "layer": "design", "subtype": "", "title": "模块设计：REF 反思（compare-first）", "status": ""}, {"id": "design/reflector-subagent.md", "layer": "design", "subtype": "", "title": "模块设计：reflector 子代理（REF 的运行载体）", "status": ""}, {"id": "design/spine.md", "layer": "design", "subtype": "", "title": "系统架构：autoharness workflow v0", "status": ""}, {"id": "design/stage-skill.md", "layer": "design", "subtype": "", "title": "模块设计：stage_skill（reflector 的提案工具，emit-intent）", "status": ""}, {"id": "design/validate-store.md", "layer": "design", "subtype": "", "title": "模块设计：校验·存储（确定性 promoter，admission 模型）", "status": ""}, {"id": "ideas/additive-over-native-skill.md", "layer": "ideas", "subtype": "", "title": "不影响原生 skill 本来的功能：增强纯叠加、对原生零侵入", "status": "候选"}, {"id": "ideas/adherence-driven-curate.md", "layer": "ideas", "subtype": "", "title": "经验生命周期管理：Hermes 式时间状态机为骨架，遵守度定生死留后", "status": "候选"}, {"id": "ideas/dynamic-validation-lifecycle.md", "layer": "ideas", "subtype": "", "title": "核心理念：在运行中积累并验证经验，而非定期收集 eval 跑进化", "status": "候选"}, {"id": "ideas/episode-boundary-reflection.md", "layer": "ideas", "subtype": "", "title": "按轮次在 episode 边界自动反思、整段蒸馏 skill——优于 ECC 逐调用从 hook 抓执行碎片", "status": "候选"}, {"id": "ideas/hook-forced-injection.md", "layer": "ideas", "subtype": "", "title": "要可靠生效的规则，走 hook 强制注入，别靠 skill 的概率触发", "status": "候选"}, {"id": "ideas/lifecycle-by-provenance.md", "layer": "ideas", "subtype": "", "title": "按 provenance 划生命周期成员；默认机器自产入池、其余 opt-in（含「只维护」模式）", "status": "候选"}, {"id": "ideas/precipitate-storage-layer.md", "layer": "ideas", "subtype": "", "title": "经验自动沉淀后存在哪一层——倾向 B（新增为 skill，参考 Hermes），独立 instinct 层留作苗圃", "status": "候选"}, {"id": "ideas/record-scenarios-for-eval.md", "layer": "ideas", "subtype": "", "title": "符号随附记录：v1 只做决策账本，使用·监控·验证留后", "status": "候选"}, {"id": "ideas/skill-recall-low-degrades-with-n.md", "layer": "ideas", "subtype": "", "title": "skill 的召回率本就不高,且随 skill 数量增长而进一步恶化", "status": "候选"}, {"id": "ideas/trace-based-pattern-extraction.md", "layer": "ideas", "subtype": "", "title": "候选来料：从对话回合捕获，而非只从 tool 执行反推", "status": "候选"}, {"id": "sources/blogs/claude-code-skills.md", "layer": "sources", "subtype": "blogs", "title": "[博客] Lessons from Building Claude Code: How We Use Skills", "status": ""}, {"id": "sources/blogs/henrypan-1k-harness-experiments.md", "layer": "sources", "subtype": "blogs", "title": "[博客] What 1k Harness Experiments Taught Me About Self-Improving Agents", "status": ""}, {"id": "sources/blogs/karpathy-llm-wiki.md", "layer": "sources", "subtype": "blogs", "title": "[博客] llm-wiki — Andrej Karpathy", "status": ""}, {"id": "sources/blogs/learning-beyond-gradients.md", "layer": "sources", "subtype": "blogs", "title": "[博客] Learning Beyond Gradients (Heuristic Learning)", "status": ""}, {"id": "sources/blogs/symbolic-learning-renaissance.md", "layer": "sources", "subtype": "blogs", "title": "[博客] 符号学习在 Agent 时代的文艺复兴？ (The Symbolic-Learning Renaissance in the Agent Era)", "status": ""}, {"id": "sources/github/affaan-m-ecc.md", "layer": "sources", "subtype": "github", "title": "[GitHub] affaan-m/ECC", "status": ""}, {"id": "sources/github/aiming-lab-autoharness.md", "layer": "sources", "subtype": "github", "title": "[GitHub] aiming-lab/AutoHarness", "status": ""}, {"id": "sources/github/all-hands-openhands.md", "layer": "sources", "subtype": "github", "title": "[GitHub] All-Hands-AI/OpenHands", "status": ""}, {"id": "sources/github/anthropics-skills.md", "layer": "sources", "subtype": "github", "title": "[GitHub] anthropics/skills", "status": ""}, {"id": "sources/github/hesreallyhim-awesome-claude-code.md", "layer": "sources", "subtype": "github", "title": "[GitHub] hesreallyhim/awesome-claude-code", "status": ""}, {"id": "sources/github/hexo-ai-sia.md", "layer": "sources", "subtype": "github", "title": "[GitHub] hexo-ai/sia", "status": ""}, {"id": "sources/github/kayba-ai-autoharness.md", "layer": "sources", "subtype": "github", "title": "[GitHub] kayba-ai/autoharness", "status": ""}, {"id": "sources/github/mattpocock-skills.md", "layer": "sources", "subtype": "github", "title": "[GitHub] mattpocock/skills", "status": ""}, {"id": "sources/github/microsoft-skillopt-sleep.md", "layer": "sources", "subtype": "github", "title": "[GitHub] microsoft/SkillOpt — SkillOpt-Sleep", "status": ""}, {"id": "sources/github/nousresearch-hermes-agent.md", "layer": "sources", "subtype": "github", "title": "[GitHub] NousResearch/Hermes-Agent", "status": ""}, {"id": "sources/github/obra-superpowers.md", "layer": "sources", "subtype": "github", "title": "[GitHub] obra/superpowers", "status": ""}, {"id": "sources/github/openclaw.md", "layer": "sources", "subtype": "github", "title": "[GitHub] openclaw/openclaw", "status": ""}, {"id": "sources/github/parikhakshat-autoharness.md", "layer": "sources", "subtype": "github", "title": "[GitHub] parikhakshat/autoharness", "status": ""}, {"id": "sources/github/plastic-labs-honcho.md", "layer": "sources", "subtype": "github", "title": "[GitHub] plastic-labs/honcho", "status": ""}, {"id": "sources/github/recursi.md", "layer": "sources", "subtype": "github", "title": "[项目] Recursi", "status": ""}, {"id": "sources/github/sjhalani7-vaen.md", "layer": "sources", "subtype": "github", "title": "[GitHub] sjhalani7/vaen", "status": ""}, {"id": "sources/github/tinyhumansai-openhuman.md", "layer": "sources", "subtype": "github", "title": "[GitHub] tinyhumansai/OpenHuman", "status": ""}, {"id": "sources/papers/agent-skill-eval-survey.md", "layer": "sources", "subtype": "papers", "title": "[论文] Agent Skill Evaluation and Evolution: Frameworks and Benchmarks", "status": ""}, {"id": "sources/papers/agent-skills-data.md", "layer": "sources", "subtype": "papers", "title": "[论文] Agent Skills: A Data-Driven Analysis of Claude Skills", "status": ""}, {"id": "sources/papers/agentic-fuzzing.md", "layer": "sources", "subtype": "papers", "title": "[论文] Agentic Fuzzing: Opportunities and Challenges", "status": ""}, {"id": "sources/papers/apex.md", "layer": "sources", "subtype": "papers", "title": "[论文] APEX: Autonomous Policy Exploration for Self-Evolving LLM Agents", "status": ""}, {"id": "sources/papers/autoharness-lou.md", "layer": "sources", "subtype": "papers", "title": "[论文] AutoHarness: Improving LLM Agents by Automatically Synthesizing a Code Harness", "status": ""}, {"id": "sources/papers/bayesian-agent.md", "layer": "sources", "subtype": "papers", "title": "[论文] Bayesian-Agent: Posterior-Guided Skill Evolution for LLM Agent Harnesses", "status": ""}, {"id": "sources/papers/embodiskill.md", "layer": "sources", "subtype": "papers", "title": "[论文] EmbodiSkill: Skill-Aware Reflection for Self-Evolving Embodied Agents", "status": ""}, {"id": "sources/papers/evoskill.md", "layer": "sources", "subtype": "papers", "title": "[论文] EvoSkill: Automated Skill Discovery for Multi-Agent Systems", "status": ""}, {"id": "sources/papers/exg.md", "layer": "sources", "subtype": "papers", "title": "[论文] EXG: Self-Evolving Agents with Experience Graphs", "status": ""}, {"id": "sources/papers/externalization-review.md", "layer": "sources", "subtype": "papers", "title": "[论文] Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering", "status": ""}, {"id": "sources/papers/falsecrashreducer.md", "layer": "sources", "subtype": "papers", "title": "[论文] FalseCrashReducer: Mitigating False Positive Crashes in OSS-Fuzz-Gen Using Agentic AI", "status": ""}, {"id": "sources/papers/gepa.md", "layer": "sources", "subtype": "papers", "title": "[论文] GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning", "status": ""}, {"id": "sources/papers/graph-of-skills.md", "layer": "sources", "subtype": "papers", "title": "[论文] Graph-of-Skills (GoS): Dependency-Aware Structural Retrieval for Massive Agent Skills", "status": ""}, {"id": "sources/papers/harnessagent.md", "layer": "sources", "subtype": "papers", "title": "[论文] HarnessAgent: Scaling Automatic Fuzzing Harness Construction", "status": ""}, {"id": "sources/papers/harnessfix.md", "layer": "sources", "subtype": "papers", "title": "[论文] HarnessFix: From Failed Trajectories to Reliable LLM Agents — Diagnosing and Repairing Harness Flaws", "status": ""}, {"id": "sources/papers/hasp.md", "layer": "sources", "subtype": "papers", "title": "[论文] HASP: Harnessing LLM Agents with Skill Programs", "status": ""}, {"id": "sources/papers/java-fuzz-harness.md", "layer": "sources", "subtype": "papers", "title": "[论文] Coverage-Guided Multi-Agent Harness Generation for Java Library Fuzzing", "status": ""}, {"id": "sources/papers/masfuzzer.md", "layer": "sources", "subtype": "papers", "title": "[论文] MASFuzzer: Fuzz Driver Generation and Adaptive Scheduling", "status": ""}, {"id": "sources/papers/metatool.md", "layer": "sources", "subtype": "papers", "title": "[论文] MetaTool: Deciding Whether to Use Tools and Which to Use", "status": ""}, {"id": "sources/papers/moss.md", "layer": "sources", "subtype": "papers", "title": "[论文] MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems", "status": ""}, {"id": "sources/papers/muse-autoskill.md", "layer": "sources", "subtype": "papers", "title": "[论文] MUSE-Autoskill: Self-Evolving Agents via Skill Creation, Memory, Management, and Evaluation", "status": ""}, {"id": "sources/papers/openclaw-skill.md", "layer": "sources", "subtype": "papers", "title": "[论文] OpenClaw-Skill: Collective Skill Tree Search for Agentic Large Language Models", "status": ""}, {"id": "sources/papers/quartetfuzz.md", "layer": "sources", "subtype": "papers", "title": "[论文] QuartetFuzz: Quality-Assured Fuzz Harness Generation via the Four Principles Framework", "status": ""}, {"id": "sources/papers/reflexion.md", "layer": "sources", "subtype": "papers", "title": "[论文] Reflexion: Language Agents with Verbal Reinforcement Learning", "status": ""}, {"id": "sources/papers/reliable-fuzz-vision.md", "layer": "sources", "subtype": "papers", "title": "[论文] Towards Reliable LLM-Driven Fuzz Testing: Vision and Road Ahead", "status": ""}, {"id": "sources/papers/rho.md", "layer": "sources", "subtype": "papers", "title": "[论文] Retrospective Harness Optimization (RHO)", "status": ""}, {"id": "sources/papers/sage.md", "layer": "sources", "subtype": "papers", "title": "[论文] SAGE: A Self-Evolving Agentic Graph-Memory Engine", "status": ""}, {"id": "sources/papers/scheduzz.md", "layer": "sources", "subtype": "papers", "title": "[论文] Scheduzz: Constraint-based Fuzz Driver Generation with Dual Scheduling", "status": ""}, {"id": "sources/papers/sec-bench-pro.md", "layer": "sources", "subtype": "papers", "title": "[论文] SEC-bench Pro: Can Language Models Solve Long-Horizon Software Security Tasks?", "status": ""}, {"id": "sources/papers/self-evolving-forget.md", "layer": "sources", "subtype": "papers", "title": "[论文] Do Self-Evolving Agents Forget? Capability Degradation and Preservation", "status": ""}, {"id": "sources/papers/self-harness.md", "layer": "sources", "subtype": "papers", "title": "[论文] Self-Harness: Harnesses That Improve Themselves", "status": ""}, {"id": "sources/papers/sgdr-web-agents.md", "layer": "sources", "subtype": "papers", "title": "[论文] Online Skill Learning for Web Agents via State-Grounded Dynamic Retrieval (SGDR)", "status": ""}, {"id": "sources/papers/skill-harnessing-ra.md", "layer": "sources", "subtype": "papers", "title": "[论文] Harnessing Agent Skills: Architectural Patterns and a Reference Architecture for Skill-Mediated LLM Agents", "status": ""}, {"id": "sources/papers/skill-mas.md", "layer": "sources", "subtype": "papers", "title": "[论文] Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems", "status": ""}, {"id": "sources/papers/skilladaptor.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillAdaptor: Self-Adapting Skills for LLM Agents from Trajectories", "status": ""}, {"id": "sources/papers/skilldag.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillDAG: Self-Evolving Typed Skill Graphs for LLM Skill Selection at Scale", "status": ""}, {"id": "sources/papers/skillevolver.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillEvolver: A Meta-Skill for Online Skill Learning from Failures in Agent Self-Evolution", "status": ""}, {"id": "sources/papers/skillgen.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillGen: Verified Inference-Time Agent Skill Synthesis", "status": ""}, {"id": "sources/papers/skillgraph.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillGraph: Skill-Augmented Reinforcement Learning for Agents via Evolving Skill Graphs", "status": ""}, {"id": "sources/papers/skillharness.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillHarness: Harnessing Safe Skills for Computer-Use Agents", "status": ""}, {"id": "sources/papers/skillhone.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History", "status": ""}, {"id": "sources/papers/skilllens.md", "layer": "sources", "subtype": "papers", "title": "[论文] From Raw Experience to Skill Consumption (SkillLens)", "status": ""}, {"id": "sources/papers/skillmd-mining.md", "layer": "sources", "subtype": "papers", "title": "[论文] Automating SKILL.md Generation for Computer-Using Agents via Interaction Trajectory Mining", "status": ""}, {"id": "sources/papers/skillopt.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillOpt: Executive Strategy for Self-Evolving Agent Skills", "status": ""}, {"id": "sources/papers/skillos.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillOS: Learning Skill Curation for Self-Evolving Agents", "status": ""}, {"id": "sources/papers/skillreducer.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillReducer: Optimizing LLM Agent Skills for Token Efficiency", "status": ""}, {"id": "sources/papers/skillwiki.md", "layer": "sources", "subtype": "papers", "title": "[论文] SkillWiki: A Living Knowledge Infrastructure for Agent Skills", "status": ""}, {"id": "sources/papers/socratic-swe.md", "layer": "sources", "subtype": "papers", "title": "[论文] Socratic-SWE: Self-Evolving Coding Agents via Trace-Derived Agent Skills", "status": ""}, {"id": "sources/papers/stitch.md", "layer": "sources", "subtype": "papers", "title": "[论文] STITCH: Automatic, Expressive, and Scalable Fuzzing with Stitching", "status": ""}, {"id": "sources/papers/textgrad.md", "layer": "sources", "subtype": "papers", "title": "[论文] TextGrad: Automatic \"Differentiation\" via Text", "status": ""}, {"id": "sources/papers/tmem.md", "layer": "sources", "subtype": "papers", "title": "[论文] Scaling Self-Evolving Agents via Parametric Memory (TMEM)", "status": ""}, {"id": "sources/papers/trace2skill.md", "layer": "sources", "subtype": "papers", "title": "[论文] Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills", "status": ""}, {"id": "sources/papers/voyager.md", "layer": "sources", "subtype": "papers", "title": "[论文] Voyager: An Open-Ended Embodied Agent with Large Language Models", "status": ""}, {"id": "sources/papers/what-makes-a-harness.md", "layer": "sources", "subtype": "papers", "title": "[论文] What Makes a Harness a Harness: Necessary and Sufficient Conditions for an Agent Harness", "status": ""}, {"id": "synthesis/offline-validation.md", "layer": "synthesis", "subtype": "", "title": "方向：离线评测验证 harness 更改（裁决轴 · 重）", "status": ""}, {"id": "synthesis/skill-recall-execution.md", "layer": "synthesis", "subtype": "", "title": "方向：skill 的召回率与执行率", "status": ""}, {"id": "synthesis/trace-to-experience.md", "layer": "synthesis", "subtype": "", "title": "方向：从 trace 沉淀经验（intake / 入料口）", "status": ""}], "edges": [{"from": "design/architecture.md", "to": "design/spine.md"}, {"from": "design/architecture.md", "to": "design/cap.md"}, {"from": "design/architecture.md", "to": "design/ref.md"}, {"from": "design/architecture.md", "to": "design/reflector-subagent.md"}, {"from": "design/architecture.md", "to": "design/stage-skill.md"}, {"from": "design/architecture.md", "to": "design/validate-store.md"}, {"from": "design/architecture.md", "to": "design/mng.md"}, {"from": "design/architecture.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/architecture.md", "to": "ideas/precipitate-storage-layer.md"}, {"from": "design/cap.md", "to": "design/ref.md"}, {"from": "design/cap.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "design/cap.md", "to": "design/validate-store.md"}, {"from": "design/cap.md", "to": "design/reflector-subagent.md"}, {"from": "design/cap.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/cap.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "design/mng.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "design/mng.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "design/mng.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "design/mng.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/mng.md", "to": "design/validate-store.md"}, {"from": "design/mng.md", "to": "ideas/dynamic-validation-lifecycle.md"}, {"from": "design/mng.md", "to": "ideas/skill-recall-low-degrades-with-n.md"}, {"from": "design/mng.md", "to": "ideas/record-scenarios-for-eval.md"}, {"from": "design/ref.md", "to": "design/reflector-subagent.md"}, {"from": "design/ref.md", "to": "design/validate-store.md"}, {"from": "design/ref.md", "to": "design/cap.md"}, {"from": "design/ref.md", "to": "design/mng.md"}, {"from": "design/ref.md", "to": "ideas/skill-recall-low-degrades-with-n.md"}, {"from": "design/ref.md", "to": "design/stage-skill.md"}, {"from": "design/ref.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "design/ref.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "design/ref.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "design/reflector-subagent.md", "to": "design/ref.md"}, {"from": "design/reflector-subagent.md", "to": "design/architecture.md"}, {"from": "design/reflector-subagent.md", "to": "design/stage-skill.md"}, {"from": "design/reflector-subagent.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/reflector-subagent.md", "to": "design/validate-store.md"}, {"from": "design/reflector-subagent.md", "to": "design/cap.md"}, {"from": "design/reflector-subagent.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "design/reflector-subagent.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "design/reflector-subagent.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "design/reflector-subagent.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "design/spine.md", "to": "design/cap.md"}, {"from": "design/spine.md", "to": "design/ref.md"}, {"from": "design/spine.md", "to": "design/validate-store.md"}, {"from": "design/spine.md", "to": "design/reflector-subagent.md"}, {"from": "design/spine.md", "to": "design/mng.md"}, {"from": "design/spine.md", "to": "ideas/dynamic-validation-lifecycle.md"}, {"from": "design/spine.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/spine.md", "to": "ideas/skill-recall-low-degrades-with-n.md"}, {"from": "design/spine.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "design/spine.md", "to": "ideas/record-scenarios-for-eval.md"}, {"from": "design/spine.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "design/spine.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "design/spine.md", "to": "ideas/precipitate-storage-layer.md"}, {"from": "design/spine.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "design/spine.md", "to": "ideas/hook-forced-injection.md"}, {"from": "design/stage-skill.md", "to": "design/reflector-subagent.md"}, {"from": "design/stage-skill.md", "to": "design/validate-store.md"}, {"from": "design/stage-skill.md", "to": "design/cap.md"}, {"from": "design/stage-skill.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "design/stage-skill.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/stage-skill.md", "to": "design/ref.md"}, {"from": "design/validate-store.md", "to": "design/stage-skill.md"}, {"from": "design/validate-store.md", "to": "design/cap.md"}, {"from": "design/validate-store.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "design/validate-store.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "design/validate-store.md", "to": "ideas/dynamic-validation-lifecycle.md"}, {"from": "design/validate-store.md", "to": "ideas/skill-recall-low-degrades-with-n.md"}, {"from": "design/validate-store.md", "to": "ideas/precipitate-storage-layer.md"}, {"from": "design/validate-store.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "design/validate-store.md", "to": "ideas/record-scenarios-for-eval.md"}, {"from": "design/validate-store.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "design/validate-store.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/additive-over-native-skill.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "ideas/additive-over-native-skill.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "ideas/additive-over-native-skill.md", "to": "ideas/hook-forced-injection.md"}, {"from": "ideas/additive-over-native-skill.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "ideas/record-scenarios-for-eval.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "ideas/dynamic-validation-lifecycle.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "ideas/adherence-driven-curate.md", "to": "ideas/hook-forced-injection.md"}, {"from": "ideas/dynamic-validation-lifecycle.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "ideas/dynamic-validation-lifecycle.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "ideas/dynamic-validation-lifecycle.md", "to": "synthesis/offline-validation.md"}, {"from": "ideas/dynamic-validation-lifecycle.md", "to": "sources/papers/skilllens.md"}, {"from": "ideas/dynamic-validation-lifecycle.md", "to": "sources/papers/skillopt.md"}, {"from": "ideas/dynamic-validation-lifecycle.md", "to": "ideas/record-scenarios-for-eval.md"}, {"from": "ideas/episode-boundary-reflection.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/episode-boundary-reflection.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "ideas/episode-boundary-reflection.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "ideas/episode-boundary-reflection.md", "to": "synthesis/trace-to-experience.md"}, {"from": "ideas/hook-forced-injection.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/hook-forced-injection.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "ideas/lifecycle-by-provenance.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "ideas/lifecycle-by-provenance.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "ideas/lifecycle-by-provenance.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "ideas/additive-over-native-skill.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "synthesis/trace-to-experience.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "sources/github/openclaw.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "ideas/hook-forced-injection.md"}, {"from": "ideas/precipitate-storage-layer.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "synthesis/offline-validation.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "ideas/dynamic-validation-lifecycle.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "sources/papers/skillhone.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "ideas/lifecycle-by-provenance.md"}, {"from": "ideas/record-scenarios-for-eval.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "synthesis/skill-recall-execution.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "sources/papers/agent-skills-data.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "sources/papers/skillreducer.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "sources/papers/metatool.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/skill-recall-low-degrades-with-n.md", "to": "ideas/hook-forced-injection.md"}, {"from": "ideas/trace-based-pattern-extraction.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "ideas/trace-based-pattern-extraction.md", "to": "ideas/episode-boundary-reflection.md"}, {"from": "ideas/trace-based-pattern-extraction.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "sources/blogs/claude-code-skills.md", "to": "sources/github/anthropics-skills.md"}, {"from": "sources/blogs/henrypan-1k-harness-experiments.md", "to": "sources/github/recursi.md"}, {"from": "sources/blogs/henrypan-1k-harness-experiments.md", "to": "sources/github/hexo-ai-sia.md"}, {"from": "sources/blogs/karpathy-llm-wiki.md", "to": "sources/github/tinyhumansai-openhuman.md"}, {"from": "sources/blogs/learning-beyond-gradients.md", "to": "sources/blogs/symbolic-learning-renaissance.md"}, {"from": "sources/blogs/symbolic-learning-renaissance.md", "to": "sources/papers/autoharness-lou.md"}, {"from": "sources/blogs/symbolic-learning-renaissance.md", "to": "sources/papers/skillopt.md"}, {"from": "sources/blogs/symbolic-learning-renaissance.md", "to": "sources/blogs/learning-beyond-gradients.md"}, {"from": "sources/github/affaan-m-ecc.md", "to": "sources/github/microsoft-skillopt-sleep.md"}, {"from": "sources/github/affaan-m-ecc.md", "to": "sources/papers/rho.md"}, {"from": "sources/github/aiming-lab-autoharness.md", "to": "sources/papers/autoharness-lou.md"}, {"from": "sources/github/aiming-lab-autoharness.md", "to": "sources/github/parikhakshat-autoharness.md"}, {"from": "sources/github/aiming-lab-autoharness.md", "to": "sources/github/kayba-ai-autoharness.md"}, {"from": "sources/github/anthropics-skills.md", "to": "sources/blogs/claude-code-skills.md"}, {"from": "sources/github/kayba-ai-autoharness.md", "to": "sources/papers/rho.md"}, {"from": "sources/github/microsoft-skillopt-sleep.md", "to": "sources/papers/skillopt.md"}, {"from": "sources/github/microsoft-skillopt-sleep.md", "to": "sources/papers/moss.md"}, {"from": "sources/github/microsoft-skillopt-sleep.md", "to": "sources/papers/rho.md"}, {"from": "sources/github/nousresearch-hermes-agent.md", "to": "sources/github/plastic-labs-honcho.md"}, {"from": "sources/github/openclaw.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "sources/github/openclaw.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/github/parikhakshat-autoharness.md", "to": "sources/papers/quartetfuzz.md"}, {"from": "sources/github/parikhakshat-autoharness.md", "to": "sources/github/aiming-lab-autoharness.md"}, {"from": "sources/github/parikhakshat-autoharness.md", "to": "sources/github/kayba-ai-autoharness.md"}, {"from": "sources/github/plastic-labs-honcho.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "sources/github/plastic-labs-honcho.md", "to": "sources/papers/externalization-review.md"}, {"from": "sources/github/tinyhumansai-openhuman.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "sources/github/tinyhumansai-openhuman.md", "to": "sources/github/openclaw.md"}, {"from": "sources/papers/agent-skill-eval-survey.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/agent-skills-data.md", "to": "sources/papers/skillreducer.md"}, {"from": "sources/papers/agent-skills-data.md", "to": "synthesis/skill-recall-execution.md"}, {"from": "sources/papers/apex.md", "to": "sources/papers/rho.md"}, {"from": "sources/papers/bayesian-agent.md", "to": "sources/papers/apex.md"}, {"from": "sources/papers/evoskill.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/exg.md", "to": "sources/papers/sage.md"}, {"from": "sources/papers/exg.md", "to": "sources/papers/skilldag.md"}, {"from": "sources/papers/gepa.md", "to": "sources/papers/evoskill.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/autoharness-lou.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/reflexion.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/voyager.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/sage.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/skillopt.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/tmem.md"}, {"from": "sources/papers/hasp.md", "to": "sources/papers/apex.md"}, {"from": "sources/papers/metatool.md", "to": "synthesis/skill-recall-execution.md"}, {"from": "sources/papers/moss.md", "to": "sources/papers/harnessfix.md"}, {"from": "sources/papers/openclaw-skill.md", "to": "sources/github/openclaw.md"}, {"from": "sources/papers/openclaw-skill.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/openclaw-skill.md", "to": "sources/papers/skilllens.md"}, {"from": "sources/papers/openclaw-skill.md", "to": "sources/papers/apex.md"}, {"from": "sources/papers/rho.md", "to": "sources/github/kayba-ai-autoharness.md"}, {"from": "sources/papers/rho.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/rho.md", "to": "sources/papers/skilllens.md"}, {"from": "sources/papers/rho.md", "to": "sources/papers/apex.md"}, {"from": "sources/papers/sage.md", "to": "sources/papers/exg.md"}, {"from": "sources/papers/sage.md", "to": "sources/papers/skilldag.md"}, {"from": "sources/papers/self-harness.md", "to": "sources/papers/rho.md"}, {"from": "sources/papers/self-harness.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/skill-harnessing-ra.md", "to": "sources/papers/skillharness.md"}, {"from": "sources/papers/skill-harnessing-ra.md", "to": "sources/papers/hasp.md"}, {"from": "sources/papers/skill-harnessing-ra.md", "to": "sources/papers/skillos.md"}, {"from": "sources/papers/skill-mas.md", "to": "sources/papers/skillopt.md"}, {"from": "sources/papers/skilladaptor.md", "to": "sources/papers/harnessfix.md"}, {"from": "sources/papers/skillharness.md", "to": "sources/papers/voyager.md"}, {"from": "sources/papers/skilllens.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/skillmd-mining.md", "to": "synthesis/offline-validation.md"}, {"from": "sources/papers/skillopt.md", "to": "sources/github/microsoft-skillopt-sleep.md"}, {"from": "sources/papers/skillopt.md", "to": "sources/blogs/symbolic-learning-renaissance.md"}, {"from": "sources/papers/skillreducer.md", "to": "sources/papers/agent-skills-data.md"}, {"from": "sources/papers/skillreducer.md", "to": "synthesis/skill-recall-execution.md"}, {"from": "sources/papers/stitch.md", "to": "sources/papers/sgdr-web-agents.md"}, {"from": "sources/papers/voyager.md", "to": "sources/blogs/symbolic-learning-renaissance.md"}, {"from": "synthesis/offline-validation.md", "to": "synthesis/trace-to-experience.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/github/kayba-ai-autoharness.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/skillopt.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/evoskill.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/self-harness.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/harnessfix.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/rho.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/skilllens.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/moss.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/skillgen.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/github/microsoft-skillopt-sleep.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/apex.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/self-evolving-forget.md"}, {"from": "synthesis/offline-validation.md", "to": "sources/papers/what-makes-a-harness.md"}, {"from": "synthesis/offline-validation.md", "to": "ideas/dynamic-validation-lifecycle.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "synthesis/trace-to-experience.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "ideas/hook-forced-injection.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "sources/papers/metatool.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "sources/papers/skillreducer.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "sources/papers/agent-skills-data.md"}, {"from": "synthesis/skill-recall-execution.md", "to": "ideas/adherence-driven-curate.md"}, {"from": "synthesis/trace-to-experience.md", "to": "synthesis/offline-validation.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/github/affaan-m-ecc.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/github/nousresearch-hermes-agent.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/github/openclaw.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/papers/skillmd-mining.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/papers/reflexion.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/papers/socratic-swe.md"}, {"from": "synthesis/trace-to-experience.md", "to": "sources/github/tinyhumansai-openhuman.md"}, {"from": "synthesis/trace-to-experience.md", "to": "ideas/trace-based-pattern-extraction.md"}, {"from": "synthesis/trace-to-experience.md", "to": "ideas/adherence-driven-curate.md"}], "layers": ["sources", "synthesis", "ideas", "design", "decisions"], "title": "autoharness"};
+
+const LAYER_META = {
+  sources:   { label: "SOURCES",   desc: "one card per paper / repo / post — what it claims, facts only" },
+  synthesis: { label: "SYNTHESIS", desc: "sources clustered into directions — concept matrix + my verdict" },
+  ideas:     { label: "IDEAS",     desc: "my claims in my words, atomic, each citing its sources" },
+  design:    { label: "DESIGN",    desc: "ideas woven into a spine + modules, provenance-linked" },
+  decisions: { label: "DECISIONS", desc: "contested points: drivers → options → trade-offs → ADR" },
+};
+
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const layerColor = layer => css("--c-" + layer);
+
+document.getElementById("title").textContent = DATA.title + " — research-loom map";
+document.title = DATA.title + " — research-loom map";
+
+const model = document.getElementById("model");
+DATA.layers.forEach(layer => {
+  const count = DATA.nodes.filter(n => n.layer === layer).length;
+  const card = document.createElement("div");
+  card.className = "layer-card";
+  card.style.setProperty("--chip", layerColor(layer));
+  card.innerHTML = `<div class="name"><span>${LAYER_META[layer].label}</span>` +
+    `<span class="count">${count}</span></div><div class="desc">${LAYER_META[layer].desc}</div>`;
+  model.appendChild(card);
+});
+
+const NODE_W = 232, ROW_H = 26, COL_GAP = 108, PAD_X = 36, PAD_TOP = 46, PAD_BOT = 24;
+const byLayer = {};
+DATA.layers.forEach(l => byLayer[l] = DATA.nodes.filter(n => n.layer === l));
+const maxRows = Math.max(...DATA.layers.map(l => byLayer[l].length));
+const H = Math.max(560, PAD_TOP + PAD_BOT + maxRows * ROW_H);
+const W = PAD_X * 2 + DATA.layers.length * NODE_W + (DATA.layers.length - 1) * COL_GAP;
+
+const nodeById = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+const outEdges = {}, inEdges = {};
+DATA.edges.forEach(e => {
+  (outEdges[e.from] = outEdges[e.from] || []).push(e.to);
+  (inEdges[e.to] = inEdges[e.to] || []).push(e.from);
+});
+
+const colIndex = Object.fromEntries(DATA.layers.map((l, i) => [l, i]));
+DATA.layers.forEach(l => byLayer[l].forEach((n, i) => n.row = i));
+for (let pass = 0; pass < 4; pass++) {
+  const order = pass % 2 ? [...DATA.layers].reverse() : DATA.layers;
+  order.forEach(layer => {
+    byLayer[layer].forEach(n => {
+      const neighbors = [...(outEdges[n.id] || []), ...(inEdges[n.id] || [])]
+        .map(id => nodeById[id]).filter(m => m.layer !== layer);
+      n.bary = neighbors.length
+        ? neighbors.reduce((s, m) => s + m.row / Math.max(1, byLayer[m.layer].length - 1), 0) / neighbors.length
+        : n.row / Math.max(1, byLayer[layer].length - 1);
+    });
+    byLayer[layer].sort((a, b) => a.bary - b.bary).forEach((n, i) => n.row = i);
+  });
+}
+DATA.nodes.forEach(n => {
+  const rows = byLayer[n.layer].length;
+  const span = H - PAD_TOP - PAD_BOT;
+  n.x = PAD_X + colIndex[n.layer] * (NODE_W + COL_GAP);
+  n.y = PAD_TOP + (rows === 1 ? span / 2 : n.row * (span - ROW_H) / (rows - 1)) ;
+});
+
+const svg = document.getElementById("graph");
+svg.setAttribute("width", W); svg.setAttribute("height", H);
+svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs) => {
+  const node = document.createElementNS(NS, tag);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  return node;
+};
+
+DATA.layers.forEach(layer => {
+  const x = PAD_X + colIndex[layer] * (NODE_W + COL_GAP);
+  const label = el("text", { x: x + 4, y: 26, class: "col-label" });
+  label.textContent = LAYER_META[layer].label;
+  svg.appendChild(label);
+});
+
+const edgeGroup = el("g", {}); svg.appendChild(edgeGroup);
+const edgeEls = DATA.edges.map(e => {
+  const a = nodeById[e.from], b = nodeById[e.to];
+  const leftward = colIndex[b.layer] <= colIndex[a.layer];
+  const x1 = leftward ? a.x : a.x + NODE_W;
+  const x2 = leftward ? b.x + NODE_W : b.x;
+  const y1 = a.y + 9, y2 = b.y + 9;
+  const dx = Math.max(40, Math.abs(x2 - x1) * 0.45) * (leftward ? -1 : 1);
+  const path = el("path", {
+    d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`,
+    class: "edge", stroke: layerColor(a.layer),
+  });
+  edgeGroup.appendChild(path);
+  return { e, path };
+});
+
+const trunc = (s, units) => {
+  let used = 0, out = "";
+  for (const ch of s) {
+    used += /[⺀-꓏가-힣豈-﫿＀-￯]/.test(ch) ? 2 : 1;
+    if (used > units) return out + "…";
+    out += ch;
+  }
+  return out;
+};
+
+const tooltip = document.getElementById("tooltip");
+let pinned = null;
+const nodeGroup = el("g", {}); svg.appendChild(nodeGroup);
+const nodeEls = DATA.nodes.map(n => {
+  const g = el("g", { class: "node", transform: `translate(${n.x},${n.y})` });
+  g.appendChild(el("rect", { width: NODE_W, height: 19, y: 0 }));
+  g.appendChild(el("rect", { class: "bar", width: 3, height: 13, x: 5, y: 3, fill: layerColor(n.layer) }));
+  const label = el("text", { x: 13, y: 13.5 });
+  label.textContent = trunc(n.title, n.subtype ? 29 : 34);
+  g.appendChild(label);
+  if (n.subtype) {
+    const st = el("text", { x: NODE_W - 6, y: 13.5, "text-anchor": "end", class: "st" });
+    st.textContent = n.subtype;
+    g.appendChild(st);
+  }
+  nodeGroup.appendChild(g);
+  g.addEventListener("mouseenter", evt => { if (!pinned) light(n); showTip(n, evt); });
+  g.addEventListener("mousemove", evt => showTip(n, evt));
+  g.addEventListener("mouseleave", () => { if (!pinned) unlight(); hideTip(); });
+  g.addEventListener("click", evt => {
+    evt.stopPropagation();
+    pinned = pinned === n ? null : n;
+    pinned ? light(pinned) : unlight();
+  });
+  return { n, g };
+});
+document.body.addEventListener("click", () => { pinned = null; unlight(); });
+
+function chain(id, edgesMap) {
+  const seen = new Set([id]); const queue = [id];
+  while (queue.length) {
+    for (const next of (edgesMap[queue.shift()] || [])) {
+      if (!seen.has(next)) { seen.add(next); queue.push(next); }
+    }
+  }
+  return seen;
+}
+function light(n) {
+  const keep = new Set([...chain(n.id, outEdges), ...chain(n.id, inEdges)]);
+  nodeEls.forEach(({ n: m, g }) => g.setAttribute("class", "node " + (keep.has(m.id) ? "lit" : "dim")));
+  edgeEls.forEach(({ e, path }) => path.setAttribute("class",
+    "edge " + (keep.has(e.from) && keep.has(e.to) ? "lit" : "dim")));
+}
+function unlight() {
+  nodeEls.forEach(({ g }) => g.setAttribute("class", "node"));
+  edgeEls.forEach(({ path }) => path.setAttribute("class", "edge"));
+  applySearch();
+}
+function showTip(n, evt) {
+  const outs = (outEdges[n.id] || []).length, ins = (inEdges[n.id] || []).length;
+  tooltip.innerHTML = `<div class="t">${n.title}</div>` +
+    `<div class="m">${n.layer}${n.subtype ? " / " + n.subtype : ""}` +
+    `${n.status ? " · status: " + n.status : ""}</div>` +
+    `<div class="m">cites ${outs} · cited by ${ins}</div>` +
+    `<div class="m">${n.id}</div>`;
+  tooltip.style.display = "block";
+  const x = Math.min(evt.clientX + 14, innerWidth - 360);
+  tooltip.style.left = x + "px";
+  tooltip.style.top = Math.min(evt.clientY + 14, innerHeight - 110) + "px";
+}
+function hideTip() { tooltip.style.display = "none"; }
+
+const searchBox = document.getElementById("search");
+function applySearch() {
+  const q = searchBox.value.trim().toLowerCase();
+  nodeEls.forEach(({ n, g }) => {
+    const hit = q && (n.title.toLowerCase().includes(q) || n.id.toLowerCase().includes(q));
+    if (!pinned) g.setAttribute("class", "node" + (hit ? " hit" : q ? " dim" : ""));
+  });
+}
+searchBox.addEventListener("input", applySearch);
+
+document.getElementById("theme").addEventListener("click", evt => {
+  evt.stopPropagation();
+  const root = document.documentElement;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const current = root.dataset.theme || (dark ? "dark" : "light");
+  root.dataset.theme = current === "dark" ? "light" : "dark";
+  repaint();
+});
+function repaint() {
+  edgeEls.forEach(({ e, path }) => path.setAttribute("stroke", layerColor(nodeById[e.from].layer)));
+  nodeEls.forEach(({ n, g }) => g.querySelector(".bar").setAttribute("fill", layerColor(n.layer)));
+  document.querySelectorAll(".layer-card").forEach((card, i) =>
+    card.style.setProperty("--chip", layerColor(DATA.layers[i])));
+}
+</script>
+</body>
+</html>
