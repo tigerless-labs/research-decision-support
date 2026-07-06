@@ -24,6 +24,8 @@ design→design、decisions→decisions、全局→map；卡片正文统一经 c
 - **判断、阅读状态**的权威版本在卡片 markdown 里；浏览器内的标注只是**草稿**，
   存 localStorage，经 read 页"导出补丁"生成可落盘文本，由 agent 或人写回卡片。
   HTML 永远可以整体重新生成而不丢失任何事实。
+- **生成物不入库**：工作台输出到临时目录或以 Artifact 发布，永不提交——投影 checked-in
+  等于同一事实住两个家。对外 demo 由发布流水线现场生成。
 
 ## 组件
 

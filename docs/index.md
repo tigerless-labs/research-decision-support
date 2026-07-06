@@ -5,4 +5,5 @@
 - [plans/](plans/) — 每次变更的实施计划（工作产物）。
 - [testing.md](testing.md) — 测试约定与测试地图。
 - [TODO.md](TODO.md) — 未上路线图的跟进项。
-- [site/](site/index.html) — 由 examples/autoharness 生成的演示工作台（index/read/compare/ideas/design/map）。
+
+生成的 HTML 工作台不入库（投影随建随弃）：`python3 tools/build_loom_site.py examples/autoharness -o /tmp/loom-demo --title autoharness`。

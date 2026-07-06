@@ -2,11 +2,11 @@
 
 > A published Agent Skill: turns literature reading into a five-layer, provenance-linked
 > design workspace (sources → synthesis → ideas → design → decisions), plus a generator that
-> renders any workspace into a self-contained interactive HTML provenance map. One-line wedge:
-> unstructured agent research produces confident prose with invisible provenance — the loom
-> makes *your judgment* an explicit, versioned, traceable artifact. This repo is
-> distribution-first: README hook, live example (`examples/autoharness/`), demo map
-> (`docs/site/`) all optimize for shareability.
+> renders any workspace into a self-contained HTML workbench. One-line wedge: unstructured
+> agent research produces confident prose with invisible provenance — the loom makes *your
+> judgment* an explicit, versioned, traceable artifact. This repo is distribution-first:
+> README hook and live example (`examples/autoharness/`) optimize for shareability. Generated
+> HTML is a throwaway projection — built to temp dirs or artifacts, never committed.
 
 ## Key docs (read before changing the relevant area)
 

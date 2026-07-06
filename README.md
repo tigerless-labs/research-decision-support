@@ -105,8 +105,16 @@ Every card title opens in a built-in reader that renders the markdown properly
 MIT, embedded at build time — still zero network requests), with cross-card links staying
 inside the reader and a "linked from / links to" trail under each card.
 
-The [demo](docs/site/index.html) is generated from the autoharness example. It's not
-academia-specific — anything that is "read materials → make a defensible call"
+Generated HTML is a throwaway projection — build it into a temp dir (or publish it as an
+artifact), never commit it; the markdown stays the single source of truth. Try it on the
+bundled example in ten seconds:
+
+```bash
+python3 tools/build_loom_site.py examples/autoharness -o /tmp/loom-demo --title autoharness
+open /tmp/loom-demo/index.html
+```
+
+It's not academia-specific — anything that is "read materials → make a defensible call"
 (vendor evaluations, due diligence, competitive analysis) fits the same five layers.
 
 ## Quickstart
@@ -161,7 +169,6 @@ tools/build_loom_site.py workspace → workbench: overview / read / compare / id
 tools/build_loom_map.py  workspace → the provenance map page alone
 tools/check_doc_links.py dangling-link validator
 examples/autoharness/    real 97-card workspace from a live project
-docs/site/             the demo workbench, generated from the example
 ```
 
 ## FAQ
