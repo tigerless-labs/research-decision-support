@@ -94,12 +94,12 @@ footer a { color: var(--ink-2); }
 <header>
   <h1 id="title">research-loom map</h1>
   <p class="tagline">Five structural layers, not pipeline steps. Every design element traces back
-  through the ideas it was distilled from to the sources that earned it — hover any card to walk
-  its provenance chain.</p>
+  through the ideas it was distilled from to the sources that earned it — hover any card to see
+  its direct provenance links.</p>
   <div class="controls">
     <input id="search" type="search" placeholder="Search cards…" aria-label="Search cards">
     <button id="theme">◐ theme</button>
-    <span class="hint">hover = provenance chain · click = pin</span>
+    <span class="hint">hover = direct links · click = pin</span>
   </div>
 </header>
 <section class="model" id="model"></section>
@@ -244,20 +244,11 @@ const nodeEls = DATA.nodes.map(n => {
 });
 document.body.addEventListener("click", () => { pinned = null; unlight(); });
 
-function chain(id, edgesMap) {
-  const seen = new Set([id]); const queue = [id];
-  while (queue.length) {
-    for (const next of (edgesMap[queue.shift()] || [])) {
-      if (!seen.has(next)) { seen.add(next); queue.push(next); }
-    }
-  }
-  return seen;
-}
 function light(n) {
-  const keep = new Set([...chain(n.id, outEdges), ...chain(n.id, inEdges)]);
+  const keep = new Set([n.id, ...(outEdges[n.id] || []), ...(inEdges[n.id] || [])]);
   nodeEls.forEach(({ n: m, g }) => g.setAttribute("class", "node " + (keep.has(m.id) ? "lit" : "dim")));
   edgeEls.forEach(({ e, path }) => path.setAttribute("class",
-    "edge " + (keep.has(e.from) && keep.has(e.to) ? "lit" : "dim")));
+    "edge " + (e.from === n.id || e.to === n.id ? "lit" : "dim")));
 }
 function unlight() {
   nodeEls.forEach(({ g }) => g.setAttribute("class", "node"));
