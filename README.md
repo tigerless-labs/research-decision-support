@@ -74,7 +74,7 @@ Nothing here is invented from scratch — it's four proven practices fused into 
 
 [`examples/autoharness/`](examples/autoharness/index.md) is the unedited workspace from a
 real project (an agent-harness self-evolution research effort): **76 sources → 3 directions →
-10 ideas → 8 design docs**, every link live. Start at its
+10 ideas → 8 design docs → 4 decisions (1 still open)**, every link live. Start at its
 [index](examples/autoharness/index.md) and follow any design doc backwards to the papers
 that justify it.
 
