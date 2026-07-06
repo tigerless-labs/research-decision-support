@@ -78,19 +78,26 @@ real project (an agent-harness self-evolution research effort): **76 sources →
 [index](examples/autoharness/index.md) and follow any design doc backwards to the papers
 that justify it.
 
-## The provenance map
+## The workbench
 
-One command renders any workspace into a **self-contained interactive HTML map** — five
-colored columns, every provenance edge drawn, hover a card to light up its full chain
-(everything it rests on, and everything that rests on it):
+One command renders any workspace into a **self-contained four-page HTML workbench** —
+no dependencies, no server, dark/light theme:
 
 ```bash
-python3 tools/build_loom_map.py docs/research-loom -o loom-map.html --title my-project
+python3 tools/build_loom_site.py docs/research-loom -o loom-site --title my-project
 ```
 
-No dependencies, no build step, dark/light theme, search built in. The
-[demo map](docs/index.html) is generated from the autoharness example — open it and hover a
-design doc to watch the chain light up back to individual papers.
+- **Read** — the working loop: digest card per source, filter and search, and tag
+  *while you read* — status, direction, a one-line take. Tags are browser drafts;
+  one click exports a patch your agent writes back into the cards.
+- **Compare** — sources clustered by direction, membership derived from your synthesis
+  cards (plus drafts, marked); the unassigned pile is your reading to-do.
+- **Map** — the provenance graph: hover a card to light up its direct links.
+- **Overview** — where you are: counts, directions, progress.
+
+The [demo](docs/index.html) is generated from the autoharness example. It's not
+academia-specific — anything that is "read materials → make a defensible call"
+(vendor evaluations, due diligence, competitive analysis) fits the same five layers.
 
 ## Quickstart
 
@@ -118,7 +125,7 @@ GitHub, backlinks in Obsidian, greppable forever.
 
 ```bash
 python3 tools/check_doc_links.py docs        # zero dangling links
-python3 tools/build_loom_map.py docs/research-loom -o loom-map.html
+python3 tools/build_loom_site.py docs/research-loom -o loom-site
 ```
 
 ## Hard rules the skill enforces
@@ -139,10 +146,11 @@ python3 tools/build_loom_map.py docs/research-loom -o loom-map.html
 SKILL.md                 the skill (drop into ~/.claude/skills/research-loom/)
 templates/               card templates: idea, direction MOC, design, decision worksheet, ADR
 references/note-types.md the three-card contract + frontmatter spec
-tools/build_loom_map.py  workspace → interactive provenance map (self-contained HTML)
+tools/build_loom_site.py workspace → 4-page workbench: overview / read / compare / map
+tools/build_loom_map.py  workspace → the provenance map page alone
 tools/check_doc_links.py dangling-link validator
 examples/autoharness/    real 97-card workspace from a live project
-docs/index.html          the demo map, generated from the example
+docs/index.html …        the demo workbench, generated from the example
 ```
 
 ## FAQ

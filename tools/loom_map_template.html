@@ -40,6 +40,16 @@ body {
   margin: 0; background: var(--page); color: var(--ink);
   font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
 }
+.sitenav {
+  max-width: 1640px; margin: 0 auto; padding: 14px 24px 0;
+  display: flex; gap: 4px; align-items: center;
+}
+.sitenav .brand { font-weight: 700; margin-right: 10px; }
+.sitenav a {
+  text-decoration: none; color: var(--ink-2); padding: 5px 11px; border-radius: 999px;
+  border: 1px solid transparent;
+}
+.sitenav a.on { background: var(--surface); border-color: var(--grid); color: var(--ink); }
 header { max-width: 1640px; margin: 0 auto; padding: 28px 24px 0; }
 h1 { font-size: 22px; margin: 0 0 4px; }
 .tagline { color: var(--ink-2); margin: 0 0 18px; max-width: 72ch; }
