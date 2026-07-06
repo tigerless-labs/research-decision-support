@@ -5,6 +5,7 @@
 
 - sources/
   - [products/](sources/products/index.md) — 竞品产品卡。
+  - [github/](sources/github/index.md) — 自动研究 agent 仓库卡。
   - [blogs/](sources/blogs/index.md) — 方法与惯例。
 - synthesis/ — [竞品格局](synthesis/competitive-landscape.md)。
 - ideas/ — [读标判一步完成](ideas/read-tag-judge-loop.md) ·
