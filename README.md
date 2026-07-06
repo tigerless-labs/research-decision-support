@@ -84,7 +84,7 @@ One command renders any workspace into a **self-contained HTML workbench** — o
 layer, no dependencies, no server, dark/light theme:
 
 ```bash
-python3 tools/build_loom_site.py docs/research-loom -o /tmp/loom-site --title my-project
+python3 plugins/research-loom/skills/research-loom/scripts/build_loom_site.py docs/research-loom -o /tmp/loom-site --title my-project
 ```
 
 - **Read** — the working loop: digest card per source, filter and search, and tag
@@ -110,7 +110,8 @@ artifact), never commit it; the markdown stays the single source of truth. Try i
 bundled example in ten seconds:
 
 ```bash
-python3 tools/build_loom_site.py examples/autoharness -o /tmp/loom-demo --title autoharness
+python3 plugins/research-loom/skills/research-loom/scripts/build_loom_site.py \
+  examples/autoharness -o /tmp/loom-demo --title autoharness
 open /tmp/loom-demo/index.html
 ```
 
@@ -119,15 +120,16 @@ It's not academia-specific — anything that is "read materials → make a defen
 
 ## Quickstart
 
-**1. Install the skill** (Claude Code):
+**1. Install** (Claude Code — this repo is a plugin marketplace):
 
-```bash
-git clone https://github.com/tigerless-ai/research-loom
-mkdir -p ~/.claude/skills
-cp -r research-loom/{SKILL.md,templates,references} ~/.claude/skills/research-loom/
+```
+/plugin marketplace add tigerless-ai/research-loom
+/plugin install research-loom@research-loom
 ```
 
-Any other SKILL.md-compatible agent: point it at `SKILL.md`.
+The skill and its scripts travel together — no manual copying, `/plugin marketplace update`
+pulls new versions. Any other SKILL.md-compatible agent: point it at
+`plugins/research-loom/skills/research-loom/SKILL.md`.
 
 **2. Use it.** In your project, just talk to your agent:
 
@@ -141,10 +143,8 @@ GitHub, backlinks in Obsidian, greppable forever.
 
 **3. Keep it honest:**
 
-```bash
-python3 tools/check_doc_links.py docs        # zero dangling links
-python3 tools/build_loom_site.py docs/research-loom -o /tmp/loom-site
-```
+The skill runs its bundled validators and generator via `${CLAUDE_SKILL_DIR}` — zero dangling
+links after every write, workbench rendered to a temp dir on demand.
 
 ## Hard rules the skill enforces
 
@@ -161,16 +161,22 @@ python3 tools/build_loom_site.py docs/research-loom -o /tmp/loom-site
 ## Repo layout
 
 ```
-SKILL.md                 the skill (drop into ~/.claude/skills/research-loom/)
-templates/               card templates: idea, direction MOC, design, decision worksheet, ADR
-references/note-types.md the three-card contract + frontmatter spec
-tools/build_loom_site.py workspace → workbench: overview / read / compare / ideas / design /
-                         decisions / map, + card reader (embedded marked+DOMPurify)
-tools/build_loom_map.py  workspace → the provenance map page alone
-tools/check_doc_links.py dangling-link validator
-examples/autoharness/    real 97-card workspace from a live project
-tests/                   pytest suite for the generators (incl. injection red-team cases)
-LICENSE                  MIT (vendored marked/DOMPurify keep their own MIT headers)
+.claude-plugin/marketplace.json          this repo IS the marketplace
+plugins/research-loom/
+  .claude-plugin/plugin.json             plugin manifest
+  skills/research-loom/
+    SKILL.md                             the skill
+    templates/                           card templates: idea, direction MOC, design,
+                                         decision worksheet, ADR
+    references/note-types.md             the three-card contract + frontmatter spec
+    scripts/build_loom_site.py           workspace → workbench: overview / read / compare /
+                                         ideas / design / decisions / map + card reader
+    scripts/build_loom_map.py            the provenance map page alone
+    scripts/check_doc_links.py           dangling-link validator
+examples/autoharness/                    real 97-card workspace from a live project (not
+                                         installed with the plugin — demo only)
+tests/                                   pytest suite (incl. injection red-team cases)
+LICENSE                                  MIT (vendored marked/DOMPurify keep their headers)
 ```
 
 ## FAQ

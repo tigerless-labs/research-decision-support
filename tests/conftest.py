@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "plugins/research-loom/skills/research-loom/scripts"))
 
 XSS_TITLE = 'Evil </script><script>alert(1)</script> <img src=x onerror=alert(2)>'
 
