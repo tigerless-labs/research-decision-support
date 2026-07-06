@@ -84,7 +84,7 @@ One command renders any workspace into a **self-contained HTML workbench** — o
 layer, no dependencies, no server, dark/light theme:
 
 ```bash
-python3 tools/build_loom_site.py docs/research-loom -o loom-site --title my-project
+python3 tools/build_loom_site.py docs/research-loom -o /tmp/loom-site --title my-project
 ```
 
 - **Read** — the working loop: digest card per source, filter and search, and tag
@@ -143,7 +143,7 @@ GitHub, backlinks in Obsidian, greppable forever.
 
 ```bash
 python3 tools/check_doc_links.py docs        # zero dangling links
-python3 tools/build_loom_site.py docs/research-loom -o loom-site
+python3 tools/build_loom_site.py docs/research-loom -o /tmp/loom-site
 ```
 
 ## Hard rules the skill enforces
@@ -169,6 +169,8 @@ tools/build_loom_site.py workspace → workbench: overview / read / compare / id
 tools/build_loom_map.py  workspace → the provenance map page alone
 tools/check_doc_links.py dangling-link validator
 examples/autoharness/    real 97-card workspace from a live project
+tests/                   pytest suite for the generators (incl. injection red-team cases)
+LICENSE                  MIT (vendored marked/DOMPurify keep their own MIT headers)
 ```
 
 ## FAQ

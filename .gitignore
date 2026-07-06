@@ -1,3 +1,5 @@
 .claude/
-docs/site/
+CLAUDE.md
+docs/
 loom-site/
+__pycache__/

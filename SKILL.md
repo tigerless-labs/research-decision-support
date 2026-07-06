@@ -1,6 +1,10 @@
 ---
 name: research-loom
 description: 把几十篇论文织成自己的、可溯源的设计 —— 提炼每篇论点优缺点、分方向对比、蒸馏成认可的思路与新 idea、组装成设计并链回论文、对争议点做决策。五者是结构层不是步骤，按需跨层维护、每层固定格式。Use when 整理大量文献做综述、从论文出发做架构/方法设计、把读到的东西沉淀成自己带出处的设计、或要在 docs/research-loom/ 里推进"文献→设计"工作时（"整理这些论文""做个方向对比""把这些想法组装成设计""这个设计点怎么决策"）。
+license: MIT
+metadata:
+  author: tigerless.ai
+  repository: https://github.com/tigerless-ai/research-loom
 ---
 
 # research-loom —— 文献→设计 合成工作法
