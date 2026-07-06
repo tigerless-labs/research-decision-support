@@ -1,4 +1,4 @@
-<h1 align="center">research-loom</h1>
+<h1 align="center">research-decision-support</h1>
 
 <p align="center"><strong>Weave 80 papers into a design you can defend — every claim traceable back to its source.</strong></p>
 
@@ -15,7 +15,7 @@ Most "literature review" folders die the same death: a pile of paper summaries n
 a design doc that cites nothing, and — six months later — no way to answer *"why did we build
 it this way?"*
 
-**research-loom** is an [Agent Skill](https://agentskills.io) (works in Claude Code and any
+**research-decision-support** is an [Agent Skill](https://agentskills.io) (works in Claude Code and any
 SKILL.md-compatible agent) that turns reading into a **provenance-linked design workspace**.
 You read; the agent files every output into one of five layers and keeps the links between
 them honest. The result is a design where every element traces back through the ideas it was
@@ -84,7 +84,7 @@ One command renders any workspace into a **self-contained HTML workbench** — o
 layer, no dependencies, no server, dark/light theme:
 
 ```bash
-python3 plugins/research-loom/skills/research-loom/scripts/build_loom_site.py docs/research-loom -o /tmp/loom-site --title my-project
+python3 plugins/research-decision-support/skills/research-decision-support/scripts/build_site.py docs/research-decision-support -o /tmp/workbench --title my-project
 ```
 
 - **Read** — the working loop: digest card per source, filter and search, and tag
@@ -110,9 +110,9 @@ artifact), never commit it; the markdown stays the single source of truth. Try i
 bundled example in ten seconds:
 
 ```bash
-python3 plugins/research-loom/skills/research-loom/scripts/build_loom_site.py \
-  examples/autoharness -o /tmp/loom-demo --title autoharness
-open /tmp/loom-demo/index.html
+python3 plugins/research-decision-support/skills/research-decision-support/scripts/build_site.py \
+  examples/autoharness -o /tmp/workbench-demo --title autoharness
+open /tmp/workbench-demo/index.html
 ```
 
 It's not academia-specific — anything that is "read materials → make a defensible call"
@@ -123,13 +123,13 @@ It's not academia-specific — anything that is "read materials → make a defen
 **1. Install** (Claude Code — this repo is a plugin marketplace):
 
 ```
-/plugin marketplace add tigerless-ai/research-loom
-/plugin install research-loom@research-loom
+/plugin marketplace add tigerless-ai/research-decision-support
+/plugin install research-decision-support@research-decision-support
 ```
 
 The skill and its scripts travel together — no manual copying, `/plugin marketplace update`
 pulls new versions. Any other SKILL.md-compatible agent: point it at
-`plugins/research-loom/skills/research-loom/SKILL.md`.
+`plugins/research-decision-support/skills/research-decision-support/SKILL.md`.
 
 **2. Use it.** In your project, just talk to your agent:
 
@@ -138,7 +138,7 @@ pulls new versions. Any other SKILL.md-compatible agent: point it at
 > *"把这些想法组装成设计"* / "assemble these into a design" → spine + modules into `design/`
 > *"这个设计点怎么决策"* / "decide this contested point" → worksheet → ADR into `decisions/`
 
-Everything lands in `docs/research-loom/` as plain Markdown with relative links — renders on
+Everything lands in `docs/research-decision-support/` as plain Markdown with relative links — renders on
 GitHub, backlinks in Obsidian, greppable forever.
 
 **3. Keep it honest:**
@@ -162,16 +162,16 @@ links after every write, workbench rendered to a temp dir on demand.
 
 ```
 .claude-plugin/marketplace.json          this repo IS the marketplace
-plugins/research-loom/
+plugins/research-decision-support/
   .claude-plugin/plugin.json             plugin manifest
-  skills/research-loom/
+  skills/research-decision-support/
     SKILL.md                             the skill
     templates/                           card templates: idea, direction MOC, design,
                                          decision worksheet, ADR
     references/note-types.md             the three-card contract + frontmatter spec
-    scripts/build_loom_site.py           workspace → workbench: overview / read / compare /
+    scripts/build_site.py           workspace → workbench: overview / read / compare /
                                          ideas / design / decisions / map + card reader
-    scripts/build_loom_map.py            the provenance map page alone
+    scripts/build_map.py            the provenance map page alone
     scripts/check_doc_links.py           dangling-link validator
 examples/autoharness/                    real 97-card workspace from a live project (not
                                          installed with the plugin — demo only)
@@ -185,7 +185,7 @@ LICENSE                                  MIT (vendored marked/DOMPurify keep the
 Markdown in your repo. No database, no server, no lock-in.
 
 **Why not just let the agent "do research"?** Unstructured agent research produces confident
-prose with invisible provenance. The loom makes the middle layer — *your* judgment — an
+prose with invisible provenance. The skill makes the middle layer — *your* judgment — an
 explicit, versioned artifact. When a source is retracted or a benchmark shifts, you can trace
 exactly which ideas, designs, and decisions are exposed.
 

@@ -6,7 +6,7 @@ affects: [<设计元素ID>]
 ---
 # 决策：<争议点一句话>
 
-属于 ⑤ 精炼（open 态，会变）。放入 `docs/research-loom/decisions/`。定了即坍缩成一条 ADR。
+属于 ⑤ 精炼（open 态，会变）。放入 `docs/research-decision-support/decisions/`。定了即坍缩成一条 ADR。
 
 ## 驱动力（加权质量属性 —— 决策的重点）
 

@@ -1,4 +1,4 @@
-from build_loom_map import build, collect
+from build_map import build, collect
 
 from conftest import XSS_TITLE
 

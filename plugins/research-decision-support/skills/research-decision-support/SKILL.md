@@ -1,14 +1,14 @@
 ---
-name: research-loom
-description: 把几十篇论文织成自己的、可溯源的设计 —— 提炼每篇论点优缺点、分方向对比、蒸馏成认可的思路与新 idea、组装成设计并链回论文、对争议点做决策。五者是结构层不是步骤，按需跨层维护、每层固定格式。Use when 整理大量文献做综述、从论文出发做架构/方法设计、把读到的东西沉淀成自己带出处的设计、或要在 docs/research-loom/ 里推进"文献→设计"工作时（"整理这些论文""做个方向对比""把这些想法组装成设计""这个设计点怎么决策"）。
+name: research-decision-support
+description: 把几十篇论文织成自己的、可溯源的设计 —— 提炼每篇论点优缺点、分方向对比、蒸馏成认可的思路与新 idea、组装成设计并链回论文、对争议点做决策。五者是结构层不是步骤，按需跨层维护、每层固定格式。Use when 整理大量文献做综述、从论文出发做架构/方法设计、把读到的东西沉淀成自己带出处的设计、或要在 docs/research-decision-support/ 里推进"文献→设计"工作时（"整理这些论文""做个方向对比""把这些想法组装成设计""这个设计点怎么决策"）。
 license: MIT
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/*)
 metadata:
   author: tigerless.ai
-  repository: https://github.com/tigerless-ai/research-loom
+  repository: https://github.com/tigerless-ai/research-decision-support
 ---
 
-# research-loom —— 文献→设计 合成工作法
+# research-decision-support —— 文献→设计 合成工作法
 
 被触发后进入**合成模式**。五者是内容的**结构层，不是时间步骤**——按真实节奏跨层穿梭（调研一批就先搭设计、随后再调研、随时回改 idea），任意顺序、可交错。skill 不排时序，只做一件事：**把你产出的每一块归到对的层、保持原子、按格式落盘、连好链接**。层间是 provenance 依赖（设计建立在 idea、idea 引用源卡、决策作用于设计），不是先后。
 
@@ -19,7 +19,7 @@ metadata:
 - **三种卡分家**：文献笔记（论文说）≠ 永久笔记（我说）≠ 设计（组装）。详见 [note-types](references/note-types.md)。
 - **相对 Markdown 链接**互连原子，`[[ ]]` 不作链接机制。
 - **append-only**：ADR 只增不删。
-- 每次写入后跑校验器：`python3 ${CLAUDE_SKILL_DIR}/scripts/check_doc_links.py docs`（`check_research_loom.py` 校验 frontmatter，尚未实现时跳过）。
+- 每次写入后跑校验器：`python3 ${CLAUDE_SKILL_DIR}/scripts/check_doc_links.py docs`（`check_workspace.py` 校验 frontmatter，尚未实现时跳过）。
 
 **写卡四律**（每张卡都守）：
 
@@ -30,7 +30,7 @@ metadata:
 
 ## 开场
 
-先用一行说清这次在**哪一层、做什么**（不是"推进到第几阶段"），再开始。哪层先动取决于你手头在做什么——可自底向上（源→idea→设计），也可自顶向下（先搭设计再补 idea/源）。内容全部落在 `docs/research-loom/`。
+先用一行说清这次在**哪一层、做什么**（不是"推进到第几阶段"），再开始。哪层先动取决于你手头在做什么——可自底向上（源→idea→设计），也可自顶向下（先搭设计再补 idea/源）。内容全部落在 `docs/research-decision-support/`。
 
 ## 主动引导（skill 的另一半：看火候推进度）
 
@@ -87,7 +87,7 @@ metadata:
 design / decisions / map + card 阅读器）：
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/build_loom_site.py <workspace> -o /tmp/loom-site --title <名字>
+python3 ${CLAUDE_SKILL_DIR}/scripts/build_site.py <workspace> -o /tmp/workbench --title <名字>
 ```
 
 输出到**临时目录**，或作为 Artifact 发布分享——**生成的 HTML 永不提交进仓库**。markdown 是

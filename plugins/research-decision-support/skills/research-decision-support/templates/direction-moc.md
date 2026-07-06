@@ -4,7 +4,7 @@ type: direction
 ---
 # 方向：<方向名>
 
-一句话界定这个方向是什么、把哪些来源卡归到一起。属于 ② 组织。放入 `docs/research-loom/synthesis/`。
+一句话界定这个方向是什么、把哪些来源卡归到一起。属于 ② 组织。放入 `docs/research-decision-support/synthesis/`。
 
 ## 与其他方向的区别
 

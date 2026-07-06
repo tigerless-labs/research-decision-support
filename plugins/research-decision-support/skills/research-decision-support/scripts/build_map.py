@@ -87,7 +87,7 @@ def without_bodies(data):
 
 
 def render(data, nav=""):
-    template = (Path(__file__).parent / "loom_map_template.html").read_text(encoding="utf-8")
+    template = (Path(__file__).parent / "map_template.html").read_text(encoding="utf-8")
     return (template
             .replace("<!--__NAV__-->", nav)
             .replace("/*__DATA__*/null", embed_json(without_bodies(data))))
@@ -104,10 +104,10 @@ def build(workspace, output, title, nav=""):
 
 def main(argv):
     if len(argv) < 2:
-        print("usage: build_loom_map.py <workspace-dir> [-o output.html] [--title 'Page title']")
+        print("usage: build_map.py <workspace-dir> [-o output.html] [--title 'Page title']")
         return 1
     workspace = argv[1]
-    output = argv[argv.index("-o") + 1] if "-o" in argv else "loom-map.html"
+    output = argv[argv.index("-o") + 1] if "-o" in argv else "map.html"
     title = argv[argv.index("--title") + 1] if "--title" in argv else Path(workspace).name
     build(workspace, output, title)
     return 0

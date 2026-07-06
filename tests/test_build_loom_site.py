@@ -1,5 +1,5 @@
-from build_loom_map import collect
-from build_loom_site import assemble, build_site
+from build_map import collect
+from build_site import assemble, build_site
 
 from conftest import XSS_TITLE
 

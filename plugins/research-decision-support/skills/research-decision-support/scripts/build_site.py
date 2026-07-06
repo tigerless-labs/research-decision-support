@@ -2,8 +2,8 @@ import os
 import sys
 from pathlib import Path
 
-from build_loom_map import collect, embed_json, without_bodies
-from build_loom_map import render as render_map
+from build_map import collect, embed_json, without_bodies
+from build_map import render as render_map
 
 SITE_PAGES = ["index", "read", "compare", "ideas", "design", "decisions"]
 NAV_LINKS = [("index", "Overview"), ("read", "Read"), ("compare", "Compare"),
@@ -31,7 +31,7 @@ def nav_html(active, with_theme):
         f'<a href="{page}.html"{" class=\"on\"" if page == active else ""}>{label}</a>'
         for page, label in NAV_LINKS)
     theme = '<span class="spacer"></span><button id="theme-toggle">◐ theme</button>' if with_theme else ""
-    return f'<nav class="sitenav"><span class="brand">🧶 loom</span>{links}{theme}</nav>'
+    return f'<nav class="sitenav"><span class="brand">🧭 research-decision-support</span>{links}{theme}</nav>'
 
 
 def build_site(workspace, outdir, title):
@@ -42,14 +42,14 @@ def build_site(workspace, outdir, title):
     site["title"] = title
     site["workspace_rel"] = Path(os.path.relpath(workspace, outdir.resolve())).as_posix()
     tools = Path(__file__).parent
-    template = (tools / "loom_site_template.html").read_text(encoding="utf-8")
+    template = (tools / "site_template.html").read_text(encoding="utf-8")
     for page in SITE_PAGES:
         html = (template
                 .replace("<!--__NAV__-->", nav_html(page, with_theme=True))
                 .replace('"__PAGE__"', f'"{page}"')
                 .replace("/*__DATA__*/null", embed_json(without_bodies(site))))
         (outdir / f"{page}.html").write_text(html, encoding="utf-8")
-    card = ((tools / "loom_card_template.html").read_text(encoding="utf-8")
+    card = ((tools / "card_template.html").read_text(encoding="utf-8")
             .replace("<!--__NAV__-->", nav_html("", with_theme=True))
             .replace("/*__MARKED__*/", (tools / "vendor/marked.min.js").read_text(encoding="utf-8"))
             .replace("/*__PURIFY__*/", (tools / "vendor/purify.min.js").read_text(encoding="utf-8"))
@@ -66,10 +66,10 @@ def build_site(workspace, outdir, title):
 
 def main(argv):
     if len(argv) < 2:
-        print("usage: build_loom_site.py <workspace-dir> [-o output-dir] [--title 'Site title']")
+        print("usage: build_site.py <workspace-dir> [-o output-dir] [--title 'Site title']")
         return 1
     workspace = argv[1]
-    outdir = argv[argv.index("-o") + 1] if "-o" in argv else "loom-site"
+    outdir = argv[argv.index("-o") + 1] if "-o" in argv else "workbench"
     title = argv[argv.index("--title") + 1] if "--title" in argv else Path(workspace).name
     build_site(workspace, outdir, title)
     return 0

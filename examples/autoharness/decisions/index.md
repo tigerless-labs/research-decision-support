@@ -1,6 +1,6 @@
 # decisions — ⑤ 精炼（决策工作表 → ADR）
 
-对设计上有争议的点跑决策模型（驱动力→选项→权衡→取舍），开放态为决策工作表，定了坍缩成一条 ADR。**ADR 只增不删**，旧决策标记被取代而非抹除。决策锚定到 [design/](../design/index.md) 的元素。方法由 `research-loom` skill 承载。
+对设计上有争议的点跑决策模型（驱动力→选项→权衡→取舍），开放态为决策工作表，定了坍缩成一条 ADR。**ADR 只增不删**，旧决策标记被取代而非抹除。决策锚定到 [design/](../design/index.md) 的元素。方法由 `research-decision-support` skill 承载。
 
 
 - [D-001 沉淀物存哪层](D-001-precipitate-storage.md) — `open`：A instinct 层 / B 长成 skill / C 苗圃毕业；user 倾向 B。

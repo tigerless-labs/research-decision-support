@@ -1,6 +1,6 @@
 # ideas — ③ 蒸馏（永久笔记）
 
-我认可的思路与自己的新念头，每条一卡：**用自己的话、原子化、引用所凭的来源卡**。永久笔记不是论文摘要，是你的主张。方法由 `research-loom` skill 承载。
+我认可的思路与自己的新念头，每条一卡：**用自己的话、原子化、引用所凭的来源卡**。永久笔记不是论文摘要，是你的主张。方法由 `research-decision-support` skill 承载。
 
 - 🧭 **[核心理念：在运行中积累并验证经验，而非定期收集 eval 跑进化](dynamic-validation-lifecycle.md)** — `候选`（理念卡：in-loop 验证、离线 eval 会过期、replay 降兜底；机制归 episode/adherence，待复核）
 - [要可靠生效的规则，走 hook 强制注入](hook-forced-injection.md) — `候选`（源于 ECC 实测，待复核）

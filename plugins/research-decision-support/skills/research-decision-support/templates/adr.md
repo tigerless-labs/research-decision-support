@@ -7,7 +7,7 @@ supersedes: <被取代的ADR-id 或留空>
 ---
 # <决策标题>
 
-由 [<决策工作表>](<D-编号-slug>.md) 坍缩而来。属于 ⑤ 精炼（resolved）。放入 `docs/research-loom/decisions/`。**只增不删**：改主意写新 ADR 并标 `supersedes`，不改本文。
+由 [<决策工作表>](<D-编号-slug>.md) 坍缩而来。属于 ⑤ 精炼（resolved）。放入 `docs/research-decision-support/decisions/`。**只增不删**：改主意写新 ADR 并标 `supersedes`，不改本文。
 
 ## 背景
 

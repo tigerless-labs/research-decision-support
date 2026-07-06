@@ -1,11 +1,11 @@
 {
-  "name": "research-loom",
+  "name": "research-decision-support",
   "description": "Literature-to-design synthesis method: five provenance-linked layers, proactive coaching, and a self-contained HTML workbench generator.",
   "version": "0.1.0",
   "author": {
     "name": "tigerless.ai",
     "email": "saas@tigerless.com"
   },
-  "homepage": "https://github.com/tigerless-ai/research-loom",
+  "homepage": "https://github.com/tigerless-ai/research-decision-support",
   "license": "MIT"
 }

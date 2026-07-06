@@ -1,13 +1,13 @@
 {
-  "name": "research-loom",
+  "name": "research-decision-support",
   "owner": {
     "name": "tigerless.ai",
     "email": "saas@tigerless.com"
   },
   "plugins": [
     {
-      "name": "research-loom",
-      "source": "./plugins/research-loom",
+      "name": "research-decision-support",
+      "source": "./plugins/research-decision-support",
       "description": "Weave papers into a provenance-linked design workspace: sources → synthesis → ideas → design → decisions, plus an HTML workbench generator."
     }
   ]

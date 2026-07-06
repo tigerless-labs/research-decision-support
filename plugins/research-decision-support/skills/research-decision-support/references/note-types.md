@@ -12,7 +12,7 @@
 
 **为什么分家**：永久笔记不是论文摘要。文献笔记（论文说）与永久笔记（我说）解耦，念头才能脱离原始出处、自由重组进设计而不必重构。
 
-## frontmatter 契约（由 `tools/check_research_loom.py` 强制）
+## frontmatter 契约（由 `tools/check_workspace.py` 强制）
 
 只有新阶段原子带 frontmatter；旧来源卡为散文格式，豁免。必填字段缺失或 status 越界 → 校验器报错。
 
