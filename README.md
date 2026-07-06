@@ -99,7 +99,7 @@ python3 tools/build_loom_site.py docs/research-loom -o loom-site --title my-proj
 - **Map** — the provenance graph: hover a card to light up its direct links.
 - **Overview** — where you are: counts, directions, progress.
 
-The [demo](docs/index.html) is generated from the autoharness example. It's not
+The [demo](docs/site/index.html) is generated from the autoharness example. It's not
 academia-specific — anything that is "read materials → make a defensible call"
 (vendor evaluations, due diligence, competitive analysis) fits the same five layers.
 
@@ -154,7 +154,7 @@ tools/build_loom_site.py workspace → workbench: overview / read / compare / id
 tools/build_loom_map.py  workspace → the provenance map page alone
 tools/check_doc_links.py dangling-link validator
 examples/autoharness/    real 97-card workspace from a live project
-docs/index.html …        the demo workbench, generated from the example
+docs/site/             the demo workbench, generated from the example
 ```
 
 ## FAQ

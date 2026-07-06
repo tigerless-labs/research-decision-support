@@ -6,7 +6,7 @@
 > unstructured agent research produces confident prose with invisible provenance — the loom
 > makes *your judgment* an explicit, versioned, traceable artifact. This repo is
 > distribution-first: README hook, live example (`examples/autoharness/`), demo map
-> (`docs/index.html`) all optimize for shareability.
+> (`docs/site/`) all optimize for shareability.
 
 ## Key docs (read before changing the relevant area)
 
