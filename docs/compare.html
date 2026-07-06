@@ -87,6 +87,12 @@ button.action:hover { color: var(--ink); }
   border-radius: 999px; padding: 1px 8px; white-space: nowrap;
 }
 .badge.dir { border-color: color-mix(in srgb, var(--c-synthesis) 45%, transparent); color: var(--c-synthesis); }
+.badge.ok { border-color: color-mix(in srgb, var(--c-design) 55%, transparent); color: var(--c-design); }
+.badge.warn { border-color: color-mix(in srgb, var(--c-ideas) 60%, transparent); color: var(--c-ideas); }
+a.badge { text-decoration: none; }
+a.badge:hover { border-color: var(--ink-2); }
+.rel-row { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; margin-top: 8px; }
+.rel-row .rel-label { color: var(--muted); font-size: 11.5px; min-width: 74px; }
 .badge.draft { border-style: dashed; }
 .card-head select {
   margin-left: auto; background: none; color: var(--ink-2); border: 1px solid var(--grid);
@@ -148,7 +154,7 @@ dialog .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10
 </style>
 </head>
 <body>
-<nav class="sitenav"><span class="brand">🧶 loom</span><a href="index.html">Overview</a><a href="read.html">Read</a><a href="compare.html" class="on">Compare</a><a href="map.html">Map</a><span class="spacer"></span><button id="theme-toggle">◐ theme</button></nav>
+<nav class="sitenav"><span class="brand">🧶 loom</span><a href="index.html">Overview</a><a href="read.html">Read</a><a href="compare.html" class="on">Compare</a><a href="ideas.html">Ideas</a><a href="design.html">Design</a><a href="map.html">Map</a><span class="spacer"></span><button id="theme-toggle">◐ theme</button></nav>
 <header>
   <h1 id="title"></h1>
   <p class="tagline" id="tagline"></p>
@@ -201,7 +207,7 @@ const el = (tag, cls, text) => {
 };
 
 document.getElementById("title").textContent = DATA.title +
-  ({ index: "", read: " — read", compare: " — directions" })[PAGE];
+  ({ index: "", read: " — read", compare: " — directions", ideas: " — ideas", design: " — design" })[PAGE];
 document.title = document.getElementById("title").textContent;
 
 const TAGLINES = {
@@ -211,6 +217,10 @@ const TAGLINES = {
     "Tags made here are drafts until exported back into the cards.",
   compare: "Your sources clustered by direction — membership comes from the synthesis cards " +
     "(plus your browser drafts, marked). The unassigned pile is your to-do.",
+  ideas: "Your claims, in your words — each cites the sources that earned it and shows which " +
+    "design elements use it. An idea no design uses yet is either a gap or a cut.",
+  design: "What you built and what it stands on: every element lists the ideas it assembles; " +
+    "decisions act on elements and are recorded here.",
 };
 document.getElementById("tagline").textContent = TAGLINES[PAGE];
 
@@ -220,13 +230,39 @@ function statusChip(n) {
   return el("span", "chip " + statusOf(n), statusOf(n));
 }
 
+const outOf = (id, layer) => DATA.edges
+  .filter(e => e.from === id && nodeById[e.to] && nodeById[e.to].layer === layer)
+  .map(e => nodeById[e.to]);
+const inOf = (id, layer) => DATA.edges
+  .filter(e => e.to === id && nodeById[e.from] && nodeById[e.from].layer === layer)
+  .map(e => nodeById[e.from]);
+const statusClass = s => /采纳|accepted|resolved/.test(s) ? " ok"
+  : /存疑|open|proposed/.test(s) ? " warn" : "";
+function chipLink(n) {
+  const a = el("a", "badge", n.title);
+  a.href = cardHref(n.id);
+  return a;
+}
+function relRow(label, nodes) {
+  const row = el("div", "rel-row");
+  row.append(el("span", "rel-label", label));
+  nodes.forEach(n => row.append(chipLink(n)));
+  return row;
+}
+
 function renderIndex() {
   const grid = el("div", "grid");
   const readCount = sources.filter(n => statusOf(n) !== "unread").length;
+  const ideas = DATA.nodes.filter(n => n.layer === "ideas");
+  const designs = DATA.nodes.filter(n => n.layer === "design");
+  const decisions = DATA.nodes.filter(n => n.layer === "decisions");
+  const unusedIdeas = ideas.filter(n => inOf(n.id, "design").length === 0).length;
   const tiles = [
     ["read.html", "Read", sources.length, readCount + " of " + sources.length + " sources read — continue"],
     ["compare.html", "Compare", DATA.directions.length,
       "directions · " + DATA.unassigned.length + " sources unassigned"],
+    ["ideas.html", "Ideas", ideas.length, unusedIdeas + " not yet used by any design"],
+    ["design.html", "Design", designs.length, decisions.length + " decisions on record"],
     ["map.html", "Map", DATA.edges.length, "provenance links across " + DATA.nodes.length + " cards"],
   ];
   tiles.forEach(([href, k, n, d]) => {
@@ -416,7 +452,103 @@ function renderCompare() {
   main.append(section);
 }
 
-({ index: renderIndex, read: renderRead, compare: renderCompare })[PAGE]();
+function renderIdeas() {
+  const ideas = DATA.nodes.filter(n => n.layer === "ideas");
+  const controls = el("div", "controls");
+  const search = el("input");
+  search.type = "search"; search.placeholder = "Search ideas…";
+  const selStatus = el("select"), selUse = el("select");
+  const opt = (sel, value, label) => {
+    const o = el("option", "", label || value); o.value = value; sel.append(o);
+  };
+  opt(selStatus, "", "any status");
+  [...new Set(ideas.map(n => n.status).filter(Boolean))].forEach(s => opt(selStatus, s));
+  opt(selUse, "", "used or not");
+  opt(selUse, "used", "used by a design");
+  opt(selUse, "unused", "not yet used");
+  const counter = el("span", "counter");
+  controls.append(search, selStatus, selUse, counter);
+  main.append(controls);
+
+  const rows = ideas.map(n => {
+    const usedBy = inOf(n.id, "design");
+    const cites = outOf(n.id, "sources");
+    const card = el("div", "card");
+    const head = el("div", "card-head");
+    const title = el("a", "t", n.title);
+    title.href = cardHref(n.id);
+    head.append(title);
+    if (n.status) head.append(el("span", "badge" + statusClass(n.status), n.status));
+    if (!usedBy.length) head.append(el("span", "badge warn", "not yet in design"));
+    card.append(head);
+    if (n.summary) card.append(el("p", "summary", n.summary));
+    if (cites.length) card.append(relRow("cites", cites));
+    if (usedBy.length) card.append(relRow("used by", usedBy));
+    main.append(card);
+    return { n, card, used: usedBy.length > 0 };
+  });
+
+  function paint() {
+    const q = search.value.trim().toLowerCase();
+    let visible = 0;
+    rows.forEach(({ n, card, used }) => {
+      const show = (!selStatus.value || n.status === selStatus.value) &&
+        (!selUse.value || (selUse.value === "used") === used) &&
+        (!q || (n.title + " " + n.summary).toLowerCase().includes(q));
+      card.style.display = show ? "" : "none";
+      if (show) visible += 1;
+    });
+    counter.textContent = visible + " / " + ideas.length + " ideas · " +
+      rows.filter(r => !r.used).length + " not yet in design";
+  }
+  [search, selStatus, selUse].forEach(c => c.addEventListener("input", paint));
+  paint();
+  if (!ideas.length) main.append(el("p", "empty",
+    "No ideas yet — promote your takes from the Read page into idea cards."));
+}
+
+function renderDesign() {
+  const designs = DATA.nodes.filter(n => n.layer === "design");
+  const decisions = DATA.nodes.filter(n => n.layer === "decisions");
+  designs.forEach(n => {
+    const card = el("div", "card");
+    const head = el("div", "card-head");
+    const title = el("a", "t", n.title);
+    title.href = cardHref(n.id);
+    head.append(title);
+    card.append(head);
+    if (n.summary) card.append(el("p", "summary", n.summary));
+    const assembles = outOf(n.id, "ideas");
+    if (assembles.length) card.append(relRow("assembles", assembles));
+    const actedOn = inOf(n.id, "decisions");
+    if (actedOn.length) card.append(relRow("decided by", actedOn));
+    main.append(card);
+  });
+  if (!designs.length) main.append(el("p", "empty",
+    "No design cards yet — assemble adopted ideas into a spine and modules."));
+
+  const section = el("section", "direction");
+  const h2 = el("h2", "", "Decisions");
+  h2.append(el("span", "count", " " + decisions.length));
+  section.append(h2);
+  if (!decisions.length) {
+    section.append(el("p", "", "No decisions recorded yet — when a design point is contested, " +
+      "work it through options and trade-offs and land it as an ADR."));
+  }
+  decisions.forEach(n => {
+    const row = el("div", "member");
+    const a = el("a", "", n.title);
+    a.href = cardHref(n.id);
+    row.append(a);
+    if (n.status) row.append(el("span", "badge" + statusClass(n.status), n.status));
+    outOf(n.id, "design").forEach(d => row.append(chipLink(d)));
+    section.append(row);
+  });
+  main.append(section);
+}
+
+({ index: renderIndex, read: renderRead, compare: renderCompare,
+   ideas: renderIdeas, design: renderDesign })[PAGE]();
 
 document.getElementById("export-copy").addEventListener("click", () => {
   const text = document.getElementById("export-text");

@@ -3,7 +3,7 @@ from build_loom_site import assemble, build_site
 
 from conftest import XSS_TITLE
 
-PAGES = ["index.html", "read.html", "compare.html", "map.html"]
+PAGES = ["index.html", "read.html", "compare.html", "ideas.html", "design.html", "map.html"]
 
 
 def test_directions_come_from_synthesis_links(workspace):
@@ -62,3 +62,7 @@ def test_pages_carry_data_and_nav(workspace, tmp_path):
     read = (tmp_path / "site" / "read.html").read_text(encoding="utf-8")
     assert "Alpha paper" in read
     assert "First paragraph of alpha." in read
+    ideas = (tmp_path / "site" / "ideas.html").read_text(encoding="utf-8")
+    assert "My idea" in ideas and "候选" in ideas
+    design = (tmp_path / "site" / "design.html").read_text(encoding="utf-8")
+    assert "The spine" in design and "ADR: pick alpha" in design

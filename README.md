@@ -80,8 +80,8 @@ that justify it.
 
 ## The workbench
 
-One command renders any workspace into a **self-contained four-page HTML workbench** —
-no dependencies, no server, dark/light theme:
+One command renders any workspace into a **self-contained HTML workbench** — one page per
+layer, no dependencies, no server, dark/light theme:
 
 ```bash
 python3 tools/build_loom_site.py docs/research-loom -o loom-site --title my-project
@@ -92,6 +92,10 @@ python3 tools/build_loom_site.py docs/research-loom -o loom-site --title my-proj
   one click exports a patch your agent writes back into the cards.
 - **Compare** — sources clustered by direction, membership derived from your synthesis
   cards (plus drafts, marked); the unassigned pile is your reading to-do.
+- **Ideas** — your claims with their receipts: what each cites, which design elements
+  use it, and which ideas no design uses yet.
+- **Design** — every element with the ideas it assembles and the decisions that act on
+  it; the decision/ADR ledger lives here.
 - **Map** — the provenance graph: hover a card to light up its direct links.
 - **Overview** — where you are: counts, directions, progress.
 
@@ -146,7 +150,7 @@ python3 tools/build_loom_site.py docs/research-loom -o loom-site
 SKILL.md                 the skill (drop into ~/.claude/skills/research-loom/)
 templates/               card templates: idea, direction MOC, design, decision worksheet, ADR
 references/note-types.md the three-card contract + frontmatter spec
-tools/build_loom_site.py workspace → 4-page workbench: overview / read / compare / map
+tools/build_loom_site.py workspace → workbench: overview / read / compare / ideas / design / map
 tools/build_loom_map.py  workspace → the provenance map page alone
 tools/check_doc_links.py dangling-link validator
 examples/autoharness/    real 97-card workspace from a live project

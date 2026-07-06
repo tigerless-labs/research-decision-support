@@ -5,8 +5,9 @@ from pathlib import Path
 from build_loom_map import collect, embed_json
 from build_loom_map import render as render_map
 
-SITE_PAGES = ["index", "read", "compare"]
-NAV_LINKS = [("index", "Overview"), ("read", "Read"), ("compare", "Compare"), ("map", "Map")]
+SITE_PAGES = ["index", "read", "compare", "ideas", "design"]
+NAV_LINKS = [("index", "Overview"), ("read", "Read"), ("compare", "Compare"),
+             ("ideas", "Ideas"), ("design", "Design"), ("map", "Map")]
 
 
 def assemble(data):
@@ -50,7 +51,7 @@ def build_site(workspace, outdir, title):
     map_data["title"] = title
     (outdir / "map.html").write_text(render_map(map_data, nav_html("map", with_theme=False)),
                                      encoding="utf-8")
-    print(f"ok: {outdir} — index/read/compare/map · {len(site['nodes'])} cards, "
+    print(f"ok: {outdir} — index/read/compare/ideas/design/map · {len(site['nodes'])} cards, "
           f"{len(site['directions'])} directions, {len(site['unassigned'])} unassigned, "
           f"{len(site['edges'])} links")
 
