@@ -123,7 +123,7 @@ It's not academia-specific — anything that is "read materials → make a defen
 **1. Install** (Claude Code — this repo is a plugin marketplace):
 
 ```
-/plugin marketplace add tigerless-ai/research-decision-support
+/plugin marketplace add tigerless-labs/research-decision-support
 /plugin install research-decision-support@research-decision-support
 ```
 
@@ -194,6 +194,6 @@ be agent-harness research because that's what we built it for.
 
 ---
 
-MIT. Built by [Tigerless AI](https://github.com/tigerless-ai). The skill's operating
+MIT. Built by [Tigerless AI](https://github.com/tigerless-labs). The skill's operating
 instructions are written primarily in Chinese (the templates and validator messages are
 bilingual-friendly); the method itself is language-neutral.

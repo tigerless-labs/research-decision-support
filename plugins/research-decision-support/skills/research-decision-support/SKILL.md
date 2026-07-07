@@ -5,7 +5,7 @@ license: MIT
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/*)
 metadata:
   author: tigerless.ai
-  repository: https://github.com/tigerless-ai/research-decision-support
+  repository: https://github.com/tigerless-labs/research-decision-support
 ---
 
 # research-decision-support —— 文献→设计 合成工作法
