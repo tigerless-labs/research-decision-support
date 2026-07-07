@@ -1,27 +1,32 @@
 ---
-id: <设计-kebab-id>
+id: <design-kebab-id>
 type: design
 ---
-# 设计：<设计名/版本>
+# Design: <name / version>
 
-设计层两类文件：**脊柱一篇**（本模板：原则 + 流水线 + 全局不变量 + 架构图）与**每步/模块一篇**（本步的行为边界 + 接口契约 + 验收，复用下方「元素登记」provenance 格式）。`index.md` 只做指针。属于 ④ 装配，放入 `docs/research-decision-support/design/`；变更原因见对应决策。
+The design layer has two file kinds: **one spine** (this template: principles + pipeline +
+global invariants + architecture diagram) and **one file per step/module** (its behavior
+boundary + interface contract + acceptance criteria, reusing the element-registry provenance
+format below). `index.md` is pointers only. Change rationale lives in the linked decision.
 
-## 原则
-<这条 pipeline 的核心主张，一句话>
+## Principle
+<the pipeline's core claim, one sentence>
 
-## 流水线
+## Pipeline
 ```mermaid
 flowchart LR
-  A[<元素A>]:::core --> B[(<元素B>)]
+  A[<element-A>]:::core --> B[(<element-B>)]
   classDef core fill:#fdd
 ```
 
-## 全局不变量
-- <跨步都必须成立的约束；只在脊柱出现一次，per-step 文档不重述>
+## Global invariants
+- <constraints that must hold across steps; stated once here, never restated per-step>
 
-## 元素登记（稳定 ID ↔ provenance）
+## Element registry (stable ID ↔ provenance)
 
-- `A` <元素A> — 实现 [<思路>](../ideas/<思路id>.md)（← [<源id>](../sources/papers/<源id>.md)）；决策见 [<决策>](../decisions/<决策id>.md)
-- `B` <元素B> — 实现 [<思路>](../ideas/<思路id>.md)
+- `A` <element-A> — implements [<idea>](../ideas/<idea-id>.md)
+  (← [<source-id>](../sources/papers/<source-id>.md)); decided by
+  [<decision>](../decisions/<decision-id>.md)
+- `B` <element-B> — implements [<idea>](../ideas/<idea-id>.md)
 
-provenance：设计元素 → ideas → 源卡，任何选择可追回论文。
+Provenance: design element → ideas → source cards; any choice traces back to its sources.

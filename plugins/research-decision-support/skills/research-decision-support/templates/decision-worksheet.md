@@ -1,29 +1,30 @@
 ---
-id: D-<编号>-<kebab-slug>
+id: D-<number>-<kebab-slug>
 type: decision
 status: open
-affects: [<设计元素ID>]
+affects: [<design-element-id>]
 ---
-# 决策：<争议点一句话>
+# Decision: <the contested point in one sentence>
 
-属于 ⑤ 精炼（open 态，会变）。放入 `docs/research-decision-support/decisions/`。定了即坍缩成一条 ADR。
+Open state — will change. Lives in the decisions layer. Once settled, collapses into an ADR.
 
-## 驱动力（加权质量属性 —— 决策的重点）
+## Drivers (weighted quality attributes — the point of the decision)
 
-- <驱动力1>: <权重>
-- <驱动力2>: <权重>
+- <driver-1>: <weight>
+- <driver-2>: <weight>
 
-## 选项（set-based，先都养着）
+## Options (set-based — keep them alive)
 
-- A <选项A>
-- B <选项B>
-- C <选项C>
+- A <option-A>
+- B <option-B>
+- C <option-C>
 
-## 权衡（选项 × 驱动力 + 证据）
+## Trade-offs (options × drivers + evidence)
 
-| | <驱动力1> | <驱动力2> | 证据 |
+| | <driver-1> | <driver-2> | Evidence |
 |---|---|---|---|
-| A | … | … | [<源id>](../sources/papers/<源id>.md) |
-| B | … | … | [<源id>](../sources/papers/<源id>.md) |
+| A | … | … | [<source-id>](../sources/papers/<source-id>.md) |
+| B | … | … | [<source-id>](../sources/papers/<source-id>.md) |
 
-敏感点：… 权衡点：… 可逆性（单/双向门）：… 还缺什么证据：…
+Sensitivity points: … Trade-off points: … Reversibility (one-way / two-way door): …
+Evidence still missing: …

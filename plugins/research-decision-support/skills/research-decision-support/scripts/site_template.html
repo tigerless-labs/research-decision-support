@@ -239,8 +239,8 @@ const outOf = (id, layer) => DATA.edges
 const inOf = (id, layer) => DATA.edges
   .filter(e => e.to === id && nodeById[e.from] && nodeById[e.from].layer === layer)
   .map(e => nodeById[e.from]);
-const statusClass = s => /采纳|accepted|resolved/.test(s) ? " ok"
-  : /存疑|open|proposed/.test(s) ? " warn" : "";
+const statusClass = s => /采纳|adopted|accepted|resolved/.test(s) ? " ok"
+  : /存疑|doubtful|open|proposed/.test(s) ? " warn" : "";
 function chipLink(n) {
   const a = el("a", "badge", n.title);
   a.href = cardHref(n.id);
@@ -534,7 +534,7 @@ function renderDesign() {
 
 function renderDecisions() {
   const decisions = DATA.nodes.filter(n => n.layer === "decisions");
-  const OPEN = /open|proposed|存疑/, groups = [
+  const OPEN = /open|proposed|存疑|doubtful/, groups = [
     ["Open", decisions.filter(n => OPEN.test(n.status))],
     ["Settled", decisions.filter(n => !OPEN.test(n.status))],
   ];

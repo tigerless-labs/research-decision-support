@@ -1,27 +1,29 @@
 ---
-id: ADR-<编号>
+id: ADR-<number>
 type: adr
 status: proposed
-affects: [<设计元素ID>]
-supersedes: <被取代的ADR-id 或留空>
+affects: [<design-element-id>]
+supersedes:
 ---
-# <决策标题>
+# <decision title>
 
-由 [<决策工作表>](<D-编号-slug>.md) 坍缩而来。属于 ⑤ 精炼（resolved）。放入 `docs/research-decision-support/decisions/`。**只增不删**：改主意写新 ADR 并标 `supersedes`，不改本文。
+Collapsed from [<decision worksheet>](<D-number-slug>.md). Lives in the decisions layer.
+**Append-only**: to change your mind, write a new ADR with `supersedes` — never edit this one.
 
-## 背景
+## Context
 
-为什么要决策；威胁了哪个质量属性。引用 [<源id>](../sources/papers/<源id>.md)。
+Why a decision was needed; which quality attribute was threatened.
+Cite [<source-id>](../sources/papers/<source-id>.md).
 
-## 决定
+## Decision
 
-选了哪个选项、凭什么证据。
+Which option won, on what evidence.
 
-## 后果
+## Consequences
 
-- 好：…
-- 差：…（可能引出后续 ADR）
+- Good: …
+- Bad: … (may seed a follow-up ADR)
 
-## 重开条件
+## Reopen conditions
 
-什么新证据会推翻本决策（Bayesian）。
+What new evidence would overturn this decision (Bayesian).

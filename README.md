@@ -143,8 +143,13 @@ GitHub, backlinks in Obsidian, greppable forever.
 
 **3. Keep it honest:**
 
-The skill runs its bundled validators and generator via `${CLAUDE_SKILL_DIR}` — zero dangling
-links after every write, workbench rendered to a temp dir on demand.
+The skill bootstraps the workspace on first use, then runs its bundled validators after every
+write (zero dangling links, frontmatter conforms) and renders the workbench to a temp dir on
+demand — all via `${CLAUDE_SKILL_DIR}`, no setup on your side.
+
+**Start light.** A young workspace needs only `sources/` + `ideas/`; synthesis, design, and
+decisions switch on when their signal appears (clusters form, ideas start assembling, two
+options contend). The skill coaches these moments — it never force-fills five layers.
 
 ## Hard rules the skill enforces
 
@@ -173,6 +178,8 @@ plugins/research-decision-support/
                                          ideas / design / decisions / map + card reader
     scripts/build_map.py            the provenance map page alone
     scripts/check_doc_links.py           dangling-link validator
+    scripts/check_workspace.py           frontmatter/status validator (EN + ZH enums)
+    scripts/init_workspace.py            one-command idempotent workspace bootstrap
 examples/autoharness/                    real 97-card workspace from a live project (not
                                          installed with the plugin — demo only)
 tests/                                   pytest suite (incl. injection red-team cases)

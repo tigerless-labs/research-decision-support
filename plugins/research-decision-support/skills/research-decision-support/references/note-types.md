@@ -1,31 +1,38 @@
-# 三种卡 + frontmatter 契约
+# Three card types + frontmatter contract
 
-## 三种卡分家（命门）
+## Three voices never share a card (the linchpin)
 
-| 卡型 | 装什么 | 位置 | frontmatter |
+| Card | Holds | Location | Frontmatter |
 |---|---|---|---|
-| **文献笔记** | 论文/repo/博客**说了什么**——论点、做法、优缺点 | `sources/`（内分 `papers/` `github/` `blogs/` …） | 跟随现有卡片格式（散文，无强制 frontmatter） |
-| **永久笔记** | **我说什么**——我的主张/新 idea，用自己的话、引用文献 | `ideas/` | `type: idea` |
-| **设计** | 永久笔记**组装**成的设计：脊柱（原则+流水线+不变量）+ 每步/模块文档 | `design/` | `type: design` |
+| **Literature note** | what a source **says** — claims, method, strengths/weaknesses | `sources/` (subdirs `papers/` `repos/` `posts/` …) | follows the directory's existing card format (prose; frontmatter optional) |
+| **Permanent note** | what **I say** — my claim/new idea, in my own words, citing sources | `ideas/` | `type: idea` |
+| **Design** | permanent notes **assembled**: one spine (principles + pipeline + invariants) + per-module files | `design/` | `type: design` |
 
-外加 ② 的**方向卡**（`synthesis/`，`type: direction`）与 ⑤ 的**决策卡 / ADR**（`decisions/`，`type: decision` / `adr`）。
+Plus the **direction MOC** (`synthesis/`, `type: direction`) and the **decision worksheet /
+ADR** (`decisions/`, `type: decision` / `adr`).
 
-**为什么分家**：永久笔记不是论文摘要。文献笔记（论文说）与永久笔记（我说）解耦，念头才能脱离原始出处、自由重组进设计而不必重构。
+**Why the split**: a permanent note is not a source summary. Decoupling "the source says" from
+"I say" is what lets a thought leave its original context and recombine freely into designs.
 
-## frontmatter 契约（由 `tools/check_workspace.py` 强制）
+## Frontmatter contract (enforced by `scripts/check_workspace.py`)
 
-只有新阶段原子带 frontmatter；旧来源卡为散文格式，豁免。必填字段缺失或 status 越界 → 校验器报错。
+Only structured cards carry frontmatter; prose source cards are exempt. Missing required
+fields or out-of-range status → validator error.
 
-- `type: direction` — 必填 `id` `type`
-- `type: idea` — 必填 `id` `type` `status`；`status ∈ {候选, 采纳, 存疑}`
-- `type: design` — 必填 `id` `type`
-- `type: decision` — 必填 `id` `type` `status` `affects`；`status ∈ {open, resolved}`
-- `type: adr` — 必填 `id` `type` `status`；`status ∈ {proposed, accepted, superseded}`
+- `type: direction` — requires `id` `type`
+- `type: idea` — requires `id` `type` `status`;
+  `status ∈ {candidate, adopted, doubtful}` (候选/采纳/存疑 equally valid)
+- `type: design` — requires `id` `type`
+- `type: decision` — requires `id` `type` `status` `affects`; `status ∈ {open, resolved}`
+- `type: adr` — requires `id` `type` `status`; `status ∈ {proposed, accepted, superseded}`
 
-`affects` 锚定到 `design/` 脊柱图的元素稳定 ID，把决策接到设计上。
+`affects` anchors a decision to stable element IDs in the `design/` spine.
 
-## 链接约定
+## Link convention
 
-原子之间用**相对 Markdown 链接**（`[label](../sources/papers/<id>.md)`）：GitHub 可渲染、Obsidian 可反链、`tools/check_doc_links.py` 可校验。`[[ ]]` **不作链接机制**——现有散文里有示意性 `[[ ]]`，强校验会误报。
+Cards connect via **relative Markdown links** (`[label](../sources/papers/<id>.md)`): they
+render on GitHub, backlink in Obsidian, and are checkable by `scripts/check_doc_links.py`.
+`[[wikilinks]]` are **not** the link mechanism.
 
-provenance 链：`design 元素 → ideas/<id>.md → sources/papers/<id>.md`，沿相对链接任何设计选择可一路追回论文。
+Provenance chain: `design element → ideas/<id>.md → sources/<subdir>/<id>.md` — any design
+choice walks back to its sources along relative links.

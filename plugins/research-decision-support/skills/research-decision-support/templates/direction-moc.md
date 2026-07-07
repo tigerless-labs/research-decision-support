@@ -1,24 +1,26 @@
 ---
-id: <方向-kebab-id>
+id: <direction-kebab-id>
 type: direction
 ---
-# 方向：<方向名>
+# Direction: <name>
 
-一句话界定这个方向是什么、把哪些来源卡归到一起。属于 ② 组织。放入 `docs/research-decision-support/synthesis/`。
+One sentence defining this direction and which source cards it groups. Lives in the
+synthesis layer.
 
-## 与其他方向的区别
+## Boundary against other directions
 
-点名相邻/易混的方向（链接到对应 MOC），逐个说清本方向与它的分界线在哪、为什么不归到一起。确保各方向互斥不重叠。
+Name the adjacent/confusable directions (link their MOCs) and state where the line is and why
+these sources don't belong there. Directions must be mutually exclusive.
 
-## 概念矩阵（来源 × 维度 + 我的评判）
+## Concept matrix (sources × dimensions + my verdict)
 
-| 来源 | <维度1> | <维度2> | <维度3> | 我的评判 |
+| Source | <dim-1> | <dim-2> | <dim-3> | My verdict |
 |---|---|---|---|---|
-| [<源id>](../sources/papers/<源id>.md) | … | … | … | 采纳 / 否决 / 存疑 |
-| [<源id>](../sources/github/<源id>.md) | … | … | … | … |
+| [<source-id>](../sources/papers/<source-id>.md) | … | … | … | adopt / reject / doubt |
+| [<source-id>](../sources/repos/<source-id>.md) | … | … | … | … |
 
-按概念组织，不按作者。维度由本方向的对比点决定。
+Organize by concept, not by author. Dimensions come from what this direction actually contrasts.
 
-## 小结
+## Summary
 
-这个方向的共识、分歧、空白；哪些点值得蒸馏成 [ideas/](../ideas/index.md) 永久笔记。
+Consensus, disagreements, gaps; which points deserve distilling into [ideas/](../ideas/index.md).
