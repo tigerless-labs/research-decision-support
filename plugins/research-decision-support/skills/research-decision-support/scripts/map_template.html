@@ -10,7 +10,7 @@
   --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
   --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
   --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
-  --c-design: #008300; --c-decisions: #4a3aa7;
+  --c-ok: #008300; --c-decisions: #4a3aa7;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -18,7 +18,7 @@
     --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
     --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
     --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
-    --c-design: #008300; --c-decisions: #9085e9;
+    --c-ok: #008300; --c-decisions: #9085e9;
   }
 }
 :root[data-theme="light"] {
@@ -26,14 +26,14 @@
   --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
   --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
   --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
-  --c-design: #008300; --c-decisions: #4a3aa7;
+  --c-ok: #008300; --c-decisions: #4a3aa7;
 }
 :root[data-theme="dark"] {
   --surface: #1a1a19; --page: #0d0d0d;
   --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
   --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
   --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
-  --c-design: #008300; --c-decisions: #9085e9;
+  --c-ok: #008300; --c-decisions: #9085e9;
 }
 * { box-sizing: border-box; }
 body {
@@ -104,8 +104,8 @@ footer a { color: var(--ink-2); }
 <!--__NAV__-->
 <header>
   <h1 id="title">research-decision-support map</h1>
-  <p class="tagline">Five structural layers, not pipeline steps. Every design element traces back
-  through the ideas it was distilled from to the sources that earned it — hover any card to see
+  <p class="tagline">Four structural layers, not pipeline steps. Every decision traces back
+  through the ideas it weighs to the sources that earned them — hover any card to see
   its direct provenance links.</p>
   <div class="controls">
     <input id="search" type="search" placeholder="Search cards…" aria-label="Search cards">
@@ -114,7 +114,7 @@ footer a { color: var(--ink-2); }
   </div>
 </header>
 <section class="model" id="model"></section>
-<p class="model-note">provenance direction: decisions act on design · design assembles ideas ·
+<p class="model-note">provenance direction: decisions weigh ideas ·
 ideas cite sources · synthesis organizes sources into directions</p>
 <div class="graph-wrap"><div class="graph-card"><svg id="graph"></svg></div></div>
 <div id="tooltip"></div>
@@ -127,7 +127,6 @@ const LAYER_META = {
   sources:   { label: "SOURCES",   desc: "one card per paper / repo / post — what it claims, facts only" },
   synthesis: { label: "SYNTHESIS", desc: "sources clustered into directions — concept matrix + my verdict" },
   ideas:     { label: "IDEAS",     desc: "my claims in my words, atomic, each citing its sources" },
-  design:    { label: "DESIGN",    desc: "ideas woven into a spine + modules, provenance-linked" },
   decisions: { label: "DECISIONS", desc: "contested points: drivers → options → trade-offs → ADR" },
 };
 

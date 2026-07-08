@@ -6,13 +6,12 @@
 |---|---|---|---|
 | **Literature note** | what a source **says** — claims, method, strengths/weaknesses | `sources/` (subdirs `papers/` `repos/` `posts/` …) | follows the directory's existing card format (prose; frontmatter optional) |
 | **Permanent note** | what **I say** — my claim/new idea, in my own words, citing sources | `ideas/` | `type: idea` |
-| **Design** | permanent notes **assembled**: one spine (principles + pipeline + invariants) + per-module files | `design/` | `type: design` |
+| **Decision** | what **we decide** — options weighed on evidence, verdict + consequences | `decisions/` | `type: decision` / `adr` |
 
-Plus the **direction MOC** (`synthesis/`, `type: direction`) and the **decision worksheet /
-ADR** (`decisions/`, `type: decision` / `adr`).
+Plus the **direction MOC** (`synthesis/`, `type: direction`).
 
 **Why the split**: a permanent note is not a source summary. Decoupling "the source says" from
-"I say" is what lets a thought leave its original context and recombine freely into designs.
+"I say" is what lets a thought leave its original context and be weighed on its own evidence.
 
 ## Frontmatter contract (enforced by `scripts/check_workspace.py`)
 
@@ -22,11 +21,11 @@ fields or out-of-range status → validator error.
 - `type: direction` — requires `id` `type`
 - `type: idea` — requires `id` `type` `status`;
   `status ∈ {candidate, adopted, doubtful}` (候选/采纳/存疑 equally valid)
-- `type: design` — requires `id` `type`
 - `type: decision` — requires `id` `type` `status` `affects`; `status ∈ {open, resolved}`
 - `type: adr` — requires `id` `type` `status`; `status ∈ {proposed, accepted, superseded}`
 
-`affects` anchors a decision to stable element IDs in the `design/` spine.
+`affects` anchors a decision to what it settles: idea card IDs, or stable IDs in your
+project's downstream design docs (which live outside the workspace and link back).
 
 ## Link convention
 
@@ -34,5 +33,6 @@ Cards connect via **relative Markdown links** (`[label](../sources/papers/<id>.m
 render on GitHub, backlink in Obsidian, and are checkable by `scripts/check_doc_links.py`.
 `[[wikilinks]]` are **not** the link mechanism.
 
-Provenance chain: `design element → ideas/<id>.md → sources/<subdir>/<id>.md` — any design
-choice walks back to its sources along relative links.
+Provenance chain: `decision → ideas/<id>.md → sources/<subdir>/<id>.md` — any verdict
+walks back to its sources along relative links. What you build from the decisions lives
+downstream in your own repo and links back to the decision cards that justify it.

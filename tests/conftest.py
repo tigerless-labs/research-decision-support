@@ -36,13 +36,10 @@ def workspace(tmp_path):
          "Because [alpha](../sources/papers/alpha.md) says so. Also [index](../sources/papers/index.md).",
          frontmatter="id: idea-one\ntype: idea\nstatus: 候选")
     card("ideas/idea-orphan.md", "Unused idea",
-         "Cites [gamma](../sources/github/gamma.md) but no design uses it.",
+         "Cites [gamma](../sources/github/gamma.md) but no decision weighs it.",
          frontmatter="id: idea-orphan\ntype: idea\nstatus: 采纳")
-    card("design/spine.md", "The spine",
-         "Assembles [my idea](../ideas/idea-one.md).",
-         frontmatter="id: spine\ntype: design")
     card("decisions/adr-one.md", "ADR: pick alpha",
-         "Acts on [the spine](../design/spine.md).",
+         "Weighs [my idea](../ideas/idea-one.md).",
          frontmatter="id: adr-one\ntype: adr\nstatus: accepted")
     (root / "sources/papers/index.md").write_text("# not a card\n", encoding="utf-8")
     (root / "notes.md").write_text("# outside layers\n", encoding="utf-8")

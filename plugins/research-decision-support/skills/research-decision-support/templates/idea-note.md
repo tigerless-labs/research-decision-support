@@ -16,4 +16,4 @@ From [<source-id>](../sources/papers/<source-id>.md); contrast with
 
 ## Connections
 
-Builds on [<other-idea>](<other-idea-id>.md); to be assembled into [design/](../design/index.md).
+Builds on [<other-idea>](<other-idea-id>.md); to be weighed in [decisions/](../decisions/index.md).

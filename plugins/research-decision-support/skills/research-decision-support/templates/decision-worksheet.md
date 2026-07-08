@@ -2,7 +2,7 @@
 id: D-<number>-<kebab-slug>
 type: decision
 status: open
-affects: [<design-element-id>]
+affects: [<idea-or-downstream-element-id>]
 ---
 # Decision: <the contested point in one sentence>
 

@@ -26,4 +26,4 @@ status: 候选
 
 ## 关联
 
-蒸馏自 [skill 的召回率与执行率](../synthesis/skill-recall-execution.md);为结构化去重/消歧(=召回杠杆)与 [滚动 curate](adherence-driven-curate.md)(删冗余=抬召回)提供动机轴;与 [hook 强制注入](hook-forced-injection.md)(对 must-always 规则绕开 ② 的另一条路)互补。将装配进 [design/](../design/index.md) 的 Admission/Curate 段。
+蒸馏自 [skill 的召回率与执行率](../synthesis/skill-recall-execution.md);为结构化去重/消歧(=召回杠杆)与 [滚动 curate](adherence-driven-curate.md)(删冗余=抬召回)提供动机轴;与 [hook 强制注入](hook-forced-injection.md)(对 must-always 规则绕开 ② 的另一条路)互补。将装配进 [design/](../downstream-design/index.md) 的 Admission/Curate 段。

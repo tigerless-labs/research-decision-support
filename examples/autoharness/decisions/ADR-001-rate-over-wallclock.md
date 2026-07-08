@@ -7,7 +7,7 @@ supersedes:
 ---
 # 符号存活判据用调用率，不用墙钟时间
 
-补记：从 [mng](../design/mng.md) 已定内容坍缩而来（决策先落在了设计卡里）。
+补记：从 [mng](../downstream-design/mng.md) 已定内容坍缩而来（决策先落在了设计卡里）。
 
 ## 背景
 

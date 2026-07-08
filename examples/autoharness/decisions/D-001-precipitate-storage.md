@@ -6,7 +6,7 @@ affects: [validate-store, architecture]
 ---
 # 决策：自动沉淀的经验存在哪一层
 
-问题原述与全部论据在 [precipitate-storage-layer](../ideas/precipitate-storage-layer.md)；本卡只跑决策模型。作用于 [validate-store](../design/validate-store.md) 与 [architecture](../design/architecture.md) 的存储契约。
+问题原述与全部论据在 [precipitate-storage-layer](../ideas/precipitate-storage-layer.md)；本卡只跑决策模型。作用于 [validate-store](../downstream-design/validate-store.md) 与 [architecture](../downstream-design/architecture.md) 的存储契约。
 
 ## 驱动力
 

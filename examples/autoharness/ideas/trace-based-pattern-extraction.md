@@ -19,4 +19,4 @@ status: 候选
 
 ## 关联
 
-是准入裁决的上游来源（捕获供料 → 把关）；提取出的「固定工作流」即潜在**顺序边**。捕获的对话回合交 [episode 边界反思](episode-boundary-reflection.md) 整段蒸馏；更高保真的「被遵守 / 被矛盾」对照也回馈 [滚动 curate](adherence-driven-curate.md)。装配进 [design/](../design/index.md) 的 CAP。
+是准入裁决的上游来源（捕获供料 → 把关）；提取出的「固定工作流」即潜在**顺序边**。捕获的对话回合交 [episode 边界反思](episode-boundary-reflection.md) 整段蒸馏；更高保真的「被遵守 / 被矛盾」对照也回馈 [滚动 curate](adherence-driven-curate.md)。装配进 [design/](../downstream-design/index.md) 的 CAP。

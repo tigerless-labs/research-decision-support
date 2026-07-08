@@ -11,7 +11,7 @@
 | 来源（捕获） | [sources/](sources/index.md) | 文献笔记（一源一卡）。内分 `papers/` `github/` `blogs/` …；类型为开放集，按来源自动归类，无匹配则新建一类。 |
 | 方向（组织） | [synthesis/](synthesis/index.md) | 方向 MOC + 概念矩阵 + 我的评判 |
 | idea（蒸馏） | [ideas/](ideas/index.md) | 永久笔记（我的话，引用文献） |
-| 设计（装配） | [design/](design/index.md) | 设计草稿 + provenance 链 |
+| 下游设计（层外） | [downstream-design/](downstream-design/index.md) | 装配产物，向外链回决定与想法 |
 | 决策（精炼） | [decisions/](decisions/index.md) | 决策工作表 → ADR |
 
 ## Where to start

@@ -40,4 +40,4 @@ status: 候选
 
 ## 关联
 
-直接源于 [从 trace 沉淀经验](../synthesis/trace-to-experience.md) 的「沉淀产物」分歧。与 [hook 强制注入](hook-forced-injection.md)（载体路由，正交）、[滚动 curate](adherence-driven-curate.md)（治理需求，约束选型）、[不影响原生 skill 功能](additive-over-native-skill.md)（侵入度边界，约束选 B）三者交叉牵制。定生死前不装配进 [design/](../design/index.md)；坍缩时应开一张 [决策工作表](../decisions/index.md)（驱动力：curate 治理力 / 注入可靠度 / 原生零侵入 / 不造第二套 skill 系统）。
+直接源于 [从 trace 沉淀经验](../synthesis/trace-to-experience.md) 的「沉淀产物」分歧。与 [hook 强制注入](hook-forced-injection.md)（载体路由，正交）、[滚动 curate](adherence-driven-curate.md)（治理需求，约束选型）、[不影响原生 skill 功能](additive-over-native-skill.md)（侵入度边界，约束选 B）三者交叉牵制。定生死前不装配进 [design/](../downstream-design/index.md)；坍缩时应开一张 [决策工作表](../decisions/index.md)（驱动力：curate 治理力 / 注入可靠度 / 原生零侵入 / 不造第二套 skill 系统）。

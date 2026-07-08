@@ -5,9 +5,9 @@ from pathlib import Path
 from build_map import collect, embed_json, without_bodies
 from build_map import render as render_map
 
-SITE_PAGES = ["index", "read", "compare", "ideas", "design", "decisions"]
+SITE_PAGES = ["index", "read", "compare", "ideas", "decisions"]
 NAV_LINKS = [("index", "Overview"), ("read", "Read"), ("compare", "Compare"),
-             ("ideas", "Ideas"), ("design", "Design"), ("decisions", "Decisions"),
+             ("ideas", "Ideas"), ("decisions", "Decisions"),
              ("map", "Map")]
 
 

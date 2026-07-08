@@ -35,4 +35,4 @@ status: 候选
 
 ## 关联
 
-是 [滚动 curate](adherence-driven-curate.md) 的成员资格规则（谁进这条流）；受 [不影响原生 skill 功能](additive-over-native-skill.md) 约束（默认不碰外来）。装配进 [design/](../design/index.md) 的 MNG（兼产品定位）。
+是 [滚动 curate](adherence-driven-curate.md) 的成员资格规则（谁进这条流）；受 [不影响原生 skill 功能](additive-over-native-skill.md) 约束（默认不碰外来）。装配进 [design/](../downstream-design/index.md) 的 MNG（兼产品定位）。

@@ -3,7 +3,7 @@ import re
 import sys
 from pathlib import Path
 
-LAYERS = ["sources", "synthesis", "ideas", "design", "decisions"]
+LAYERS = ["sources", "synthesis", "ideas", "decisions"]
 _MD_LINK = re.compile(r"\]\(\s*([^)\s]+?\.md)(?:#[^)]*)?\s*\)")
 _EXTERNAL = re.compile(r"^[a-z][a-z0-9+.-]*://")
 _FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)

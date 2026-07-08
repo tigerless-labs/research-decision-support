@@ -10,7 +10,7 @@
   --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
   --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
   --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
-  --c-design: #008300; --c-decisions: #4a3aa7;
+  --c-ok: #008300; --c-decisions: #4a3aa7;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -18,7 +18,7 @@
     --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
     --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
     --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
-    --c-design: #008300; --c-decisions: #9085e9;
+    --c-ok: #008300; --c-decisions: #9085e9;
   }
 }
 :root[data-theme="light"] {
@@ -26,14 +26,14 @@
   --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
   --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
   --c-sources: #2a78d6; --c-synthesis: #1baf7a; --c-ideas: #eda100;
-  --c-design: #008300; --c-decisions: #4a3aa7;
+  --c-ok: #008300; --c-decisions: #4a3aa7;
 }
 :root[data-theme="dark"] {
   --surface: #1a1a19; --page: #0d0d0d;
   --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
   --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
   --c-sources: #3987e5; --c-synthesis: #199e70; --c-ideas: #c98500;
-  --c-design: #008300; --c-decisions: #9085e9;
+  --c-ok: #008300; --c-decisions: #9085e9;
 }
 * { box-sizing: border-box; }
 body {
@@ -87,7 +87,7 @@ button.action:hover { color: var(--ink); }
   border-radius: 999px; padding: 1px 8px; white-space: nowrap;
 }
 .badge.dir { border-color: color-mix(in srgb, var(--c-synthesis) 45%, transparent); color: var(--c-synthesis); }
-.badge.ok { border-color: color-mix(in srgb, var(--c-design) 55%, transparent); color: var(--c-design); }
+.badge.ok { border-color: color-mix(in srgb, var(--c-ok) 55%, transparent); color: var(--c-ok); }
 .badge.warn { border-color: color-mix(in srgb, var(--c-ideas) 60%, transparent); color: var(--c-ideas); }
 a.badge { text-decoration: none; }
 a.badge:hover { border-color: var(--ink-2); }
@@ -98,7 +98,7 @@ a.badge:hover { border-color: var(--ink-2); }
   margin-left: auto; background: none; color: var(--ink-2); border: 1px solid var(--grid);
   border-radius: 8px; padding: 3px 6px; font: inherit; font-size: 12px;
 }
-.card.s-read { border-left: 3px solid var(--c-design); }
+.card.s-read { border-left: 3px solid var(--c-ok); }
 .card.s-skimmed { border-left: 3px solid var(--c-ideas); }
 .summary { color: var(--ink-2); margin: 7px 0 0; font-size: 13px; }
 .note-row { display: flex; gap: 8px; margin-top: 9px; }
@@ -119,7 +119,7 @@ section.direction > p { color: var(--ink-2); margin: 2px 0 10px; font-size: 13px
 .member a:hover { text-decoration: underline; }
 .member .note { color: var(--muted); font-size: 12.5px; font-style: italic; }
 .chip { font-size: 11px; border-radius: 999px; padding: 1px 8px; color: #fff; }
-.chip.read { background: var(--c-design); }
+.chip.read { background: var(--c-ok); }
 .chip.skimmed { background: var(--c-ideas); }
 .chip.unread { background: none; color: var(--muted); border: 1px solid var(--grid); }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 22px; }
@@ -131,7 +131,7 @@ section.direction > p { color: var(--ink-2); margin: 2px 0 10px; font-size: 13px
 .tile .k { font-weight: 700; font-size: 17px; }
 .tile .n { font-size: 26px; font-variant-numeric: tabular-nums; margin: 5px 0 1px; }
 .tile .d { color: var(--ink-2); font-size: 12.5px; }
-.layerstrip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 22px; }
+.layerstrip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 22px; }
 .layer-card {
   background: var(--surface); border: 1px solid var(--grid); border-radius: 10px;
   padding: 10px 13px; border-top: 3px solid var(--chip); font-size: 12.5px;
@@ -208,20 +208,18 @@ const el = (tag, cls, text) => {
 
 document.getElementById("title").textContent = DATA.title +
   ({ index: "", read: " — read", compare: " — directions", ideas: " — ideas",
-     design: " — design", decisions: " — decisions" })[PAGE];
+     decisions: " — decisions" })[PAGE];
 document.title = document.getElementById("title").textContent;
 
 const TAGLINES = {
-  index: "Read, tag, judge — then weave what you kept into a design you can defend. " +
-    "Every conclusion stays traceable to the source that earned it.",
+  index: "Read, tag, judge — then land decisions you can defend. " +
+    "Every verdict stays traceable to the source that earned it.",
   read: "Work through your sources: skim the digest, tag a direction, leave a one-line take. " +
     "Tags made here are drafts until exported back into the cards.",
   compare: "Your sources clustered by direction — membership comes from the synthesis cards " +
     "(plus your browser drafts, marked). The unassigned pile is your to-do.",
   ideas: "Your claims, in your words — each cites the sources that earned it and shows which " +
-    "design elements use it. An idea no design uses yet is either a gap or a cut.",
-  design: "What you built and what it stands on: every element lists the ideas it assembles " +
-    "and the decisions that act on it.",
+    "decisions weigh it. An idea no decision weighs yet is either a gap or a cut.",
   decisions: "The contested points and how they landed: drivers → options → trade-offs → ADR. " +
     "Append-only — a new decision supersedes, history stays.",
 };
@@ -257,15 +255,13 @@ function renderIndex() {
   const grid = el("div", "grid");
   const readCount = sources.filter(n => statusOf(n) !== "unread").length;
   const ideas = DATA.nodes.filter(n => n.layer === "ideas");
-  const designs = DATA.nodes.filter(n => n.layer === "design");
   const decisions = DATA.nodes.filter(n => n.layer === "decisions");
-  const unusedIdeas = ideas.filter(n => inOf(n.id, "design").length === 0).length;
+  const unweighedIdeas = ideas.filter(n => inOf(n.id, "decisions").length === 0).length;
   const tiles = [
     ["read.html", "Read", sources.length, readCount + " of " + sources.length + " sources read — continue"],
     ["compare.html", "Compare", DATA.directions.length,
       "directions · " + DATA.unassigned.length + " sources unassigned"],
-    ["ideas.html", "Ideas", ideas.length, unusedIdeas + " not yet used by any design"],
-    ["design.html", "Design", designs.length, "elements assembled from adopted ideas"],
+    ["ideas.html", "Ideas", ideas.length, unweighedIdeas + " not yet weighed by any decision"],
     ["decisions.html", "Decisions", decisions.length,
       decisions.filter(n => /open|proposed/.test(n.status)).length + " still open"],
     ["map.html", "Map", DATA.edges.length, "provenance links across " + DATA.nodes.length + " cards"],
@@ -468,15 +464,15 @@ function renderIdeas() {
   };
   opt(selStatus, "", "any status");
   [...new Set(ideas.map(n => n.status).filter(Boolean))].forEach(s => opt(selStatus, s));
-  opt(selUse, "", "used or not");
-  opt(selUse, "used", "used by a design");
-  opt(selUse, "unused", "not yet used");
+  opt(selUse, "", "weighed or not");
+  opt(selUse, "used", "weighed by a decision");
+  opt(selUse, "unused", "not yet weighed");
   const counter = el("span", "counter");
   controls.append(search, selStatus, selUse, counter);
   main.append(controls);
 
   const rows = ideas.map(n => {
-    const usedBy = inOf(n.id, "design");
+    const weighedBy = inOf(n.id, "decisions");
     const cites = outOf(n.id, "sources");
     const card = el("div", "card");
     const head = el("div", "card-head");
@@ -484,13 +480,13 @@ function renderIdeas() {
     title.href = cardHref(n.id);
     head.append(title);
     if (n.status) head.append(el("span", "badge" + statusClass(n.status), n.status));
-    if (!usedBy.length) head.append(el("span", "badge warn", "not yet in design"));
+    if (!weighedBy.length) head.append(el("span", "badge warn", "not yet weighed"));
     card.append(head);
     if (n.summary) card.append(el("p", "summary", n.summary));
     if (cites.length) card.append(relRow("cites", cites));
-    if (usedBy.length) card.append(relRow("used by", usedBy));
+    if (weighedBy.length) card.append(relRow("weighed by", weighedBy));
     main.append(card);
-    return { n, card, used: usedBy.length > 0 };
+    return { n, card, used: weighedBy.length > 0 };
   });
 
   function paint() {
@@ -504,32 +500,12 @@ function renderIdeas() {
       if (show) visible += 1;
     });
     counter.textContent = visible + " / " + ideas.length + " ideas · " +
-      rows.filter(r => !r.used).length + " not yet in design";
+      rows.filter(r => !r.used).length + " not yet weighed";
   }
   [search, selStatus, selUse].forEach(c => c.addEventListener("input", paint));
   paint();
   if (!ideas.length) main.append(el("p", "empty",
     "No ideas yet — promote your takes from the Read page into idea cards."));
-}
-
-function renderDesign() {
-  const designs = DATA.nodes.filter(n => n.layer === "design");
-  designs.forEach(n => {
-    const card = el("div", "card");
-    const head = el("div", "card-head");
-    const title = el("a", "t", n.title);
-    title.href = cardHref(n.id);
-    head.append(title);
-    card.append(head);
-    if (n.summary) card.append(el("p", "summary", n.summary));
-    const assembles = outOf(n.id, "ideas");
-    if (assembles.length) card.append(relRow("assembles", assembles));
-    const actedOn = inOf(n.id, "decisions");
-    if (actedOn.length) card.append(relRow("decided by", actedOn));
-    main.append(card);
-  });
-  if (!designs.length) main.append(el("p", "empty",
-    "No design cards yet — assemble adopted ideas into a spine and modules."));
 }
 
 function renderDecisions() {
@@ -540,7 +516,7 @@ function renderDecisions() {
   ];
   if (!decisions.length) {
     main.append(el("p", "empty",
-      "No decisions recorded yet — when a design point is contested, work it through " +
+      "No decisions recorded yet — when a point is contested, work it through " +
       "drivers, options and trade-offs, then land it as an ADR. ADRs are append-only: " +
       "a new decision supersedes the old one, history stays."));
     return;
@@ -560,8 +536,6 @@ function renderDecisions() {
       if (n.status) head.append(el("span", "badge" + statusClass(n.status), n.status));
       card.append(head);
       if (n.summary) card.append(el("p", "summary", n.summary));
-      const acts = outOf(n.id, "design");
-      if (acts.length) card.append(relRow("acts on", acts));
       const evidence = outOf(n.id, "sources").concat(outOf(n.id, "ideas"));
       if (evidence.length) card.append(relRow("evidence", evidence));
       section.append(card);
@@ -571,7 +545,7 @@ function renderDecisions() {
 }
 
 ({ index: renderIndex, read: renderRead, compare: renderCompare,
-   ideas: renderIdeas, design: renderDesign, decisions: renderDecisions })[PAGE]();
+   ideas: renderIdeas, decisions: renderDecisions })[PAGE]();
 
 document.getElementById("export-copy").addEventListener("click", () => {
   const text = document.getElementById("export-text");

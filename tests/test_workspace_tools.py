@@ -33,6 +33,17 @@ def test_check_flags_missing_required_field(workspace):
     assert any("bad.md" in p and "status" in p for p in problems)
 
 
+def test_design_dir_is_outside_the_schema(workspace):
+    from build_map import collect
+    (workspace / "design").mkdir()
+    (workspace / "design" / "spine.md").write_text(
+        "---\nid: spine\ntype: design\n---\n# retired layer\n", encoding="utf-8")
+    assert check(workspace) == []
+    ids = {n["id"] for n in collect(workspace)["nodes"]}
+    assert "design/spine.md" not in ids
+    assert "design" not in collect(workspace)["layers"]
+
+
 def test_check_flags_out_of_enum_status(workspace):
     bad = workspace / "ideas" / "weird.md"
     bad.write_text("---\nid: weird\ntype: idea\nstatus: maybe\n---\n# x\n", encoding="utf-8")
