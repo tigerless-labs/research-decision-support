@@ -129,17 +129,9 @@ the project's downstream design docs, which live outside the workspace and link 
 Run both validators (no dangling links, frontmatter conforms); state in one line **which
 layers changed**.
 
-## Rendering is a projection — never committed
+## Rendering
 
-When the user wants to see the whole picture (or share it), render the workspace into the
-workbench (overview / read / compare / ideas / decisions / map + card reader):
-
-```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/build_site.py <workspace> -o /tmp/workbench --title <name>
-```
-
-Output goes to a **temp directory**, or publish it as an artifact — **generated HTML is never
-committed**. Markdown is the single source of truth; the projection rebuilds in one command.
-The read page supports in-flow tagging (status / direction / one-line take, saved as browser
-drafts); when the user hands back an exported patch, write each entry into the corresponding
-card's frontmatter and body.
+The UI is not settled yet. If the user asks to see or share the whole picture, render with
+whatever fits the moment (the bundled `scripts/build_site.py` still works) — but treat any
+rendered HTML as a throwaway projection, never committed. Markdown is the single source of
+truth.
