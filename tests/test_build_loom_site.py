@@ -3,7 +3,7 @@ from build_site import assemble, build_site
 
 from conftest import XSS_TITLE
 
-NAV_PAGES = ["index.html", "read.html", "compare.html", "ideas.html", "design.html",
+NAV_PAGES = ["index.html", "read.html", "compare.html", "ideas.html",
              "decisions.html", "map.html"]
 PAGES = NAV_PAGES + ["card.html"]
 
@@ -44,6 +44,7 @@ def test_build_site_writes_all_pages_self_contained(workspace, tmp_path):
         assert "<script src" not in html
         assert '<link rel="stylesheet"' not in html
         assert "@import" not in html
+    assert not (tmp_path / "site" / "design.html").exists()
 
 
 def test_pages_resist_script_breakout(workspace, tmp_path):
@@ -66,8 +67,6 @@ def test_pages_carry_data_and_nav(workspace, tmp_path):
     assert "First paragraph of alpha." in read
     ideas = (tmp_path / "site" / "ideas.html").read_text(encoding="utf-8")
     assert "My idea" in ideas and "候选" in ideas
-    design = (tmp_path / "site" / "design.html").read_text(encoding="utf-8")
-    assert "The spine" in design
     decisions = (tmp_path / "site" / "decisions.html").read_text(encoding="utf-8")
     assert "ADR: pick alpha" in decisions and "accepted" in decisions
 

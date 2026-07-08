@@ -25,4 +25,4 @@ status: 候选
 
 ## 关联
 
-承接 [从 trace 沉淀经验](../synthesis/trace-to-experience.md);与 [从 trace 提模式(借 ECC 捕获前端)](trace-based-pattern-extraction.md)(管道,正交)、[从对话回合捕获](trace-based-pattern-extraction.md)(被整段 replay 天然满足)交叉牵制。将装配进 [design/](../design/index.md) 的 Intake 段。
+承接 [从 trace 沉淀经验](../synthesis/trace-to-experience.md);与 [从 trace 提模式(借 ECC 捕获前端)](trace-based-pattern-extraction.md)(管道,正交)、[从对话回合捕获](trace-based-pattern-extraction.md)(被整段 replay 天然满足)交叉牵制。将装配进 [design/](../downstream-design/index.md) 的 Intake 段。

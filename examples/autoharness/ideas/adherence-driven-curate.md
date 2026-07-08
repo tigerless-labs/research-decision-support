@@ -35,4 +35,4 @@ status: 候选
 
 ## 关联
 
-成员资格见 [按 provenance 划生命周期](lifecycle-by-provenance.md)；留后的遵守度轴接 [dynamic-validation-lifecycle](dynamic-validation-lifecycle.md)，其信号供料需 [从对话回合捕获](trace-based-pattern-extraction.md) / 使用日志（[record-scenarios-for-eval](record-scenarios-for-eval.md)，留后）。「退役 = 不再注入」依赖 [hook 强制注入](hook-forced-injection.md)。装配进 [design/](../design/index.md) 的 Manage 段。
+成员资格见 [按 provenance 划生命周期](lifecycle-by-provenance.md)；留后的遵守度轴接 [dynamic-validation-lifecycle](dynamic-validation-lifecycle.md)，其信号供料需 [从对话回合捕获](trace-based-pattern-extraction.md) / 使用日志（[record-scenarios-for-eval](record-scenarios-for-eval.md)，留后）。「退役 = 不再注入」依赖 [hook 强制注入](hook-forced-injection.md)。装配进 [design/](../downstream-design/index.md) 的 Manage 段。

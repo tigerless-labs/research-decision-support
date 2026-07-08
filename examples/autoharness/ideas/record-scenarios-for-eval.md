@@ -38,4 +38,4 @@ status: 候选
 
 ## 关联
 
-上游承 [从 trace 提模式](trace-based-pattern-extraction.md)、[episode 边界反思](episode-boundary-reflection.md)；成员资格随 [按 provenance 划生命周期](lifecycle-by-provenance.md)；留后部分接 [dynamic-validation-lifecycle](dynamic-validation-lifecycle.md) 与 [滚动 curate](adherence-driven-curate.md) 的遵守度判定。将装配进 [design/](../design/index.md) 的 Intake/Manage 段。
+上游承 [从 trace 提模式](trace-based-pattern-extraction.md)、[episode 边界反思](episode-boundary-reflection.md)；成员资格随 [按 provenance 划生命周期](lifecycle-by-provenance.md)；留后部分接 [dynamic-validation-lifecycle](dynamic-validation-lifecycle.md) 与 [滚动 curate](adherence-driven-curate.md) 的遵守度判定。将装配进 [design/](../downstream-design/index.md) 的 Intake/Manage 段。

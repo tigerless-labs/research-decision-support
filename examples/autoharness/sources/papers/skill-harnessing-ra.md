@@ -18,7 +18,7 @@ The framing/architecture companion (sequential arXiv id to [SkillHarness](skillh
 - **It validates *itself* qualitatively, not empirically.** No benchmark, no numbers, no ablation: it uses **Galster & Avgeriou's 6-step RA method** + **coverage across 8 systems** (showing existing systems fit the 10 patterns / 4 layers).
 - **Where the actual validation logic/code lives** (the cited systems, not this paper): [HASP](hasp.md) — executable validator, skill admitted only after running verifications ([arXiv:2605.17734](https://arxiv.org/abs/2605.17734)); **SkillRL** — recursive skill evolution co-evolved with policy via RL, code at [github.com/aiming-lab/SkillRL](https://github.com/aiming-lab/SkillRL); **FlowEvo** — workflows compiled to executable skills with replay tests; **Aeon** — verification-triggered changes via reviewable PRs with attached verification plans; [SkillOS](skillos.md) — frozen executor / curator split (repository-governed).
 
-**Relevance to autoharness.** This is the **architecture vocabulary for exactly what we build** — most of our invariants map onto a named pattern, which is useful for [docs/design/](../../design/index.md):
+**Relevance to autoharness.** This is the **architecture vocabulary for exactly what we build** — most of our invariants map onto a named pattern, which is useful for [docs/design/](../../downstream-design/index.md):
 - **Skill–Agent Co-Evolution Loop** (run evidence → validated candidate, not direct mutation) = our **never-auto-write + gate** (invariants 1, 7).
 - **Verifiable Skill Contract** (passed/failed/inconclusive) = our **zero-oracle objective gate** (invariant 7).
 - **Skill Eligibility Gate** (applicability/trust/provenance before selectability) = **applicability** (invariant 6).

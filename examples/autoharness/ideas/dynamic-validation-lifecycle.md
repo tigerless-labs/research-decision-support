@@ -28,4 +28,4 @@ status: 候选
 
 ## 关联
 
-机制归 [episode 边界反思](episode-boundary-reflection.md)（反思时校验 → 更新 / 新建 / 删除）与 [滚动 curate](adherence-driven-curate.md)（失活状态机 + 遵守度留后）；重排 [离线评测验证](../synthesis/offline-validation.md) 的地位（裁决轴 → 兜底）；给 [record-scenarios-for-eval](record-scenarios-for-eval.md) 的记录赋予「滚动过期」语义。是 DEFINITION 级理念，装配进 [design/](../design/index.md) 脊柱与定位。
+机制归 [episode 边界反思](episode-boundary-reflection.md)（反思时校验 → 更新 / 新建 / 删除）与 [滚动 curate](adherence-driven-curate.md)（失活状态机 + 遵守度留后）；重排 [离线评测验证](../synthesis/offline-validation.md) 的地位（裁决轴 → 兜底）；给 [record-scenarios-for-eval](record-scenarios-for-eval.md) 的记录赋予「滚动过期」语义。是 DEFINITION 级理念，装配进 [design/](../downstream-design/index.md) 脊柱与定位。

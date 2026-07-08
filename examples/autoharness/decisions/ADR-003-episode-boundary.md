@@ -15,7 +15,7 @@ supersedes:
 
 ## 决定
 
-选 episode 边界整段反思（[cap](../design/cap.md) 触发、[ref](../design/ref.md) 执行）：反思单位是含用户意图与最终结果的完整轨迹，而非被 500 行窗口任意切开的碎片；同上下文 replay 吃 warm prefix cache，连贯且便宜。
+选 episode 边界整段反思（[cap](../downstream-design/cap.md) 触发、[ref](../downstream-design/ref.md) 执行）：反思单位是含用户意图与最终结果的完整轨迹，而非被 500 行窗口任意切开的碎片；同上下文 replay 吃 warm prefix cache，连贯且便宜。
 
 ## 后果
 

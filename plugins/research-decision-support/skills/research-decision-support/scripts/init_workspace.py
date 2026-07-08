@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-LAYERS = ["sources", "synthesis", "ideas", "design", "decisions"]
+LAYERS = ["sources", "synthesis", "ideas", "decisions"]
 
 INDEXES = {
     "index.md": (
@@ -9,13 +9,11 @@ INDEXES = {
         "- [sources/](sources/index.md) — what the material says, one card per source\n"
         "- [synthesis/](synthesis/index.md) — sources clustered into directions, my verdict\n"
         "- [ideas/](ideas/index.md) — my claims, atomic, each citing its sources\n"
-        "- [design/](design/index.md) — ideas assembled into a spine + modules\n"
         "- [decisions/](decisions/index.md) — contested points: worksheet → ADR\n"
     ),
     "sources/index.md": "# sources — one card per source, facts only\n",
     "synthesis/index.md": "# synthesis — directions with concept matrices\n",
     "ideas/index.md": "# ideas — my claims in my words\n",
-    "design/index.md": "# design — spine + modules, provenance-linked\n",
     "decisions/index.md": "# decisions — worksheets (open) and ADRs (append-only)\n",
 }
 

@@ -2,7 +2,7 @@
 id: ADR-<number>
 type: adr
 status: proposed
-affects: [<design-element-id>]
+affects: [<idea-or-downstream-element-id>]
 supersedes:
 ---
 # <decision title>

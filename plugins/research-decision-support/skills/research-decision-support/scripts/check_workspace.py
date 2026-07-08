@@ -7,7 +7,6 @@ CONTRACTS = {
     "direction": {"required": ["id", "type"], "status": None},
     "idea": {"required": ["id", "type", "status"],
              "status": {"候选", "采纳", "存疑", "candidate", "adopted", "doubtful"}},
-    "design": {"required": ["id", "type"], "status": None},
     "decision": {"required": ["id", "type", "status", "affects"],
                  "status": {"open", "resolved"}},
     "adr": {"required": ["id", "type", "status"],

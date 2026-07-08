@@ -1,6 +1,9 @@
-# design — ④ 装配（设计草稿 + provenance）
+# downstream design — 工作区之外的装配产物
 
-把永久笔记织成设计，每个设计元素经相对链接连起 provenance：**设计元素 → [ideas/](../ideas/index.md) → 来源卡**。设计分两类文件：脊柱一篇（原则+流水线+全局不变量+架构图）+ 每步/模块各一篇（行为边界+接口契约+验收）。过渡期此处为将来唯一设计家；现有 `docs/design/` 冻结为 legacy，以此处为准。方法由 `research-decision-support` skill 承载。
+设计不是工作区的层：装配发生在使用方项目自己的文档里，这些设计稿**向外链回**工作区的
+决定与想法取证——**设计元素 → [ideas/](../ideas/index.md) → 来源卡**，被
+[decisions/](../decisions/index.md) 的 ADR `affects` 锚定。真实项目中这批文件住在你
+repo 的 `docs/design/`；示例里与四层同放一处仅为自包含。
 
 - 🦴 **[spine — autoharness workflow v0](spine.md)** — 系统架构图：宿主 + 学习管道（CAP→REF→校验·存储）+ 原生 skill 正常召回闭环 + 生命周期分支（MNG）+ 账本（LED）；含组件职责 / 决策 / 待解。
 - 🧱 **[architecture — 代码结构 / 文件树](architecture.md)** — 最终形态 = 单个 Claude Code plugin：代码只一份（plugin）、执行只在 hook 全局层、只有数据分 global/repo、config 单点、维护逻辑 write-once；含模块落位表。
