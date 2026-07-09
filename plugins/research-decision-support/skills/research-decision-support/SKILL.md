@@ -135,3 +135,12 @@ The UI is not settled yet. If the user asks to see or share the whole picture, r
 whatever fits the moment (the bundled `scripts/build_site.py` still works) — but treat any
 rendered HTML as a throwaway projection, never committed. Markdown is the single source of
 truth.
+
+When hand-rendering a projection, pick its look from the bundled style pack (`styles/`):
+read `styles/selection-index.json` first and shortlist at most 3 styles against the
+occasion, read only the shortlisted `preview.md` files, then read `design.md` **only for
+the single chosen style — never bulk-read the pack**. The index `usage` block is the
+authoritative protocol; its safety rules (single self-contained file, zero external
+requests, untrusted content sanitized, light and dark both styled) bind every projection
+regardless of style. To verify pack integrity:
+`python3 ${CLAUDE_SKILL_DIR}/scripts/check_style_pack.py`.
