@@ -5,7 +5,7 @@ from build_map import card_files, parse_frontmatter
 
 CONTRACTS = {
     "direction": {"required": ["id", "type"], "status": None},
-    "idea": {"required": ["id", "type", "status"],
+    "idea": {"required": ["id", "type"],
              "status": {"候选", "采纳", "存疑", "candidate", "adopted", "doubtful"}},
     "decision": {"required": ["id", "type", "status", "affects"],
                  "status": {"open", "resolved"}},
