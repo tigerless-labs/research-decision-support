@@ -1,0 +1,248 @@
+import json
+from pathlib import Path
+
+import pytest
+
+from check_style_pack import CANONICAL_TOKENS, USAGE_KEYS, check
+
+LIGHT = {
+    "surface": "#fcfcfb", "page": "#f9f9f7", "ink": "#0b0b0b", "ink-2": "#52514e",
+    "muted": "#898781", "grid": "#e1e0d9", "ring": "rgba(11,11,11,0.10)",
+    "c-sources": "#2a78d6", "c-synthesis": "#1baf7a", "c-ideas": "#eda100",
+    "c-decisions": "#4a3aa7", "c-ok": "#008300",
+}
+DARK = {
+    "surface": "#1a1a19", "page": "#0d0d0d", "ink": "#ffffff", "ink-2": "#c3c2b7",
+    "muted": "#898781", "grid": "#2c2c2a", "ring": "rgba(255,255,255,0.10)",
+    "c-sources": "#3987e5", "c-synthesis": "#199e70", "c-ideas": "#c98500",
+    "c-decisions": "#9085e9", "c-ok": "#008300",
+}
+
+
+def palette_block(name, palette):
+    lines = [f"{name}:"]
+    lines += [f'  {token}: "{value}"' for token, value in palette.items()]
+    return "\n".join(lines)
+
+
+def design_md(slug, light=LIGHT, dark=DARK, extra_frontmatter="", body_extra=""):
+    frontmatter = "\n".join([
+        f"slug: {slug}",
+        f"name: {slug.title()}",
+        "version: 1",
+        "scheme: dual",
+        palette_block("colors-light", light),
+        palette_block("colors-dark", dark),
+        "color-aliases:",
+        "  accent: c-decisions",
+        "  link: c-sources",
+        "typography:",
+        '  body-family: system-ui, sans-serif',
+        '  base-size: "14px"',
+        "components:",
+        '  card-radius: "8px"',
+        '  max-width: "1160px"',
+        extra_frontmatter,
+    ]).strip()
+    body = "\n".join([
+        "## Atmosphere", "Calm paper, quiet chrome, content leads." + body_extra,
+        "## Layer semantics",
+        "Sources cool blue, synthesis organizing green, ideas warm amber, decisions settled violet.",
+        "## Signature moves",
+        "- Hairline grid borders", "- Layer-tinted chips", "- Generous reading measure",
+        "## Do / Don't",
+        "Do keep chrome quiet. Don't introduce colors outside the palette.",
+        "## Invariants",
+        "Single self-contained file. Zero external requests. Escape and sanitize untrusted card",
+        "content. Style both light and dark schemes.",
+    ])
+    return f"---\n{frontmatter}\n---\n\n# {slug.title()}\n\n{body}\n"
+
+
+def preview_md(slug):
+    return "\n".join([
+        f"# {slug.title()} — calm editorial paper",
+        "## Palette",
+        "surface #fcfcfb / #1a1a19; ink #0b0b0b / #ffffff; decisions #4a3aa7 / #9085e9",
+        "## Typography",
+        "System UI stack, 14px base, quiet weights.",
+        "## Signature moves",
+        "- Hairline grid borders", "- Layer-tinted chips",
+        "## Fit",
+        "Best for: long reading sessions. Avoid for: high-energy pitch moments.",
+    ]) + "\n"
+
+
+def index_entry(slug, **overrides):
+    entry = {
+        "slug": slug,
+        "name": slug.title(),
+        "tagline": "Calm editorial paper.",
+        "mood": ["calm", "editorial"],
+        "tone": "understated",
+        "formality": "neutral",
+        "density": "comfortable",
+        "scheme": "dual",
+        "best_for": ["long reading sessions"],
+        "avoid_for": ["high-energy pitch moments"],
+        "preview": f"{slug}/preview.md",
+        "design": f"{slug}/design.md",
+    }
+    entry.update(overrides)
+    return entry
+
+
+def usage_block():
+    return {key: f"Rule text for {key}." for key in USAGE_KEYS}
+
+
+class PackFixture:
+    def __init__(self, root):
+        self.root = root
+
+    def __truediv__(self, rel):
+        return self.root / rel
+
+    def __fspath__(self):
+        return str(self.root)
+
+    def add_style(self, slug, design=None, preview=None):
+        style_dir = self.root / slug
+        style_dir.mkdir(exist_ok=True)
+        (style_dir / "design.md").write_text(design or design_md(slug), encoding="utf-8")
+        (style_dir / "preview.md").write_text(preview or preview_md(slug), encoding="utf-8")
+
+    def write_index(self, entries, usage=None, version=1):
+        payload = {"version": version, "usage": usage or usage_block(), "styles": entries}
+        (self.root / "selection-index.json").write_text(
+            json.dumps(payload, indent=2), encoding="utf-8")
+
+
+@pytest.fixture
+def pack(tmp_path):
+    root = tmp_path / "styles"
+    root.mkdir()
+    fixture = PackFixture(root)
+    fixture.add_style("alpha-paper")
+    fixture.add_style("beta-slate")
+    fixture.write_index([index_entry("alpha-paper"), index_entry("beta-slate")])
+    return fixture
+
+
+def problems_mentioning(problems, fragment):
+    return [p for p in problems if fragment in p]
+
+
+def test_valid_synthetic_pack_passes(pack):
+    assert check(pack) == []
+
+
+def test_external_url_in_design_body_rejected(pack):
+    style = pack / "alpha-paper" / "design.md"
+    style.write_text(
+        design_md("alpha-paper", body_extra=" background: url(https://evil.example/px.png)"),
+        encoding="utf-8")
+    assert problems_mentioning(check(pack), "alpha-paper/design.md")
+
+
+def test_script_tag_in_preview_rejected(pack):
+    (pack / "beta-slate" / "preview.md").write_text(
+        preview_md("beta-slate") + "\n<script>alert(1)</script>\n", encoding="utf-8")
+    assert problems_mentioning(check(pack), "beta-slate/preview.md")
+
+
+def test_expression_color_value_rejected(pack):
+    bad = dict(LIGHT, ink="expression(alert(1))")
+    (pack / "alpha-paper" / "design.md").write_text(
+        design_md("alpha-paper", light=bad), encoding="utf-8")
+    assert problems_mentioning(check(pack), "alpha-paper/design.md")
+
+
+def test_javascript_color_value_rejected(pack):
+    bad = dict(DARK, ink="javascript:alert(1)")
+    (pack / "alpha-paper" / "design.md").write_text(
+        design_md("alpha-paper", dark=bad), encoding="utf-8")
+    assert problems_mentioning(check(pack), "alpha-paper/design.md")
+
+
+def test_index_entry_for_missing_directory_rejected(pack):
+    pack.write_index([index_entry("alpha-paper"), index_entry("beta-slate"),
+                      index_entry("ghost-style")])
+    assert problems_mentioning(check(pack), "ghost-style")
+
+
+def test_orphan_directory_rejected(pack):
+    pack.add_style("orphan-style")
+    assert problems_mentioning(check(pack), "orphan-style")
+
+
+def test_duplicate_slug_rejected(pack):
+    pack.write_index([index_entry("alpha-paper"), index_entry("alpha-paper"),
+                      index_entry("beta-slate")])
+    assert problems_mentioning(check(pack), "alpha-paper")
+
+
+def test_frontmatter_slug_mismatch_rejected(pack):
+    (pack / "beta-slate" / "design.md").write_text(
+        design_md("other-name"), encoding="utf-8")
+    assert problems_mentioning(check(pack), "beta-slate/design.md")
+
+
+def test_path_traversal_in_index_rejected(pack):
+    pack.write_index([
+        index_entry("alpha-paper", design="../../../etc/passwd"),
+        index_entry("beta-slate"),
+    ])
+    assert problems_mentioning(check(pack), "alpha-paper")
+
+
+def test_depth_three_frontmatter_fails_safe(pack):
+    nested = "colors-extra:\n  group:\n    deep: \"#ffffff\""
+    (pack / "alpha-paper" / "design.md").write_text(
+        design_md("alpha-paper", extra_frontmatter=nested), encoding="utf-8")
+    assert problems_mentioning(check(pack), "alpha-paper/design.md")
+
+
+def test_missing_canonical_token_rejected(pack):
+    short = {token: value for token, value in DARK.items() if token != "ink"}
+    (pack / "alpha-paper" / "design.md").write_text(
+        design_md("alpha-paper", dark=short), encoding="utf-8")
+    problems = problems_mentioning(check(pack), "alpha-paper/design.md")
+    assert problems_mentioning(problems, "ink")
+
+
+def test_dangling_color_alias_rejected(pack):
+    (pack / "alpha-paper" / "design.md").write_text(
+        design_md("alpha-paper",
+                  extra_frontmatter="").replace("accent: c-decisions", "accent: c-nonexistent"),
+        encoding="utf-8")
+    assert problems_mentioning(check(pack), "alpha-paper/design.md")
+
+
+def test_missing_usage_key_rejected(pack):
+    usage = usage_block()
+    del usage["never-bulk-read"]
+    pack.write_index([index_entry("alpha-paper"), index_entry("beta-slate")], usage=usage)
+    assert problems_mentioning(check(pack), "never-bulk-read")
+
+
+def test_illegal_enum_values_rejected(pack):
+    pack.write_index([
+        index_entry("alpha-paper", formality="corporate", density="dense", scheme="sepia"),
+        index_entry("beta-slate"),
+    ])
+    problems = problems_mentioning(check(pack), "alpha-paper")
+    assert len(problems) >= 3
+
+
+def test_preview_must_be_lighter_than_design(pack):
+    (pack / "beta-slate" / "preview.md").write_text(
+        preview_md("beta-slate") + "filler line\n" * 400, encoding="utf-8")
+    assert problems_mentioning(check(pack), "beta-slate/preview.md")
+
+
+def test_canonical_tokens_cover_template_slots():
+    assert set(CANONICAL_TOKENS) == {
+        "surface", "page", "ink", "ink-2", "muted", "grid", "ring",
+        "c-sources", "c-synthesis", "c-ideas", "c-decisions", "c-ok",
+    }
