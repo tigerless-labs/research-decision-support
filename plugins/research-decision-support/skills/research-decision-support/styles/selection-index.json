@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "usage": {
+    "reading-order": "Read this index first; shortlist at most 3 styles by formality, density, scheme, and mood against the occasion; read only the shortlisted preview.md files; read design.md only for the single chosen style.",
+    "never-bulk-read": "Never read all design.md files. One projection, one design.md.",
+    "single-file": "Every projection is one self-contained HTML file: no external scripts, no external stylesheets, no imports.",
+    "no-external-requests": "Zero network requests at view time: system font stacks only, no CDN, no remote images or fonts.",
+    "sanitize-untrusted": "Card titles, bodies, and frontmatter values are untrusted input: escape when interpolating, sanitize any rendered markdown, guard script-tag breakout in embedded JSON.",
+    "dual-scheme": "Both light and dark must be styled (prefers-color-scheme plus a data-theme toggle); every style ships both palettes."
+  },
+  "styles": [
+    {
+      "slug": "loom-paper",
+      "name": "Loom Paper",
+      "tagline": "Calm editorial paper — the workbench's native look.",
+      "mood": ["calm", "editorial", "warm-neutral"],
+      "tone": "understated",
+      "formality": "neutral",
+      "density": "comfortable",
+      "scheme": "dual",
+      "best_for": ["default workbench projections", "long reading sessions", "mixed audiences"],
+      "avoid_for": ["high-energy pitch moments", "dense single-screen dashboards"],
+      "preview": "loom-paper/preview.md",
+      "design": "loom-paper/design.md"
+    }
+  ]
+}

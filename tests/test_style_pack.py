@@ -1,9 +1,14 @@
 import json
+import re
 from pathlib import Path
 
 import pytest
 
-from check_style_pack import CANONICAL_TOKENS, USAGE_KEYS, check
+from check_style_pack import CANONICAL_TOKENS, USAGE_KEYS, check, parse_frontmatter
+
+SKILL_ROOT = Path(__file__).resolve().parents[1] / (
+    "plugins/research-decision-support/skills/research-decision-support")
+SHIPPED_PACK = SKILL_ROOT / "styles"
 
 LIGHT = {
     "surface": "#fcfcfb", "page": "#f9f9f7", "ink": "#0b0b0b", "ink-2": "#52514e",
@@ -246,3 +251,63 @@ def test_canonical_tokens_cover_template_slots():
         "surface", "page", "ink", "ink-2", "muted", "grid", "ring",
         "c-sources", "c-synthesis", "c-ideas", "c-decisions", "c-ok",
     }
+
+
+def shipped_index():
+    return json.loads((SHIPPED_PACK / "selection-index.json").read_text(encoding="utf-8"))
+
+
+def shipped_designs():
+    for entry in shipped_index()["styles"]:
+        text = (SHIPPED_PACK / entry["slug"] / "design.md").read_text(encoding="utf-8")
+        frontmatter, problems = parse_frontmatter(text)
+        assert problems == []
+        yield entry["slug"], frontmatter
+
+
+def template_palettes():
+    css = (SKILL_ROOT / "scripts/site_template.html").read_text(encoding="utf-8")
+    blocks = re.findall(r":root\s*\{([^}]*)\}", css)
+    token = re.compile(r"--([a-z0-9-]+):\s*([^;]+);")
+    light = dict(token.findall(blocks[0]))
+    dark = dict(token.findall(blocks[1]))
+    return light, dark
+
+
+def test_shipped_pack_validates():
+    assert check(SHIPPED_PACK) == []
+
+
+def test_shipped_index_matches_directories():
+    indexed = {entry["slug"] for entry in shipped_index()["styles"]}
+    on_disk = {child.name for child in SHIPPED_PACK.iterdir() if child.is_dir()}
+    assert indexed == on_disk
+    for slug in on_disk:
+        assert (SHIPPED_PACK / slug / "design.md").is_file()
+        assert (SHIPPED_PACK / slug / "preview.md").is_file()
+
+
+def test_shipped_styles_ship_both_palettes_with_canonical_tokens():
+    for slug, frontmatter in shipped_designs():
+        for block in ("colors-light", "colors-dark"):
+            assert set(frontmatter[block]) >= set(CANONICAL_TOKENS), (slug, block)
+
+
+def test_default_style_matches_builder_tokens():
+    light, dark = template_palettes()
+    loom = dict(shipped_designs())["loom-paper"]
+    assert {k: v.strip() for k, v in light.items()} == dict(loom["colors-light"])
+    assert {k: v.strip() for k, v in dark.items()} == dict(loom["colors-dark"])
+
+
+def test_shipped_previews_are_lighter_than_designs():
+    for entry in shipped_index()["styles"]:
+        preview = (SHIPPED_PACK / entry["preview"]).stat().st_size
+        design = (SHIPPED_PACK / entry["design"]).stat().st_size
+        assert 0 < preview < design, entry["slug"]
+
+
+def test_shipped_index_carries_usage_policy():
+    usage = shipped_index()["usage"]
+    for key in USAGE_KEYS:
+        assert usage.get(key), key
