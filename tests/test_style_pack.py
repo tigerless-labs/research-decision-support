@@ -311,3 +311,12 @@ def test_shipped_index_carries_usage_policy():
     usage = shipped_index()["usage"]
     for key in USAGE_KEYS:
         assert usage.get(key), key
+
+
+def test_shipped_index_has_discriminating_axes():
+    entries = shipped_index()["styles"]
+    for axis in ("formality", "density"):
+        assert len({entry[axis] for entry in entries}) >= 2, axis
+    schemes = {entry["scheme"] for entry in entries}
+    assert schemes & {"light", "dual"} and schemes & {"dark", "dual"}
+    assert len(schemes) >= 2
