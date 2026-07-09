@@ -27,10 +27,16 @@ def test_check_passes_valid_workspace(workspace):
 
 
 def test_check_flags_missing_required_field(workspace):
-    bad = workspace / "ideas" / "bad.md"
-    bad.write_text("---\nid: bad\ntype: idea\n---\n# no status\n", encoding="utf-8")
+    bad = workspace / "decisions" / "bad.md"
+    bad.write_text("---\nid: bad\ntype: decision\nstatus: open\n---\n# no affects\n", encoding="utf-8")
     problems = check(workspace)
-    assert any("bad.md" in p and "status" in p for p in problems)
+    assert any("bad.md" in p and "affects" in p for p in problems)
+
+
+def test_check_accepts_idea_without_status(workspace):
+    (workspace / "ideas" / "bare.md").write_text(
+        "---\nid: bare\ntype: idea\n---\n# existence means accepted\n", encoding="utf-8")
+    assert check(workspace) == []
 
 
 def test_design_dir_is_outside_the_schema(workspace):
