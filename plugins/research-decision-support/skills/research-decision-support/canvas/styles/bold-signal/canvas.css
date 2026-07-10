@@ -57,7 +57,7 @@ body { color:var(--ink); font:15px/1.5 var(--body);
   font-weight:700; }
 #vp { position:absolute; inset:0; cursor:grab; overflow:hidden; }
 #vp.panning { cursor:grabbing; }
-#world { position:absolute; left:0; top:0; transform-origin:0 0; will-change:transform; }
+#world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
 .wtitle .en { font-family:var(--display); font-size:112px; font-weight:900;

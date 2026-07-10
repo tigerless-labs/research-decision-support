@@ -60,7 +60,7 @@ body { background:var(--page); color:var(--ink); font:14px/1.6 var(--hand); }
   transform:rotate(0); font-weight:700; }
 #vp { position:absolute; inset:0; cursor:grab; overflow:hidden; }
 #vp.panning { cursor:grabbing; }
-#world { position:absolute; left:0; top:0; transform-origin:0 0; will-change:transform; }
+#world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
 .wtitle .en { font-size:104px; font-weight:800; letter-spacing:.06em; color:var(--ink);
