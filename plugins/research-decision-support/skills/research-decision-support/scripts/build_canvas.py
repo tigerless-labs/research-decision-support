@@ -13,8 +13,6 @@ TEMPLATE = SKILL_DIR / "canvas" / "template.html"
 STYLE_PACK = SKILL_DIR / "canvas" / "styles"
 DEFAULT_STYLE = "pin-and-paper"
 DEFAULT_CSS = STYLE_PACK / DEFAULT_STYLE / "canvas.css"
-SUBTYPE_ZH = {"methods": "方法", "products": "产品", "github": "仓库",
-              "blogs": "博客", "papers": "论文"}
 
 CW, CH, DH = 252, 150, 116
 GX, GY, PAD, HEAD = 20, 20, 16, 52
@@ -50,7 +48,7 @@ def collect(workspace):
                 docs[str(rel)] = md.read_text(encoding="utf-8")
         return docs
     return {"nodes": nodes, "edges": edges, "output": docs_of("output"),
-            "board": docs_of("board"), "subtypeZh": SUBTYPE_ZH}
+            "board": docs_of("board")}
 
 
 def groups_of(nodes):
@@ -179,7 +177,6 @@ def build(workspace, outdir, css=None, title=None):
         "edges": data["edges"],
         "labels": labels, "worlds": worlds,
         "output": data["output"], "board": data["board"],
-        "subtypeZh": SUBTYPE_ZH,
     }
     needs_mermaid = any("```mermaid" in t for t in
                         list(data["output"].values()) + list(data["board"].values()))

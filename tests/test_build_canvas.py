@@ -27,6 +27,22 @@ def test_collect_excludes_archive_and_indexes(workspace):
     assert not any(i.endswith("index.md") for i in ids)
 
 
+def test_collect_takes_any_source_type_dir_verbatim(workspace):
+    (workspace / "sources" / "podcasts").mkdir()
+    (workspace / "sources" / "podcasts" / "delta.md").write_text(
+        "# Delta episode\n\nA card under a type dir no preset knows.\n",
+        encoding="utf-8")
+    by_id = {n["id"]: n for n in collect(workspace)["nodes"]}
+    assert by_id["sources/podcasts/delta.md"]["subtype"] == "podcasts"
+    assert by_id["sources/papers/alpha.md"]["subtype"] == "papers"
+    assert by_id["ideas/idea-one.md"]["subtype"] == ""
+
+
+def test_build_has_no_subtype_mapping(workspace, tmp_path):
+    html = build(workspace, tmp_path / "proj").read_text(encoding="utf-8")
+    assert "subtypeZh" not in html
+
+
 def test_collect_reads_frontmatter_tags_and_edges(workspace):
     data = collect(workspace)
     by_id = {n["id"]: n for n in data["nodes"]}
@@ -147,6 +163,7 @@ def test_build_payload_splits_bodies_from_nodes(workspace, tmp_path):
     line = next(l for l in html.split("\n") if l.startswith("const DATA = "))
     payload = json.loads(line[len("const DATA = "):].rstrip(";"))
     assert {"nodes", "bodies", "edges", "labels", "worlds",
-            "output", "board", "subtypeZh"} <= payload.keys()
+            "output", "board"} <= payload.keys()
+    assert "subtypeZh" not in payload
     assert not any("body" in n for n in payload["nodes"])
     assert payload["bodies"]
