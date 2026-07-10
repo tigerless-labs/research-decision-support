@@ -29,4 +29,4 @@ output 必须包含：
 - 模块细节 → [output/modules/](output/modules/source.md)（source / idea / output /
   canvas / agent / protocol）
 - canvas 可视化层约束 → [output/modules/canvas.md](output/modules/canvas.md)
-- skill 文件结构 → [output/architecture.md](output/architecture.md)
+- skill 文件结构 → [output/file-structure.md](output/file-structure.md)

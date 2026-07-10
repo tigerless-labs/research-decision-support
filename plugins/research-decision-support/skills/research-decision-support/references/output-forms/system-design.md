@@ -7,9 +7,10 @@ is an architecture plus the reasons behind it.
 
 ```
 output/
-├── index.md          entry point (projection)
-├── system.md         the spine: system flowchart + architecture diagram in ONE document
-└── modules/*.md      one module, one file — the diagram's blocks click through to these
+├── index.md            entry point (projection)
+├── system.md           the spine: system flowchart + architecture diagram in ONE document
+├── file-structure.md   the design mapped onto disk: annotated file tree(s) + module→file map
+└── modules/*.md        one module, one file — the diagram's blocks click through to these
 ```
 
 ## Rules
@@ -20,6 +21,9 @@ output/
   document: no prose restating what a node already says.
 - Every diagram block carries a `click` declaration to its module file — the diagram→module
   mapping lives in the markdown, not in any projection.
+- `file-structure.md` grounds the design on disk: annotated file tree(s) — one-line
+  responsibility per entry — plus a module→file mapping whose entries link back to
+  `modules/*.md`. It stays separate from `system.md` so the spine remains pure logic.
 - Each `modules/*.md` states the module's responsibility and its behavior boundary as
   **bullets** (one principle per bullet), then a provenance line linking the ideas and
   sources it stands on.
