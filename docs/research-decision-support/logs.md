@@ -127,3 +127,5 @@
 - 2026-07-10 · 单画布三团 / 分页画廊模板 · 归档（实现落地触发既有裁决"两张先行模板卡随合并完成归档"） · 旧：两卡在 ideas/ 现役 → 新：移入 ideas/archive/，全部引用改指 archive/ 路径（校验：无 dangling、卡全合规），index 画板节除名
 - 2026-07-10 · output 同步（modules/canvas + architecture） · 装配（idea 双写纪律） · 旧：canvas.md 无构建段、architecture canvas/ 树标"实现待 skill 解冻" → 新：canvas.md 增"构建（固定脚本）"两条（唯一入口唯一入参 / 模板风格分离只换 CSS），architecture 更新 canvas/ 树为 spec+template+style.css 并标 styles/ 迁挂待办，溯源补新卡
 - 2026-07-10 · 风格包校验对齐融合画布（随固定脚本合并主分支） · 装配 · 旧：check_style_pack 按 canvases/ 目录校验 canvas_renderings、默认 token 钉在 tabbed-gallery 模板、canvas/style.css 用简写 token 名 → 新：canvas_renderings 目录查验退役（呈现节存在性照查）、默认 token 钉到 canvas/style.css、token 名改规范接口（ink-2/accent-a..d/positive）；残差补记"默认模板暗色 palette 待补"；59 测试全绿
+- 2026-07-10 · canvas-fixed-builder-style-css-only · 原地迭代（人："那我不如给每个style把css都写好 用户选哪个直接用"） · 旧：CSS 按需现场编译 → 新：全部风格预编译入库——每 style 目录一份 canvas.css（design.md 的编译产物，规格仍是真身），--css 直接指用零等待
+- 2026-07-10 · 风格 CSS 预编译落地 · 装配 · 旧：styles/ 仅规格无编译产物 → 新：8 风格各一份 canvas.css（并行编译，选择器全覆盖默认模板、canonical token 明暗双份、禁外链）；check_style_pack 新增 canvas.css 校验（token 双份+外链+括号平衡）；8 风格 × 明暗 16 张截图零 JS 错误；modules/canvas 补"预编译入库"与"HTML 为结构契约、agent 可写面=markdown+风格 CSS"两条

@@ -181,6 +181,32 @@ def check_entry(entry):
     return problems
 
 
+CSS_TOKEN_DEF = re.compile(r"--([a-z0-9-]+)\s*:")
+DARK_BLOCK = re.compile(r"@media[^{]*prefers-color-scheme:\s*dark[^{]*\{(.*?)\}\s*\}",
+                        re.DOTALL)
+
+
+def check_canvas_css(rel, text):
+    # A compiled canvas.css is a build artifact of design.md for the unified
+    # canvas: it must define every canonical token in its light :root and again
+    # in a prefers-color-scheme:dark override, and may never reach the network.
+    problems = check_reach(rel, text)
+    if text.count("{") != text.count("}"):
+        problems.append(f"{rel}: unbalanced braces")
+    root = re.search(r":root\s*\{([^}]*)\}", text)
+    light_tokens = set(CSS_TOKEN_DEF.findall(root.group(1))) if root else set()
+    problems += [f"{rel}: light :root missing canonical token: --{token}"
+                 for token in CANONICAL_TOKENS if token not in light_tokens]
+    dark = DARK_BLOCK.search(text)
+    dark_tokens = set(CSS_TOKEN_DEF.findall(dark.group(1))) if dark else set()
+    if not dark:
+        problems.append(f"{rel}: missing prefers-color-scheme dark palette block")
+    else:
+        problems += [f"{rel}: dark palette missing canonical token: --{token}"
+                     for token in CANONICAL_TOKENS if token not in dark_tokens]
+    return problems
+
+
 def check_canvas_renderings(rel, entry, design_text):
     # The multi-canvas selector is retired: only the unified canvas exists, so a
     # canvas_renderings entry is legacy metadata — sections it names must still
@@ -253,6 +279,10 @@ def check(pack_root):
                                   len(design_text.encode("utf-8")))
         problems += check_canvas_renderings(
             f"{slug}/design.md", entries_by_slug[slug], design_text)
+        canvas_css = pack / slug / "canvas.css"
+        if canvas_css.is_file():
+            problems += check_canvas_css(
+                f"{slug}/canvas.css", canvas_css.read_text(encoding="utf-8"))
     return problems
 
 
