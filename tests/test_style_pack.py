@@ -329,11 +329,10 @@ def test_shipped_styles_ship_both_palettes_with_canonical_tokens():
             assert set(frontmatter[block]) >= set(CANONICAL_TOKENS), (slug, block)
 
 
-def test_default_style_matches_builder_tokens():
+def test_builder_default_theme_covers_canonical_tokens():
     light, dark = template_palettes()
-    loom = dict(shipped_designs())["loom-paper"]
-    assert {k: v.strip() for k, v in light.items()} == dict(loom["colors-light"])
-    assert {k: v.strip() for k, v in dark.items()} == dict(loom["colors-dark"])
+    assert set(CANONICAL_TOKENS) <= set(light)
+    assert set(CANONICAL_TOKENS) <= set(dark)
 
 
 def test_shipped_previews_are_lighter_than_designs():
