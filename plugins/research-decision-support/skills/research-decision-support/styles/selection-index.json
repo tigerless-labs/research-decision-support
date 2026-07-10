@@ -65,82 +65,57 @@
       ]
     },
     {
-      "slug": "terminal-green",
-      "name": "Terminal Green",
-      "tagline": "GitHub-dark terminal session: prompt, cursor, ANSI accents, listing rows.",
+      "slug": "blue-professional",
+      "name": "Blue Professional",
+      "tagline": "Warm cream canvas with a single saturated cobalt voice; consulting-grade.",
       "mood": [
-        "technical",
-        "hacker",
-        "alive"
+        "professional",
+        "calm",
+        "trustworthy"
       ],
-      "tone": "candid",
-      "formality": "neutral",
-      "density": "compact",
-      "scheme": "dark",
-      "best_for": [
-        "dev-facing demos",
-        "session walkthroughs"
-      ],
-      "avoid_for": [
-        "print handouts",
-        "non-technical readouts"
-      ],
-      "preview": "terminal-green/preview.md",
-      "design": "terminal-green/design.md",
-      "canvas_renderings": [
-        "tabbed-gallery"
-      ]
-    },
-    {
-      "slug": "bold-signal",
-      "name": "Bold Signal",
-      "tagline": "Charcoal poster with one saturated block and ultra-black display type.",
-      "mood": [
-        "loud",
-        "confident",
-        "high-impact"
-      ],
-      "tone": "dramatic",
-      "formality": "playful",
-      "density": "spacious",
-      "scheme": "dark",
-      "best_for": [
-        "pitch moments",
-        "kickoff energy"
-      ],
-      "avoid_for": [
-        "dense evidence tables",
-        "quiet institutional documents"
-      ],
-      "preview": "bold-signal/preview.md",
-      "design": "bold-signal/design.md",
-      "canvas_renderings": [
-        "tabbed-gallery"
-      ]
-    },
-    {
-      "slug": "8-bit-orbit",
-      "name": "8-Bit Orbit",
-      "tagline": "Pixel-arcade neon on deep navy: chunky borders, hard shadows, world-select.",
-      "mood": [
-        "playful",
-        "retro-tech",
-        "energetic"
-      ],
-      "tone": "geeky",
-      "formality": "playful",
+      "tone": "polished",
+      "formality": "formal",
       "density": "comfortable",
-      "scheme": "dark",
+      "scheme": "light",
       "best_for": [
-        "hackathon demos",
-        "launch teasers"
+        "consulting deliverables",
+        "investor readouts",
+        "executive research synthesis"
       ],
       "avoid_for": [
-        "formal decision readouts",
-        "print-bound documents"
+        "playful workshops",
+        "multi-accent heat"
       ],
-      "preview": "8-bit-orbit/preview.md",
-      "design": "8-bit-orbit/design.md",
+      "preview": "blue-professional/preview.md",
+      "design": "blue-professional/design.md",
+      "canvas_renderings": [
+        "tabbed-gallery"
+      ]
+    },
+    {
+      "slug": "block-frame",
+      "name": "BlockFrame",
+      "tagline": "Neobrutalist candy pastels in chunky black borders with hard offset shadows.",
+      "mood": [
+        "bold",
+        "playful",
+        "graphic"
+      ],
+      "tone": "confident",
+      "formality": "playful",
+      "density": "compact",
+      "scheme": "light",
+      "best_for": [
+        "launch decks",
+        "agency-grade reviews",
+        "contemporary confident readouts"
+      ],
+      "avoid_for": [
+        "quiet institutional restraint",
+        "regulated formal documents"
+      ],
+      "preview": "block-frame/preview.md",
+      "design": "block-frame/design.md",
       "canvas_renderings": [
         "tabbed-gallery"
       ]
