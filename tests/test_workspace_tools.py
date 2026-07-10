@@ -111,3 +111,24 @@ def test_real_workspace_conforms_when_present():
         return
     assert check(real) == []
     assert check_links(real) == []
+
+
+def test_board_cards_are_schema_free(workspace):
+    (workspace / "board" / "scratch.md").write_text(
+        "# anything goes\n\nNo frontmatter, no required fields.\n", encoding="utf-8")
+    assert check(workspace) == []
+
+
+def test_board_is_terminal_no_inbound_references(workspace):
+    (workspace / "ideas" / "leans-on-board.md").write_text(
+        "---\nid: leans-on-board\ntype: idea\n---\n# bad\n\n"
+        "Rests on [a board](../board/first-compare.md).\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("leans-on-board.md" in p and "board" in p for p in problems)
+
+
+def test_board_single_tag_rule_still_applies(workspace):
+    (workspace / "board" / "tagged.md").write_text(
+        "---\ntags: [a, b]\n---\n# two tags\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("tagged.md" in p and "at most one tag" in p for p in problems)

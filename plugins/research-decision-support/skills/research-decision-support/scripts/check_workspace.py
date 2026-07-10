@@ -24,6 +24,21 @@ def schema_problems(workspace):
     return problems
 
 
+def board_inbound_problems(workspace):
+    workspace = Path(workspace).resolve()
+    cards = {str(rel): md for md, rel in card_files(workspace)}
+    problems = []
+    for rel, md in cards.items():
+        if rel.startswith("board/"):
+            continue
+        for target in card_links(md, rel, workspace, cards):
+            if target.startswith("board/"):
+                problems.append(
+                    f"{rel}: references board/ — the board is terminal; distill its "
+                    f"conclusions into an idea card instead ({target})")
+    return problems
+
+
 def cycle_problems(workspace):
     workspace = Path(workspace).resolve()
     cards = {str(rel): md for md, rel in card_files(workspace)}
@@ -55,7 +70,8 @@ def cycle_problems(workspace):
 
 def check(workspace):
     workspace = Path(workspace).resolve()
-    return schema_problems(workspace) + cycle_problems(workspace)
+    return (schema_problems(workspace) + board_inbound_problems(workspace)
+            + cycle_problems(workspace))
 
 
 def main(argv):

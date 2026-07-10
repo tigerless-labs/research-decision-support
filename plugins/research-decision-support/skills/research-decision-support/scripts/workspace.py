@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-LAYERS = ["sources", "ideas", "output"]
+LAYERS = ["sources", "ideas", "output", "board"]
 
 _MD_LINK = re.compile(r"\]\(\s*([^)\s]+?\.md)(?:#[^)]*)?\s*\)")
 _EXTERNAL = re.compile(r"^[a-z][a-z0-9+.-]*://")

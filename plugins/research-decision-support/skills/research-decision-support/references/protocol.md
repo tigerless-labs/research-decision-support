@@ -19,9 +19,12 @@ commit.
 │   ├── index.md            (projection)
 │   ├── archive/            archived state — cards move here, never deleted
 │   └── *.md
-└── output/               ③ assembly: human-initiated; inner layout set by the chosen
-    ├── index.md            output form (projection)
-    └── …
+├── output/               ③ assembly: human-initiated; inner layout set by the chosen
+│   ├── index.md            output form (projection)
+│   └── …
+└── board/                free surface: one file, one board (a comparison, anything);
+    ├── index.md            human-owned, no schema (projection index as usual)
+    └── *.md
 ```
 
 ## Card schema
@@ -32,6 +35,10 @@ commit.
   `tags` optional. No status field — existence is the live state, location under
   `archive/` is the archived state.
 - `sources/` cards: frontmatter optional; when present, only `tags` is read.
+- `board/` documents: **no schema** — no required frontmatter, no fixed sections; the
+  single-tag rule still applies if tags appear. Boards are **terminal**: they may
+  reference any layer, but sources/ideas/output must never reference a board — distill a
+  board's conclusion into an idea card instead.
 - Principles inside output documents are bullet lists, one principle per bullet — never
   paragraphs — so each can be cited, edited, and ledgered on its own.
 - In the system-design output form, diagrams **are** the markdown: mermaid blocks with

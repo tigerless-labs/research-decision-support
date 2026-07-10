@@ -1,0 +1,129 @@
+# logs — 变更账本（append-only，覆盖 ideas 与 output 两层）
+
+每次变更（idea 的新增/**正文更新**/更名/合并/归档/supersede，output 的装配/修改/
+同步刷新，及账本约定本身）由 agent 自动追加一行，永不编辑旧行。格式：`日期 · 卡 · 动作 · 改动（旧→新）· 一句话原因`——
+**必须记录改动本身**（最小 delta，旧→新），不只动作与原因；docs 不入 git，本账本
+是回溯的唯一依据，一行须足以还原"改了什么"。节点级 log 落地前，本账本是 idea
+改动的唯一留痕。output 同步遵循
+[output-auto-refresh](ideas/output-auto-refresh.md)，同步动作也记账：**每层一条**
+——一次双写记两行（idea 一行、output 一行），各带自己的旧→新，「原因」字段点名
+触发方串起因果；output 未生成时只有 idea 一行。
+
+- 2026-07-07 · judgment-provenance-wedge / read-tag-judge-loop / one-engine-many-schemas / drafts-not-state · 存量迁入 · 建库前既有四卡
+- 2026-07-08 · vibe-code-design-canvas · 新增 · vibe coding 的设计意图无落点
+- 2026-07-08 · four-persona-scenarios · 新增 · 同一协议四种证据源与裁决物
+- 2026-07-08 · creation-canvas · 新增（收编 vibe-code-design-canvas 为下游延伸） · 画板比决策模型更贴形态
+- 2026-07-08 · source-tags-self-classify / canvas-edges-on-demand / agent-synthesizes-human-adjudicates / runtime-agnostic-protocol · 新增 · 画板方向四卡（另会话）
+- 2026-07-08 · idea-layer-single-entity · ADR resolved · 单实体+状态生命周期，否决 GTD 式双层
+- 2026-07-09 · claims-anchor-evidence · 新增 · 主张无锚定不得晋级
+- 2026-07-09 · evidence-grading · 新增 · 来源不等权，分级随场景可配
+- 2026-07-09 · buffer-captures-anything · 新增 · 入口零门槛，结构事后归 agent
+- 2026-07-09 · four-persona-scenarios · 更新 · 补第五人格：生活决策者（跳槽/选校/买房）
+- 2026-07-09 · single-canvas-clustered-graph · 新增 · 单画布三团、tag 小团水平排布
+- 2026-07-09 · output-auto-refresh · 新增 · idea 变更同回合重推 output
+- 2026-07-09 · 全层 · 状态标签移除 · 存在即采纳，归档走 log（validator 同步放宽，PR #4）
+- 2026-07-09 · 全层 · ideas 并入 decisions 更名 decision · 决定卡单实体语义
+- 2026-07-09 · output-auto-refresh · 措辞同步 · 随层更名刷新（规则首次自执行）
+- 2026-07-09 · 全层 · decisions 更名回 ideas · 命名回稳；本 logs.md 启用，此后变更自动记账
+- 2026-07-09 · 全层 · 生命周期简化（人的裁决） · idea 只能由人创建；状态收敛为 存在/归档 二态，锚定/拍板/采纳流程移除；归档卡移入 ideas/archive/；supersede idea-layer-single-entity 的状态机细分，其单实体+log 结论不变
+- 2026-07-09 · 全层 · 正文更新纳入记账 · 单个 idea 暂无节点级 log，改动一律记入本账本（顺删已废除的"晋级"动作）
+- 2026-07-09 · output/modules/idea · 措辞同步 · 随"正文更新纳入记账"刷新（output-auto-refresh 自执行）
+- 2026-07-09 · output 同步 · 措辞清残 · 清除「已锚定→拍板→已采纳」旧生命周期残留：output/agent 两模块 md、artifact 系统图 tab、4 个 agent 生成 skill（swimlane/traceback/artifact-feedback/evidence-tiering）
+- 2026-07-09 · output-primary-after-generation · 新增（人的裁决） · output 由人启动生成；生成后以 output 为主，人直改、agent 反校准 ideas（代笔）；idea 层转决策记录不废除
+- 2026-07-09 · output-auto-refresh · 更新 · 方向语义被上卡校准：只刷新已存在的 output，首次生成归人
+- 2026-07-09 · output 同步 · 刷新 · system.md 流程图加 启动装配/修改 output/反校准 三节点；output/idea/agent 三模块 md 随裁决更新
+- 2026-07-09 · ideas/index · 重写 · 旧：仅 1 卡+「存在即采纳/门禁移到晋级」旧措辞 → 新：全部 17 卡按五组分类、二态表述
+- 2026-07-09 · 账本格式 · 升级（人的裁决） · 旧：`日期·卡·动作·原因` → 新：`日期·卡·动作·改动（旧→新）·原因`——必须记录改动本身以支持回溯；旧行不补写
+- 2026-07-09 · output-primary-after-generation · 更新（人的裁决） · 旧：时相主次（无 output 以 idea 为主，有 output 以 output 为主，反校准单向补写）→ 新：不变量＝两层永远双向同步——人提 idea 同回合双写 ideas+output（未生成则只写 ideas），人改 output 反校准回 ideas；冲突仍以 output 为准
+- 2026-07-09 · output 同步 · 刷新 · system.md 导语、output/idea 两模块 md、ideas/index 一行随上卡改为"永远双向同步"表述
+- 2026-07-09 · 账本格式 · 澄清（人的确认） · 双写记账＝每层一条：idea 一行 + output 一行，各带旧→新，「原因」字段点名触发方；output 未生成只记 idea 一行
+- 2026-07-09 · 账本更名（人的裁决） · 旧：「idea 层变更账本」→ 新：「变更账本（覆盖 ideas 与 output 两层）」——账本早已记两层与约定本身，名不副实；protocol 模块、工作区 index 同步（index 顺手收敛：ideas 罗列改为指向 ideas/index，删残留 decisions/ 条目）
+- 2026-07-09 · protocol-discoverability-in-situ · 新增（人采稿落卡） · 协议三规则（output 人启动/先积累/双向同步）靠 空态+时机提示+动作回执 就地教学，不写手册
+- 2026-07-09 · output 同步 · 刷新 · canvas 模块加空态占位/布局即流程/闪亮回执，agent 模块加时机提示/如实报薄/同步回执职责，ideas/index 加一行 · 随 protocol-discoverability-in-situ 落卡
+- 2026-07-09 · single-edge-single-tag · 新增（人的裁决） · 结构化事实收敛为两种：引用（唯一关联，Connections 段链接，单向落笔反向派生）+ tag（唯一分类）；距离/坐标是投影派生量不入真身
+- 2026-07-09 · output 同步 · 刷新 · protocol 模块加两种事实约定，canvas 模块连线改述为"卡内引用"+布局派生输入，ideas/index 加一行 · 随 single-edge-single-tag 落卡
+- 2026-07-09 · single-edge-single-tag · 更新（人的裁决） · 补：tag 分类逻辑在"推导连线"步执行——两种事实同一推导步产出
+- 2026-07-09 · output 同步 · 刷新 · 流程图 agent 节点 旧：收录·分类·分级 / 推导连线·补证据锚点 → 新：收录·分级 / 推导连线·tag 分类·补证据锚点（system.md + artifact SVG）；agent 模块跑腿清单同改 · 随上行
+- 2026-07-09 · source-tags-self-classify · 更新（人的裁决） · 补：source 打 tag 在推导连线步、**可选**（人工主动或 agent 建议均可）；无 tag 卡合法、不阻塞引用与装配
+- 2026-07-09 · output 同步 · 刷新 · source 模块行为边界加"tag 分类在推导连线步且可选（人主动/agent 建议），无 tag 落画板未分类区" · 随上行
+- 2026-07-09 · tags-in-layer-index · 新增（人的裁决） · 全部 tag 在各层 index 行尾表现；检索走派生索引不设分类层；倒排按需派生
+- 2026-07-09 · 全层 · tag 落地（agent 建议，人可删改） · 55 卡 frontmatter 加 `tags:`（ideas 19 + methods 23 + github 6 + blogs 3 + products 4）；五个 index 行尾加 #tag
+- 2026-07-09 · idea-layer-single-entity · 规整 · 旧：type: decision + status: resolved + affects → 新：type: idea 无状态——对齐二态设计，affects 信息已在正文
+- 2026-07-09 · output 同步 · 刷新 · 流程图账房节点 旧：记 logs → 新：记 logs·重生成各层 index；架构图 PROTO 标注引用+tag 两种事实、横切边加派生 index；protocol 模块加 index 约定；artifact 状态筹码（无状态/resolved 残留）换成 tag 筹码 · 随 tags-in-layer-index 落卡
+- 2026-07-09 · synthesis 层 · 删除（人的裁决） · 8 文件移除；其判断成分早已入 ideas，组织成分按设计属"可再生简报"；9 张卡的引用改锚到方法/产品源卡（方法存活学→IBIS 反面教材、竞品格局→产品卡索引、证据可信→EBM/GRADE），工作区 index 与 TODO 同步清残
+- 2026-07-09 · ideas/index · 扁平化（人的裁决） · 旧：五个 ## 子标题分组（第二套分类法，与"唯一分类是 tag"冲突）→ 新：平铺 20 行，分类只看行尾 #tag
+- 2026-07-09 · output 同步 · 刷新 · artifact 卡片链路轨 旧：来源/方向/想法/决定 四层 → 新：来源/想法 两层（synthesis/decisions 均已不存在） · 随 synthesis 删除
+- 2026-07-09 · single-edge-single-tag / source-tags-self-classify / tags-in-layer-index · 更新（人的裁决） · tag 规则收敛 旧：细粒度、一卡多标、行尾表现 → 新：单层顶层分类、一卡至多一个（相关俩 tag 即拆卡）、可选、人提出或 agent 自行归类、index 以 `TAG：一句为何一类` 作小标题分组
+- 2026-07-09 · 全层 · 重打 tag · 56 卡改单标或无标（read-tag-judge-loop / adr-tooling / synthesis-matrix 入未分类）· 随 tag 规则收敛
+- 2026-07-09 · output 同步 · 刷新 · 五个 index 重写为 TAG 小标题分组+末尾未分类区；protocol 模块 tag 约定改三性（单层/至多一/可选），canvas 模块加"一卡一团无歧义、无 tag 落散区" · 随 tag 规则收敛
+- 2026-07-09 · output 同步 · 补锚 · protocol 模块溯源 旧：无 logs 证据 → 新：锚 ADR（append-only+supersede）与决策日志（防事后美化，①级） · 人指出 logs 裁决缺证据支撑
+- 2026-07-09 · sources 索引 · 合一（人的裁决） · 旧：四个类型子 index（tag 被来源类型切碎）→ 新：sources/index.md 一张，13 个 tag 小标题横跨全类型，路径即类型，未分类平铺末尾；四子 index 删除，工作区 index 与 3 张 idea 卡引用改锚
+- 2026-07-09 · single-edge-single-tag · 更新（人的裁决） · 引用方向收紧 旧：单向落笔反向派生 → 新：**只准向前**——只引证据与所依赖/所修正的先行卡，"我支持了谁"不落笔、backlink 派生
+- 2026-07-09 · output-auto-refresh / single-edge-single-tag / protocol-discoverability-in-situ · 清残 · Connections 删向后引用（"作用对象是系统总图""被 X 校准""约束 canvas 布局""教的对象是 X"改写为向前措辞）· 随引用方向收紧
+- 2026-07-09 · output 同步 · 刷新 · protocol 模块引用约定加"只准向前" · 随上行
+- 2026-07-09 · idea-layer-single-entity · 更新（人的裁决） · 加自动合并规则：新 idea 与旧卡同判断（重复/增量）即 agent 自动并入旧卡、log 记账；冲突不算可合并，分歧上板由人裁决；顺清卡内旧状态机与"晋级门禁"残留、删向后引用（系统总图据此绘制）
+- 2026-07-09 · output 同步 · 刷新 · idea 模块行为边界加自动合并一句，agent 模块跑腿清单加"同判断新旧 idea 自动合并（冲突除外）" · 随上行
+- 2026-07-09 · 全层 · 卡结构瘦身（人的裁决） · 旧：正文含 ## Evidence / ## Connections 固定段 → 新：卡＝frontmatter+标题+摘要，引用内联正文（15 张 idea 卡去段头，内容不删）；protocol 模块与 single-edge-single-tag 措辞随改
+- 2026-07-09 · output/modules/output · 更新（人的裁决） · 旧：形态不限 → 新：形态由用户 target 决定；定 target 时 agent 可推荐形态，推荐集暂空（入 TODO）
+- 2026-07-09 · output 同步 · 刷新 · artifact 卡片 旧：标题+摘要+底部链路轨 → 新：只留标题+摘要（右上角 tag/类型徽标保留，链路仍在详情页）；页头图例随删 · 随卡结构瘦身
+- 2026-07-09 · single-canvas-clustered-graph · 更新（人的裁决） · 旧：三团布局＝画板结构本身 → 新：画板结构从**模板集**选取，定 target 时 agent 问用户风格；本卡改为模板集之一，模板库待扩（入 TODO）
+- 2026-07-09 · tabbed-gallery-template · 新增（人的裁决） · 当前三 tab 分页画廊本身就是一款模板（已实现），与单画布三团并列——模板集现两款
+- 2026-07-09 · output 同步 · 刷新 · canvas 模块重构为**规则（模板无关不变量）/ 模板（可选风格集）**两段（人指出模板与规则须分离）；ideas/index 画板组加分页画廊行；TODO 更新两款状态
+- 2026-07-09 · output 同步 · 移位 · "默认不画——单击亮邻边、双击进详情"从 canvas 规则段移入单画布三团模板条目（人指出属单画布专有交互，分页画廊不画线）；artifact 架构图 canvas 块副标同改
+- 2026-07-09 · output/system · 补锚 · 旧：图块→模块映射只存在于 artifact SVG 的 data-mod（投影持有真身没有的事实）→ 新：两张 mermaid 加 click 声明（流程图 11 节点、架构图 6 块各指其 modules/*.md），映射落回真身 · 人问"每个块在 markdown 怎么引用模块"暴露缺口
+- 2026-07-09 · output/modules/output · 更新（人的裁决） · 推荐集 旧：暂空 → 新：首款入集——**系统设计**＝各类系统设计图+modules 细节层，适用 target：项目开发/论文设计等；本工作区 output 即活实例
+- 2026-07-09 · output/system · 补显 · 流程图 旧：同步只藏在"支撑/刷新已有"虚线里 → 新：两条实线边显式命名——正向同步（idea 变更→重推已有 output，C→E）、反向同步（output 改动→校准 ideas，P→K）；artifact SVG 同步加双标 · 人指出双向同步在流程图无体现
+- 2026-07-09 · drafts-not-state · 更新（人的裁决） · 加投影同步纪律：markdown 改动同回合重建发布 HTML；顺序恒为先 markdown 后 HTML；**禁止只改 HTML**；protocol 模块同步
+- 2026-07-09 · output/system · 补显 · 架构图 旧：IDEA→OUT 单向箭头 → 新：IDEA⟷OUT 双向边标注"永远双向同步：正向重推/反向校准"（mermaid 先改，artifact 架构图 ②⟷③ 随改，流程图同步标加粗） · 人指出双向同步在 artifact 仍无体现
+- 2026-07-09 · 双会话冲突（人的裁决：双向同步为准） · 另会话新增 rocket-staging-lifecycle（点火即全量归档、supersede 双向同步/热刷新）并执行归档清扫，与本会话并发出现两处不一致（14 卡 live/archive 分叉、7 卡仅存 archive）· 裁决：维持双向同步；rocket 卡留 ideas/archive/ 作被否之路
+- 2026-07-09 · 全层 · 冲突恢复 · 7 卡从 archive 移回 live（链接深度还原）；archive 删 14 张重复副本，只留 rocket-staging-lifecycle；infranodus 引用改回 live 路径；style-pack 模块已被另会话删除，output/index 与 system.md 两处引用随删；artifact 画廊排除 archive/ 卡防双算
+- 2026-07-09 · output 同步 · 投影改造 · artifact 系统图 tab 旧：手绘 SVG+手拼架构块（与 system.md 平行维护，屡次漂移）→ 新：构建时用 mermaid 渲染 system.md 原文（prose+两图+click 映射全部派生自真身，零平行事实）· 人要求系统图与 output/ markdown 一致
+- 2026-07-09 · output 同步 · 回滚（人的裁决：美观优先） · 系统图 tab 旧：mermaid 渲染 system.md → 新：恢复手绘 SVG+架构块（21 卡状态、双向同步标注、模板集副标全在）；一致性改靠同步纪律保证——system.md 变更时手绘版必须同回合人工对齐，mermaid click 映射仍留真身
+- 2026-07-09 · output/system · 对齐 · 两张 mermaid 旧：仅主标签 → 新：每节点/模块补副标行（small：零门槛任意形态、来源不等权、二态、模板集两款等），与 artifact 手绘版逐块一致；架构图三层加①②③编号 · 随手绘版回滚后的一致性要求
+- 2026-07-09 · diagrams-in-markdown-native-format · 新增（人的裁决） · 系统设计图在 markdown 真身固定为可视化图格式（mermaid+click 声明），不是散文配外挂图、不是仅存于 HTML 的手绘物
+- 2026-07-09 · output 同步 · 刷新 · output 模块推荐集补图格式约定一句，溯源加新卡；ideas/index 协议组加一行 · 随上卡落卡
+- 2026-07-09 · principles-as-bullets · 新增（人的裁决） · markdown 中的原则必须分点（一点一原则），不写成段——可单独引用/修改/记账
+- 2026-07-09 · output 同步 · 刷新 · 六个模块 md 的行为边界/规则段全部改为分点列表（output/idea/source/agent/protocol/canvas）· 随上卡落卡
+- 2026-07-09 · output/system · 收敛（人的要求"满足图即真身格式"） · 旧：导语散文段+图 → 新：文档即图——删与图重复的散文（事实全在节点副标），冲突规则并入同步边标签，<small> 换纯 <br/> 双行保跨宿主渲染
+- 2026-07-09 · diagrams-in-markdown-native-format · 更新 · 补 mermaid vs ASCII 框图对比作选型理由（ASCII 手工重排/diff 噪音/无 click/CJK 错位，只适合静态快照）
+- 2026-07-09 · output 同步 · 对齐（人问"是否一比一"审计） · artifact 两图文字修至与 system.md 一比一：流程图 C 节点旧"补锚点"→"补证据锚点"；架构图三块面文字旧：多印模块级细节（分级序列、"为什么在这"等投影私货）→ 新：等于 md 副标，细节留模块弹窗
+- 2026-07-09 · single-edge-single-tag · 更新（人问"可否互引"引出规则确认） · 补：引用可指向其他 idea 卡但**不得成环**——互引意味着该合并或有一边是下游（删引用交 backlink）
+- 2026-07-09 · 五卡清残 · 拆互引 · source-tags（删指 single-edge 的"见"链）、single-canvas（删指分页画廊链）、creation-canvas（删"被 canvas-edges 精确化"句）、buffer（"被 idea-layer 修订"改为内联事实并顺修 raw→存在态）、claims-anchor（"守晋级不守入口，见 idea-layer"改为"锚定义务落在 output 上板主张"并删链）——五对环全拆，保留的方向均为真依赖
+- 2026-07-09 · target · 新增要求（人："基于当前设计生成 skill 的文件结构设计"） · 旧：三条要求 → 新：加第四条"skill 的文件结构设计"；顺修履行对照残留 style-pack（该模块已删）
+- 2026-07-09 · output/architecture · 新建（履行 target 新要求） · 旧：无 → 新：architecture.md——skill 包（SKILL.md/references/output-forms/templates/scripts/canvases/styles）与工作区两棵树 + 模块→文件映射；由既有 idea 装配（解耦/一引擎多 schema/投影不持有事实/两模板），无新判断，ideas 层无需反向校准
+- 2026-07-10 · 四卡拆逆向边（skill v2 校验器无环检查上线抓出，"五对环全拆"漏掉的长链） · 拆引用 · single-canvas（删指 output/system 链，"三大块"改内联）、infranodus 源卡（删指 creation-canvas 链，源卡不得引 idea）、buffer（删"流向 evidence-grading"链——指向消费者属反向）、four-persona（删"creation-canvas 下游延伸"链——自述下游即反向） · 引用只准向前且不得成环，含跨层：output 引 idea、idea 引 source，反向皆派生
+- 2026-07-10 · output/architecture · 对齐实现（skill v2 已按本图落地，PR #7） · 旧：scripts 树四脚本+vendor → 新：补 check_style_pack.py、workspace.py 共享读卡器、vendor 注 mermaid 按需嵌入——实现揭示的两个真实构件回写入图
+- 2026-07-10 · board-freeform-layer · 新建（人："新增一个 board 文件夹，自由度交给人，每个 md 可以是一组对比也可以是别的"） · 旧：三目录 → 新：第四目录 board/，一文一板无 schema，人主导 agent 点名代笔，最下游可引不可被引，结论沉淀成 idea 才进提炼流
+- 2026-07-10 · output 同步（system/modules/architecture/index） · 装配（idea 双写纪律） · 旧：架构图三层+横切、modules 六文 → 新：架构图加 BOARD 块（自由面副标+沉淀边+click）、新增 modules/board.md、architecture.md 工作区树加 board/、两 index 补行
+- 2026-07-10 · style-canvas-orthogonality · 新建（人：风格只放 UI 其他交给 skill、五种布局都属 tabbed-gallery、两 canvas 共用 style） · 旧：风格 token 含层语义（c-src/c-idea/c-out/human/c-ok），布局无归属 · 新：style 纯 UI（accent-a/b/c/d/positive）+ 可选 per-canvas 呈现章节，层→accent 绑定唯一在 SKILL.md · 风格对内容成立、可移植
+- 2026-07-10 · output 同步（architecture/modules/canvas） · 装配（style pack v2 落地） · 旧：styles 行"三层渐进、双 palette" → 新：注明纯 UI 规格+风格×画布正交要点；canvas.md 模板段注明视觉全权归风格包 · 与 worktree-style-pack-v2 同回合
+- 2026-07-10 · frontend-slides 源卡 · 拆逆向边（无环检查抓出） · 旧：末句链 output/modules/canvas.md → 新：删链改注"沉淀在下游，此处不引" · 源卡不得引下游，反向皆派生
+- 2026-07-10 · 风格包定稿（人看浅色候选预览后拍板：Notebook Tabs / Swiss Modern / Blue Professional / BlockFrame） · 换血 · 旧：5 款（含 terminal-green/bold-signal/8-bit-orbit） → 新：4 款全浅色原生（深色 palette 仍强制），新增 blue-professional、block-frame（取材 frontend-slides Bold 包） · 包定位主浅色；轴区分测试放宽 scheme 断言
+- 2026-07-10 · 风格包终稿（人对全谱系预览确认：七款） · 恢复 · 旧：4 款 → 新：7 款——terminal-green/bold-signal/8-bit-orbit 自 d7a5f97 恢复回包，与定稿四款并列 · 深色三款回归，包重新覆盖明暗两谱
+- 2026-07-10 · 风格包扩容（人指认浅色候选 Pin & Paper 落选遗珠，拍板补入） · 增补 · 旧：7 款 → 新：8 款——pin-and-paper 由 single-canvas 预览候选转正，spec 含 tabbed-gallery 与 single-canvas 两个定制呈现章节（首个带 single-canvas 章节的风格） · 插件 0.6.0
+- 2026-07-10 · single-canvas-subsumes-gallery · 新建（人："single canvas 包含了 tabbed gallery 的所有功能"，细读档截图佐证） · 旧：两模板并列现役 → 新：单画布功能超集画廊（三档缩放＝画廊三页），现役收敛为一；闸门＝画布实现并对齐搜索/tag 过滤/文档渲染/空态教学/红队后画廊才归档
+- 2026-07-10 · output 同步（modules/canvas + system） · 装配（idea 双写纪律） · 旧：模板段"分页画廊已实现/单画布已设计"并列、架构图副标"结构从模板集选" → 新：单画布列现役方向（缩放三档＝画廊三页）、画廊标"待归档+闸门清单"、架构图副标改"现役模板收敛为单画布三团（画廊对齐后归档）"
+- 2026-07-10 · single-canvas-subsumes-gallery · 原地迭代（人："两者结合成一种 canvas 吧，合并优点"） · 旧：超集判断+对齐后归档闸门 → 新：直接合并为唯一融合画布（画布底盘+画廊全部优点：三档缩放、搜索+筹码、文档/mermaid 弹窗、空态教学、红队），先行两模板卡随合并完成归档
+- 2026-07-10 · output 同步（modules/canvas + system） · 装配（idea 双写纪律） · 旧：单画布现役方向+画廊待归档两条 → 新：模板段改"唯一现役：融合画布"一条+残差行，架构图副标改"唯一现役模板：融合画布（单画布底盘+画廊优点）"
+- 2026-07-10 · output/system 流程图 · 换图种（人："流程图难看懂，尤其 agent 部分"，看过时序图草稿后拍板"替换"） · 旧：flowchart 双泳道 11 块交叉拉线 → 新：sequenceDiagram 三参与者（人/agent/真身）autonumber 13 步、四阶段 Note 横幅、双向同步显式 loop 框；架构图保持 flowchart（表达拓扑）；时序图不支持 click，模块点穿走文末索引行——skill 的 system-design 形态规格（现写死 flowchart 泳道）待解冻时同步
+- 2026-07-10 · output/system 流程图 · 再换形（人："之前版本还强点，但要横过来——人在上 agent 在下横向推进"） · 旧：sequenceDiagram 纵向 13 步 → 新：flowchart LR 双泳道时间轴——人上 agent 下、①-⑬ 编号之字形从左到右单链推进、同步循环用 A11⇢H8 虚线回边、click 点穿恢复（时序图不支持的短板补回）
+- 2026-07-10 · output/system 流程图 · 定形（渲染迭代三轮后收敛） · 旧：之字形单链（dagre 把两泳道排成左右两柱） → 新：泳道内各自横向链（人 ①④⑥⑧⑩⑫ / agent ②③⑤⑦⑨⑪⑬+logs）+ 竖直交接边（证据就绪/想法成熟/正向/反向）+ 双向同步双向虚线 H8⇠⇢H10 + 外层 BT 钉人上 agent 下 + click 全部恢复
+- 2026-07-10 · output 同步（architecture + modules/canvas） · 校准（人："architecture 还没跟上融合；改版后的 canvas UI 要求都要体现到 output"） · 旧：architecture 树列两模板、canvas.md 无交互细则 → 新：树收敛为 canvases/canvas/ 融合画布一款（先行两模板随实现归档）；canvas.md 增"融合画布交互契约"六条（board 下方居中、筹码按团分行、单击语义分档、文档引用边+装配 backlink 节、mermaid 点击放大、渲染观感归风格）——均为人的 UI 裁决沉淀，无新独立判断卡（细则属模板契约，锚 single-canvas-subsumes-gallery）
+- 2026-07-10 · output/system 流程图 · 回退定稿（人："要两次改动之前的版本，只是横过来"） · 旧：①-⑬ 编号重写版 → 新：恢复最初 11 节点原文与原边（支撑/正向同步/反向同步标注），仅改排布——外层 TB + 泳道内不可见序边，人上 agent 下横向推进，click 保留
+- 2026-07-10 · output/modules/canvas · 补实（人："这两个配置需要体现在 output"） · 旧：渲染观感一句带过 → 新：写明两开关 look: handDrawn + themeVariables 注入风格 token
+- 2026-07-10 · output/system 流程图 · 还原原版（人贴图指出"人的卡应直连 agent 的卡，不是甬道相连"） · 旧：TB+泳道内不可见序边（跨道边捆到甬道边界汇束） → 新：恢复最初 flowchart LR 原版一字不改——本就是人上 agent 下、卡对卡直连；此前三轮改排布全部撤销
+- 2026-07-10 · output/system 流程图 · 定稿换图种（人贴老手绘图问"mermaid 能做到这个程度吗"，实验证实后拍板） · 旧：flowchart LR（dagre 自动布局，双排直连做不到） → 新：block-beta 手动网格——人/agent 各一排行首带 lane 标、卡对卡竖直直连、支撑/正向同步横标、反向同步竖标、logs 横条汇流；代价：block-beta 不支持 click，模块点穿走架构图与文末索引行
+- 2026-07-10 · output/system 流程图 · 微调（人："agent card 之间的箭头呢"） · 旧：10 卡紧贴，横向边零长度只剩标签 → 新：列数 6→10，卡间插 space 列——支撑/正向同步横向箭头显形，纵向直连与 logs 汇流不变
+- 2026-07-10 · output/system 流程图 · 补边（人："idea 更新也是要记录 logs 的"） · 旧：logs 条只收 装配/校准/归档 三箭头 → 新：加 C→L（idea 创建与更新经推导连线后记账），logs 条文案补"idea 创建与更新"——对齐账本本就覆盖 ideas 层的协议事实
+- 2026-07-10 · output/system 流程图 · 补点穿（人："当前系统流程图没有用和架构图一样的 mermaid 渲染，node 点击也没有链 module"） · 旧：block-beta 无 click，模块点穿只走文末索引行 → 新：真身内加 `%% click 节点ID "modules/*.md"` 注释约定（12 节点映射 source/idea/output/protocol/agent），GitHub 与 mermaid 均安全忽略、投影读取挂载
+- 2026-07-10 · output/modules/canvas · 补契约（同上诉求） · 旧：mermaid 观感只写两开关，block 图渲染差异未提 → 新：新增"block 网格图与其余图种同渲染同点穿"条——投影后处理 token 上色（mainBkg/nodeBorder/lineColor）+ 位移滤镜近似手绘 + `%% click` 注释点穿
+- 2026-07-10 · output/architecture · 结构归并（人："把 styles 放入 canvas 更合理；不需要 canvases 了，只有一种 canvas，一层文件就够"） · 旧：canvases/ 模板集目录 + 顶层 styles/ 平行 → 新：单层 canvas/（canvas.md 契约 + styles/ 挂其下）；canvas_renderings 多画布选择器随模板集退役；模块映射改 canvas → build_canvas.py + canvas/
+- 2026-07-10 · ideas/style-canvas-orthogonality · 反向校准（同上裁决，代笔誊写） · 旧：style 不属于任何 canvas、任意组合成立 → 新：补 2026-07-10 收敛段——唯一画布后正交性退化为 token 接口约定，目录归并但"纯 UI、不触结构、整包可换"分界不变
+- 2026-07-10 · output/system 流程图 · 换图种（人："别用网格布局了 换成常规流程图"） · 旧：block-beta 手动网格（%% click 注释点穿） → 新：flowchart TB 双 subgraph 泳道（人上 agent 下）——11 节点原文与全部边标注不变、click 恢复原生指令；泳道标题不支持 click，agent 模块点穿走架构图与文末索引行
+- 2026-07-10 · output/modules/canvas · 契约撤除（随上条换图种） · 旧："block 网格图与其余图种同渲染同点穿"条（token 上色 + 位移滤镜 + %% click 注释约定） → 新：删除——真身已无 block 图，特殊后处理失效；通用两开关条（handDrawn + themeVariables）不变
+- 2026-07-10 · output/modules/idea + modules/agent + system 流程图 · 权限放开（人："agent 和人都可以归档 idea"） · 旧：归档只能由人触发（2026-07-09 生命周期简化裁决的一部分） → 新：人与 agent 均可归档；移卡入 ideas/archive/ 与 log 留痕不变，idea 创建与 output 首次装配仍只归人
+- 2026-07-10 · canvas-fixed-builder-style-css-only · 新建（人："能做成固定脚本吗 agent 自己输入工作区路径就可以渲染出来？只一个脚本 换 style 只换 css"） · 旧：融合版构建器只活在旧会话 /tmp（重发靠手工拼数据，schema 不合即空白） → 新：判断定形——一个固定脚本、工作区路径唯一必填输入、模板留 CSS 槽、换风格只换 CSS
+- 2026-07-10 · 融合画布实现落地（skill-v2 工作树） · 装配 · 旧：canvases/ 模板集（tabbed-gallery 实现 + single-canvas 仅 spec），融合版脚本在 /tmp → 新：canvas/ 一层（spec.md + template.html + style.css），build_canvas.py 重写为固定脚本（--css 换风格、--template 退役），SKILL.md 画布段与测试同步（32 测试过）
+- 2026-07-10 · 单画布三团 / 分页画廊模板 · 归档（实现落地触发既有裁决"两张先行模板卡随合并完成归档"） · 旧：两卡在 ideas/ 现役 → 新：移入 ideas/archive/，全部引用改指 archive/ 路径（校验：无 dangling、卡全合规），index 画板节除名
+- 2026-07-10 · output 同步（modules/canvas + architecture） · 装配（idea 双写纪律） · 旧：canvas.md 无构建段、architecture canvas/ 树标"实现待 skill 解冻" → 新：canvas.md 增"构建（固定脚本）"两条（唯一入口唯一入参 / 模板风格分离只换 CSS），architecture 更新 canvas/ 树为 spec+template+style.css 并标 styles/ 迁挂待办，溯源补新卡
+- 2026-07-10 · 风格包校验对齐融合画布（随固定脚本合并主分支） · 装配 · 旧：check_style_pack 按 canvases/ 目录校验 canvas_renderings、默认 token 钉在 tabbed-gallery 模板、canvas/style.css 用简写 token 名 → 新：canvas_renderings 目录查验退役（呈现节存在性照查）、默认 token 钉到 canvas/style.css、token 名改规范接口（ink-2/accent-a..d/positive）；残差补记"默认模板暗色 palette 待补"；59 测试全绿

@@ -181,7 +181,10 @@ def check_entry(entry):
     return problems
 
 
-def check_canvas_renderings(rel, entry, design_text, canvases_root):
+def check_canvas_renderings(rel, entry, design_text):
+    # The multi-canvas selector is retired: only the unified canvas exists, so a
+    # canvas_renderings entry is legacy metadata — sections it names must still
+    # resolve inside the design, but no canvas directory lookup remains.
     renderings = entry.get("canvas_renderings")
     if not nonempty_str_list(renderings):
         return []
@@ -189,8 +192,6 @@ def check_canvas_renderings(rel, entry, design_text, canvases_root):
     for canvas in renderings:
         if not SLUG_RE.match(canvas):
             continue
-        if not (canvases_root / canvas).is_dir():
-            problems.append(f"{rel}: canvas_renderings names unknown canvas: {canvas}")
         if f"### {canvas}" not in design_text:
             problems.append(f"{rel}: missing rendering section for canvas: ### {canvas}")
     return problems
@@ -235,7 +236,6 @@ def check(pack_root):
                  for slug in sorted(on_disk - indexed)]
 
     entries_by_slug = {entry.get("slug"): entry for entry in entries}
-    canvases_root = pack.parent / "canvases"
     for slug in sorted(indexed & on_disk):
         design_path = pack / slug / "design.md"
         preview_path = pack / slug / "preview.md"
@@ -252,7 +252,7 @@ def check(pack_root):
         problems += check_preview(f"{slug}/preview.md", preview_text,
                                   len(design_text.encode("utf-8")))
         problems += check_canvas_renderings(
-            f"{slug}/design.md", entries_by_slug[slug], design_text, canvases_root)
+            f"{slug}/design.md", entries_by_slug[slug], design_text)
     return problems
 
 
