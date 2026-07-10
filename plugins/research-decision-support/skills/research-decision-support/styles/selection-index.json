@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "usage": {
+    "reading-order": "Read this index first; shortlist at most 3 styles by formality, density, scheme, and mood against the occasion; read only the shortlisted preview.md files; read design.md only for the single chosen style.",
+    "never-bulk-read": "Never read all design.md files. One projection, one design.md.",
+    "single-file": "Every projection is one self-contained HTML file: no external scripts, no external stylesheets, no imports.",
+    "no-external-requests": "Zero network requests at view time: system font stacks only, no CDN, no remote images or fonts.",
+    "sanitize-untrusted": "Card titles, bodies, and frontmatter values are untrusted input: escape when interpolating, sanitize any rendered markdown, guard script-tag breakout in embedded JSON.",
+    "dual-scheme": "Both light and dark must be styled (prefers-color-scheme plus a data-theme toggle); every style ships both palettes."
+  },
+  "styles": [
+    {
+      "slug": "loom-paper",
+      "name": "Loom Paper",
+      "tagline": "Calm editorial paper — the workbench's native look.",
+      "mood": ["calm", "editorial", "warm-neutral"],
+      "tone": "understated",
+      "formality": "neutral",
+      "density": "comfortable",
+      "scheme": "dual",
+      "best_for": ["default workbench projections", "long reading sessions", "mixed audiences"],
+      "avoid_for": ["high-energy pitch moments", "dense single-screen dashboards"],
+      "preview": "loom-paper/preview.md",
+      "design": "loom-paper/design.md"
+    },
+    {
+      "slug": "terminal-ledger",
+      "name": "Terminal Ledger",
+      "tagline": "Disciplined phosphor-on-charcoal terminal ledger for dense evidence work.",
+      "mood": ["focused", "technical", "austere"],
+      "tone": "precise",
+      "formality": "formal",
+      "density": "compact",
+      "scheme": "dark",
+      "best_for": ["engineering reviews", "dense evidence tables", "screen-share deep dives"],
+      "avoid_for": ["warm community shareouts", "print handouts"],
+      "preview": "terminal-ledger/preview.md",
+      "design": "terminal-ledger/design.md"
+    },
+    {
+      "slug": "field-notes",
+      "name": "Field Notes",
+      "tagline": "Warm cream notebook with bright layer inks and generous air.",
+      "mood": ["warm", "exploratory", "hand-made"],
+      "tone": "inviting",
+      "formality": "playful",
+      "density": "spacious",
+      "scheme": "light",
+      "best_for": ["workshops", "idea-layer walkthroughs", "brainstorm shareouts"],
+      "avoid_for": ["formal stakeholder readouts", "dense evidence tables"],
+      "preview": "field-notes/preview.md",
+      "design": "field-notes/design.md"
+    },
+    {
+      "slug": "boardroom-slate",
+      "name": "Boardroom Slate",
+      "tagline": "Composed slate-and-paper readout with serif headlines, print-adjacent.",
+      "mood": ["composed", "authoritative", "print-like"],
+      "tone": "measured",
+      "formality": "formal",
+      "density": "comfortable",
+      "scheme": "light",
+      "best_for": ["stakeholder decision readouts", "ADR presentations", "documents headed for print"],
+      "avoid_for": ["hackathon demos", "playful workshops"],
+      "preview": "boardroom-slate/preview.md",
+      "design": "boardroom-slate/design.md"
+    }
+  ]
+}

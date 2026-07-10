@@ -8,7 +8,7 @@
     {
       "name": "research-decision-support",
       "source": "./plugins/research-decision-support",
-      "description": "Weave papers into a provenance-linked design workspace: sources → synthesis → ideas → design → decisions, plus an HTML workbench generator."
+      "description": "Step one of vibe coding — turn scattered reading and half-formed ideas into a design you can defend. Three markdown layers (sources → ideas → output) in permanent two-way sync on a visual canvas; the human adjudicates, the agent runs errands."
     }
   ]
 }
