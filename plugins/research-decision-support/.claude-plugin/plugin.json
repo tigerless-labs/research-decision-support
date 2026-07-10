@@ -1,7 +1,7 @@
 {
   "name": "research-decision-support",
-  "description": "Literature-to-design synthesis method: five provenance-linked layers, proactive coaching, and a self-contained HTML workbench generator.",
-  "version": "0.1.0",
+  "description": "A decision board for evidence-based calls — the human adjudicates, the agent runs errands. Three markdown layers (sources → ideas → output) in permanent two-way sync, projected onto a visual canvas.",
+  "version": "0.2.0",
   "author": {
     "name": "tigerless.ai",
     "email": "saas@tigerless.com"
