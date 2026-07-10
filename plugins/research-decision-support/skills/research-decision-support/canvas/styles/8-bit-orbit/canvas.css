@@ -92,6 +92,7 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .card .badge { position:absolute; right:8px; top:6px; font-size:9px; color:var(--muted);
   text-transform:uppercase; letter-spacing:.1em; }
+.card .badge + .t { margin-top:12px; }
 .card.note { background:var(--surface); border:3px solid var(--accent-a);
   box-shadow:5px 5px 0 var(--shadow); }
 .card.note .t { color:var(--accent-a); }

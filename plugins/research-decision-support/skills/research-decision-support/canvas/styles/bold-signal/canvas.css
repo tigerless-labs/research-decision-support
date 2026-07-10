@@ -79,6 +79,7 @@ body { color:var(--ink); font:15px/1.5 var(--body);
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .card .badge { position:absolute; right:9px; top:8px; font-family:var(--mono);
   font-size:9.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em; }
+.card .badge + .t { margin-top:12px; }
 .card.note { background:color-mix(in srgb, var(--surface) 72%, transparent);
   border:1px solid var(--grid); border-left:4px solid var(--accent-a); }
 .card.slip { background:color-mix(in srgb, var(--surface) 55%, transparent);

@@ -70,6 +70,7 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono); }
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .card .badge { position:absolute; right:8px; top:6px; font-size:10px; color:var(--muted);
   text-transform:lowercase; }
+.card .badge + .t { margin-top:12px; }
 .card.note { background:var(--surface); border:1px solid var(--grid);
   border-left:3px solid var(--accent-a); }
 .card.note .t::before { content:"./"; color:var(--accent-a); font-weight:400; }

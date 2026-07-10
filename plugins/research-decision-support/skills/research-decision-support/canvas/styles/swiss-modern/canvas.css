@@ -85,6 +85,7 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body);
 .card .badge { position:absolute; right:8px; top:5px; font-size:9px;
   color:var(--muted); text-transform:uppercase; letter-spacing:.12em;
   font-family:var(--mono); }
+.card .badge + .t { margin-top:12px; }
 .card.note { background:var(--surface); border:2px solid var(--grid); border-radius:0; }
 .card.note::before { content:""; position:absolute; top:0; left:0; right:0;
   height:4px; background:var(--accent-a); }

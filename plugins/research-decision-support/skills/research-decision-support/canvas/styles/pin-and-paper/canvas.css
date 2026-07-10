@@ -78,6 +78,7 @@ body { background:var(--page); color:var(--ink); font:14px/1.6 var(--hand); }
 .card .sum { color:var(--ink-2); font-size:11.5px; margin:0;
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .card .badge { position:absolute; right:8px; top:6px; font-size:10px; color:var(--ink-2); }
+.card .badge + .t { margin-top:12px; }
 .card.note { background:var(--surface); border:1px solid var(--ring);
   border-radius:3px; box-shadow:0 6px 12px var(--shadow-soft); }
 .card.note::before { content:""; position:absolute; top:-6px; left:50%; width:11px;
