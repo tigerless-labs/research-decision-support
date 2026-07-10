@@ -109,5 +109,9 @@ Whenever the markdown truth changes, rebuild and republish the canvas in the sam
 never edit the HTML directly.
 
 For visual styling beyond the template default, use the style pack: read
-[styles/selection-index.json](styles/selection-index.json) first and load **only** the
-chosen style's `design.md` — never bulk-read the pack.
+[styles/selection-index.json](styles/selection-index.json) first to pick — never
+bulk-read the pack. Every style ships a precompiled `styles/<slug>/canvas.css`;
+selecting it is just passing that file via `--css`. Open a style's `design.md` only
+when (re)compiling its canvas.css — the spec is the truth, so whenever a design.md
+changes, recompile its canvas.css in the same change (the pack validator checks
+token coverage in both palettes and bans external reach).
