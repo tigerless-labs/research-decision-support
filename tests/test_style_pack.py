@@ -8,7 +8,7 @@ from check_style_pack import CANONICAL_TOKENS, USAGE_KEYS, check, parse_frontmat
 
 SKILL_ROOT = Path(__file__).resolve().parents[1] / (
     "plugins/research-decision-support/skills/research-decision-support")
-SHIPPED_PACK = SKILL_ROOT / "styles"
+SHIPPED_PACK = SKILL_ROOT / "canvas/styles"
 
 LIGHT = {
     "surface": "#fcfcfb", "page": "#f9f9f7", "ink": "#0b0b0b", "ink-2": "#52514e",
