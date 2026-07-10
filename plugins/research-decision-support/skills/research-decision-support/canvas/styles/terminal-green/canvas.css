@@ -52,7 +52,7 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono); }
 .chip.on::before, .chip.on::after { color:var(--page); }
 #vp { position:absolute; inset:0; cursor:grab; overflow:hidden; }
 #vp.panning { cursor:grabbing; }
-#world { position:absolute; left:0; top:0; transform-origin:0 0; will-change:transform; }
+#world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
 .wtitle .en { font-size:100px; font-weight:700; letter-spacing:.04em; color:var(--ink);
