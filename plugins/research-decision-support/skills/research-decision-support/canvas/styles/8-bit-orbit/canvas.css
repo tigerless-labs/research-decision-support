@@ -19,9 +19,8 @@
 * { box-sizing:border-box; }
 html, body { margin:0; height:100%; overflow:hidden; }
 body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
-  background-image:linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size:28px 28px; }
+  background-image:repeating-linear-gradient(0deg,
+    transparent 0 3px, color-mix(in srgb, var(--ink) 6%, transparent) 3px 5px); }
 #bar { position:fixed; inset:0 0 auto 0; z-index:20; display:flex; gap:14px;
   align-items:center; flex-wrap:wrap; padding:10px 18px 8px;
   background:var(--surface); border-bottom:3px solid var(--grid); }
@@ -84,7 +83,8 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
 .glabel::after { content:""; position:absolute; left:0; right:-4px; bottom:-4px;
   height:3px; background:var(--grid); }
 .card { position:absolute; padding:12px 13px 10px; cursor:pointer;
-  font-size:12px; line-height:1.5; color:var(--ink); border-radius:0; }
+  font-size:12px; line-height:1.5; color:var(--ink); border-radius:0;
+  transform:none !important; }
 .card .t { font-weight:800; font-size:13px; margin:0 0 5px; text-transform:uppercase;
   letter-spacing:.05em;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
@@ -98,12 +98,15 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
 .card.note .t { color:var(--accent-a); }
 .card.note::before { content:""; position:absolute; top:-3px; left:-3px; width:9px;
   height:9px; background:var(--accent-a); }
-.card.slip { background:var(--surface); border:3px solid var(--accent-b);
-  box-shadow:5px 5px 0 var(--shadow); }
+.card.slip { background:var(--surface); border:2px solid var(--accent-b);
+  box-shadow:0 0 0 2px var(--page), 0 0 0 4px var(--accent-b), 5px 5px 0 var(--shadow); }
 .card.slip .t { color:var(--accent-b); }
+.card.slip .badge::after { content:" ▮"; color:var(--accent-b);
+  animation:blink 1.1s steps(1) infinite; }
 .card.kraft { background:var(--surface); border:3px solid var(--accent-c);
-  box-shadow:5px 5px 0 var(--shadow); }
+  box-shadow:5px 5px 0 var(--shadow), 0 0 16px -2px var(--accent-c); }
 .card.kraft .t { color:var(--accent-c); }
+.card.kraft .badge::before { content:"★ "; color:var(--accent-c); }
 .card.empty { background:transparent; border:3px dashed var(--muted);
   color:var(--muted); box-shadow:none; }
 .card.empty .t, .card.empty .sum { color:var(--muted); opacity:.85; }
@@ -185,5 +188,6 @@ dialog#zoom::backdrop { background:transparent; }
 @media (prefers-reduced-motion: reduce) {
   #world { transition:none !important; }
   #bar h1::after { animation:none; }
+  .card.slip .badge::after { animation:none; }
 }
 #skin { font:inherit; font-size:12px; color:var(--ink); background:var(--wash); border:3px solid var(--grid); border-radius:0; padding:5px 12px; cursor:pointer; }

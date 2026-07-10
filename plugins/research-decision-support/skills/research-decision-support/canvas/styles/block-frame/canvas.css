@@ -74,7 +74,8 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body); }
   height:4px; background:var(--grid); }
 .card { position:absolute; padding:12px 13px 10px; cursor:pointer;
   font-size:13px; line-height:1.45; color:var(--ink);
-  border:3px solid var(--grid); border-radius:0; box-shadow:var(--shadow); }
+  border:3px solid var(--grid); border-radius:0; box-shadow:var(--shadow);
+  transform:none !important; }
 .card .t { font-family:var(--head); font-weight:900; font-size:13.5px;
   text-transform:uppercase; letter-spacing:.01em; margin:0 0 5px;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
@@ -83,12 +84,14 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body); }
 .card .badge { position:absolute; right:8px; top:6px; font-family:var(--mono);
   font-size:9.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-2); }
 .card .badge + .t { margin-top:12px; }
-.card.note { background:color-mix(in srgb, var(--accent-a) 26%, var(--surface)); }
-.card.note::before { content:""; position:absolute; top:-3px; left:-3px; width:13px;
-  height:13px; background:var(--accent-a); border:3px solid var(--grid); }
-.card.slip { background:color-mix(in srgb, var(--accent-b) 22%, var(--surface)); }
-.card.kraft { background:color-mix(in srgb, var(--accent-c) 30%, var(--surface));
-  box-shadow:6px 6px 0 var(--accent-b), 6px 6px 0 3px var(--grid); }
+.card.note { background:color-mix(in srgb, var(--accent-a) 38%, var(--surface)); }
+.card.slip { background:color-mix(in srgb, var(--accent-b) 38%, var(--surface)); }
+.card.slip:nth-child(odd) { transform:rotate(-1.2deg) !important; }
+.card.slip:nth-child(even) { transform:rotate(1deg) !important; }
+.card.kraft { background:color-mix(in srgb, var(--accent-c) 42%, var(--surface)); }
+.card.kraft::after { content:""; position:absolute; top:-13px; right:-11px; width:22px;
+  height:22px; border-radius:50%; background:var(--positive);
+  border:3px solid var(--grid); }
 .card.empty { background:var(--wash); border:3px dashed var(--muted); box-shadow:none;
   color:var(--muted); transform:rotate(-1deg); }
 .card.empty .t, .card.empty .sum { color:var(--ink-2); opacity:.8; }

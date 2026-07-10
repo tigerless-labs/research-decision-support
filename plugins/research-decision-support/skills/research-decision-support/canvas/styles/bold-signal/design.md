@@ -96,3 +96,11 @@ at low opacity, the active one at full strength with an accent underline — pai
 oversized two-digit numeral at the top left. The first card of the active page is promoted
 onto the accent block at poster scale; remaining cards stack as slim translucent panels
 beside it, each with its accent-tinted meta line.
+
+### single-canvas
+
+Layers climb a saturation ladder, all unrotated on the charcoal ground. Sources are thin
+outline strips: faint translucent fill, hairline ink-mix border, the meta line in the
+source accent. Ideas are translucent accent panels: accent-mixed fill with no border and a
+heavier title. Output docs are the full-saturation poster blocks: solid accent ground,
+dark ink text, display-face uppercase titles — the only full-saturation surfaces in view.

@@ -97,3 +97,11 @@ like arcade worlds with the page name — where the active world lights its neon
 text. Cards are cartridge tiles in a grid: stage label in the page accent, uppercase
 title, dimmed description, and a bottom status line; the view opens with a marquee title
 and closes with an insert-coin footer.
+
+### single-canvas
+
+Layers are three arcade set pieces on a scanlined void, all unrotated. Sources are
+cartridge bricks: thick neon border, hard dark shadow, a pixel corner chip. Ideas are
+dialog boxes: a thinner border doubled by an outer neon ring, with the blinking block
+cursor appended to the badge as the single permitted animation. Output docs are boss
+stages: thick border, hard shadow, an outer neon glow, and a star prefixed to the badge.

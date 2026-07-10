@@ -54,16 +54,18 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono); }
 #vp.panning { cursor:grabbing; }
 #world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+#edgeSvg path { stroke:var(--positive); stroke-width:1.8px; stroke-dasharray:4 4; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
 .wtitle .en { font-size:100px; font-weight:700; letter-spacing:.04em; color:var(--ink);
   opacity:.16; }
 .wtitle .zh { font-size:44px; margin-left:26px; color:var(--ink-2); opacity:.4; }
 .glabel { position:absolute; pointer-events:none; font-size:24px; font-weight:700;
   color:var(--ink-2); white-space:nowrap; letter-spacing:.02em; }
-.glabel::before { content:"# "; color:var(--muted); font-weight:400; }
+.glabel::before { content:"$ "; color:var(--positive); font-weight:400; }
 .glabel i { font-style:normal; font-size:15px; color:var(--muted); margin-left:8px; }
 .card { position:absolute; padding:12px 13px 10px; cursor:pointer;
-  font-size:12.5px; line-height:1.5; color:var(--ink); border-radius:6px; }
+  font-size:12.5px; line-height:1.5; color:var(--ink); border-radius:6px;
+  transform:none !important; }
 .card .t { font-weight:700; font-size:13px; margin:0 0 5px;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .card .sum { color:var(--ink-2); font-size:11px; margin:0;
@@ -71,13 +73,21 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono); }
 .card .badge { position:absolute; right:8px; top:6px; font-size:10px; color:var(--muted);
   text-transform:lowercase; }
 .card .badge + .t { margin-top:12px; }
-.card.note { background:var(--surface); border:1px solid var(--grid);
-  border-left:3px solid var(--accent-a); }
-.card.note .t::before { content:"./"; color:var(--accent-a); font-weight:400; }
-.card.slip { background:var(--surface); border:1px dashed var(--grid);
-  border-left:3px solid var(--accent-b); }
-.card.kraft { background:var(--wash); border:1px solid var(--ink-2);
-  border-left:3px solid var(--accent-c); box-shadow:0 2px 8px rgba(0,0,0,.25); }
+.card.note { background:transparent; border:none;
+  border-bottom:1px dashed var(--grid); border-radius:0; }
+.card.note .t { color:var(--accent-a); }
+.card.note .t::before { content:"▸ "; color:var(--muted); font-weight:400; }
+.card.slip { background:color-mix(in srgb, var(--accent-b) 9%, transparent);
+  border:none; border-left:2px solid var(--accent-b); border-radius:0; }
+.card.slip .t { color:var(--accent-b); }
+.card.slip .t::before { content:"+ "; font-weight:400; }
+.card.kraft { background:var(--surface); border:1px solid var(--grid);
+  border-radius:6px; padding-top:24px; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+.card.kraft::before { content:""; position:absolute; top:9px; left:11px; width:7px;
+  height:7px; border-radius:50%; background:var(--accent-c);
+  box-shadow:12px 0 0 var(--grid), 24px 0 0 var(--grid); }
+.card.kraft .t { color:var(--accent-c); }
+.card.kraft .badge + .t { margin-top:0; }
 .card.empty { background:transparent; border:1px dashed var(--muted);
   color:var(--muted); }
 .card.empty .t, .card.empty .sum { color:var(--muted); }

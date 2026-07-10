@@ -72,7 +72,8 @@ body { color:var(--ink); font:15px/1.5 var(--body);
 .glabel::after { content:""; position:absolute; left:0; bottom:-6px; width:52px;
   height:5px; background:var(--accent-c); }
 .card { position:absolute; padding:13px 14px 11px; cursor:pointer;
-  font-size:13px; line-height:1.45; color:var(--ink); border-radius:6px; }
+  font-size:13px; line-height:1.45; color:var(--ink); border-radius:6px;
+  transform:none !important; }
 .card .t { font-weight:700; font-size:14px; margin:0 0 5px; letter-spacing:.01em;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .card .sum { color:var(--ink-2); font-size:11.5px; margin:0;
@@ -80,12 +81,13 @@ body { color:var(--ink); font:15px/1.5 var(--body);
 .card .badge { position:absolute; right:9px; top:8px; font-family:var(--mono);
   font-size:9.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em; }
 .card .badge + .t { margin-top:12px; }
-.card.note { background:color-mix(in srgb, var(--surface) 72%, transparent);
-  border:1px solid var(--grid); border-left:4px solid var(--accent-a); }
-.card.slip { background:color-mix(in srgb, var(--surface) 55%, transparent);
-  border:1px solid color-mix(in srgb, var(--accent-b) 45%, var(--grid)); }
-.card.slip::before { content:""; position:absolute; left:0; right:0; top:0; height:4px;
-  background:var(--accent-b); border-radius:6px 6px 0 0; }
+.card.note { background:color-mix(in srgb, var(--ink) 4%, transparent);
+  border:1px solid color-mix(in srgb, var(--ink) 18%, transparent); border-radius:4px; }
+.card.note .badge { color:var(--accent-a); font-weight:700; }
+.card.slip { background:color-mix(in srgb, var(--accent-b) 16%, transparent);
+  border:none; border-radius:4px; }
+.card.slip .t { font-weight:800; }
+.card.slip .badge { color:var(--accent-b); font-weight:700; }
 .card.kraft { background:var(--accent-c); color:var(--on-accent); border:none;
   box-shadow:0 10px 26px var(--ring); }
 .card.kraft .t { font-family:var(--display); font-weight:900; text-transform:uppercase;
@@ -95,7 +97,7 @@ body { color:var(--ink); font:15px/1.5 var(--body);
   color:var(--muted); }
 .card.empty .t, .card.empty .sum { color:var(--muted); opacity:.85; }
 .card.dim { opacity:.12; }
-.card.sel { outline:3px solid var(--accent-c); outline-offset:3px; }
+.card.sel { outline:3px solid var(--ink); outline-offset:3px; }
 .card.nb { outline:2px dashed var(--accent-d); outline-offset:3px; }
 [data-tier="bird"] .card .t, [data-tier="bird"] .card .sum,
 [data-tier="bird"] .card .badge { visibility:hidden; }

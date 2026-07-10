@@ -97,3 +97,12 @@ positional arguments; the active chip fills with its accent and inverts its text
 compress into a listing table: one row per card with name in the page accent, meta dimmed,
 description in ink; the prompt line above echoes the active page and a status footer
 closes the view.
+
+### single-canvas
+
+Layers read as three kinds of terminal output, all unrotated. Sources are log rows:
+transparent ground, a dashed rule beneath, titles prefixed "▸ " and colored ANSI blue.
+Ideas are diff additions: a faint yellow-mixed fill behind a two-pixel yellow left bar,
+titles prefixed "+ " in ANSI yellow. Output docs are mini terminal windows: bordered
+panels with three chrome dots in the top-left and violet titles. Group labels carry a
+"$ " prompt prefix; selection rings in terminal green with a soft glow.

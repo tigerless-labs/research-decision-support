@@ -98,3 +98,11 @@ hairline-bordered cream, the active pill fills solid cobalt with cream text. Car
 an even grid as 4% cobalt tints with translucent borders; each card leads with a small
 uppercase cobalt eyebrow, and metric-bearing cards render their number at display scale in
 cobalt.
+
+### single-canvas
+
+Layers form a cobalt-weight gradient, all unrotated. Sources are the 4% tint cards with
+translucent hairline borders. Ideas are top-bar cards: near-white stock, hairline border,
+and a solid three-pixel cobalt top rule with the meta line in uppercase cobalt. Output
+docs are solid cobalt blocks with cream text — the heaviest cobalt moment on the board.
+Selection rings in cobalt with a soft cobalt drop.

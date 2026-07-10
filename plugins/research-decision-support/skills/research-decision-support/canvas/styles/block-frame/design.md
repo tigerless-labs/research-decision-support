@@ -99,3 +99,11 @@ its page's pastel, the active tab popped by a hard offset shadow and a slight ti
 sit in a dense grid, each a bordered pastel block with an ink uppercase title; one card
 per view may carry the circular accent-dot badge, and the whole grid keeps square corners
 and hard shadows throughout.
+
+### single-canvas
+
+Layers are three candy pastels in identical chunky frames: sources fill cyan, ideas fill
+pink and keep the slight per-card tilt, output docs fill yellow and carry the one circular
+badge — a small positive-green dot popped over the top-right corner. Every card keeps the
+3px ink border and hard offset shadow; cluster labels are pastel-filled bordered blocks
+with their own hard shadows.

@@ -64,6 +64,7 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body);
 #vp.panning { cursor:grabbing; }
 #world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+#edgeSvg path { stroke:var(--ink); stroke-width:2px; stroke-dasharray:0; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
 .wtitle .en { font-size:110px; font-weight:800; letter-spacing:-.04em;
   text-transform:uppercase; color:var(--ink); opacity:.92; }
@@ -76,8 +77,8 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body);
   margin-left:10px; letter-spacing:.12em; }
 .glabel::after { content:""; position:absolute; left:0; right:0; bottom:-6px;
   height:2px; background:var(--grid); }
-.card { position:absolute; padding:16px 13px 10px; cursor:pointer;
-  font-size:13px; line-height:1.45; color:var(--ink); }
+.card { position:absolute; padding:12px 14px 10px; cursor:pointer;
+  font-size:13px; line-height:1.45; color:var(--ink); transform:none !important; }
 .card .t { font-weight:800; font-size:14px; margin:0 0 5px; letter-spacing:-.01em;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .card .sum { color:var(--ink-2); font-size:11.5px; margin:0;
@@ -87,14 +88,15 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body);
   font-family:var(--mono); }
 .card .badge + .t { margin-top:12px; }
 .card.note { background:var(--surface); border:2px solid var(--grid); border-radius:0; }
-.card.note::before { content:""; position:absolute; top:0; left:0; right:0;
-  height:4px; background:var(--accent-a); }
-.card.slip { background:var(--wash); border:2px solid var(--grid); border-radius:0; }
-.card.slip::before { content:""; position:absolute; top:0; left:0; right:0;
-  height:4px; background:var(--accent-b); }
-.card.kraft { background:var(--surface); border:2px solid var(--grid); border-radius:0; }
-.card.kraft::before { content:""; position:absolute; top:0; left:0; right:0;
-  height:4px; background:var(--accent-c); }
+.card.slip { background:transparent; border:none; border-bottom:1px solid var(--grid);
+  border-radius:0; padding-left:32px; }
+.card.slip::before { content:""; position:absolute; left:10px; top:15px; width:11px;
+  height:11px; border-radius:50%; background:var(--ink); }
+.card.kraft { background:var(--ink); color:var(--page); border:2px solid var(--grid);
+  border-radius:0; }
+.card.kraft .t { color:var(--page); }
+.card.kraft .sum { color:color-mix(in srgb, var(--page) 72%, var(--ink)); }
+.card.kraft .badge { color:var(--accent-c); font-weight:700; }
 .card.empty { background:transparent; border:2px dashed var(--accent-d);
   color:var(--muted); border-radius:0; }
 .card.empty .t, .card.empty .sum { color:var(--ink-2); opacity:.75; }
