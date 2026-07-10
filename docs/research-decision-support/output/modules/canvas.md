@@ -41,7 +41,12 @@
   第二条构建路径；产物只进临时目录或 artifact，绝不入真身。
 - 模板与风格分离：`canvas/template.html` 定结构与交互并留 CSS 注入槽，默认灌
   `canvas/style.css`；**换风格只换 CSS**（`--css` 传另一份风格样式），禁止为
-  观感复制模板或另写脚本。
+  观感复制模板或另写脚本。模板即结构契约：agent 不改 HTML 投影，可写面只有
+  markdown 真身与风格 CSS。
+- 风格 CSS **预编译入库**：每个 style 目录下一份 `canvas.css`（design.md 规格的
+  编译产物——规格是真身，改规格必重编译），选用时 `--css` 直接指过去，零等待；
+  校验器查 canonical token 明暗双份齐全、禁外链。默认 `canvas/style.css` 是
+  其中一员，永不因换风格被改写。
 - 待清残差：小屏体验、大卡量性能、默认模板暗色 palette（style.css 现仅明色一套，
   token 名已按风格包规范接口对齐）。两张先行模板（分页画廊/单画布三团）随合并完成归档。
 

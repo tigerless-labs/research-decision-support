@@ -268,6 +268,38 @@ def test_canvas_renderings_happy_path(pack):
     assert check(pack) == []
 
 
+GOOD_CANVAS_CSS = (
+    ":root { " + " ".join(f"--{t}:#111;" for t in CANONICAL_TOKENS) + " }\n"
+    "body { background:var(--page); }\n"
+    "@media (prefers-color-scheme: dark) { :root { "
+    + " ".join(f"--{t}:#eee;" for t in CANONICAL_TOKENS) + " } }\n"
+)
+
+
+def test_compiled_canvas_css_accepted(pack):
+    (pack / "alpha-paper/canvas.css").write_text(GOOD_CANVAS_CSS, encoding="utf-8")
+    assert check(pack) == []
+
+
+def test_compiled_canvas_css_missing_tokens_rejected(pack):
+    (pack / "alpha-paper/canvas.css").write_text(
+        GOOD_CANVAS_CSS.replace("--positive:#111;", ""), encoding="utf-8")
+    assert problems_mentioning(check(pack), "--positive")
+
+
+def test_compiled_canvas_css_requires_dark_palette(pack):
+    light_only = GOOD_CANVAS_CSS.split("@media")[0]
+    (pack / "alpha-paper/canvas.css").write_text(light_only, encoding="utf-8")
+    assert problems_mentioning(check(pack), "dark palette")
+
+
+def test_compiled_canvas_css_rejects_external_reach(pack):
+    (pack / "alpha-paper/canvas.css").write_text(
+        GOOD_CANVAS_CSS + '.x { background:url(https://evil.example/x.png); }\n',
+        encoding="utf-8")
+    assert problems_mentioning(check(pack), "external reach")
+
+
 def test_canvas_renderings_missing_design_section_rejected(pack):
     pack.add_canvas("tabbed-gallery")
     pack.write_index([index_entry("alpha-paper", canvas_renderings=["tabbed-gallery"]),
