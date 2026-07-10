@@ -171,3 +171,4 @@ dialog#zoom::backdrop { background:transparent; }
   color:var(--ink); font-size:11px; padding:5px 16px; z-index:2;
   text-transform:uppercase; letter-spacing:.14em; }
 @media (prefers-reduced-motion: reduce) { #world { transition:none !important; } }
+#skin { font:inherit; font-size:13px; color:var(--ink); background:var(--surface); border:1px solid var(--grid); border-radius:4px; padding:6px 12px; cursor:pointer; }

@@ -6,6 +6,7 @@
 <div id="bar">
   <h1><!--__TITLE__--></h1>
   <input id="q" type="search" placeholder="搜索标题或摘要，回车飞过去…" aria-label="搜索">
+  <select id="skin" aria-label="风格"></select>
   <div id="hint">滚轮缩放 · 拖拽平移 · 单击亮邻边 · 双击进详情 · Esc 清除</div>
 </div>
 <div id="chips"></div>
@@ -230,7 +231,9 @@ function renderMarkdown(container, text, fromId) {
     }
   });
   if (window.mermaid) {
-    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", look: "handDrawn", theme: "neutral", themeVariables: { fontFamily: "Segoe Print, Comic Sans MS, cursive", primaryColor: "#f8f1d6", primaryBorderColor: "#1f3a8a", primaryTextColor: "#1f3a8a", lineColor: "#2d4fb8", mainBkg: "#f8f1d6", nodeBorder: "#1f3a8a", edgeLabelBackground: "#fdfaef" } });
+    const rootStyle = getComputedStyle(document.documentElement);
+    const tok = name => rootStyle.getPropertyValue(name).trim();
+    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", look: "handDrawn", theme: "neutral", themeVariables: { fontFamily: getComputedStyle(document.body).fontFamily, primaryColor: tok("--surface"), primaryBorderColor: tok("--ink"), primaryTextColor: tok("--ink"), lineColor: tok("--ink-2"), mainBkg: tok("--surface"), nodeBorder: tok("--ink"), edgeLabelBackground: tok("--wash") } });
     const pres = [...container.querySelectorAll(".mermaid")];
     Promise.all(pres.map(p =>
       mermaid.render("mmd" + (mmdSeq++), p.dataset.src || p.textContent)
@@ -405,4 +408,27 @@ svg.setAttribute("width", bw); svg.setAttribute("height", bh);
 svg.setAttribute("viewBox", `0 0 ${bw} ${bh}`);
 svg.style.left = "0px"; svg.style.top = "0px";
 fitAll(false);
+</script>
+<script>
+const STYLES = /*__STYLES__*/null;
+(function () {
+  const sel = document.getElementById("skin");
+  if (!STYLES) { sel.style.display = "none"; return; }
+  const sheet = document.querySelector("style");
+  STYLES.options.forEach(o => {
+    const op = document.createElement("option");
+    op.value = o.slug; op.textContent = o.name;
+    sel.append(op);
+  });
+  let cur = null;
+  try { cur = localStorage.getItem("rds-skin"); } catch (e) {}
+  if (!cur || !STYLES.css[cur]) cur = STYLES.default;
+  function apply(slug) {
+    sheet.textContent = STYLES.css[slug];
+    sel.value = slug;
+    try { localStorage.setItem("rds-skin", slug); } catch (e) {}
+  }
+  apply(cur);
+  sel.addEventListener("change", () => apply(sel.value));
+})();
 </script>

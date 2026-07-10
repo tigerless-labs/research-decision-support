@@ -97,6 +97,31 @@ def test_build_style_is_swapped_by_css_only(workspace, tmp_path):
     assert DEFAULT_CSS.read_text(encoding="utf-8") not in html
 
 
+def switcher_payload(html):
+    line = next((l for l in html.split("\n") if l.startswith("const STYLES = ")), None)
+    assert line is not None
+    return json.loads(line[len("const STYLES = "):].rstrip(";"))
+
+
+def test_build_default_embeds_live_style_switcher(workspace, tmp_path):
+    html = build(workspace, tmp_path / "proj").read_text(encoding="utf-8")
+    assert '<select id="skin"' in html
+    payload = switcher_payload(html)
+    index = json.loads((DEFAULT_CSS.parent.parent / "selection-index.json")
+                       .read_text(encoding="utf-8"))
+    slugs = {entry["slug"] for entry in index["styles"]}
+    assert set(payload["css"]) == slugs
+    assert {o["slug"] for o in payload["options"]} == slugs
+    assert payload["default"] in payload["css"]
+
+
+def test_build_pinned_css_disables_switcher(workspace, tmp_path):
+    pinned = tmp_path / "pinned.css"
+    pinned.write_text(":root { --page:#101418; }", encoding="utf-8")
+    html = build(workspace, tmp_path / "proj", css=pinned).read_text(encoding="utf-8")
+    assert switcher_payload(html) is None
+
+
 def test_build_skips_mermaid_when_no_output_uses_it(workspace, tmp_path):
     plain = build(workspace, tmp_path / "plain").read_text(encoding="utf-8")
     assert "__esbuild_esm_mermaid" not in plain

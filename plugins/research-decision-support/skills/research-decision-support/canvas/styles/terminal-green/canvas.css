@@ -155,3 +155,4 @@ dialog#zoom::backdrop { background:transparent; }
   #world { transition:none !important; }
   #bar h1::after { animation:none; }
 }
+#skin { font:inherit; color:var(--ink); background:var(--surface); border:1px solid var(--grid); border-radius:6px; padding:5px 12px; cursor:pointer; }

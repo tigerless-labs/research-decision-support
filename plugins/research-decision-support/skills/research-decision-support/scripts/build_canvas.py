@@ -10,8 +10,9 @@ from workspace import (card_files, card_links, first_paragraph, parse_frontmatte
 SKILL_DIR = Path(__file__).resolve().parent.parent
 VENDOR = Path(__file__).resolve().parent / "vendor"
 TEMPLATE = SKILL_DIR / "canvas" / "template.html"
+STYLE_PACK = SKILL_DIR / "canvas" / "styles"
 DEFAULT_STYLE = "pin-and-paper"
-DEFAULT_CSS = SKILL_DIR / "canvas" / "styles" / DEFAULT_STYLE / "canvas.css"
+DEFAULT_CSS = STYLE_PACK / DEFAULT_STYLE / "canvas.css"
 SUBTYPE_ZH = {"methods": "方法", "products": "产品", "github": "仓库",
               "blogs": "博客", "papers": "论文"}
 
@@ -148,6 +149,20 @@ def embed_json(data):
     return json.dumps(data, ensure_ascii=False).replace("<", "\\u003c")
 
 
+def style_pack_skins():
+    index = json.loads((STYLE_PACK / "selection-index.json").read_text(encoding="utf-8"))
+    options, sheets = [], {}
+    for entry in index.get("styles", []):
+        slug = entry.get("slug")
+        sheet = STYLE_PACK / slug / "canvas.css"
+        if slug and sheet.is_file():
+            options.append({"slug": slug, "name": entry.get("name", slug)})
+            sheets[slug] = sheet.read_text(encoding="utf-8")
+    if DEFAULT_STYLE not in sheets:
+        raise ValueError(f"default style '{DEFAULT_STYLE}' missing from {STYLE_PACK}")
+    return {"default": DEFAULT_STYLE, "options": options, "css": sheets}
+
+
 def build(workspace, outdir, css=None, title=None):
     workspace = Path(workspace).resolve()
     outdir = Path(outdir).resolve()
@@ -169,9 +184,11 @@ def build(workspace, outdir, css=None, title=None):
     needs_mermaid = any("```mermaid" in t for t in
                         list(data["output"].values()) + list(data["board"].values()))
     css_file = Path(css).resolve() if css else DEFAULT_CSS
+    skins = None if css else style_pack_skins()
     html = (TEMPLATE.read_text(encoding="utf-8")
             .replace("<!--__TITLE__-->", title or f"{workspace.name} · 融合画布")
             .replace("/*__CSS__*/", css_file.read_text(encoding="utf-8"))
+            .replace("/*__STYLES__*/null", embed_json(skins) if skins else "null")
             .replace("/*__MARKED__*/", (VENDOR / "marked.min.js").read_text(encoding="utf-8"))
             .replace("/*__PURIFY__*/", (VENDOR / "purify.min.js").read_text(encoding="utf-8"))
             .replace("/*__MERMAID__*/",
@@ -183,7 +200,7 @@ def build(workspace, outdir, css=None, title=None):
     out.write_text(html, encoding="utf-8")
     print(f"ok: {out} — {len(placed)} nodes, {len(data['edges'])} edges, "
           f"{len(worlds)} worlds, mermaid={needs_mermaid}, "
-          f"css={css_file.name}")
+          f"skin={'switcher:' + str(len(skins['options'])) if skins else css_file.name}")
     return out
 
 
