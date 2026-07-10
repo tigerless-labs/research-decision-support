@@ -24,6 +24,11 @@ SKELETON = {
     "sources/index.md": "# sources — 证据卡（tag 小标题分组，投影随卡重生成）\n",
     "ideas/index.md": "# ideas — 人创建，二态（存在 / 归档）\n",
     "output/index.md": "# output — 装配产物（形态由 target 决定）\n",
+    "board/index.md": (
+        "# board — 自由面（一文一板，人自有）\n\n"
+        "每个 md 是一块板：一组对比或任意演算，无 schema。板可向前引用三层取材；\n"
+        "三层不引板——板上结论沉淀成 idea 卡再进提炼流。\n"
+    ),
 }
 
 

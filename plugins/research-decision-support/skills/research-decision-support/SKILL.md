@@ -29,6 +29,13 @@ Full contract (card schema, facts, sync invariants, ledger format):
    [references/output-forms/](references/output-forms/system-design.md) and the human's
    `target.md`. Before output exists, ideas are primary and human input lands in ideas only.
 
+Plus one free surface: **board/** — the human's own boards, one markdown file per board
+(a comparison matrix, a theme grid, any scratch reasoning). **No schema, no required
+fields** — the freedom belongs to the human; you edit a board only when asked ("lay these
+three sources out as a comparison"). Boards may reference the three layers; **nothing may
+reference a board** — it is terminal, and a board's conclusions must be distilled into an
+idea card (human-created) to enter the flow.
+
 ## The sync invariant (never break this)
 
 Once output exists, the two layers stay in permanent two-way sync, same turn:
@@ -84,15 +91,18 @@ recommend a form from [references/output-forms/](references/output-forms/system-
 ## The canvas
 
 The canvas is the human's main thinking surface and is **only a projection** — it holds no
-facts and accepts no writes that bypass markdown. Rules (truth-driven, edges = in-card
-references, layout derived from references + tags) live in the builder; each template under
-[canvases/](canvases/tabbed-gallery/template.html) carries only its own form. When setting a
-target, ask which template the human wants — `tabbed-gallery` (implemented) or
-`single-canvas` ([design spec](canvases/single-canvas/spec.md), not yet built).
+facts and accepts no writes that bypass markdown. There is exactly one canvas — the unified
+canvas ([spec](canvas/spec.md), [template](canvas/template.html)) — and one fixed builder:
+rules (truth-driven, edges = in-card references, layout derived from references + tags) live
+in the builder; the workspace path is the only required input.
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/build_canvas.py <workspace> -o <temp-dir> --template tabbed-gallery
+python3 ${CLAUDE_SKILL_DIR}/scripts/build_canvas.py <workspace> -o <temp-dir> [--css style.css] [--title '...']
 ```
+
+Visual style is CSS-only: the template carries a `/*__CSS__*/` slot filled from
+[canvas/style.css](canvas/style.css) by default; pass `--css` with another stylesheet to
+switch styles — never fork the template or the builder for looks.
 
 Build only into a temp directory or an artifact — the projection never enters the repo.
 Whenever the markdown truth changes, rebuild and republish the canvas in the same turn;
@@ -101,10 +111,3 @@ never edit the HTML directly.
 For visual styling beyond the template default, use the style pack: read
 [styles/selection-index.json](styles/selection-index.json) first and load **only** the
 chosen style's `design.md` — never bulk-read the pack.
-
-Styles are content-agnostic; bind content to accent roles at render time: sources →
-`accent-a`, ideas → `accent-b`, output → `accent-c` (always the visually weightiest),
-the human's own mark → `accent-d`, approved/valid states → `positive` (and nothing
-else). If the chosen style has a `### <canvas>` rendering section for the chosen canvas,
-follow it; otherwise use the canvas template's default presentation with the style's
-tokens.

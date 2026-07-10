@@ -36,6 +36,10 @@ def workspace(tmp_path):
     card("ideas/archive/idea-old.md", "Retired judgment",
          "Superseded; kept for the trail.",
          frontmatter="id: idea-old\ntype: idea\ntags: [positioning]")
+    card("board/first-compare.md", "Alpha vs Gamma",
+         "One board, one comparison. Weighs [alpha](../sources/papers/alpha.md) "
+         "against [gamma](../sources/github/gamma.md) via [idea one](../ideas/idea-one.md).")
+    (root / "board/index.md").write_text("# board index (projection)\n", encoding="utf-8")
     (root / "sources/index.md").write_text("# sources index (projection)\n", encoding="utf-8")
     (root / "ideas/index.md").write_text("# ideas index (projection)\n", encoding="utf-8")
     (root / "output").mkdir()

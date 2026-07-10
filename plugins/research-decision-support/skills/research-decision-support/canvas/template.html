@@ -1,0 +1,429 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><!--__TITLE__--></title>
+<style>/*__CSS__*/</style>
+<div id="bar">
+  <h1><!--__TITLE__--></h1>
+  <nav id="modes">
+    <button class="strip" data-mode="bird">鸟瞰 · 团簇</button>
+    <button class="strip" data-mode="mid">分类 · tag 组</button>
+    <button class="strip" data-mode="close">细读 · 卡片</button>
+  </nav>
+  <input id="q" type="search" placeholder="搜索标题或摘要，回车飞过去…" aria-label="搜索">
+  <div id="hint">滚轮缩放 · 拖拽平移 · 单击亮邻边 · 双击进详情 · Esc 清除</div>
+</div>
+<div id="chips"></div>
+<div id="vp"><div id="world">
+  <svg id="edgeSvg"></svg>
+</div></div>
+<dialog id="zoom"><div class="tip">滚轮缩放 · 拖拽平移 · 点空白或 Esc 关闭</div><div class="stage"><div class="inner"></div></div></dialog>
+<dialog id="dlg"><div class="dlg">
+  <aside class="rail" id="rail"></aside>
+  <section class="content" id="content"></section>
+</div></dialog>
+<script>/*__MARKED__*/</script>
+<script>/*__PURIFY__*/</script>
+<script>/*__MERMAID__*/</script>
+<script>
+const DATA = /*__DATA__*/null;
+const byId = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+const ALLDOCS = Object.assign({}, DATA.output, DATA.board);
+const world = document.getElementById("world");
+const vp = document.getElementById("vp");
+const svg = document.getElementById("edgeSvg");
+const el = (t, c, x) => { const n = document.createElement(t);
+  if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; };
+
+DATA.worlds.forEach(w => {
+  const d = el("div", "wtitle");
+  d.style.left = w.x + "px"; d.style.top = w.y + "px";
+  const en = el("span", "en", w.en), zh = el("span", "zh", w.zh);
+  d.append(en, zh); world.append(d);
+});
+DATA.labels.forEach(l => {
+  const d = el("div", "glabel", l.t);
+  const i = document.createElement("i"); i.textContent = "×" + l.n;
+  d.append(i); d.style.left = l.x + "px"; d.style.top = l.y + "px";
+  world.append(d);
+});
+const cardEls = {};
+DATA.nodes.forEach((n, i) => {
+  const c = el("article", "card " + n.g);
+  c.style.left = n.x + "px"; c.style.top = n.y + "px";
+  c.style.width = n.w + "px"; c.style.height = n.h + "px";
+  c.style.transform = "rotate(" + (((i * 137) % 7 - 3) * .5) + "deg)";
+  const badge = (DATA.subtypeZh[n.subtype] || "") +
+    (n.tags.length ? " #" + n.tags[0] : "");
+  if (badge.trim()) c.append(el("span", "badge", badge.trim()));
+  c.append(el("p", "t", n.title.replace(/^\[[^\]]*\]\s*/, "")));
+  c.append(el("p", "sum", n.summary));
+  c.dataset.id = n.id;
+  world.append(c);
+  cardEls[n.id] = c;
+});
+
+let sx = 0, sy = 0, scale = 1;
+function apply(animate) {
+  world.style.transition = animate ? "transform .45s ease" : "none";
+  world.style.transform = `translate(${sx}px, ${sy}px) scale(${scale})`;
+  document.body.dataset.tier = scale < .34 ? "bird" : scale < .78 ? "mid" : "close";
+  document.querySelectorAll("#modes .strip").forEach(b =>
+    b.classList.toggle("on", b.dataset.mode === document.body.dataset.tier));
+}
+const bbox = (() => {
+  let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
+  DATA.nodes.forEach(n => { x1 = Math.min(x1, n.x); y1 = Math.min(y1, n.y - 420);
+    x2 = Math.max(x2, n.x + n.w); y2 = Math.max(y2, n.y + n.h); });
+  return { x1, y1, x2, y2 };
+})();
+function fitAll(animate) {
+  const vw = innerWidth, vh = innerHeight - 195;
+  scale = Math.min(vw / (bbox.x2 - bbox.x1 + 200), vh / (bbox.y2 - bbox.y1 + 200), 1);
+  sx = (vw - (bbox.x2 - bbox.x1) * scale) / 2 - bbox.x1 * scale;
+  sy = 205 + (vh - (bbox.y2 - bbox.y1) * scale) / 2 - bbox.y1 * scale;
+  apply(animate);
+}
+function zoomTo(target, animate) {
+  const cx = innerWidth / 2, cy = innerHeight / 2;
+  const wx = (cx - sx) / scale, wy = (cy - sy) / scale;
+  scale = target;
+  sx = cx - wx * scale; sy = cy - wy * scale;
+  apply(animate);
+}
+function flyTo(id, target) {
+  const n = byId[id]; if (!n) return;
+  scale = target || .95;
+  sx = innerWidth / 2 - (n.x + n.w / 2) * scale;
+  sy = innerHeight / 2 - (n.y + n.h / 2) * scale;
+  apply(true);
+}
+document.querySelectorAll("#modes .strip").forEach(b =>
+  b.addEventListener("click", () => {
+    if (b.dataset.mode === "bird") fitAll(true);
+    else if (b.dataset.mode === "mid") zoomTo(.55, true);
+    else zoomTo(1, true);
+  }));
+
+vp.addEventListener("wheel", e => {
+  e.preventDefault();
+  const f = Math.exp(-e.deltaY * .0013);
+  const ns = Math.min(2.2, Math.max(.05, scale * f));
+  sx = e.clientX - (e.clientX - sx) * ns / scale;
+  sy = e.clientY - (e.clientY - sy) * ns / scale;
+  scale = ns; apply(false);
+}, { passive: false });
+let pan = null;
+vp.addEventListener("pointerdown", e => {
+  if (e.target.closest(".card")) return;
+  pan = { x: e.clientX - sx, y: e.clientY - sy };
+  vp.classList.add("panning"); vp.setPointerCapture(e.pointerId);
+});
+vp.addEventListener("pointermove", e => {
+  if (!pan) return; sx = e.clientX - pan.x; sy = e.clientY - pan.y; apply(false);
+});
+vp.addEventListener("pointerup", () => { pan = null; vp.classList.remove("panning"); });
+
+const outE = {}, inE = {};
+DATA.edges.forEach(e => {
+  (outE[e.from] = outE[e.from] || []).push(e.to);
+  (inE[e.to] = inE[e.to] || []).push(e.from);
+});
+let selected = null;
+function clearSel() {
+  selected = null; svg.textContent = "";
+  Object.values(cardEls).forEach(c => c.classList.remove("sel", "nb"));
+}
+function select(id) {
+  clearSel(); selected = id;
+  const me = byId[id]; if (!me) return;
+  cardEls[id].classList.add("sel");
+  const nbs = [...new Set([...(outE[id] || []), ...(inE[id] || [])])];
+  nbs.forEach(t => {
+    const n = byId[t]; if (!n) return;
+    cardEls[t].classList.add("nb");
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const x1 = me.x + me.w / 2, y1 = me.y + me.h / 2;
+    const x2 = n.x + n.w / 2, y2 = n.y + n.h / 2;
+    const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - 60 - Math.abs(x2 - x1) * .06;
+    p.setAttribute("d", `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
+    p.setAttribute("fill", "none");
+    p.setAttribute("stroke", "var(--ink)");
+    p.setAttribute("stroke-width", "2.5");
+    p.setAttribute("stroke-dasharray", "7 6");
+    p.setAttribute("opacity", ".85");
+    svg.append(p);
+  });
+}
+world.addEventListener("click", e => {
+  const c = e.target.closest(".card");
+  if (!c) { clearSel(); return; }
+  if (document.body.dataset.tier === "bird") {
+    flyTo(c.dataset.id, .95);
+    select(c.dataset.id);
+    return;
+  }
+  select(c.dataset.id);
+});
+world.addEventListener("dblclick", e => {
+  const c = e.target.closest(".card"); if (!c) return;
+  const id = c.dataset.id;
+  if (ALLDOCS[id] !== undefined) openDoc(id);
+  else if (id !== "__board_empty__") openCard(id);
+});
+addEventListener("keydown", e => { if (e.key === "Escape" && !dlg.open) clearSel(); });
+
+const chipsEl = document.getElementById("chips");
+let activeTag = "", activeLayer = "", q = "";
+const chips = [];
+const ROWS = [["sources", "证据 · 团 1"], ["ideas", "想法 · 团 2"],
+              ["output", "装配 · 团 3"], ["board", "自由面"]];
+const rowTop = el("div", "chiprow");
+const allChip = el("button", "chip on", "全部 " + DATA.nodes.length);
+rowTop.append(el("span", "rowlab", "全部"), allChip);
+chips.push([allChip, "", ""]);
+chipsEl.append(rowTop);
+ROWS.forEach(([layer, label]) => {
+  const counts = {};
+  DATA.nodes.filter(n => n.layer === layer)
+    .forEach(n => n.tags.forEach(t => counts[t] = (counts[t] || 0) + 1));
+  if (!Object.keys(counts).length) return;
+  const row = el("div", "chiprow");
+  row.append(el("span", "rowlab", label));
+  Object.keys(counts).sort((a, b) => counts[b] - counts[a]).forEach(t => {
+    const c = el("button", "chip", "#" + t + " " + counts[t]);
+    row.append(c); chips.push([c, t, layer]);
+  });
+  chipsEl.append(row);
+});
+function paint() {
+  DATA.nodes.forEach(n => {
+    const hit = (!activeTag || (n.tags.includes(activeTag) && n.layer === activeLayer)) &&
+      (!q || (n.title + " " + n.summary + " " + n.tags.join(" "))
+        .toLowerCase().includes(q));
+    cardEls[n.id].classList.toggle("dim", !hit);
+  });
+}
+chips.forEach(([c, t, layer]) => c.addEventListener("click", () => {
+  activeTag = t; activeLayer = layer;
+  chips.forEach(([o]) => o.classList.remove("on"));
+  c.classList.add("on"); paint();
+}));
+const qEl = document.getElementById("q");
+qEl.addEventListener("input", e => { q = e.target.value.trim().toLowerCase(); paint(); });
+qEl.addEventListener("keydown", e => {
+  if (e.key !== "Enter" || !q) return;
+  const hit = DATA.nodes.find(n =>
+    (n.title + " " + n.summary).toLowerCase().includes(q));
+  if (hit) { flyTo(hit.id); select(hit.id); }
+});
+
+let mmdSeq = 0;
+const dlg = document.getElementById("dlg");
+const rail = document.getElementById("rail");
+const content = document.getElementById("content");
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+function renderMarkdown(container, text, fromId) {
+  const parts = text.split(/```mermaid\n([\s\S]*?)```/);
+  parts.forEach((part, i) => {
+    if (!part.trim()) return;
+    if (i % 2 && window.mermaid) {
+      const p = el("pre", "mermaid", part);
+      p.dataset.src = part;
+      container.append(p);
+    } else if (i % 2) {
+      container.append(el("pre", "", part));
+    } else {
+      const d = el("div", "");
+      d.innerHTML = DOMPurify.sanitize(marked.parse(part));
+      d.querySelectorAll("a").forEach(a => {
+        const href = a.getAttribute("href") || "";
+        if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; return; }
+        const target = resolveRel(fromId, href);
+        if (target && (byId[target] || ALLDOCS[target] !== undefined)) {
+          a.href = "#";
+          a.addEventListener("click", e => { e.preventDefault();
+            byId[target] ? openCard(target) : openDoc(target); });
+        } else { a.removeAttribute("href"); a.style.opacity = .6; }
+      });
+      container.append(d);
+    }
+  });
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", look: "handDrawn", theme: "neutral", themeVariables: { fontFamily: "Segoe Print, Comic Sans MS, cursive", primaryColor: "#f8f1d6", primaryBorderColor: "#1f3a8a", primaryTextColor: "#1f3a8a", lineColor: "#2d4fb8", mainBkg: "#f8f1d6", nodeBorder: "#1f3a8a", edgeLabelBackground: "#fdfaef" } });
+    const pres = [...container.querySelectorAll(".mermaid")];
+    Promise.all(pres.map(p =>
+      mermaid.render("mmd" + (mmdSeq++), p.dataset.src || p.textContent)
+        .then(r => { p.innerHTML = r.svg; })
+        .catch(() => {})
+    )).then(() => {
+      container.querySelectorAll(".mermaid a").forEach(a => {
+        const href = a.getAttribute("href") || a.getAttribute("xlink:href") || "";
+        const target = resolveRel(fromId, href);
+        a.addEventListener("click", e => {
+          e.preventDefault();
+          if (target && ALLDOCS[target] !== undefined) openDoc(target);
+          else if (target && byId[target]) openCard(target);
+        });
+      });
+      let wob = 0;
+      container.querySelectorAll(".mermaid").forEach(m => {
+        const bsvg = m.querySelector('svg[aria-roledescription="block"]');
+        if (bsvg) {
+          const uid = "wob" + Date.now() + (wob++);
+          const vb = (bsvg.getAttribute("viewBox") || "0 0 800 600").split(/\s+/).map(Number);
+          const region = `filterUnits="userSpaceOnUse" x="${vb[0] - 30}" y="${vb[1] - 30}" width="${vb[2] + 60}" height="${vb[3] + 60}"`;
+          const mkF = (id, seed, scale) => `<filter id="${id}" ${region}>` +
+            `<feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="${seed}" result="n"/>` +
+            `<feDisplacementMap in="SourceGraphic" in2="n" scale="${scale}"/></filter>`;
+          const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+          defs.innerHTML = mkF(uid + "a", 3, 3) + mkF(uid + "b", 11, 3.4);
+          bsvg.prepend(defs);
+          const rects = [...bsvg.querySelectorAll("g.node rect")];
+          const epaths = [...bsvg.querySelectorAll("path")].filter(p =>
+            !p.closest("marker") && !p.closest("g.node"));
+          [...rects, ...epaths].forEach(s => {
+            s.setAttribute("filter", `url(#${uid}a)`);
+            s.setAttribute("stroke-linecap", "round");
+            if (getComputedStyle(s).stroke === "none") return;
+            const c = s.cloneNode(false);
+            c.setAttribute("filter", `url(#${uid}b)`);
+            c.setAttribute("fill", "none");
+            c.style.strokeWidth = (parseFloat(getComputedStyle(s).strokeWidth) || 1.5) * .7 + "px";
+            c.style.opacity = ".85";
+            c.removeAttribute("marker-end"); c.removeAttribute("marker-start");
+            s.after(c);
+          });
+          (m.dataset.src || "").split("\n").forEach(line => {
+            const c = line.match(/^\s*%%\s*click\s+(\S+)\s+"([^"]+)"/);
+            if (!c) return;
+            const g = bsvg.querySelector(`g.node[id$="-${c[1]}"]`);
+            const target = resolveRel(fromId, c[2]);
+            if (!g || !target) return;
+            g.classList.add("blk-link");
+            g.addEventListener("click", e => {
+              e.stopPropagation();
+              if (ALLDOCS[target] !== undefined) openDoc(target);
+              else if (byId[target]) openCard(target);
+            });
+          });
+        }
+        m.title = "点击放大";
+        m.addEventListener("click", e => {
+          if (e.target.closest("a")) return;
+          openZoom(m.querySelector("svg"));
+        });
+      });
+    });
+  }
+}
+const zoomEl = document.getElementById("zoom");
+const zoomInner = zoomEl.querySelector(".inner");
+const zoomStage = zoomEl.querySelector(".stage");
+let zs = 1, zx = 0, zy = 0, zpan = null;
+function zApply() { zoomInner.style.transform = `translate(${zx}px, ${zy}px) scale(${zs})`; }
+function openZoom(svg) {
+  if (!svg) return;
+  zoomInner.textContent = "";
+  const clone = svg.cloneNode(true);
+  clone.removeAttribute("width");
+  const vb = (svg.getAttribute("viewBox") || "0 0 800 600").split(/\s+/);
+  const w = parseFloat(vb[2]) || 800, h = parseFloat(vb[3]) || 600;
+  zs = Math.min((innerWidth - 120) / w, (innerHeight - 120) / h) ;
+  zs = Math.max(zs, .2);
+  clone.style.width = w + "px"; clone.style.height = h + "px";
+  zx = (innerWidth - w * zs) / 2; zy = (innerHeight - h * zs) / 2;
+  zoomInner.append(clone); zApply();
+  zoomEl.showModal();
+}
+zoomStage.addEventListener("wheel", e => {
+  e.preventDefault();
+  const f = Math.exp(-e.deltaY * .0015);
+  const ns = Math.min(6, Math.max(.15, zs * f));
+  zx = e.clientX - (e.clientX - zx) * ns / zs;
+  zy = e.clientY - (e.clientY - zy) * ns / zs;
+  zs = ns; zApply();
+}, { passive: false });
+zoomStage.addEventListener("pointerdown", e => {
+  if (e.target.closest(".inner")) { zpan = { x: e.clientX - zx, y: e.clientY - zy };
+    zoomStage.setPointerCapture(e.pointerId); return; }
+  zoomEl.close();
+});
+zoomStage.addEventListener("pointermove", e => {
+  if (!zpan) return; zx = e.clientX - zpan.x; zy = e.clientY - zpan.y; zApply();
+});
+zoomStage.addEventListener("pointerup", () => { zpan = null; });
+function resolveRel(fromId, href) {
+  if (!/\.md(#|$)/.test(href)) return null;
+  const parts = fromId.split("/").slice(0, -1);
+  href.split("#")[0].split("/").forEach(seg => {
+    if (seg === "..") parts.pop(); else if (seg !== ".") parts.push(seg);
+  });
+  return parts.join("/");
+}
+function railList(title, hint, entries, current, open) {
+  rail.textContent = "";
+  rail.append(el("h3", "", title), el("p", "hint", hint));
+  entries.forEach(([sect, items]) => {
+    if (sect) rail.append(el("div", "sect", sect));
+    items.forEach(m => {
+      const a = el("a", "node", m.title.replace(/^\[[^\]]*\]\s*/, ""));
+      a.href = "#";
+      if (m.id === current) { a.style.fontWeight = "700"; a.style.borderColor = "var(--ink)"; }
+      a.addEventListener("click", e => { e.preventDefault();
+        if (m.id !== current) open(m.id); });
+      rail.append(a);
+    });
+    if (!items.length) rail.append(el("p", "hint", "（无）"));
+  });
+}
+function topBar(badgeText) {
+  content.textContent = "";
+  const top = el("div", "top");
+  top.append(el("span", "badge", badgeText));
+  const close = el("button", "", "✕ 关闭");
+  close.addEventListener("click", () => dlg.close());
+  top.append(close);
+  content.append(top);
+  return top;
+}
+function openCard(id) {
+  const n = byId[id]; if (!n) return;
+  const both = dir => [...new Set(dir[id] || [])].map(i => byId[i]).filter(Boolean);
+  const rel = [...new Set([...both(outE), ...both(inE)])];
+  const asm = rel.filter(m => m.layer === "output" || m.layer === "board");
+  railList("证据链", "这张卡两侧的来源、想法与装配",
+    [["来源", rel.filter(m => m.layer === "sources")],
+     ["想法", rel.filter(m => m.layer === "ideas")],
+     ["装配（引用本卡）", asm]],
+    id, openCard);
+  topBar(n.layer + (n.tags.length ? " · #" + n.tags[0] : ""));
+  const md = el("div", "md");
+  renderMarkdown(md, DATA.bodies[id] || n.summary, id);
+  content.append(md);
+  content.scrollTop = 0; rail.scrollTop = 0;
+  if (!dlg.open) dlg.showModal();
+}
+function openDoc(path) {
+  const text = ALLDOCS[path]; if (text === undefined) return;
+  const family = path.startsWith("board/") ? DATA.board : DATA.output;
+  railList(path.startsWith("board/") ? "board 板文" : "output 文档",
+    path.startsWith("board/") ? "一文一板 · 点击切换" : "装配产物 · 点击切换",
+    [["", Object.keys(family).map(p => ({ id: p,
+        title: p.replace(/^(output|board)\//, "") }))]],
+    path, openDoc);
+  topBar(path);
+  const md = el("div", "md");
+  renderMarkdown(md, text, path);
+  content.append(md);
+  content.scrollTop = 0; rail.scrollTop = 0;
+  if (!dlg.open) dlg.showModal();
+}
+
+const bw = bbox.x2 - bbox.x1 + 400, bh = bbox.y2 - bbox.y1 + 400;
+svg.setAttribute("width", bw); svg.setAttribute("height", bh);
+svg.setAttribute("viewBox", `0 0 ${bw} ${bh}`);
+svg.style.left = "0px"; svg.style.top = "0px";
+fitAll(false);
+</script>
