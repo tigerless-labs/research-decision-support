@@ -101,3 +101,10 @@ never edit the HTML directly.
 For visual styling beyond the template default, use the style pack: read
 [styles/selection-index.json](styles/selection-index.json) first and load **only** the
 chosen style's `design.md` — never bulk-read the pack.
+
+Styles are content-agnostic; bind content to accent roles at render time: sources →
+`accent-a`, ideas → `accent-b`, output → `accent-c` (always the visually weightiest),
+the human's own mark → `accent-d`, approved/valid states → `positive` (and nothing
+else). If the chosen style has a `### <canvas>` rendering section for the chosen canvas,
+follow it; otherwise use the canvas template's default presentation with the style's
+tokens.

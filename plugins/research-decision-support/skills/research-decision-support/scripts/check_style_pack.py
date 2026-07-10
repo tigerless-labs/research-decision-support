@@ -4,8 +4,8 @@ import sys
 from pathlib import Path
 
 CANONICAL_TOKENS = (
-    "surface", "page", "ink", "ink-2", "muted", "grid", "ring", "wash", "human",
-    "c-src", "c-idea", "c-out", "c-ok",
+    "surface", "page", "ink", "ink-2", "muted", "grid", "ring", "wash",
+    "accent-a", "accent-b", "accent-c", "accent-d", "positive",
 )
 USAGE_KEYS = (
     "reading-order", "never-bulk-read", "single-file",
@@ -28,8 +28,7 @@ FORBIDDEN_REACH = (
     "javascript:", "url(//", 'src="//', "src='//",
 )
 DESIGN_SECTIONS = (
-    "## Atmosphere", "## Layer semantics", "## Signature moves",
-    "## Do / Don't", "## Invariants",
+    "## Atmosphere", "## Accent roles", "## Signature moves", "## Do / Don't",
 )
 PREVIEW_SECTIONS = ("## Palette", "## Typography", "## Signature moves", "## Fit")
 INDEX_MAX_BYTES = 8192
@@ -172,6 +171,28 @@ def check_entry(entry):
     for field in ("preview", "design"):
         if not safe_relpath(entry.get(field)):
             problems.append(f"{label}: unsafe or missing path in field: {field}")
+    renderings = entry.get("canvas_renderings")
+    if renderings is not None:
+        if not nonempty_str_list(renderings):
+            problems.append(f"{label}: canvas_renderings must be a nonempty string list")
+        else:
+            problems += [f"{label}: canvas_renderings slug fails pattern: {canvas}"
+                         for canvas in renderings if not SLUG_RE.match(canvas)]
+    return problems
+
+
+def check_canvas_renderings(rel, entry, design_text, canvases_root):
+    renderings = entry.get("canvas_renderings")
+    if not nonempty_str_list(renderings):
+        return []
+    problems = []
+    for canvas in renderings:
+        if not SLUG_RE.match(canvas):
+            continue
+        if not (canvases_root / canvas).is_dir():
+            problems.append(f"{rel}: canvas_renderings names unknown canvas: {canvas}")
+        if f"### {canvas}" not in design_text:
+            problems.append(f"{rel}: missing rendering section for canvas: ### {canvas}")
     return problems
 
 
@@ -213,6 +234,8 @@ def check(pack_root):
     problems += [f"{slug}: directory not listed in selection-index.json"
                  for slug in sorted(on_disk - indexed)]
 
+    entries_by_slug = {entry.get("slug"): entry for entry in entries}
+    canvases_root = pack.parent / "canvases"
     for slug in sorted(indexed & on_disk):
         design_path = pack / slug / "design.md"
         preview_path = pack / slug / "preview.md"
@@ -228,6 +251,8 @@ def check(pack_root):
         problems += check_design(f"{slug}/design.md", design_text, slug)
         problems += check_preview(f"{slug}/preview.md", preview_text,
                                   len(design_text.encode("utf-8")))
+        problems += check_canvas_renderings(
+            f"{slug}/design.md", entries_by_slug[slug], design_text, canvases_root)
     return problems
 
 

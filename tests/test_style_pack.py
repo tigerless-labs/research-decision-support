@@ -13,14 +13,14 @@ SHIPPED_PACK = SKILL_ROOT / "styles"
 LIGHT = {
     "surface": "#fcfcfb", "page": "#f9f9f7", "ink": "#0b0b0b", "ink-2": "#52514e",
     "muted": "#898781", "grid": "#e1e0d9", "ring": "rgba(11,11,11,0.10)",
-    "wash": "#f1f1ed", "human": "#c2410c",
-    "c-src": "#2a78d6", "c-idea": "#eda100", "c-out": "#4a3aa7", "c-ok": "#008300",
+    "wash": "#f1f1ed", "accent-d": "#c2410c",
+    "accent-a": "#2a78d6", "accent-b": "#eda100", "accent-c": "#4a3aa7", "positive": "#008300",
 }
 DARK = {
     "surface": "#1a1a19", "page": "#0d0d0d", "ink": "#ffffff", "ink-2": "#c3c2b7",
     "muted": "#898781", "grid": "#2c2c2a", "ring": "rgba(255,255,255,0.10)",
-    "wash": "#232322", "human": "#e2673a",
-    "c-src": "#3987e5", "c-idea": "#c98500", "c-out": "#9085e9", "c-ok": "#008300",
+    "wash": "#232322", "accent-d": "#e2673a",
+    "accent-a": "#3987e5", "accent-b": "#c98500", "accent-c": "#9085e9", "positive": "#008300",
 }
 
 
@@ -30,7 +30,7 @@ def palette_block(name, palette):
     return "\n".join(lines)
 
 
-def design_md(slug, light=LIGHT, dark=DARK, extra_frontmatter="", body_extra=""):
+def design_md(slug, light=LIGHT, dark=DARK, extra_frontmatter="", body_extra="", canvases=None):
     frontmatter = "\n".join([
         f"slug: {slug}",
         f"name: {slug.title()}",
@@ -39,8 +39,8 @@ def design_md(slug, light=LIGHT, dark=DARK, extra_frontmatter="", body_extra="")
         palette_block("colors-light", light),
         palette_block("colors-dark", dark),
         "color-aliases:",
-        "  accent: c-out",
-        "  link: c-src",
+        "  accent: accent-c",
+        "  link: accent-a",
         "typography:",
         '  body-family: system-ui, sans-serif',
         '  base-size: "14px"',
@@ -51,16 +51,18 @@ def design_md(slug, light=LIGHT, dark=DARK, extra_frontmatter="", body_extra="")
     ]).strip()
     body = "\n".join([
         "## Atmosphere", "Calm paper, quiet chrome, content leads." + body_extra,
-        "## Layer semantics",
-        "Sources cool blue, synthesis organizing green, ideas warm amber, decisions settled violet.",
+        "## Accent roles",
+        "accent-a cool informational blue, accent-b warm amber, accent-c settled violet",
+        "carrying the most weight, accent-d burnt sienna, positive reserved green.",
         "## Signature moves",
         "- Hairline grid borders", "- Layer-tinted chips", "- Generous reading measure",
         "## Do / Don't",
         "Do keep chrome quiet. Don't introduce colors outside the palette.",
-        "## Invariants",
-        "Single self-contained file. Zero external requests. Escape and sanitize untrusted card",
-        "content. Style both light and dark schemes.",
     ])
+    if canvases:
+        body += "\n## Canvas renderings\n"
+        body += "".join(f"\n### {canvas}\nSwitcher and card forms for {canvas}.\n"
+                        for canvas in canvases)
     return f"---\n{frontmatter}\n---\n\n# {slug.title()}\n\n{body}\n"
 
 
@@ -68,7 +70,7 @@ def preview_md(slug):
     return "\n".join([
         f"# {slug.title()} — calm editorial paper",
         "## Palette",
-        "surface #fcfcfb / #1a1a19; ink #0b0b0b / #ffffff; decisions #4a3aa7 / #9085e9",
+        "surface #fcfcfb / #1a1a19; ink #0b0b0b / #ffffff; accent-c #4a3aa7 / #9085e9",
         "## Typography",
         "System UI stack, 14px base, quiet weights.",
         "## Signature moves",
@@ -110,6 +112,11 @@ class PackFixture:
 
     def __fspath__(self):
         return str(self.root)
+
+    def add_canvas(self, slug):
+        canvas_dir = self.root.parent / "canvases" / slug
+        canvas_dir.mkdir(parents=True, exist_ok=True)
+        (canvas_dir / "spec.md").write_text(f"# canvas: {slug}\n", encoding="utf-8")
 
     def add_style(self, slug, design=None, preview=None):
         style_dir = self.root / slug
@@ -219,7 +226,7 @@ def test_missing_canonical_token_rejected(pack):
 def test_dangling_color_alias_rejected(pack):
     (pack / "alpha-paper" / "design.md").write_text(
         design_md("alpha-paper",
-                  extra_frontmatter="").replace("accent: c-out", "accent: c-nonexistent"),
+                  extra_frontmatter="").replace("accent: accent-c", "accent: accent-nonexistent"),
         encoding="utf-8")
     assert problems_mentioning(check(pack), "alpha-paper/design.md")
 
@@ -248,9 +255,38 @@ def test_preview_must_be_lighter_than_design(pack):
 
 def test_canonical_tokens_cover_template_slots():
     assert set(CANONICAL_TOKENS) == {
-        "surface", "page", "ink", "ink-2", "muted", "grid", "ring", "wash", "human",
-        "c-src", "c-idea", "c-out", "c-ok",
+        "surface", "page", "ink", "ink-2", "muted", "grid", "ring", "wash", "accent-d",
+        "accent-a", "accent-b", "accent-c", "positive",
     }
+
+
+def test_canvas_renderings_happy_path(pack):
+    pack.add_canvas("tabbed-gallery")
+    pack.add_style("alpha-paper", design=design_md("alpha-paper", canvases=["tabbed-gallery"]))
+    pack.write_index([index_entry("alpha-paper", canvas_renderings=["tabbed-gallery"]),
+                      index_entry("beta-slate")])
+    assert check(pack) == []
+
+
+def test_canvas_renderings_unknown_canvas_rejected(pack):
+    pack.add_style("alpha-paper", design=design_md("alpha-paper", canvases=["ghost-canvas"]))
+    pack.write_index([index_entry("alpha-paper", canvas_renderings=["ghost-canvas"]),
+                      index_entry("beta-slate")])
+    assert problems_mentioning(check(pack), "ghost-canvas")
+
+
+def test_canvas_renderings_missing_design_section_rejected(pack):
+    pack.add_canvas("tabbed-gallery")
+    pack.write_index([index_entry("alpha-paper", canvas_renderings=["tabbed-gallery"]),
+                      index_entry("beta-slate")])
+    assert problems_mentioning(check(pack), "tabbed-gallery")
+
+
+def test_canvas_renderings_must_be_string_list(pack):
+    pack.add_canvas("tabbed-gallery")
+    pack.write_index([index_entry("alpha-paper", canvas_renderings="tabbed-gallery"),
+                      index_entry("beta-slate")])
+    assert problems_mentioning(check(pack), "canvas_renderings")
 
 
 def shipped_index():
