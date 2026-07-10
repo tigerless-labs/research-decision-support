@@ -5,11 +5,6 @@
 <style>/*__CSS__*/</style>
 <div id="bar">
   <h1><!--__TITLE__--></h1>
-  <nav id="modes">
-    <button class="strip" data-mode="bird">鸟瞰 · 团簇</button>
-    <button class="strip" data-mode="mid">分类 · tag 组</button>
-    <button class="strip" data-mode="close">细读 · 卡片</button>
-  </nav>
   <input id="q" type="search" placeholder="搜索标题或摘要，回车飞过去…" aria-label="搜索">
   <div id="hint">滚轮缩放 · 拖拽平移 · 单击亮邻边 · 双击进详情 · Esc 清除</div>
 </div>
@@ -68,8 +63,6 @@ function apply(animate) {
   world.style.transition = animate ? "transform .45s ease" : "none";
   world.style.transform = `translate(${sx}px, ${sy}px) scale(${scale})`;
   document.body.dataset.tier = scale < .34 ? "bird" : scale < .78 ? "mid" : "close";
-  document.querySelectorAll("#modes .strip").forEach(b =>
-    b.classList.toggle("on", b.dataset.mode === document.body.dataset.tier));
 }
 const bbox = (() => {
   let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
@@ -84,13 +77,6 @@ function fitAll(animate) {
   sy = 205 + (vh - (bbox.y2 - bbox.y1) * scale) / 2 - bbox.y1 * scale;
   apply(animate);
 }
-function zoomTo(target, animate) {
-  const cx = innerWidth / 2, cy = innerHeight / 2;
-  const wx = (cx - sx) / scale, wy = (cy - sy) / scale;
-  scale = target;
-  sx = cx - wx * scale; sy = cy - wy * scale;
-  apply(animate);
-}
 function flyTo(id, target) {
   const n = byId[id]; if (!n) return;
   scale = target || .95;
@@ -98,13 +84,6 @@ function flyTo(id, target) {
   sy = innerHeight / 2 - (n.y + n.h / 2) * scale;
   apply(true);
 }
-document.querySelectorAll("#modes .strip").forEach(b =>
-  b.addEventListener("click", () => {
-    if (b.dataset.mode === "bird") fitAll(true);
-    else if (b.dataset.mode === "mid") zoomTo(.55, true);
-    else zoomTo(1, true);
-  }));
-
 vp.addEventListener("wheel", e => {
   e.preventDefault();
   const f = Math.exp(-e.deltaY * .0013);
