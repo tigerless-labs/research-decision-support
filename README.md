@@ -1,208 +1,144 @@
 <h1 align="center">research-decision-support</h1>
 
-<p align="center"><strong>Turn what you read into decisions you can defend — every verdict traceable back to its source.</strong></p>
+<p align="center"><strong>Step one of vibe coding: turn scattered reading and half-formed ideas into a design you can defend.</strong></p>
 
 <p align="center">
-  <a href="#quickstart">Quickstart</a> ·
-  <a href="#the-mental-model">Mental model</a> ·
-  <a href="#see-it-on-a-real-project">Live example</a> ·
-  <a href="#the-provenance-map">Provenance map</a>
+  <a href="#the-missing-first-step">Why</a> ·
+  <a href="#what-it-does">What it does</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#see-it-live">Live example</a> ·
+  <a href="#status">Status</a>
 </p>
 
 ---
 
-Most "literature review" folders die the same death: a pile of paper summaries nobody rereads,
-decisions that cite nothing, and — six months later — no way to answer *"why did we choose
-this?"*
+## The missing first step
 
-**research-decision-support** is an [Agent Skill](https://agentskills.io) (works in Claude Code and any
-SKILL.md-compatible agent) that turns reading into a **provenance-linked decision workspace**.
-You read; the agent files every output into one of four layers and keeps the links between
-them honest. The result is a set of decisions where every verdict traces back through the
-ideas it rests on to the papers that earned it.
+Vibe coding is magic when you know what to build. But the hardest projects don't start
+with a design — they start with **thirty open tabs and a head full of fragments**: a
+half-idea from a paper, a counter-idea from a blog post, three approaches fighting each
+other, and no way to tell which one deserves to win.
+
+Prompting an agent to code from that state just launders the confusion into confident
+syntax. What's missing is the step *before* the first prompt: reading the material,
+letting your fragments collide, and settling them into a design — **without losing the
+trail of why**.
+
+**research-decision-support** is an [Agent Skill](https://agentskills.io) (Claude Code
+plugin, works with any SKILL.md-compatible agent) that runs that step with you. It's
+built for two moments:
+
+- you want to build something new, but you have **fragments of ideas, not a mature design**;
+- you have **too many ideas fighting** and need them laid out, linked, and settled.
+
+## What it does
+
+Three moves, one loop:
+
+**1. Read faster, on a beautiful workbench.** Drop anything — papers, repos, blog posts,
+a deep-research report. The agent files each source as a card, grades it (survey > paper >
+docs > forum post), tags it, and anchors the claims to where they came from. A generated
+HTML workbench turns the pile into something you can actually speed-read: one digest card
+per source, filter, search, and tag *while you read*.
+
+**2. Your fragments become idea cards — automatically recorded, visibly connected.** Say a
+half-formed thought in conversation and it lands as a card. The agent links it to the
+evidence that supports it, clusters neighbors, and surfaces conflicts (*these two ideas
+can't both be true*) instead of quietly picking a side. Every card carries an append-only
+log — where it was born, what changed it, what merged into it. Your thinking stops
+evaporating between sessions.
+
+**3. When you say go, the ideas assemble into a design.** One command turns the surviving
+ideas into the output — a system design, an architecture doc, whatever your target
+declares. From then on ideas and output stay in two-way sync: add an idea and the design
+refreshes; edit the design and the agent calibrates the ideas underneath. Every element of
+the design links back through the ideas to the sources that earned it. *Then* you vibe
+code — from a design that can answer "why?" at every line.
+
+### Who decides
+
+You do. The founding rule is **人拍板、agent 跑腿** — the human adjudicates, the agent
+does the legwork. The agent collects, grades, links, drafts, and keeps the ledger; it
+never picks a winner. When sources disagree, it presents the contradiction. When ideas
+fight, it lays them side by side. The design that comes out is *your* judgment, with
+receipts — not an AI's confident guess.
+
+## How it works
+
+Three layers of plain Markdown in your repo, one canvas over them:
 
 ```
-sources ──▶ synthesis ──▶ ideas ──▶ decisions ──▶ (your design docs, downstream)
-(papers      (directions,   (my claims,  (trade-offs      (link back to the
- say)         my verdict)    my words)    → ADRs)          decisions they build on)
+source ──▶ idea ◀──▶ output
+(evidence:        (your judgment:      (the design:
+ agent-filed,      only you create,     assembled on your go,
+ graded,           auto-linked,         two-way synced,
+ claim-anchored)   append-only logs)    every element traceable)
 ```
 
-## The mental model
+- **`sources/`** — agent territory. Everything you touch gets filed and graded
+  automatically; you only verify at decision time.
+- **`ideas/`** — yours. Only a human creates an idea card; the agent may draft and
+  connect, never adjudicate. Two states only: it exists, or you archived it (archives
+  keep their reasons — killed ideas defend you against relitigating them later).
+- **`output/`** — the deliverable. Human-initiated, then it becomes the primary work
+  surface; the agent keeps the ideas synchronized underneath.
+- **The canvas** — a self-contained HTML projection of all of it: no server, no
+  database, no dependencies, dark/light. It's a *projection*, never a store — the
+  Markdown stays the single source of truth; the HTML is rebuilt on demand and thrown
+  away.
 
-The core move is **separating three voices that everyone mixes together**:
+Everything is versionable, greppable, and renders on GitHub. No lock-in: the protocol is
+files + schema; the agent is just the runtime.
 
-| Voice | Card | Layer |
-|---|---|---|
-| *What the paper says* | literature note — claims, method, strengths/weaknesses, facts only | `sources/` |
-| *What I say* | permanent note — an atomic claim in my own words, citing its sources | `ideas/` |
-| *What we decide* | decision record — options weighed on evidence, verdict + consequences | `decisions/` |
-
-Why it matters: when "the paper says" and "I say" live in the same note, your ideas stay
-chained to their original context and can never recombine. Split them, and an idea becomes a
-free-moving part — quotable, reusable, and attackable on its own evidence.
-
-Two layers keep the middle and the end honest:
-
-- **`synthesis/`** — sources clustered into *directions*, each with a concept matrix
-  (sources × dimensions + **a "my verdict" column**). Organized by concept, never by author.
-  Each direction must state its boundary against neighboring directions — no mushy overlap.
-- **`decisions/`** — contested points get a worksheet: **drivers → options →
-  trade-offs → verdict**. Keep ≥2 options alive until evidence collapses them
-  (set-based design); reversible decisions just get tried (two-way doors); the verdict
-  collapses into an append-only ADR that records *what evidence would reopen it*.
-
-What you *build* from the decisions — architecture docs, specs, code — lives downstream in
-your own project, linking back to the decision cards that justify it. Assembly is
-domain-specific; the judgment trail is not. That's why design is not a layer here.
-
-### Layers, not stages
-
-The four layers are **structural, not sequential**. Real research doesn't march
-sources → decisions; you open a decision after the first batch of papers, read more, revise an
-idea, reopen a verdict. The skill never enforces an order — it does exactly one job: **file
-every block you produce into the right layer, keep it atomic, keep the links unbroken.**
-What *is* enforced is the provenance direction: decisions weigh ideas, ideas cite
-sources. That's a dependency graph, not a timeline.
-
-### The intellectual lineage
-
-Nothing here is invented from scratch — it's four proven practices fused into one loop:
-
-- **Zettelkasten** (Luhmann) — atomic notes + explicit links; literature notes ≠ permanent notes
-- **Webster & Watson** — concept matrices: organize a review by concept, not by author
-- **ADR** (Nygard) — append-only decision records with context and consequences
-- **Set-based concurrent engineering** (Toyota) + **ATAM** — keep options alive, decide
-  against weighted quality attributes, respect one-way vs two-way doors
-
-## See it on a real project
+## See it live
 
 [`examples/autoharness/`](examples/autoharness/index.md) is the unedited workspace from a
-real project (an agent-harness self-evolution research effort): **76 sources → 3 directions →
-10 ideas → 4 decisions (1 still open)**, plus the project's downstream design docs linking
-back in — every link live. Start at its [index](examples/autoharness/index.md) and follow
-any decision backwards to the papers that justify it.
-
-## The workbench
-
-One command renders any workspace into a **self-contained HTML workbench** — one page per
-layer, no dependencies, no server, dark/light theme:
+real project (agent-harness self-evolution research): **93 cards, 170 live links** — every
+decision traceable back to the papers that justify it. Render it into the workbench in ten
+seconds:
 
 ```bash
-python3 plugins/research-decision-support/skills/research-decision-support/scripts/build_site.py docs/research-decision-support -o /tmp/workbench --title my-project
-```
-
-- **Read** — the working loop: digest card per source, filter and search, and tag
-  *while you read* — status, direction, a one-line take. Tags are browser drafts;
-  one click exports a patch your agent writes back into the cards.
-- **Compare** — sources clustered by direction, membership derived from your synthesis
-  cards (plus drafts, marked); the unassigned pile is your reading to-do.
-- **Ideas** — your claims with their receipts: what each cites and which decisions
-  weigh it.
-- **Decisions** — the ADR ledger: open vs settled, each linked to the ideas it weighs
-  and the evidence behind it.
-- **Map** — the provenance graph: hover a card to light up its direct links.
-- **Overview** — where you are: counts, directions, progress.
-
-Every card title opens in a built-in reader that renders the markdown properly
-([marked](https://github.com/markedjs/marked) + [DOMPurify](https://github.com/cure53/DOMPurify),
-MIT, embedded at build time — still zero network requests), with cross-card links staying
-inside the reader and a "linked from / links to" trail under each card.
-
-Generated HTML is a throwaway projection — build it into a temp dir (or publish it as an
-artifact), never commit it; the markdown stays the single source of truth. Try it on the
-bundled example in ten seconds:
-
-```bash
-python3 plugins/research-decision-support/skills/research-decision-support/scripts/build_site.py \
+python3 archive/skill-v1/skill/scripts/build_site.py \
   examples/autoharness -o /tmp/workbench-demo --title autoharness
 open /tmp/workbench-demo/index.html
 ```
 
-It's not academia-specific — anything that is "read materials → make a defensible call"
-(vendor evaluations, due diligence, competitive analysis) fits the same four layers.
+It's not just for code projects — anything shaped "read materials → make a defensible
+call" fits: vendor selection, due diligence, competitive analysis, literature review.
 
-## Quickstart
+## Status
 
-**1. Install** (Claude Code — this repo is a plugin marketplace):
+Being rebuilt in the open, and **dogfooded on itself** — this repo's own design was
+produced by running the method on ~80 sources about decision-making methods
+(Zettelkasten, ADR, GRADE evidence grading, set-based design, Shape Up…).
+
+- **v1** (four-layer workspace + HTML workbench) shipped, then taught us the schema was
+  wrong. It lives in [`archive/skill-v1/`](archive/skill-v1/) and still runs — the demo
+  above uses it.
+- **v2** (source → idea → output + canvas, this README) is the redesign now being built.
+  The plugin will land here:
 
 ```
 /plugin marketplace add tigerless-labs/research-decision-support
 /plugin install research-decision-support@research-decision-support
 ```
 
-The skill and its scripts travel together — no manual copying, `/plugin marketplace update`
-pulls new versions. Any other SKILL.md-compatible agent: point it at
-`plugins/research-decision-support/skills/research-decision-support/SKILL.md`.
-
-**2. Use it.** In your project, just talk to your agent:
-
-> *"整理这批论文"* / "file these papers" → literature notes into `sources/`
-> *"做个方向对比"* / "compare these directions" → concept matrix into `synthesis/`
-> *"这个点怎么决策"* / "decide this contested point" → worksheet → ADR into `decisions/`
-
-Everything lands in `docs/research-decision-support/` as plain Markdown with relative links — renders on
-GitHub, backlinks in Obsidian, greppable forever.
-
-**3. Keep it honest:**
-
-The skill bootstraps the workspace on first use, then runs its bundled validators after every
-write (zero dangling links, frontmatter conforms) and renders the workbench to a temp dir on
-demand — all via `${CLAUDE_SKILL_DIR}`, no setup on your side.
-
-**Start light.** A young workspace needs only `sources/` + `ideas/`; synthesis and
-decisions switch on when their signal appears (clusters form, two options contend). The
-skill coaches these moments — it never force-fills four layers.
-
-## Hard rules the skill enforces
-
-1. **Three voices never share a card.** Paper-says / I-say / we-decide are separate files in
-   separate layers.
-2. **Atomic cards, relative Markdown links.** One claim per file; `[[wikilinks]]` are not the
-   link mechanism — plain `](../path.md)` links are checkable and render everywhere.
-3. **ADRs are append-only.** A new decision `supersedes` the old one; history is never edited.
-4. **Real-time capture.** The moment a decision lands in conversation, it lands in a card.
-   Nothing lives only in chat.
-5. **Settled = distilled.** Decided content is written in its final compressed form; deferred
-   content is quarantined in its own minimal section, never interleaved.
-
-## Repo layout
-
-```
-.claude-plugin/marketplace.json          this repo IS the marketplace
-plugins/research-decision-support/
-  .claude-plugin/plugin.json             plugin manifest
-  skills/research-decision-support/
-    SKILL.md                             the skill
-    templates/                           card templates: idea, direction MOC,
-                                         decision worksheet, ADR
-    references/note-types.md             the three-card contract + frontmatter spec
-    scripts/build_site.py           workspace → workbench: overview / read / compare /
-                                         ideas / decisions / map + card reader
-    scripts/build_map.py            the provenance map page alone
-    scripts/check_doc_links.py           dangling-link validator
-    scripts/check_workspace.py           frontmatter/status validator (EN + ZH enums)
-    scripts/init_workspace.py            one-command idempotent workspace bootstrap
-examples/autoharness/                    real 97-card workspace from a live project (not
-                                         installed with the plugin — demo only)
-tests/                                   pytest suite (incl. injection red-team cases)
-LICENSE                                  MIT (vendored marked/DOMPurify keep their headers)
-```
+Star/watch to catch the v2 release.
 
 ## FAQ
 
-**Is this a note-taking app?** No — it's a method your coding agent executes, stored as plain
-Markdown in your repo. No database, no server, no lock-in.
+**Is this a note-taking app?** No — it's a method your coding agent executes, stored as
+plain Markdown in your repo. No database, no server, no account.
 
-**Why not just let the agent "do research"?** Unstructured agent research produces confident
-prose with invisible provenance. The skill makes the middle layer — *your* judgment — an
-explicit, versioned artifact. When a source is retracted or a benchmark shifts, you can trace
-exactly which ideas and decisions are exposed.
+**Why not just ask the agent to "design it for me"?** Because agents are great at
+execution and bad at judgment, and a wrong design costs you the entire branch of code
+built on it. Ten seconds of human adjudication at the fork beats ten thousand tokens down
+the wrong path. This skill makes those ten seconds fast — and permanent.
 
-**Does it work for non-ML domains?** Yes. The layers are domain-free; the example happens to
-be agent-harness research because that's what we built it for.
+**What happens to my rejected ideas?** They're archived with their reasons, not deleted.
+Six months later, when someone asks "why didn't we do X?", you have the card.
 
----
+## License
 
-MIT. Built by [Tigerless AI](https://github.com/tigerless-labs). The skill's operating
-instructions are written primarily in Chinese (the templates and validator messages are
-bilingual-friendly); the method itself is language-neutral.
+MIT — vendored renderers ([marked](https://github.com/markedjs/marked),
+[DOMPurify](https://github.com/cure53/DOMPurify)) keep their original headers.
