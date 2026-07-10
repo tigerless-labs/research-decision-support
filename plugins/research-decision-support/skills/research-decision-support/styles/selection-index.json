@@ -119,6 +119,87 @@
       "canvas_renderings": [
         "tabbed-gallery"
       ]
+    },
+    {
+      "slug": "terminal-green",
+      "name": "Terminal Green",
+      "tagline": "GitHub-dark terminal session: prompt, cursor, ANSI accents, listing rows.",
+      "mood": [
+        "technical",
+        "hacker",
+        "alive"
+      ],
+      "tone": "candid",
+      "formality": "neutral",
+      "density": "compact",
+      "scheme": "dark",
+      "best_for": [
+        "dev-facing demos",
+        "session walkthroughs"
+      ],
+      "avoid_for": [
+        "print handouts",
+        "non-technical readouts"
+      ],
+      "preview": "terminal-green/preview.md",
+      "design": "terminal-green/design.md",
+      "canvas_renderings": [
+        "tabbed-gallery"
+      ]
+    },
+    {
+      "slug": "bold-signal",
+      "name": "Bold Signal",
+      "tagline": "Charcoal poster with one saturated block and ultra-black display type.",
+      "mood": [
+        "loud",
+        "confident",
+        "high-impact"
+      ],
+      "tone": "dramatic",
+      "formality": "playful",
+      "density": "spacious",
+      "scheme": "dark",
+      "best_for": [
+        "pitch moments",
+        "kickoff energy"
+      ],
+      "avoid_for": [
+        "dense evidence tables",
+        "quiet institutional documents"
+      ],
+      "preview": "bold-signal/preview.md",
+      "design": "bold-signal/design.md",
+      "canvas_renderings": [
+        "tabbed-gallery"
+      ]
+    },
+    {
+      "slug": "8-bit-orbit",
+      "name": "8-Bit Orbit",
+      "tagline": "Pixel-arcade neon on deep navy: chunky borders, hard shadows, world-select.",
+      "mood": [
+        "playful",
+        "retro-tech",
+        "energetic"
+      ],
+      "tone": "geeky",
+      "formality": "playful",
+      "density": "comfortable",
+      "scheme": "dark",
+      "best_for": [
+        "hackathon demos",
+        "launch teasers"
+      ],
+      "avoid_for": [
+        "formal decision readouts",
+        "print-bound documents"
+      ],
+      "preview": "8-bit-orbit/preview.md",
+      "design": "8-bit-orbit/design.md",
+      "canvas_renderings": [
+        "tabbed-gallery"
+      ]
     }
   ]
 }
