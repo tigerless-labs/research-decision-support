@@ -4,7 +4,7 @@
 （[output-auto-refresh](../ideas/output-auto-refresh.md)）。
 
 - [system](system.md) — 系统流程图 + 系统架构图（同一文档，脊柱）。
-- [architecture](architecture.md) — skill v2 文件结构：skill 包与工作区两棵树、模块→文件映射。
+- [file-structure](file-structure.md) — skill v2 文件结构：skill 包与工作区两棵树、模块→文件映射。
 - modules/ — 每模块一份细节：
   [source](modules/source.md) · [idea](modules/idea.md) ·
   [output](modules/output.md) · [board](modules/board.md) ·
