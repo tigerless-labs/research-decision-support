@@ -103,9 +103,11 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/build_canvas.py <workspace> -o <temp-dir> [-
 
 Visual style is CSS-only and lives entirely in the style pack at `canvas/styles/`: the
 template carries a `/*__CSS__*/` slot and no CSS of its own. Every style ships a precompiled
-`canvas/styles/<slug>/canvas.css`; the builder's default is pin-and-paper (the canvas's
-native look), and passing `--css canvas/styles/<slug>/canvas.css` switches styles — never
-fork the template or the builder for looks.
+`canvas/styles/<slug>/canvas.css`. The default build embeds the whole pack and a toolbar
+style switcher — the human changes skins live, the choice persists in the browser, and
+pin-and-paper (the canvas's native look) is the initial skin. Passing
+`--css canvas/styles/<slug>/canvas.css` builds a pinned single-style canvas with no
+switcher. Never fork the template or the builder for looks.
 
 Build only into a temp directory or an artifact — the projection never enters the repo.
 Whenever the markdown truth changes, rebuild and republish the canvas in the same turn;
