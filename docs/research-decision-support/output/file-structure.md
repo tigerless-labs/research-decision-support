@@ -26,15 +26,14 @@ plugins/research-decision-support/skills/research-decision-support/
 │   ├── check_style_pack.py   风格包校验（schema、双 palette、禁外链、token 钉死默认模板）
 │   ├── workspace.py          共享读卡器（frontmatter/tag/链接解析，三工具与生成器共用）
 │   └── vendor/               离线渲染依赖（markdown/sanitize/mermaid，mermaid 按需嵌入）
-└── canvas/               画布层：只有一种画布（融合画布），只放结构、不放任何 CSS
-    ├── spec.md               信息架构与交互契约（默认呈现）；契约见 modules/canvas
-    └── template.html         融合画布实现：结构 + 交互 JS，留 CSS 注入槽（已落地，
-                              两张先行模板随之归档）；观感全部来自风格包
+└── canvas/               画布层：只有一种画布（融合画布），结构与风格同层分居
+    ├── template.html         融合画布实现：结构 + 交互 JS，留 CSS 注入槽、自身不含
+    │                         CSS；交互契约的真身在 modules/canvas
+    └── styles/               风格包：agent 可读的纯 UI 规格（palette/字型/几何/气质，
+        └── <slug>/               三层渐进、双 palette，内容无关、只依赖 token 接口），
+                                  每风格随附预编译 canvas.css——构建默认＝pin-and-paper
+                                  （画布原生观感），--css 换任意其他
 ```
-
-风格包 `styles/`（agent 可读的纯 UI 规格：palette/字型/几何/气质，三层渐进、双
-palette；内容无关，只依赖 token 接口；目录迁挂 canvas/ 下待办）每风格随附预编译
-`canvas.css`——构建默认＝pin-and-paper（画布原生观感），`--css` 换任意其他。
 
 - **规则与模板分离**：模板无关不变量（真身驱动、连线＝引用、布局派生）活在
   build_canvas 与 protocol 契约；canvas/ 只有形。

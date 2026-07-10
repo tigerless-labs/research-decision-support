@@ -287,7 +287,7 @@ def check(pack_root):
 
 
 def main(argv):
-    default = Path(__file__).resolve().parent.parent / "styles"
+    default = Path(__file__).resolve().parent.parent / "canvas" / "styles"
     pack = argv[1] if len(argv) > 1 else default
     problems = check(pack)
     for problem in problems:

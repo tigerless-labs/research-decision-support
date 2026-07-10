@@ -92,7 +92,8 @@ recommend a form from [references/output-forms/](references/output-forms/system-
 
 The canvas is the human's main thinking surface and is **only a projection** — it holds no
 facts and accepts no writes that bypass markdown. There is exactly one canvas — the unified
-canvas ([spec](canvas/spec.md), [template](canvas/template.html)) — and one fixed builder:
+canvas ([template](canvas/template.html); its interaction contract lives in the workspace's
+canvas module doc) — and one fixed builder:
 rules (truth-driven, edges = in-card references, layout derived from references + tags) live
 in the builder; the workspace path is the only required input.
 
@@ -100,17 +101,17 @@ in the builder; the workspace path is the only required input.
 python3 ${CLAUDE_SKILL_DIR}/scripts/build_canvas.py <workspace> -o <temp-dir> [--css style.css] [--title '...']
 ```
 
-Visual style is CSS-only and lives entirely in the style pack: `canvas/` holds structure
-(spec + template with a `/*__CSS__*/` slot) and **no CSS**. Every style ships a precompiled
-`styles/<slug>/canvas.css`; the builder's default is `styles/pin-and-paper/canvas.css`
-(the canvas's native look), and passing `--css styles/<slug>/canvas.css` switches styles —
-never fork the template or the builder for looks.
+Visual style is CSS-only and lives entirely in the style pack at `canvas/styles/`: the
+template carries a `/*__CSS__*/` slot and no CSS of its own. Every style ships a precompiled
+`canvas/styles/<slug>/canvas.css`; the builder's default is pin-and-paper (the canvas's
+native look), and passing `--css canvas/styles/<slug>/canvas.css` switches styles — never
+fork the template or the builder for looks.
 
 Build only into a temp directory or an artifact — the projection never enters the repo.
 Whenever the markdown truth changes, rebuild and republish the canvas in the same turn;
 never edit the HTML directly.
 
-To pick a style, read [styles/selection-index.json](styles/selection-index.json) — never
+To pick a style, read [canvas/styles/selection-index.json](canvas/styles/selection-index.json) — never
 bulk-read the pack. Open a style's `design.md` only when (re)compiling its canvas.css —
 the spec is the truth, so whenever a design.md changes, recompile its canvas.css in the
 same change (the pack validator checks token coverage in both palettes and bans external

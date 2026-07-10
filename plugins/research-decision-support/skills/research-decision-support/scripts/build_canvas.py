@@ -11,7 +11,7 @@ SKILL_DIR = Path(__file__).resolve().parent.parent
 VENDOR = Path(__file__).resolve().parent / "vendor"
 TEMPLATE = SKILL_DIR / "canvas" / "template.html"
 DEFAULT_STYLE = "pin-and-paper"
-DEFAULT_CSS = SKILL_DIR / "styles" / DEFAULT_STYLE / "canvas.css"
+DEFAULT_CSS = SKILL_DIR / "canvas" / "styles" / DEFAULT_STYLE / "canvas.css"
 SUBTYPE_ZH = {"methods": "方法", "products": "产品", "github": "仓库",
               "blogs": "博客", "papers": "论文"}
 
