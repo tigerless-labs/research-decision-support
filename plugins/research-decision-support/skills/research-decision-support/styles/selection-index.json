@@ -200,6 +200,34 @@
       "canvas_renderings": [
         "tabbed-gallery"
       ]
+    },
+    {
+      "slug": "pin-and-paper",
+      "name": "Pin & Paper",
+      "tagline": "Bright yellow paper, handwritten ink blue, pinned notes and kraft blocks set slightly askew.",
+      "mood": [
+        "playful",
+        "handmade",
+        "energetic"
+      ],
+      "tone": "casual",
+      "formality": "playful",
+      "density": "comfortable",
+      "scheme": "light",
+      "best_for": [
+        "workshops and brainstorm readouts",
+        "zine-flavored idea shares"
+      ],
+      "avoid_for": [
+        "formal executive reviews",
+        "dense data tables"
+      ],
+      "preview": "pin-and-paper/preview.md",
+      "design": "pin-and-paper/design.md",
+      "canvas_renderings": [
+        "tabbed-gallery",
+        "single-canvas"
+      ]
     }
   ]
 }
