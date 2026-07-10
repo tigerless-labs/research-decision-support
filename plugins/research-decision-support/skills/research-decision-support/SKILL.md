@@ -100,18 +100,18 @@ in the builder; the workspace path is the only required input.
 python3 ${CLAUDE_SKILL_DIR}/scripts/build_canvas.py <workspace> -o <temp-dir> [--css style.css] [--title '...']
 ```
 
-Visual style is CSS-only: the template carries a `/*__CSS__*/` slot filled from
-[canvas/style.css](canvas/style.css) by default; pass `--css` with another stylesheet to
-switch styles — never fork the template or the builder for looks.
+Visual style is CSS-only and lives entirely in the style pack: `canvas/` holds structure
+(spec + template with a `/*__CSS__*/` slot) and **no CSS**. Every style ships a precompiled
+`styles/<slug>/canvas.css`; the builder's default is `styles/pin-and-paper/canvas.css`
+(the canvas's native look), and passing `--css styles/<slug>/canvas.css` switches styles —
+never fork the template or the builder for looks.
 
 Build only into a temp directory or an artifact — the projection never enters the repo.
 Whenever the markdown truth changes, rebuild and republish the canvas in the same turn;
 never edit the HTML directly.
 
-For visual styling beyond the template default, use the style pack: read
-[styles/selection-index.json](styles/selection-index.json) first to pick — never
-bulk-read the pack. Every style ships a precompiled `styles/<slug>/canvas.css`;
-selecting it is just passing that file via `--css`. Open a style's `design.md` only
-when (re)compiling its canvas.css — the spec is the truth, so whenever a design.md
-changes, recompile its canvas.css in the same change (the pack validator checks
-token coverage in both palettes and bans external reach).
+To pick a style, read [styles/selection-index.json](styles/selection-index.json) — never
+bulk-read the pack. Open a style's `design.md` only when (re)compiling its canvas.css —
+the spec is the truth, so whenever a design.md changes, recompile its canvas.css in the
+same change (the pack validator checks token coverage in both palettes and bans external
+reach).

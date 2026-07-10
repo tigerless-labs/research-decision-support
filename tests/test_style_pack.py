@@ -327,7 +327,8 @@ def shipped_designs():
 
 
 def template_palettes():
-    css = (SKILL_ROOT / "canvas/style.css").read_text(encoding="utf-8")
+    from build_canvas import DEFAULT_CSS
+    css = DEFAULT_CSS.read_text(encoding="utf-8")
     blocks = re.findall(r":root\s*\{([^}]*)\}", css)
     token = re.compile(r"--([a-z0-9-]+):\s*([^;]+);")
     return [dict(token.findall(block)) for block in blocks]
@@ -353,12 +354,11 @@ def test_shipped_styles_ship_both_palettes_with_canonical_tokens():
 
 
 def test_builder_default_theme_covers_canonical_tokens():
-    # The unified canvas ships a single light palette so far; the dark palette
-    # is a recorded residual (see output/modules/canvas.md). Every palette block
-    # that exists must cover the canonical token interface.
+    # The builder default is a style-pack member (pin-and-paper), so it must
+    # carry the canonical token interface in both its light and dark palettes.
     palettes = template_palettes()
-    assert palettes
-    for palette in palettes:
+    assert len(palettes) >= 2
+    for palette in palettes[:2]:
         assert set(CANONICAL_TOKENS) <= set(palette)
 
 
