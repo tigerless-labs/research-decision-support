@@ -82,6 +82,7 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body); }
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .card .badge { position:absolute; right:8px; top:6px; font-family:var(--mono);
   font-size:9.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-2); }
+.card .badge + .t { margin-top:12px; }
 .card.note { background:color-mix(in srgb, var(--accent-a) 26%, var(--surface)); }
 .card.note::before { content:""; position:absolute; top:-3px; left:-3px; width:13px;
   height:13px; background:var(--accent-a); border:3px solid var(--grid); }

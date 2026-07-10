@@ -13,6 +13,6 @@
 |---|---|
 | tests/test_workspace_tools.py | 初始化器幂等 + 校验器契约（ideas 必填、单 tag、status 退役、引用向前无环）+ 悬链检查 |
 | tests/test_build_canvas.py | 收集器不变量（排除 archive/index、frontmatter tag、引用边、output 文档）+ 单文件自包含 + 注入防护 + 投影护栏（拒写工作区）+ 模板注册表 |
-| tests/test_style_pack.py | 风格包校验器：索引↔目录双射、schema、色值白名单、禁外链红队用例、canvas_renderings 存在性+章节对应、画板模板 token 集与 schema 锁定 |
+| tests/test_style_pack.py | 风格包校验器：索引↔目录双射、schema、色值白名单、禁外链红队用例、canvas_renderings 存在性+章节对应、画板模板 token 集与 schema 锁定、卡片 badge–标题间距不变量 |
 
 （v1 的测试随 skill v1 整体停放在 `archive/skill-v1/tests/`，不在根测试跑道上。）

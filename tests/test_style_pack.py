@@ -362,6 +362,16 @@ def test_builder_default_theme_covers_canonical_tokens():
         assert set(CANONICAL_TOKENS) <= set(palette)
 
 
+def test_shipped_canvas_css_clears_title_below_badge():
+    rule = re.compile(
+        r"\.card\s+\.badge\s*\+\s*\.t\s*\{[^}]*margin-top\s*:\s*([\d.]+)px")
+    for entry in shipped_index()["styles"]:
+        css = (SHIPPED_PACK / entry["slug"] / "canvas.css").read_text(encoding="utf-8")
+        match = rule.search(css)
+        assert match, entry["slug"]
+        assert float(match.group(1)) > 0, entry["slug"]
+
+
 def test_shipped_previews_are_lighter_than_designs():
     for entry in shipped_index()["styles"]:
         preview = (SHIPPED_PACK / entry["preview"]).stat().st_size
