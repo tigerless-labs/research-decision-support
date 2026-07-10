@@ -95,7 +95,7 @@ dialog::backdrop { background:rgba(10,10,9,.45); backdrop-filter:blur(2px); }
 .md code { background:var(--wash); border-radius:5px; padding:1px 5px; font-size:12.5px; }
 .md pre { background:var(--wash); border-radius:9px; padding:12px 14px; overflow-x:auto; }
 .md blockquote { border-left:3px solid var(--grid); margin:0; padding:2px 14px; color:var(--ink2); }
-#system { display:none; max-width:1180px; margin:0 auto; padding:14px 24px 60px; }
+#system { max-width:1180px; margin:0 auto; padding:14px 24px 60px; }
 .docwrap { background:var(--surface); border:1px solid var(--grid); border-radius:14px;
   padding:18px 22px; margin-bottom:16px; }
 .docwrap .mermaid { display:flex; justify-content:center; overflow-x:auto; padding:8px 0; }
@@ -125,7 +125,7 @@ dialog::backdrop { background:rgba(10,10,9,.45); backdrop-filter:blur(2px); }
   <input id="q-src" type="search" placeholder="搜索标题或摘要…" aria-label="搜索证据卡">
 </div>
 <main id="grid-src" style="display:none"></main>
-<section id="system"></section>
+<section id="system" style="display:none"></section>
 <dialog id="dlg"><div class="dlg">
   <aside class="rail" id="rail"></aside>
   <section class="content" id="content"></section>
@@ -310,7 +310,7 @@ function buildSystem() {
   if (!docs.length) {
     const seat = el("div", "empty");
     seat.append(el("b", "", "output 还没有生成——这个位置为它留着"),
-      el("span", "", "装配由你启动：想法积累到位后，说一声"装配 output"即可。生成后，两边任意改动都会自动同步到另一边。"));
+      el("span", "", "装配由你启动：想法积累到位后，说一声「装配 output」即可。生成后，两边任意改动都会自动同步到另一边。"));
     systemEl.append(seat);
     return;
   }
