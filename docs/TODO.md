@@ -13,3 +13,4 @@
 - [ ] vendored mermaid.min.js 3.5MB 减重评估（现仅 output 用到 mermaid 时才嵌入 HTML）。
 - [ ] 其余 7 风格的 `### single-canvas` 定制呈现章节（pin-and-paper 已带，预览 artifact 已给按层卡形方向，随 single-canvas 实现落地）。
 - [ ] skill 解冻时：references/output-forms/system-design.md 的流程图规格更新为"时间轴泳道 flowchart（人上 agent 下、编号之字形左右推进、同步回边）"，与 system.md 现状对齐。
+- [ ] docs 入 git（PR #13）后的陈述清扫："不入 git / docs 不入 git" 残句仍在 output/file-structure.md、logs.md 头部、SKILL.md 等处，逐一改为入 git 后的事实。
