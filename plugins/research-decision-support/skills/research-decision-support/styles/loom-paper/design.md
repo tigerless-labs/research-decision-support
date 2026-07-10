@@ -1,7 +1,7 @@
 ---
 slug: loom-paper
 name: Loom Paper
-version: 1
+version: 2
 scheme: dual
 colors-light:
   surface: "#fcfcfb"
@@ -11,12 +11,12 @@ colors-light:
   muted: "#898781"
   grid: "#e1e0d9"
   wash: "#f1f1ed"
-  human: "#c2410c"
+  accent-d: "#c2410c"
   ring: "rgba(11,11,11,0.10)"
-  c-src: "#2a78d6"
-  c-idea: "#eda100"
-  c-out: "#4a3aa7"
-  c-ok: "#008300"
+  accent-a: "#2a78d6"
+  accent-b: "#eda100"
+  accent-c: "#4a3aa7"
+  positive: "#008300"
 colors-dark:
   surface: "#1a1a19"
   page: "#0d0d0d"
@@ -25,16 +25,16 @@ colors-dark:
   muted: "#898781"
   grid: "#2c2c2a"
   wash: "#232322"
-  human: "#e2673a"
+  accent-d: "#e2673a"
   ring: "rgba(255,255,255,0.10)"
-  c-src: "#3987e5"
-  c-idea: "#c98500"
-  c-out: "#9085e9"
-  c-ok: "#008300"
+  accent-a: "#3987e5"
+  accent-b: "#c98500"
+  accent-c: "#9085e9"
+  positive: "#008300"
 color-aliases:
-  accent: c-out
-  positive: c-ok
-  link: c-src
+  accent: accent-c
+  positive: positive
+  link: accent-a
 typography:
   body-family: system-ui, -apple-system, Segoe UI, sans-serif
   heading-family: inherit
@@ -63,36 +63,28 @@ almost-black text on quiet surfaces; chrome (navigation, labels, borders) recede
 grays and hairlines. Nothing glows, nothing gradients — the page should read like a well-set
 working document, not a product landing page.
 
-## Layer semantics
+## Accent roles
 
-Each research layer owns one hue, used only as an identity accent (chips, badges, count
-pills, left borders) — never as a background wash:
+Each accent owns one hue, used only as an identity mark (chips, badges, count pills, left
+borders) — never as a background wash:
 
-- sources — cool informational blue: raw material, not yet judged.
-- ideas — warm amber: claims still warming into conviction.
-- output — deep violet: assembled, deliberate, weighty.
-- human — burnt sienna: the human actor's mark — swimlanes, human-triggered nodes.
-- ok — reserved green for positive/valid states only.
+- accent-a — cool informational blue: calm, matter-of-fact.
+- accent-b — warm amber: attention without alarm.
+- accent-c — deep violet: deliberate and weighty — the style's default accent.
+- accent-d — burnt sienna: the hand-made, manual mark.
+- positive — reserved green for positive/valid states only.
 
 ## Signature moves
 
 - Hairline borders in the grid token separate everything; no drop shadows for structure.
-- Layer-tinted chips and count pills carry the layer hue at full strength on neutral ground.
-- Tinted translucency comes from mixing a layer color with transparency, never a new hex.
+- Accent-tinted chips and count pills carry their hue at full strength on neutral ground.
+- Tinted translucency comes from mixing an accent with transparency, never a new hex.
 - One reading measure: content column capped at the max-width token, generous side padding.
 - The theme toggle is a quiet bordered pill in the navigation, not an icon spectacle.
 
 ## Do / Don't
 
-Do let text dominate; do use the layer hue of whatever layer the element belongs to; do keep
+Do let text dominate; do use the accent role the element belongs to; do keep
 interactive affordances flat with border emphasis on hover. Don't introduce colors outside
 the palette, don't use pure white/black surfaces in either scheme, don't decorate with
-gradients or shadows, don't color body text with layer hues.
-
-## Invariants
-
-Every projection in this style is a single self-contained HTML file making zero external
-requests (system font stacks only). Card titles, bodies, and frontmatter values are
-untrusted: escape on interpolation, sanitize rendered markdown, guard script-tag breakout in
-embedded JSON. Both light and dark are fully styled via prefers-color-scheme plus a
-data-theme override toggle.
+gradients or shadows, don't color body text with accent hues.

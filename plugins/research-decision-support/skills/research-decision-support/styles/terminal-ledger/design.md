@@ -1,7 +1,7 @@
 ---
 slug: terminal-ledger
 name: Terminal Ledger
-version: 1
+version: 2
 scheme: dark
 colors-light:
   surface: "#fbfcfb"
@@ -11,12 +11,12 @@ colors-light:
   muted: "#6b756b"
   grid: "#dde3dd"
   wash: "#eef2ee"
-  human: "#b5541d"
+  accent-d: "#b5541d"
   ring: "rgba(16,21,16,0.12)"
-  c-src: "#1d6fb8"
-  c-idea: "#a86e00"
-  c-out: "#5b46c2"
-  c-ok: "#1d7a3e"
+  accent-a: "#1d6fb8"
+  accent-b: "#a86e00"
+  accent-c: "#5b46c2"
+  positive: "#1d7a3e"
 colors-dark:
   surface: "#111411"
   page: "#0a0c0a"
@@ -25,16 +25,16 @@ colors-dark:
   muted: "#6b756b"
   grid: "#232823"
   wash: "#161a16"
-  human: "#e08a4d"
+  accent-d: "#e08a4d"
   ring: "rgba(230,237,230,0.12)"
-  c-src: "#4ea8de"
-  c-idea: "#d99a2b"
-  c-out: "#a68bfa"
-  c-ok: "#37a862"
+  accent-a: "#4ea8de"
+  accent-b: "#d99a2b"
+  accent-c: "#a68bfa"
+  positive: "#37a862"
 color-aliases:
-  accent: c-ok
-  positive: c-ok
-  link: c-src
+  accent: positive
+  positive: positive
+  link: accent-a
 typography:
   body-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
   heading-family: system-ui, -apple-system, Segoe UI, sans-serif
@@ -64,35 +64,27 @@ lighter, separated by thin grid lines like a ledger ruled in ink. Everything ali
 tight rhythm — this style trades warmth for scan speed. In its light fallback the same
 discipline holds on paper-green tinted white.
 
-## Layer semantics
+## Accent roles
 
-Layer hues read like syntax highlighting — informational, never decorative:
+Accent hues read like syntax highlighting — informational, never decorative:
 
-- sources — clear signal blue: inputs on the wire.
-- ideas — amber warning-light: claims under evaluation.
-- output — violet phosphor: committed state.
-- human — rust amber: operator input, distinct from machine output.
-- ok — green reserved for pass/valid markers only.
+- accent-a — clear signal blue: inputs on the wire.
+- accent-b — amber warning-light: things under evaluation.
+- accent-c — violet phosphor: committed state.
+- accent-d — rust amber: operator input, distinct from machine output.
+- positive — green reserved for pass/valid markers only.
 
 ## Signature moves
 
 - Monospace body text; proportional type only in headings and navigation.
 - Square corners and thin rules; density comes from tight spacing, not smaller ink.
 - Tabular layouts everywhere data allows: aligned columns, right-aligned counts.
-- Status rendered as bracketed uppercase tags in layer hues on the panel surface.
+- Status rendered as bracketed uppercase tags in accent hues on the panel surface.
 - Wide reading measure to hold tables; prose lines still capped for readability.
 
 ## Do / Don't
 
 Do keep every accent at identity strength on dark neutral ground; do align numerics in
 columns; do prefer one dense table over three sparse cards. Don't add glow, scanline, or
-CRT effects; don't use layer hues as backgrounds; don't let monospace leak into long prose
+CRT effects; don't use accent hues as backgrounds; don't let monospace leak into long prose
 paragraphs beyond summaries.
-
-## Invariants
-
-Every projection in this style is a single self-contained HTML file making zero external
-requests (system font stacks only). Card titles, bodies, and frontmatter values are
-untrusted: escape on interpolation, sanitize rendered markdown, guard script-tag breakout in
-embedded JSON. Both light and dark are fully styled via prefers-color-scheme plus a
-data-theme override toggle.

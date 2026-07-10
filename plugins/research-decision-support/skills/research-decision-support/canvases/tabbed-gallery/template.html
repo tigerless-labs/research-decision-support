@@ -6,26 +6,26 @@
 :root {
   --surface:#fcfcfb; --page:#f9f9f7; --ink:#0b0b0b; --ink-2:#52514e;
   --muted:#898781; --grid:#e1e0d9; --ring:rgba(11,11,11,0.10);
-  --wash:#f1f1ed; --human:#c2410c;
-  --c-src:#2a78d6; --c-idea:#eda100; --c-out:#4a3aa7; --c-ok:#008300;
+  --wash:#f1f1ed; --accent-d:#c2410c;
+  --accent-a:#2a78d6; --accent-b:#eda100; --accent-c:#4a3aa7; --positive:#008300;
 }
 @media (prefers-color-scheme: dark) { :root {
   --surface:#1a1a19; --page:#0d0d0d; --ink:#ffffff; --ink-2:#c3c2b7;
   --muted:#898781; --grid:#2c2c2a; --ring:rgba(255,255,255,0.10);
-  --wash:#232322; --human:#e2673a;
-  --c-src:#3987e5; --c-idea:#c98500; --c-out:#9085e9; --c-ok:#008300;
+  --wash:#232322; --accent-d:#e2673a;
+  --accent-a:#3987e5; --accent-b:#c98500; --accent-c:#9085e9; --positive:#008300;
 }}
 :root[data-theme="light"] {
   --surface:#fcfcfb; --page:#f9f9f7; --ink:#0b0b0b; --ink-2:#52514e;
   --muted:#898781; --grid:#e1e0d9; --ring:rgba(11,11,11,0.10);
-  --wash:#f1f1ed; --human:#c2410c;
-  --c-src:#2a78d6; --c-idea:#eda100; --c-out:#4a3aa7; --c-ok:#008300;
+  --wash:#f1f1ed; --accent-d:#c2410c;
+  --accent-a:#2a78d6; --accent-b:#eda100; --accent-c:#4a3aa7; --positive:#008300;
 }
 :root[data-theme="dark"] {
   --surface:#1a1a19; --page:#0d0d0d; --ink:#ffffff; --ink-2:#c3c2b7;
   --muted:#898781; --grid:#2c2c2a; --ring:rgba(255,255,255,0.10);
-  --wash:#232322; --human:#e2673a;
-  --c-src:#3987e5; --c-idea:#c98500; --c-out:#9085e9; --c-ok:#008300;
+  --wash:#232322; --accent-d:#e2673a;
+  --accent-a:#3987e5; --accent-b:#c98500; --accent-c:#9085e9; --positive:#008300;
 }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--page); color:var(--ink);
@@ -51,7 +51,7 @@ main { max-width:1180px; margin:0 auto; padding:14px 24px 60px;
   padding:15px 16px 13px; cursor:pointer; display:flex; flex-direction:column; gap:8px;
   transition:border-color .12s, transform .12s; }
 .card:hover { border-color:var(--ink-2); transform:translateY(-1px); }
-.card:focus-visible { outline:2px solid var(--c-src); outline-offset:2px; }
+.card:focus-visible { outline:2px solid var(--accent-a); outline-offset:2px; }
 .card .head { display:flex; gap:8px; align-items:baseline; }
 .card .t { font-weight:650; font-size:14.5px; line-height:1.35; text-wrap:balance; }
 .badge { font-size:11px; color:var(--ink-2); border:1px solid var(--grid); background:var(--wash);
@@ -92,7 +92,7 @@ dialog::backdrop { background:rgba(10,10,9,.45); backdrop-filter:blur(2px); }
 .md h1 { font-size:19px; margin:.4em 0 .5em; line-height:1.35; text-wrap:balance; }
 .md h2 { font-size:15.5px; margin:1.3em 0 .4em; }
 .md p, .md li { max-width:72ch; }
-.md a { color:var(--c-src); }
+.md a { color:var(--accent-a); }
 .md table { border-collapse:collapse; font-size:13px; display:block; overflow-x:auto; }
 .md th, .md td { border:1px solid var(--grid); padding:5px 10px; text-align:left; }
 .md th { background:var(--wash); }
@@ -206,8 +206,8 @@ const dlg = document.getElementById("dlg");
 const rail = document.getElementById("rail");
 const content = document.getElementById("content");
 const STAGES = [
-  ["sources", "来源", "材料说了什么", "--c-src"],
-  ["ideas", "想法", "我据此主张什么", "--c-idea"],
+  ["sources", "来源", "材料说了什么", "--accent-a"],
+  ["ideas", "想法", "我据此主张什么", "--accent-b"],
 ];
 const EMPTY = { sources: "未链接来源", ideas: "尚未提炼想法" };
 
@@ -285,10 +285,10 @@ function openDoc(path) {
   rail.append(el("h3", "", "output 文档"), el("p", "hint", "装配产物 · 点击切换"));
   Object.keys(DATA.output).forEach(p => {
     const wrap = el("div", "stage filled");
-    wrap.style.setProperty("--sc", "var(--c-out)");
+    wrap.style.setProperty("--sc", "var(--accent-c)");
     const a = el("a", "node", p.replace(/^output\//, ""));
     a.href = "#";
-    if (p === path) { a.style.fontWeight = "650"; a.style.borderColor = "var(--c-out)"; }
+    if (p === path) { a.style.fontWeight = "650"; a.style.borderColor = "var(--accent-c)"; }
     a.addEventListener("click", e => { e.preventDefault(); openDoc(p); });
     wrap.append(el("span", "mark"), a);
     rail.append(wrap);

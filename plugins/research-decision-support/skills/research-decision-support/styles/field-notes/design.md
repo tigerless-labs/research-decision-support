@@ -1,7 +1,7 @@
 ---
 slug: field-notes
 name: Field Notes
-version: 1
+version: 2
 scheme: light
 colors-light:
   surface: "#fffdf5"
@@ -11,12 +11,12 @@ colors-light:
   muted: "#98937f"
   grid: "#e8e1cd"
   wash: "#f3ecdc"
-  human: "#c24d0c"
+  accent-d: "#c24d0c"
   ring: "rgba(31,36,48,0.12)"
-  c-src: "#3b82d9"
-  c-idea: "#f0a01f"
-  c-out: "#7048c8"
-  c-ok: "#2e9e44"
+  accent-a: "#3b82d9"
+  accent-b: "#f0a01f"
+  accent-c: "#7048c8"
+  positive: "#2e9e44"
 colors-dark:
   surface: "#201f1a"
   page: "#161512"
@@ -25,16 +25,16 @@ colors-dark:
   muted: "#8d8875"
   grid: "#35332a"
   wash: "#2a2820"
-  human: "#e78a52"
+  accent-d: "#e78a52"
   ring: "rgba(242,238,226,0.12)"
-  c-src: "#5c9ee8"
-  c-idea: "#f2b13f"
-  c-out: "#9d7ff0"
-  c-ok: "#46b45e"
+  accent-a: "#5c9ee8"
+  accent-b: "#f2b13f"
+  accent-c: "#9d7ff0"
+  positive: "#46b45e"
 color-aliases:
-  accent: c-idea
-  positive: c-ok
-  link: c-src
+  accent: accent-b
+  positive: positive
+  link: accent-a
 typography:
   body-family: system-ui, -apple-system, Segoe UI, sans-serif
   heading-family: system-ui, -apple-system, Segoe UI, sans-serif
@@ -53,8 +53,8 @@ components:
 
 # Field Notes
 
-A warm notebook for exploratory sessions: cream paper, navy-leaning ink, bright layer inks
-used like colored pens, and enough air that half-formed ideas don't feel crowded.
+A warm notebook for exploratory sessions: cream paper, navy-leaning ink, bright accent
+inks used like colored pens, and enough air that half-formed thoughts don't feel crowded.
 
 ## Atmosphere
 
@@ -62,35 +62,27 @@ Light-native. Warm cream page with slightly brighter card stock; ink is a soft n
 rather than pure black. Corners round generously, spacing is loose, headings are heavy and
 friendly. The dark fallback keeps the notebook warmth — aged-paper darks, never cold gray.
 
-## Layer semantics
+## Accent roles
 
-Layer hues behave like a three-pen set, saturated and cheerful but semantically strict:
+Accents behave like a four-pen set, saturated and cheerful but semantically strict:
 
-- sources — bright pen blue: material collected in the field.
-- ideas — marker amber: the style's accent — this is a thinking-out-loud style.
-- output — vivid violet: the assembled piece taking shape.
-- human — warm terracotta: the hand holding the pen — human-only actions.
-- ok — reserved green for confirmed/valid marks only.
+- accent-a — bright pen blue: matter-of-fact notes.
+- accent-b — marker amber: the style's lead accent — thinking out loud.
+- accent-c — vivid violet: the piece taking shape.
+- accent-d — warm terracotta: the hand holding the pen.
+- positive — reserved green for confirmed/valid marks only.
 
 ## Signature moves
 
 - Big rounded cards on cream, one idea per card, generous 36px section gaps.
 - Heavy (800) headings at modest sizes — friendly weight, not shouting scale.
-- Layer hue appears as a fat left border plus a matching pill; body stays ink.
+- Accent hue appears as a fat left border plus a matching pill; body stays ink.
 - Status pills are rounded and lowercase, like margin scribbles formalized.
 - Empty states and unassigned buckets are first-class, cheerfully labeled.
 
 ## Do / Don't
 
-Do leave whitespace even when content is short; do let the ideas layer set the visual
+Do leave whitespace even when content is short; do let accent-b set the visual
 temperature; do use the muted token for meta-text so notes read as notes. Don't compress
 into tables when cards will do; don't use pure white or pure black anywhere; don't render
 this style for formal sign-off documents.
-
-## Invariants
-
-Every projection in this style is a single self-contained HTML file making zero external
-requests (system font stacks only). Card titles, bodies, and frontmatter values are
-untrusted: escape on interpolation, sanitize rendered markdown, guard script-tag breakout in
-embedded JSON. Both light and dark are fully styled via prefers-color-scheme plus a
-data-theme override toggle.
