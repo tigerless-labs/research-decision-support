@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+from discover_workspace import DEFAULT_LOCATION, discover, record_workspace
+
 SKELETON = {
     "index.md": (
         "# design-harness workspace\n\n"
@@ -50,8 +52,18 @@ def init(workspace):
 
 
 def main(argv):
-    workspace = argv[1] if len(argv) > 1 else "docs/design-harness"
+    if len(argv) > 1:
+        workspace = Path(argv[1])
+    else:
+        found = discover(".")
+        if len(found) > 1:
+            print(f"{len(found)} candidate workspaces — pass one explicitly:")
+            for candidate in found:
+                print(f"  {candidate}")
+            return 1
+        workspace = found[0] if found else DEFAULT_LOCATION
     created = init(workspace)
+    record_workspace(".", workspace)
     if created:
         print(f"ok: initialized {workspace} — created {', '.join(created)}")
     else:

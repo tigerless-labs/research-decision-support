@@ -11,6 +11,9 @@ power.
   claim anchoring, ledger writing, refreshing existing output, back-calibrating human
   output edits into ideas (transcription; judgment is the human's), and consolidating
   scattered observations into decision drafts.
+- Locates the workspace before operating (pointer file, default location, then find by
+  name); when discovery is ambiguous — many candidates or none — it asks the human and
+  never initializes a new workspace silently.
 - Idea creation and the first output assembly can only be triggered by the human;
   archival by either human or agent.
 - Source disagreements must go on the board as-is; the agent never picks a side.
