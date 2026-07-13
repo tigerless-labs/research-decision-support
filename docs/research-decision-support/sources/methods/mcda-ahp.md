@@ -1,18 +1,21 @@
 ---
-tags: [结构化比较]
+tags: [structured-comparison]
 ---
 
-# [方法] MCDA / AHP — 把「哪个更重要」数学化
+# [Method] MCDA / AHP -- turning "which matters more" into mathematics
 
-多准则决策分析；AHP＝Saaty（1970s）。背书：③ 学术文献巨量，但 AHP 有已知硬伤
-（rank reversal 争议）。
+Multi-criteria decision analysis; AHP = Saaty (1970s). Backing: (3) a vast academic literature,
+but AHP has a known flaw (the rank reversal controversy).
 
-核心逻辑：目标拆成准则树，准则间**两两比较**（1-9 标度）导出权重（特征向量法，
-附一致性检验），选项按准则打分×权重汇总。收尾必做**敏感性分析**：权重微调会不会
-翻转排名——会则结论脆弱。
+Core logic: decompose the goal into a criteria tree, derive weights from **pairwise comparisons**
+between criteria (1-9 scale, eigenvector method with a consistency check), then score options per
+criterion x weight and aggregate. Always finish with **sensitivity analysis**: does a small weight
+adjustment flip the ranking -- if so, the conclusion is fragile.
 
-边界：流程重，杀鸡勿用；两两比较数随准则数平方增长；rank reversal（加入无关选项
-改变原有排名）是理论级缺陷。
+Boundaries: heavy process, not for small game; the number of pairwise comparisons grows with the
+square of the criteria count; rank reversal (adding an irrelevant option changes the existing
+ranking) is a theory-level defect.
 
-**与本项目的关系**：整套不搬，单取敏感性分析——「哪个假设一动结论就翻」值得做进
-面板；权重计算与敏感性检验全归 agent。
+**Relation to this project**: not adopted wholesale -- take only the sensitivity analysis: "which
+assumption flips the conclusion the moment it moves" is worth building into the panel; weight
+computation and sensitivity checks go entirely to the agent.

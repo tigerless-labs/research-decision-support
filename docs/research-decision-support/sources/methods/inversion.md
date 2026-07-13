@@ -1,17 +1,20 @@
 ---
-tags: [对抗偏误]
+tags: [bias-resistance]
 ---
 
-# [方法] 反演 Inversion — 问怎么必死，然后避开
+# [Method] Inversion -- ask what guarantees death, then avoid it
 
-Charlie Munger（源自数学家 Jacobi「invert, always invert」）。背书：④ 流行启发式，
-无实证——价值在把损失规避显式化。
+Charlie Munger (from the mathematician Jacobi's "invert, always invert"). Backing: (4) popular
+heuristic, no empirical evidence -- its value lies in making loss avoidance explicit.
 
-核心逻辑：把「如何达成 X」改写成「如何保证 X 失败」，认真穷举通往失败的每条路，
-逐条翻译成戒律并避开。适用于目标模糊、成功路径说不清但失败模式很清楚的事——
-避开愚蠢常胜过追逐聪明。
+Core logic: rewrite "how do we achieve X" as "how do we guarantee X fails", earnestly enumerate
+every road to failure, and translate each into a commandment to avoid. Suited to situations where
+the goal is fuzzy and the path to success is hard to articulate but the failure modes are clear --
+avoiding stupidity often beats chasing brilliance.
 
-边界：只防守不进攻，不产生正向方案；败因穷举没有完备性保证。
+Boundaries: defense only, no offense -- it produces no positive plan; the enumeration of failure
+causes carries no completeness guarantee.
 
-**与本项目的关系**：空白推导四杠杆里「反转」的思想源头；也是 idea 生成的操作化
-动作之一（挑战单源假设）。
+**Relation to this project**: the intellectual source of the "invert" lever among the four
+blank-slate derivation levers; also one of the operationalized moves for idea generation
+(challenging single-source assumptions).

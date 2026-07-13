@@ -1,17 +1,23 @@
 ---
-tags: [判断处境]
+tags: [situation-assessment]
 ---
 
-# [方法] OODA 循环 — 循环转得比对手快就赢
+# [Method] OODA loop -- spin the loop faster than the opponent and you win
 
-John Boyd（美空军上校，空战理论）。背书：③ 军事教义+历史案例分析，无受控实验。
+John Boyd (US Air Force colonel, air-combat theory). Backing: (3) military doctrine + historical
+case analysis, no controlled experiments.
 
-核心逻辑：观察→定向→决策→行动的闭环，胜负取决于整个循环的周转速度而非单次决策
-质量。定向（Orient）是决定性一步：用心智模型消化信息、形成对局面的理解——不是归类，
-框架不够用时要**重构框架**；对手还在用旧框架理解局面时你已换新框架，即"进入对方
-循环内侧"。
+Core logic: a closed loop of observe -> orient -> decide -> act, where victory depends on the
+turnover speed of the whole loop rather than the quality of any single decision. Orient is the
+decisive step: digest information through mental models and form an understanding of the situation
+-- not classification, and when the frame falls short you must **rebuild the frame**; while the
+opponent still reads the situation through the old frame you have already switched to a new one,
+i.e. you have "gotten inside their loop".
 
-边界：为对抗性快节奏场景设计；无实验验证；Orient 的质量完全依赖决策者的模型库。
+Boundaries: designed for adversarial, fast-paced settings; no experimental validation; the quality
+of Orient depends entirely on the decision-maker's library of models.
 
-**与本项目的关系**：提示产品的时间维度——裁决桌是低频深思模式，OODA 场景（事故响应、
-竞品突袭）需要轻量快循环变体；观察与行动归 agent，定向与决策归人。
+**Relation to this project**: a hint at the product's time dimension -- the adjudication table is
+a low-frequency deliberation mode, while OODA scenarios (incident response, a competitor's ambush)
+need a lightweight fast-loop variant; observing and acting go to the agent, orienting and deciding
+go to the human.

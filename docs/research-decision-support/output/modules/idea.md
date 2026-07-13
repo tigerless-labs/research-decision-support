@@ -1,24 +1,29 @@
-# idea 决定模块
+# idea — decision module
 
-**职责**：判断的唯一居所——无 output 时是主工作面；output 生成后转为决策记录
-（溯源链、被否掉的路、多 output 复用的判断本体）。
+**Responsibilities**: the sole home of judgment — the primary work surface before output
+exists; once output is generated, it becomes the decision record (the provenance chain,
+the rejected paths, the judgment corpus reused across outputs).
 
-**行为边界**：
+**Behavior boundaries**:
 
-- **只有人能创建 idea**（agent 可整合碎片观点成草案建议，落卡须人）。
-- 状态只有两个：**存在 / 归档**——存在即在场并参与装配，没有锚定/拍板/采纳
-  流程，也无任何状态标签。
-- 归档人与 agent 均可触发，卡移入 `ideas/archive/` 子目录，log 留痕不删除。
-- 新 idea 与既有卡同判断（重复/增量）时 agent **自动合并**进旧卡、log 记账；
-  冲突不算可合并，分歧如实上板由人裁决。
-- 与 output **永远双向同步**：人提 idea 同回合双写两层，人改 output 由 agent
-  反向校准回本层（代笔誊写，判断仍属人）。
-- 每节点带 append-only log（诞生/更新/合并/supersede，待建）；层级账本
-  [logs.md](../../logs.md) 记录所有卡的变更（含正文更新）——节点级 log 落地前，
-  它是 idea 改动的唯一留痕。
+- **Only the human creates ideas** (the agent may consolidate scattered observations into
+  a draft suggestion, but landing the card is the human's act).
+- Exactly two states: **live / archived** — live means present and participating in
+  assembly; there is no anchoring/adjudication/adoption workflow and no status label.
+- Archival can be triggered by human or agent; the card moves into the `ideas/archive/`
+  subdirectory, logged, never deleted.
+- When a new idea repeats an existing card's judgment (duplicate/increment), the agent
+  **auto-merges** it into the old card and ledgers it; a conflict is not mergeable — the
+  disagreement goes on the board as-is for the human to adjudicate.
+- **Permanent two-way sync** with output: a human idea lands in both layers the same turn;
+  a human output edit is back-calibrated into this layer by the agent (transcription; the
+  judgment stays the human's).
+- Each node carries an append-only log (birth/update/merge/supersede; pending); the layer
+  ledger [logs.md](../../logs.md) records every card change (including body updates) — until
+  node-level logs land, it is the only trace of idea changes.
 
-**溯源**：[output 为主](../../ideas/output-primary-after-generation.md) ·
-[单实体 ADR](../../ideas/idea-layer-single-entity.md)（其状态机细分已简化为二态，
-见 logs 2026-07-09） ·
-[agent 思考不拍板](../../ideas/agent-synthesizes-human-adjudicates.md) ·
-[缓冲捕获](../../ideas/buffer-captures-anything.md)。
+**Provenance**: [output primary](../../ideas/output-primary-after-generation.md) ·
+[single-entity ADR](../../ideas/idea-layer-single-entity.md) (its state-machine breakdown
+was simplified to two states; see logs 2026-07-09) ·
+[the agent thinks but never adjudicates](../../ideas/agent-synthesizes-human-adjudicates.md) ·
+[the buffer captures anything](../../ideas/buffer-captures-anything.md).

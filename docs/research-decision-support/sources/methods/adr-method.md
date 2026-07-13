@@ -1,20 +1,23 @@
 ---
-tags: [决策留痕]
+tags: [decision-traceability]
 ---
 
-# [方法] ADR — 决策记录的存活标本
+# [Method] ADR -- the surviving specimen of decision records
 
-Michael Nygard "Documenting Architecture Decisions" (2011) · 软件业普遍实践 ·
-工具生态见 [adr-tools / log4brains](../github/adr-tooling.md)。
+Michael Nygard, "Documenting Architecture Decisions" (2011). Common practice across the software
+industry. For the tool ecosystem see [adr-tools / log4brains](../github/adr-tooling.md).
 
-核心逻辑：一条决策一份记录，结构 context → decision → **consequences**（后果：好坏
-都写——提前声明"我们知道代价并接受它"，防翻案式重审）。状态生命周期 proposed →
-accepted → superseded；记录不可变，推翻靠新记录 supersede 旧记录。它是 90 年代设计
-论证工具（IBIS/QOC 一族）**唯一活到主流的后裔**，活因是极简：一页纸、无专用工具、
-无本体论。
+Core logic: one decision, one record, structured as context -> decision -> **consequences** (write
+down both good and bad -- declaring up front "we know the cost and accept it" defends against
+relitigation-style review). State lifecycle: proposed -> accepted -> superseded; records are
+immutable, and reversal happens by a new record superseding the old one. It is the **only
+descendant of the 1990s design-rationale tools (the IBIS/QOC family) that survived into the
+mainstream**, and it survived by being minimal: one page, no dedicated tooling, no ontology.
 
-边界：为工程决策设计；options 一节只列不管生成；靠人自觉书写，覆盖率是老大难。
+Boundaries: designed for engineering decisions; the options section only lists, it does not
+generate; it relies on humans writing voluntarily, so coverage is a chronic problem.
 
-**与本项目的关系**：决定卡结构的出身（context/verdict/理由/代价、append-only、
-supersede、已决卡顶三行 summary=ADR 的 collapse）；"极简才存活"支撑架构极简约束。
-书写劳动移交 agent，治覆盖率痼疾。
+**Relation to this project**: the origin of the decision card's structure (context/verdict/
+reasons/costs, append-only, supersede, decided cards showing a three-line summary at the top =
+ADR's collapse); "only the minimal survives" backs the minimal-architecture constraint. The
+writing labor moves to the agent, curing the chronic coverage problem.

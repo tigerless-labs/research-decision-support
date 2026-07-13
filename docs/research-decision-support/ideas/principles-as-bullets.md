@@ -1,12 +1,15 @@
 ---
 id: principles-as-bullets
 type: idea
-tags: [协议]
+tags: [protocol]
 ---
 
-# 原则分点不成段：一点一原则
+# Principles as bullets, not paragraphs: one bullet, one principle
 
-所有 markdown 里的原则/行为边界必须**分点列出**（尤其模块 md）：一个要点承载
-一条原则，不许把多条原则挤进一段长文。理由：长段隐藏原则的数量与边界，扫读
-定位难；分点后每条原则可被单独引用、单独修改、单独记账（账本的旧→新 delta
-落到点上）；agent 的同步与校准也以点为单位，不必整段重写。
+All principles / behavior boundaries in markdown must be **listed as bullets** (especially in
+module md files): one bullet carries one principle; cramming several principles into one long
+paragraph is not allowed. Reasons: a long paragraph hides how many principles there are and
+where their boundaries lie, making scan-reading and locating hard; as bullets, each principle
+can be referenced, modified, and ledgered independently (the ledger's old-to-new delta lands on
+a single bullet); the agent's sync and calibration also operate bullet by bullet, with no need
+to rewrite whole paragraphs.

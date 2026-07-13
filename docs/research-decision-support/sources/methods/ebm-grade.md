@@ -1,18 +1,22 @@
 ---
-tags: [证据可信]
+tags: [evidence-credibility]
 ---
 
-# [方法] EBM / Cochrane / GRADE — 证据分级与"综合附着于推荐"
+# [Method] EBM / Cochrane / GRADE -- evidence grading and "synthesis attached to the recommendation"
 
-循证医学（Sackett, 1990s）· Cochrane 协作网 · GRADE 工作组 · 医学界三十年标准。
+Evidence-based medicine (Sackett, 1990s). The Cochrane Collaboration. The GRADE working group. The
+medical standard for thirty years.
 
-核心逻辑：证据收集→系统评价→临床推荐。两条纪律：**证据分级**（系统综述 > RCT > 观察
-研究 > 专家意见，等级显式可见）；**living review**（证据库持久、随新证据滚动更新）。
-GRADE 的关键形态：Summary-of-Findings 表**附着在每条推荐意见上**，不作为独立维护的
-中间层存在。
+Core logic: evidence collection -> systematic review -> clinical recommendation. Two disciplines:
+**evidence grading** (systematic review > RCT > observational study > expert opinion, with the
+grade explicitly visible); **living review** (the evidence base persists and rolls forward as new
+evidence arrives). GRADE's key form: the Summary-of-Findings table is **attached to each
+recommendation**, never maintained as an independent intermediate layer.
 
-边界：适用于可循证决策；品味、政治、资源博弈类判断不在其射程内。
+Boundaries: applies to decisions that can be evidence-based; judgments of taste, politics, and
+resource bargaining are outside its range.
 
-**与本项目的关系**：证（evidence base）部件的出身——证据库持久化、来源分级（综述>论文>
-官方文档>blog>帖子）照搬；GRADE 的附着形态是"synthesis 解剖"的旁证——对比矩阵附着于
-它服务的决定卡，不设独立 synthesis 层。
+**Relation to this project**: the origin of the evidence-base component -- evidence-base
+persistence and source grading (review > paper > official docs > blog > forum post) are adopted
+directly; GRADE's attachment form corroborates the "synthesis dissection" -- the comparison matrix
+attaches to the decision card it serves, with no independent synthesis layer.

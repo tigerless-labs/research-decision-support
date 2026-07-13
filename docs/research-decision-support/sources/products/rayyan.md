@@ -1,16 +1,19 @@
 ---
-tags: [竞品]
+tags: [competitors]
 ---
 
-# [产品] Rayyan / Covidence — 边读边筛的系统综述工作流
+# [Product] Rayyan / Covidence -- the screen-while-reading systematic review workflow
 
-rayyan.ai · covidence.org · 面向 PRISMA 流程的筛选（screening）工具。
+rayyan.ai · covidence.org · screening tools for the PRISMA process.
 
-核心逻辑：**读的过程就是分类的过程**——逐条过摘要，include / exclude / maybe + 自定义
-标签一键落下，支持双人盲筛、冲突仲裁。Cochrane 等机构口径：AI 可辅助，纳入判断必须人做。
+Core logic: **reading is classifying** -- work through abstracts one by one; include / exclude /
+maybe plus custom tags land in one click, with dual-blind screening and conflict arbitration. The
+position of Cochrane and peers: AI may assist, but inclusion judgments must be made by humans.
 
-边界：绑定系统综述场景（纳入/排除二值裁决），不产出方向综合，更不通向设计。
+Boundary: bound to the systematic-review scenario (binary include/exclude adjudication); produces
+no direction synthesis, let alone a path to design.
 
-**与 本项目 的关系**：read 页"读中打标"的人机工学原型——证明了行内轻量标注远胜事后
-整理；本项目 把二值裁决换成开放的方向+判断。来源：
-[系统综述工具对比](https://www.atlasworkspace.ai/blog/ai-systematic-review-tools)。
+**Relevance to this project**: the human-factors prototype for the read page's "tag while
+reading" -- proof that inline lightweight annotation beats after-the-fact cleanup; this project
+swaps the binary adjudication for open directions + judgments. Source:
+[systematic review tool comparison](https://www.atlasworkspace.ai/blog/ai-systematic-review-tools).

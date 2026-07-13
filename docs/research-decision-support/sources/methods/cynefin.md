@@ -1,18 +1,25 @@
 ---
-tags: [判断处境]
+tags: [situation-assessment]
 ---
 
-# [方法] Cynefin — 先判域再选打法
+# [Method] Cynefin -- assess the domain first, then pick the playbook
 
-Dave Snowden（IBM，1999）· 管理/咨询界广用。背书：③ 理论自洽+广泛采用，受控实证薄。
+Dave Snowden (IBM, 1999). Widely used in management and consulting. Backing: (3) theoretically
+coherent and broadly adopted, but thin on controlled empirical evidence.
 
-核心逻辑：问题分五域——清晰（套最佳实践）、繁杂（请专家分析）、复杂（小步试探放大
-有效项）、混沌（先行动止血）、失序。分类的全部意义是**换打法**：分错类即用错打法，
-把复杂当繁杂（以为专家分析能出答案，其实只能试）是最典型事故。判域靠性质信号（因果
-事先可见吗？专家有共识吗？结果可重复吗？），且类别会滑动——清晰域自满会跌进混沌。
-Snowden 坚称它是 sense-making 而非 categorization：先看数据再浮现格子。
+Core logic: problems fall into five domains -- clear (apply best practice), complicated (bring in
+expert analysis), complex (probe with small steps and amplify what works), chaotic (act first to
+stop the bleeding), and disorder. The entire point of classification is **switching the
+playbook**: misclassifying means using the wrong playbook, and treating complex as complicated
+(assuming expert analysis can produce the answer when you can only probe) is the classic accident.
+Domain assessment relies on signals about the problem's nature (is cause and effect visible in
+advance? do experts agree? are outcomes repeatable?), and categories drift -- complacency in the
+clear domain topples into chaos. Snowden insists it is sense-making, not categorization: look at
+the data first and let the grid emerge.
 
-边界：概念框架，几乎无对照验证；域边界的判定本身依赖判断。
+Boundaries: a conceptual framework with almost no controlled validation; judging domain boundaries
+itself depends on judgment.
 
-**与本项目的关系**：通用调度器的天然路由——判定用户处境属于哪个域，再派发对应场景
-skill；性质信号收集归 agent，判域归人。
+**Relation to this project**: the natural router for a general dispatcher -- assess which domain
+the user's situation falls into, then dispatch the matching scenario skill; collecting the nature
+signals goes to the agent, assessing the domain goes to the human.

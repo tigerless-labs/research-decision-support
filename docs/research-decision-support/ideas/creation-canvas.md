@@ -1,33 +1,42 @@
 ---
 id: creation-canvas
 type: idea
-tags: [画板]
+tags: [canvas]
 ---
 
-# 创作画板：零散 idea 实时上板自动连线，人在板上提炼成最终决策
+# Creation canvas: scattered ideas go on the board in real time and auto-link; the human refines them on the board into the final decision
 
-比"决策模型"更贴合本项目的形态是一块**创作画板**：从参考资料读出的和自己冒出的零散
-idea 逐条上板，每新增一条实时显示为节点并与已有节点自动连线——关联由 agent 从内容
-推导，人不手动拉线。人面对一张随输入生长的图，在板上组合、合并、裁剪，把散点提炼成
-最终决策。主战场是**帮人理清思路**，胜负手是 UI+AI 的直观、好看、清晰；画板是
-markdown 真身的实时投影，不是新的事实存放处。
+The form that fits this project better than a "decision model" is a **creation canvas**:
+scattered ideas -- read out of reference material or freshly surfaced -- go on the board one by
+one, each new entry appearing instantly as a node and auto-linking to existing nodes; relations
+are derived by the agent from content, the human never drags edges by hand. Facing a graph that
+grows with input, the human combines, merges, and prunes on the board, refining scattered points
+into the final decision. The main battlefield is **helping people clarify their thinking**; the
+deciding factor is UI+AI that is intuitive, good-looking, and clear. The canvas is a real-time
+projection of the markdown source of truth, not a new place where facts live.
 
-每个节点自带 **logs**：idea 的诞生来源、每次更新的内容与原因、被合并/裁剪的过程，
-append-only 追加，板上点开可读——图回答"现在长什么样"，logs 回答"怎么长成这样的"。
+Every node carries its own **logs**: where the idea was born, the content and reason of every
+update, the process of being merged or pruned -- append-only, readable by clicking on the board.
+The graph answers "what does it look like now"; the logs answer "how did it get this way".
 
-原 vibe-code design 画板（设计意图落点、接决定卡下游）收编为本卡的下游延伸：同一块
-板，向上综合 idea 成决策，向下承接决策成设计。
+The former vibe-code design board (where design intent lands, downstream of decision cards) is
+folded in as this card's downstream extension: the same board synthesizes ideas upward into
+decisions and carries decisions downward into design.
 
-Obsidian 生态勘察（2026-07）：自动连线已商品化——[InfraNodus](../sources/products/infranodus.md)
-自动成图+空隙识别，Smart Connections / Auto Linker 等做语义与标题级自动建链——但全部
-停在"关联发现"，无一产出决策；空位正是连线之后的下半程。vibe-code 延伸的原有证据
-（spec-kit / BMAD 验证品类、[tribal knowledge](../sources/blogs/tribal-knowledge-why.md)
-证明 why 先蒸发）继续成立。
+Obsidian ecosystem survey (2026-07): automatic linking is already commoditized --
+[InfraNodus](../sources/products/infranodus.md) auto-builds graphs and spots gaps, and Smart
+Connections / Auto Linker and peers do semantic and title-level auto-linking -- but all of them
+stop at "relation discovery"; none produces a decision. The open slot is exactly the second half
+after linking. The original evidence for the vibe-code extension (spec-kit / BMAD validating the
+category, [tribal knowledge](../sources/blogs/tribal-knowledge-why.md) proving the why evaporates
+first) still holds.
 
-Builds on [judgment-provenance-wedge](judgment-provenance-wedge.md)（画板是判断→决策的
-可视化现场，节点 logs 即溯源的 UI 化）、[read-tag-judge-loop](read-tag-judge-loop.md)
-（读中落下的判断即上板素材）、[drafts-not-state](drafts-not-state.md)（板是投影，
-markdown 是真身）、[one-engine-many-schemas](one-engine-many-schemas.md)（画板是引擎的
-视图层，schema 换域即换板）；[buffer-captures-anything](buffer-captures-anything.md)
-的分诊产物是上板入口。To be weighed in [decisions/](../index.md)：画板与决定卡的产出衔接、
-自动连线的推导口径。
+Builds on [judgment-provenance-wedge](judgment-provenance-wedge.md) (the canvas is where
+judgment-to-decision becomes visible; node logs are provenance turned into UI),
+[read-tag-judge-loop](read-tag-judge-loop.md) (judgments dropped while reading are the material
+that goes on the board), [drafts-not-state](drafts-not-state.md) (the board is a projection,
+markdown is the source of truth), and [one-engine-many-schemas](one-engine-many-schemas.md) (the
+canvas is the engine's view layer; swapping domains swaps schema and board);
+[buffer-captures-anything](buffer-captures-anything.md)'s triage products are the on-ramp to the
+board. To be weighed in [decisions/](../index.md): how the canvas hands off to decision cards;
+the derivation criteria for automatic linking.

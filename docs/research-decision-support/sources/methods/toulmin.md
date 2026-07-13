@@ -1,16 +1,20 @@
 ---
-tags: [证据可信]
+tags: [evidence-credibility]
 ---
 
-# [方法] Toulmin 论证模型 — 主张必须锚定证据
+# [Method] Toulmin model of argument -- claims must be anchored to evidence
 
-Stephen Toulmin《The Uses of Argument》(1958) · 论证理论经典，写作教学与法学广泛沿用。
+Stephen Toulmin, "The Uses of Argument" (1958). A classic of argumentation theory, widely used in
+writing instruction and law.
 
-核心逻辑：一个论证 = claim（主张）+ grounds（证据）+ warrant（担保：证据凭什么支持
-主张）+ qualifier/rebuttal。要点是**没有 grounds 的 claim 不成立**——主张与其证据的
-绑定是结构性义务，不是可选修饰。
+Core logic: an argument = claim + grounds (evidence) + warrant (why the evidence supports the
+claim) + qualifier/rebuttal. The key point: **a claim without grounds does not stand** -- binding
+a claim to its evidence is a structural obligation, not optional decoration.
 
-边界：模型只约束单个论证的形态，不管论证之间怎么组织、也不管谁来裁决。
+Boundaries: the model constrains only the shape of a single argument; it says nothing about how
+arguments are organized among themselves, nor about who adjudicates.
 
-**与本项目的关系**：证据库的第二条纪律出身——每条入库主张必须锚定到具体证据（出处卡+
-原文位置）；决定卡矩阵里每个格子可点开见原文，就是 Toulmin 绑定的 UI 化。
+**Relation to this project**: the origin of the evidence base's second discipline -- every claim
+entering the base must be anchored to specific evidence (source card + location in the original
+text); every cell in the decision card's matrix opening onto the original text is the Toulmin
+binding turned into UI.

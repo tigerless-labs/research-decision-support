@@ -1,17 +1,23 @@
 ---
-tags: [捕获与缓冲]
+tags: [capture-and-buffer]
 ---
 
-# [方法] GTD — 捕获缓冲必须清空
+# [Method] GTD -- the capture buffer must be emptied
 
-David Allen《Getting Things Done》(2001) · 二十余年个人生产力实践验证。
+David Allen, "Getting Things Done" (2001). Validated by twenty-plus years of personal-productivity
+practice.
 
-核心逻辑：capture → clarify → organize → reflect → engage。所有未定事项进唯一 inbox，
-零结构捕获；铁律是 **inbox 必须被清空**——它是缓冲不是储藏室，每条要么成为行动、要么归档、
-要么丢弃。心理学依据：未记录的开放事项持续占用工作记忆（Zeigarnik 效应），捕获动作本身
-即释放心智——要的是捕获，不是保存。
+Core logic: capture -> clarify -> organize -> reflect -> engage. Every unresolved item goes into a
+single inbox, captured with zero structure; the iron rule is that **the inbox must be emptied** --
+it is a buffer, not a storage room, and every item either becomes an action, gets archived, or
+gets discarded. The psychological basis: unrecorded open loops keep occupying working memory (the
+Zeigarnik effect), and the act of capture itself frees the mind -- what matters is capture, not
+preservation.
 
-边界：GTD 假设清空由本人执行，清空劳动是其著名的坚持成本来源。
+Boundaries: GTD assumes the owner does the emptying, and that emptying labor is its notorious
+source of adherence cost.
 
-**与本项目的关系**：收（inbox）部件的直接出身——唯一入口、零结构、必清空三条全部照搬；
-差异在清空的人是 agent（催熟成决定/归档为证据/蒸发），消除了 GTD 的坚持成本。
+**Relation to this project**: the direct origin of the inbox component -- single entry point, zero
+structure, must-be-emptied, all three adopted directly; the difference is that the one doing the
+emptying is the agent (ripening items into decisions / archiving as evidence / evaporating),
+eliminating GTD's adherence cost.

@@ -1,20 +1,23 @@
 ---
 id: canvas-edges-on-demand
 type: idea
-tags: [画板]
+tags: [canvas]
 ---
 
-# 画板连线按需显现：单击看关系，双击进详情
+# Canvas edges appear on demand: single-click to see relations, double-click for detail
 
-节点间的关联由 agent 实时推导并持久存储，但**默认不画线**——满屏连线是认知负载
-不是信息，图的默认态是干净的散点场，线是查询结果不是背景。交互两级：**单击**节点，
-只亮出它的直接邻边（这条 idea 和谁有关）；**双击**打开节点详情——正文、logs、
-证据锚点。三大块（source / idea / design）同屏还是分屏，暂缓裁决。
+Relations between nodes are derived by the agent in real time and stored persistently, but **no
+edges are drawn by default** -- a screen full of lines is cognitive load, not information; the
+graph's default state is a clean scatter field, and edges are query results, not background.
+Interaction has two levels: **single-click** a node to light up only its direct neighbor edges
+(what this idea relates to); **double-click** to open the node's detail -- body, logs, evidence
+anchors. Whether the three blocks (source / idea / design) share one screen or split is deferred.
 
-本项目 map 页交互已验证"hover 只亮直接邻居"的减负效果（全链高亮被否）；反例是
-[InfraNodus](../sources/products/infranodus.md) 式全图连线——首屏即毛线团，
-影响力排序被视觉噪声淹没。
+This project's map page has already validated the load-reducing effect of "hover lights only
+direct neighbors" (full-chain highlighting was rejected); the counterexample is
+[InfraNodus](../sources/products/infranodus.md)-style full-graph edges -- a hairball on first
+paint, with influence ranking drowned in visual noise.
 
-Refines [creation-canvas](creation-canvas.md)——"实时自动连线"精确化为**推导实时、
-渲染按需**。To be weighed in [decisions/](../index.md)：三大块同屏/分屏；
-单击邻边是否分跳数层级。
+Refines [creation-canvas](creation-canvas.md) -- "real-time automatic linking" is made precise as
+**derive in real time, render on demand**. To be weighed in [decisions/](../index.md): the three
+blocks on one screen vs split screens; whether single-click neighbors are tiered by hop count.

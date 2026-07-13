@@ -1,18 +1,21 @@
 ---
-tags: [对抗偏误]
+tags: [bias-resistance]
 ---
 
-# [方法] WRAP — 四步各治一种决策偏误
+# [Method] WRAP -- four steps, each treating one decision bias
 
-Chip & Dan Heath《Decisive》（2013）。背书：③ 二手综合——每个组件（窄框架、确认
-偏误、情绪距离、过度自信）各有实验室证据，整套流程未验证。
+Chip & Dan Heath, "Decisive" (2013). Backing: (3) secondhand synthesis -- each component (narrow
+framing, confirmation bias, emotional distance, overconfidence) has laboratory evidence, the full
+process is unvalidated.
 
-核心逻辑：W 扩选项（治窄框架：消失选项测试——A、B 都不许选呢？）；R 验假设（治确认
-偏误：主动找反证、问外部视角基础率）；A 拉距离（治短期情绪：10/10/10、「你会怎么劝
-朋友」）；P 备出错（治过度自信：设 tripwire——什么信号出现必须重议）。「A 还是 B」
-的二选一句式出现时先跑 W：真问题常是「有没有 C」。
+Core logic: W, widen options (treats narrow framing: the vanishing-options test -- what if neither
+A nor B were allowed?); R, reality-test assumptions (treats confirmation bias: actively seek
+disconfirmation, ask for outside-view base rates); A, attain distance (treats short-term emotion:
+10/10/10, "what would you tell a friend to do"); P, prepare to be wrong (treats overconfidence:
+set tripwires -- which signal forces a re-decision). When the "A or B" either-or phrasing appears,
+run W first: the real question is often "is there a C".
 
-边界：面向个人重大决策的质检单，不是流程引擎。
+Boundaries: a checklist for major personal decisions, not a process engine.
 
-**与本项目的关系**：决定卡质检单候选——四步映射为 agent 的自动检查：选项数≥3？
-有反证栏？有 tripwire 字段？
+**Relation to this project**: a candidate checklist for the decision card -- the four steps map to
+automatic agent checks: at least 3 options? a disconfirmation column? a tripwire field?

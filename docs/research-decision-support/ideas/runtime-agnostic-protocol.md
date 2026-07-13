@@ -1,25 +1,32 @@
 ---
 id: runtime-agnostic-protocol
 type: idea
-tags: [协议]
+tags: [protocol]
 ---
 
-# 协议适配任何 agent 产品：CLI 只是第一个宿主，不是形态
+# The protocol fits any agent product: the CLI is only the first host, not the form
 
-系统的可移植契约是**文件与 schema**——markdown 真身、frontmatter 契约、校验器、
-画板投影，全部不依赖任何特定 agent 运行时。凡是能读写文件、跑得动"分诊/连线/锚定/
-临门动作"的 agent 产品（CLI 工具、IDE agent、聊天产品、自建 agent）都能承载这套
-决策协议；各运行时的差异收敛为一层**薄适配器**（skill / prompt / MCP / API 封装），
-协议本体零改动。当前以 Claude Code skill 为宿主只是分发起点，不是产品边界——
-绑死单一运行时，协议的生命周期就被宿主的生命周期封顶。
+The system's portable contract is **files and schema** -- the markdown source of truth, the
+frontmatter contract, the validator, the canvas projection -- none of which depends on any
+particular agent runtime. Any agent product that can read and write files and run
+"triage / linking / anchoring / the final move" (CLI tools, IDE agents, chat products, homegrown
+agents) can host this decision protocol; runtime differences collapse into one **thin adapter
+layer** (skill / prompt / MCP / API wrapper), with the protocol body unchanged. Hosting on a
+Claude Code skill today is a distribution starting point, not a product boundary -- bind to a
+single runtime and the protocol's lifespan is capped by the host's.
 
-本仓库现状即证明：工作区契约（typed cards + 校验器 + 站点生成）是纯文件操作，
-skill 只是操作规程的搬运层；agent 生态载体快速更替（skill / MCP / 各家 agent 框架
-并存竞争），押注单一载体与仓库"分发为先"的定位直接冲突。
+This repository as it stands is the proof: the workspace contract (typed cards + validator +
+site generation) is pure file operations, and the skill is only the carrier of the operating
+procedure; agent-ecosystem carriers churn fast (skills / MCP / competing agent frameworks
+coexist), and betting on a single carrier directly conflicts with the repo's
+distribution-first positioning.
 
-Builds on [one-engine-many-schemas](one-engine-many-schemas.md)——那张卡横向换域
-（schema 可替换），本卡纵向换宿主（运行时可替换），合起来是同一个引擎的两个自由度；
-[drafts-not-state](drafts-not-state.md)（markdown 真身、无服务端）是可移植性的
-技术前提；[agent-synthesizes-human-adjudicates](agent-synthesizes-human-adjudicates.md)
-的分工约束是适配器必须保全的不变量——换宿主不能换掉"人拍板"。To be weighed in
-[decisions/](../index.md)：适配器的最小接口面（哪些操作是协议必需）。
+Builds on [one-engine-many-schemas](one-engine-many-schemas.md) -- that card swaps domains
+horizontally (schema replaceable), this card swaps hosts vertically (runtime replaceable);
+together they are two degrees of freedom of the same engine;
+[drafts-not-state](drafts-not-state.md) (markdown as source of truth, no server) is the
+technical precondition of portability; the division-of-labor constraint of
+[agent-synthesizes-human-adjudicates](agent-synthesizes-human-adjudicates.md) is the invariant
+every adapter must preserve -- switching hosts must not switch away "the human adjudicates". To
+be weighed in [decisions/](../index.md): the adapter's minimal interface surface (which
+operations the protocol requires).

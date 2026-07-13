@@ -1,20 +1,23 @@
 ---
-tags: [方法论仓库]
+tags: [methodology-repository]
 ---
 
-# [GitHub] bmad-code-org/BMAD-METHOD — 角色扮演式方法论（~49k★）
+# [GitHub] bmad-code-org/BMAD-METHOD -- role-play methodology (~49k stars)
 
-github.com/bmad-code-org/BMAD-METHOD · 2026-02 约 37k★ → 2026-06 约 49k★ · v6.8 · MIT
-（BMAD 是注册商标）。
+github.com/bmad-code-org/BMAD-METHOD · ~37k stars in 2026-02 -> ~49k stars in 2026-06 · v6.8 · MIT
+(BMAD is a registered trademark).
 
-核心逻辑：敏捷流程角色化——21 个专职 agent（PM/架构师/开发/UX…）+ 50+ 引导式工作流，
-**文档（PRD/架构/user story）而非源码是唯一真身**；agent 本体是 markdown 文件，可载入
-Claude Code/Copilot/Cursor 等。npx 一键安装，model-agnostic。
+Core logic: the agile process turned into roles -- 21 dedicated agents (PM/architect/developer/
+UX...) + 50+ guided workflows, with **documents (PRD/architecture/user stories), not source code,
+as the sole true form**; the agents themselves are markdown files loadable into Claude Code/
+Copilot/Cursor and others. One-command npx install, model-agnostic.
 
-做火的手法：npm 安装器降门槛 + Master Class 视频（25 万+播放）+ 社区运营（无付费墙）+
-月度发版节奏 + "Party Mode"（多角色同场）这类可传播 gimmick。
+How it caught fire: an npm installer lowering the entry bar + Master Class videos (250k+ views) +
+community operations (no paywall) + a monthly release cadence + shareable gimmicks like "Party
+Mode" (multiple roles in one session).
 
-**与本项目的关系**："文档是真身"的同道；它把**流程角色**打包，本项目把**认知结构**
-（判断的层）打包。覆盖软件生命周期，不碰文献与证据链。来源：
-[repo](https://github.com/bmad-code-org/bmad-method)、
-[Reenbit 综述](https://reenbit.com/the-bmad-method-how-structured-ai-agents-turn-vibe-coding-into-production-ready-software/)。
+**Relevance to this project**: a fellow traveler in "documents are the true form"; it packages
+**process roles**, this project packages **cognitive structure** (the layers of judgment). It
+covers the software lifecycle and does not touch literature or evidence chains. Sources:
+[repo](https://github.com/bmad-code-org/bmad-method),
+[Reenbit overview](https://reenbit.com/the-bmad-method-how-structured-ai-agents-turn-vibe-coding-into-production-ready-software/).

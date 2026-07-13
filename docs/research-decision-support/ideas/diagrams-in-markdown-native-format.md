@@ -1,17 +1,22 @@
 ---
 id: diagrams-in-markdown-native-format
 type: idea
-tags: [协议]
+tags: [protocol]
 ---
 
-# 系统设计图在 markdown 真身就得是可视化图格式
+# System design diagrams must be a visual diagram format in the markdown source itself
 
-output 的系统设计图**固定用 markdown 原生的声明式图格式**（当前：mermaid 代码块）
-——真身本身就是图，不是散文描述配外挂图片，也不是只存在于 HTML 的手绘物。
-理由：真身在任何支持渲染的宿主（GitHub / Obsidian / IDE）直接可视化；图的变更
-走文本 diff，账本可记最小 delta；节点→模块的点穿映射可在图源里声明
-（`click` 行），投影只是转绘不添事实（[markdown 唯一真身](drafts-not-state.md)）。
-图内每节点带主标+副标两行，信息集与投影版逐块一致。对比 ASCII 框图：后者布局
-全可控、信息密度高，但改一框须手工重排全图、diff 是对齐噪音记不了最小 delta、
-无 click 语义、CJK 字宽下框线易歪——只适合一次成型的静态快照；高频演化 + 要
-点穿的系统图用声明式。
+System design diagrams in output are **fixed to markdown-native declarative diagram formats**
+(currently: mermaid code blocks) -- the source of truth is itself a diagram, not a prose
+description with an attached image, nor a hand-drawn object that exists only in HTML. Reasons:
+the source renders directly in any host that supports it (GitHub / Obsidian / IDE); diagram
+changes go through text diffs, so the ledger can record minimal deltas; the node-to-module
+click-through mapping can be declared in the diagram source (`click` lines), and the projection
+merely redraws without adding facts
+([markdown is the sole source of truth](drafts-not-state.md)). Every node in the diagram carries
+two lines, main label + sublabel, with the information set matching the projected version block
+by block. Versus ASCII box diagrams: those give full layout control and high information
+density, but changing one box means hand-reflowing the whole diagram, diffs are alignment noise
+that cannot record minimal deltas, there is no click semantics, and box lines skew under CJK
+character widths -- suitable only for one-shot static snapshots; for frequently evolving system
+diagrams that need click-through, use the declarative format.

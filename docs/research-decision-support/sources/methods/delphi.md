@@ -1,16 +1,23 @@
 ---
-tags: [组织决策]
+tags: [org-decisions]
 ---
 
-# [方法] Delphi 法 — 匿名多轮收敛，防权威绑架
+# [Method] Delphi -- anonymous multi-round convergence, guarding against authority capture
 
-RAND 公司（1950s，冷战技术预测）· 数十年预测研究文献。背书：① 实证强。
+RAND Corporation (1950s, Cold War technology forecasting). Decades of forecasting research
+literature. Backing: (1) strong empirical support.
 
-核心逻辑：各专家**匿名独立**首轮作答，主持方汇总分布+匿名理由发回全员，各自修订
-再答，可多轮。趋同取中位；**不收敛的分歧本身是重要信息**（真不确定性所在）。匿名
-切断权威与从众，多轮保留互相说服的通道。
+Core logic: experts answer the first round **anonymously and independently**; the facilitator
+aggregates the distribution plus anonymized reasons and sends it back to everyone; each expert
+revises and answers again, over as many rounds as needed. Convergence takes the median;
+**disagreement that fails to converge is itself important information** (it marks true
+uncertainty). Anonymity cuts off authority and conformity effects; multiple rounds keep the
+channel for mutual persuasion open.
 
-边界：轮次多则慢；专家池的构成决定上限；对无先例问题专家共识也可能集体错。
+Boundaries: many rounds means slow; the composition of the expert pool sets the ceiling; on
+unprecedented problems even expert consensus can be collectively wrong.
 
-**与本项目的关系**：多 agent 独立评估再汇总＝机器 Delphi——产品的对抗验证已在用
-其精神；「分歧即信息」应显式进面板（agent 间不一致时如实呈现分布）。
+**Relation to this project**: multiple agents evaluating independently and then aggregating =
+machine Delphi -- the product's adversarial verification already runs on this spirit;
+"disagreement is information" should surface explicitly on the panel (when agents disagree, show
+the distribution as-is).

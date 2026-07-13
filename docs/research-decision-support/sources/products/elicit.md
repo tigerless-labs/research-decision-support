@@ -1,17 +1,23 @@
 ---
-tags: [竞品]
+tags: [competitors]
 ---
 
-# [产品] Elicit — 结构化提取矩阵
+# [Product] Elicit -- structured extraction matrix
 
-elicit.com · 基于 Semantic Scholar 索引（~138M 论文）· 免费层 + Plus $12/mo + Pro $49/mo。
+elicit.com · built on the Semantic Scholar index (~138M papers) · free tier + Plus $12/mo + Pro
+$49/mo.
 
-核心逻辑：论文为行、自定义提取列为列（样本量、方法、效应量、结论……），AI 批量填格，
-每个格子带回原文出处可核查。定位是系统综述里的检索与数据提取环节。
+Core logic: papers as rows, custom extraction columns as columns (sample size, method, effect
+size, conclusion...); AI fills the cells in bulk, and every cell links back to the original
+passage for verification. Positioned at the retrieval and data-extraction steps of systematic
+reviews.
 
-边界（评测共识）：只到"提取"为止——不管写作、不管文献库、不同步 Zotero；索引外的灰色
-文献覆盖弱。格子里是**论文的事实**，不是用户自己的评判；产出是表格，不通向设计。
+Boundary (review consensus): it stops at "extraction" -- no writing, no reference library, no
+Zotero sync; weak coverage of grey literature outside the index. The cells hold **facts about the
+papers**, not the user's own verdicts; the output is a table and does not lead to design.
 
-**与 本项目 的关系**：compare 页的"矩阵感"参照对象；差异在 本项目 的格子装的是"我的判断"，
-且判断沿溯源链继续流向 ideas/design。来源：[Elicit alternatives 综述](https://papersflow.ai/blog/best-elicit-alternatives-2026)、
-[系统综述工具对比](https://www.atlasworkspace.ai/blog/ai-systematic-review-tools)。
+**Relevance to this project**: the reference point for the compare page's "matrix feel"; the
+difference is that this project's cells hold "my judgment", and that judgment keeps flowing along
+the provenance chain into ideas/design. Sources:
+[Elicit alternatives roundup](https://papersflow.ai/blog/best-elicit-alternatives-2026),
+[systematic review tool comparison](https://www.atlasworkspace.ai/blog/ai-systematic-review-tools).

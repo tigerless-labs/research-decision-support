@@ -1,17 +1,21 @@
 ---
-tags: [结构化比较]
+tags: [structured-comparison]
 ---
 
-# [方法] Kepner-Tregoe — MUST 杀选项，WANT 加权
+# [Method] Kepner-Tregoe -- MUSTs kill options, WANTs weigh them
 
-Kepner & Tregoe（1958）· 企业培训六十余年。背书：② 长期大规模实践检验，独立对照
-研究少。
+Kepner & Tregoe (1958). Sixty-plus years of corporate training. Backing: (2) long-term large-scale
+practice testing, few independent controlled studies.
 
-核心逻辑：决策声明一句话定界，然后把准则劈成 **MUST（必要条件，一票否决）** 与
-**WANT（期望条件，加权打分）**：不满足 MUST 的选项直接出局，存活项按 WANT 加权评分，
-高分项再过一道风险评估（概率×严重度），人合观拍板。
+Core logic: a one-sentence decision statement sets the scope, then criteria are split into **MUST
+(necessary conditions, single-veto)** and **WANT (desired conditions, weighted scoring)**: options
+failing any MUST are eliminated outright, survivors are scored by weighted WANTs, high scorers
+pass through one more risk assessment (probability x severity), and the human takes the whole
+picture and adjudicates.
 
-边界：权重与打分仍是主观输入的形式化；流程重，适合要向组织交代依据的决策。
+Boundaries: weights and scores are still a formalization of subjective input; the process is
+heavy, suited to decisions that must justify their basis to an organization.
 
-**与本项目的关系**：MUST/WANT 二分可直接进决定卡——agent 先用硬条件杀选项，
-人只在存活项里裁决，砍掉面板上的无效比较。
+**Relation to this project**: the MUST/WANT split can go straight into the decision card -- the
+agent kills options with hard conditions first, the human adjudicates only among survivors,
+cutting the dead comparisons off the panel.
