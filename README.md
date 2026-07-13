@@ -17,6 +17,10 @@ the accumulated evidence into a system design. Built for vendor selection, liter
 review, due diligence, competitive analysis — any contested decision that must stand
 on traceable evidence.
 
+Markdown keeps the record; the canvas makes it readable. Nobody rereads a folder of
+files — one glance at the board is enough to survey what you've gathered, retrace
+how a decision formed, and spot the tensions plain text would bury.
+
 [![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
 <p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own design workspace, dogfooded, rebuilt from the markdown on every merge.</p>
