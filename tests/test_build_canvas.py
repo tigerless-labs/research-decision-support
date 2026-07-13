@@ -4,6 +4,7 @@ import pytest
 
 from build_canvas import DEFAULT_CSS, TEMPLATE, build, collect, doc_edges, layout
 from conftest import XSS_TITLE
+from init_workspace import init
 
 
 @pytest.fixture
@@ -203,3 +204,33 @@ def test_template_opens_on_default_skin_every_time():
     text = TEMPLATE.read_text(encoding="utf-8")
     assert "localStorage" not in text
     assert "STYLES.default" in text
+
+
+def test_build_gate_rejects_invalid_cards_and_writes_nothing(workspace, tmp_path, capsys):
+    (workspace / "ideas" / "bad.md").write_text(
+        "---\ntags: [x]\n---\n# no id, no type\n", encoding="utf-8")
+    outdir = tmp_path / "proj"
+    with pytest.raises(ValueError):
+        build(workspace, outdir)
+    assert not (outdir / "canvas.html").exists()
+    out = capsys.readouterr().out
+    assert "INVALID" in out and "bad.md" in out
+
+
+def test_build_gate_rejects_dangling_links_and_writes_nothing(workspace, tmp_path, capsys):
+    (workspace / "ideas" / "idea-one.md").write_text(
+        "---\nid: idea-one\ntype: idea\n---\n# First judgment\n\n"
+        "Stands on [gone](../sources/papers/gone.md).\n", encoding="utf-8")
+    outdir = tmp_path / "proj"
+    with pytest.raises(ValueError):
+        build(workspace, outdir)
+    assert not (outdir / "canvas.html").exists()
+    out = capsys.readouterr().out
+    assert "DANGLING" in out and "gone.md" in out
+
+
+def test_build_renders_freshly_initialized_workspace(tmp_path):
+    root = tmp_path / "fresh" / "design-harness"
+    init(root)
+    html = build(root, tmp_path / "proj").read_text(encoding="utf-8")
+    assert "No boards yet" in html
