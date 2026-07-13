@@ -363,10 +363,17 @@ def test_builder_default_theme_covers_canonical_tokens():
 
 
 def test_shipped_canvas_css_clears_title_below_badge():
+    # A top-anchored badge must push the title down; a badge parked at the
+    # card's foot (bottom-anchored) needs no title clearance.
     rule = re.compile(
         r"\.card\s+\.badge\s*\+\s*\.t\s*\{[^}]*margin-top\s*:\s*([\d.]+)px")
+    badge_rule = re.compile(r"\.card\s+\.badge\s*\{([^}]*)\}")
     for entry in shipped_index()["styles"]:
         css = (SHIPPED_PACK / entry["slug"] / "canvas.css").read_text(encoding="utf-8")
+        badge = badge_rule.search(css)
+        assert badge, entry["slug"]
+        if "bottom:" in badge.group(1):
+            continue
         match = rule.search(css)
         assert match, entry["slug"]
         assert float(match.group(1)) > 0, entry["slug"]

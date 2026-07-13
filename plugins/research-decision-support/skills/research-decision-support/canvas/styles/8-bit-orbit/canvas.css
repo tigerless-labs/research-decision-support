@@ -21,7 +21,7 @@ html, body { margin:0; height:100%; overflow:hidden; }
 body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
   --edge-shape:ortho;
   background-image:repeating-linear-gradient(0deg,
-    transparent 0 3px, color-mix(in srgb, var(--ink) 6%, transparent) 3px 5px); }
+    transparent 0 3px, rgba(0,0,0,.24) 3px 5px); }
 #edgeSvg path { stroke:var(--accent-a); stroke-width:3px; stroke-dasharray:0;
   stroke-linejoin:miter; }
 #bar { position:fixed; inset:0 0 auto 0; z-index:20; display:flex; gap:14px;
@@ -86,30 +86,25 @@ body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
   vertical-align:2px; }
 .glabel::after { content:""; position:absolute; left:0; right:-4px; bottom:-4px;
   height:3px; background:var(--grid); }
-.card { position:absolute; padding:12px 13px 10px; cursor:pointer;
+.card { position:absolute; padding:11px 12px 24px; cursor:pointer;
   font-size:12px; line-height:1.5; color:var(--ink); border-radius:0;
-  transform:none !important; }
-.card .t { font-weight:800; font-size:13px; margin:0 0 5px; text-transform:uppercase;
-  letter-spacing:.05em;
+  transform:none !important; background:var(--surface); }
+.card .t { font-weight:800; font-size:12px; margin:0 0 4px; text-transform:uppercase;
+  letter-spacing:.04em;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.card .sum { color:var(--ink-2); font-size:11px; margin:0;
-  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-.card .badge { position:absolute; right:8px; top:6px; font-size:9px; color:var(--muted);
-  text-transform:uppercase; letter-spacing:.1em; }
-.card .badge + .t { margin-top:12px; }
-.card.note { background:var(--surface); border:3px solid var(--accent-a);
-  box-shadow:5px 5px 0 var(--shadow); }
+.card .sum { color:var(--muted); font-size:10.5px; margin:0;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.card .badge { position:absolute; left:12px; bottom:7px; font-size:9.5px;
+  color:var(--muted); text-transform:uppercase; letter-spacing:.1em; }
+.card .badge + .t { margin-top:0; }
+.card.note { border:3px solid var(--accent-a); box-shadow:4px 4px 0 var(--shadow); }
 .card.note .t { color:var(--accent-a); }
-.card.note::before { content:""; position:absolute; top:-3px; left:-3px; width:9px;
-  height:9px; background:var(--accent-a); }
-.card.slip { background:var(--surface); border:2px solid var(--accent-b);
+.card.slip { border:2px solid var(--accent-b);
   box-shadow:0 0 0 2px var(--page), 0 0 0 4px var(--accent-b), 5px 5px 0 var(--shadow); }
-.card.slip .t { color:var(--accent-b); }
 .card.slip .badge::after { content:" ▮"; color:var(--accent-b);
   animation:blink 1.1s steps(1) infinite; }
-.card.kraft { background:var(--surface); border:3px solid var(--accent-c);
-  box-shadow:5px 5px 0 var(--shadow), 0 0 16px -2px var(--accent-c); }
-.card.kraft .t { color:var(--accent-c); }
+.card.kraft { border:3px solid var(--accent-c);
+  box-shadow:4px 4px 0 var(--shadow), 0 0 16px -2px var(--accent-c); }
 .card.kraft .badge::before { content:"★ "; color:var(--accent-c); }
 .card.empty { background:transparent; border:3px dashed var(--muted);
   color:var(--muted); box-shadow:none; }

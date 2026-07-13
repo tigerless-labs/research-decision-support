@@ -100,10 +100,12 @@ and closes with an insert-coin footer.
 
 ### single-canvas
 
-Layers are three arcade set pieces on a scanlined void, all unrotated. Sources are
-cartridge bricks: thick neon border, hard dark shadow, a pixel corner chip. Ideas are
-dialog boxes: a thinner border doubled by an outer neon ring, with the blinking block
-cursor appended to the badge as the single permitted animation. Output docs are boss
-stages: thick border, hard shadow, an outer neon glow, and a star prefixed to the badge.
+Layers are three arcade set pieces on a scanlined void, all unrotated, every card the
+same panel-navy tile with its meta line parked at the card's foot in muted ink. Sources
+are cartridge bricks: thick cyan border, hard dark shadow, cyan title. Ideas are dialog
+boxes: a thinner yellow border doubled by an outer yellow ring, ink title, and the
+blinking block cursor appended to the foot meta as the single permitted animation.
+Output docs are boss stages: thick magenta border, hard shadow, an outer neon glow, and
+a star prefixed to the meta.
 Edges route at right angles like circuit traces, solid neon; world titles keep the
 letterspaced glow and group labels their block-pixel prefix, all over the scanlines.
