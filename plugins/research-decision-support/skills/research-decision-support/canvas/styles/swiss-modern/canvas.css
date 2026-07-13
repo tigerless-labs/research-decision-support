@@ -94,7 +94,7 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body);
   font-family:var(--mono); }
 .card .badge + .t { margin-top:12px; }
 .card.note { background:var(--surface); border:2px solid var(--grid); border-radius:0; }
-.card.slip { background:transparent; border:none; border-bottom:1px solid var(--grid);
+.card.slip { background:var(--page); border:none; border-bottom:1px solid var(--grid);
   border-radius:0; padding-left:32px; }
 .card.slip::before { content:""; position:absolute; left:10px; top:15px; width:11px;
   height:11px; border-radius:50%; background:var(--ink); }
