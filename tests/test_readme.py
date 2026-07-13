@@ -40,6 +40,16 @@ def test_readme_names_every_shipped_style():
         assert style["name"] in text, style["name"]
 
 
+def test_readme_release_badge_matches_plugin_version():
+    manifest = json.loads(
+        (REPO / "plugins/design-harness/.claude-plugin/plugin.json").read_text(encoding="utf-8")
+    )
+    badge_versions = re.findall(r"release-v([\d.]+)-", readme_text())
+    assert badge_versions
+    for version in badge_versions:
+        assert version == manifest["version"]
+
+
 def test_readme_carries_install_and_usage():
     text = readme_text()
     assert "/plugin marketplace add tigerless-labs/design-harness" in text
