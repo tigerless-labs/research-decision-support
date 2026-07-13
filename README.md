@@ -14,10 +14,8 @@ An [Agent Skill](https://agentskills.io) (Claude Code plugin, works with any
 SKILL.md-compatible agent): feed it sources and rough ideas as you go — it files
 and links them, records how your thinking evolves, and assembles the evidence into
 a design. Markdown keeps the record; the canvas makes it readable — every source
-and idea you add or revise lands on the board, where one glance surveys everything,
-retraces any decision, and spots the tensions plain text would bury. Built for
-vendor selection, literature review, due diligence, competitive analysis — any
-contested call that must stand on evidence.
+and idea you add lands on the board, one glance away from any decision's why.
+Built for vendor selection, literature review, due diligence, competitive analysis.
 
 [![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
