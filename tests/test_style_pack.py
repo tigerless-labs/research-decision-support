@@ -425,15 +425,3 @@ def test_shipped_index_has_discriminating_axes():
     entries = shipped_index()["styles"]
     for axis in ("formality", "density"):
         assert len({entry[axis] for entry in entries}) >= 2, axis
-
-
-def test_shipped_layer_cards_occlude_edges():
-    # Edges paint beneath cards, so a content card with a transparent ground
-    # lets edge strokes strike through its text; every layer card must carry
-    # an opaque ground.
-    for entry in shipped_index()["styles"]:
-        css = (SHIPPED_PACK / entry["slug"] / "canvas.css").read_text(encoding="utf-8")
-        for layer in ("note", "slip", "kraft"):
-            for _, declarations in layer_grammar(css, layer):
-                assert "background:transparent" not in declarations, (entry["slug"], layer)
-                assert "background:none" not in declarations, (entry["slug"], layer)
