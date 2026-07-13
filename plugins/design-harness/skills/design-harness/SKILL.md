@@ -114,9 +114,9 @@ pin-and-paper (the canvas's native look). Passing
 `--css canvas/styles/<slug>/canvas.css` builds a pinned single-style canvas with no
 switcher. Never fork the template or the builder for looks.
 
-Build only into a temp directory or an artifact — the projection never enters the repo.
-Whenever the markdown truth changes, rebuild and republish the canvas in the same turn;
-never edit the HTML directly.
+Build into a temp directory, an artifact, or a fixed `canvas.html` at the workspace root
+(gitignore it) — the projection never enters version control. Whenever the markdown truth
+changes, rebuild and republish the canvas in the same turn; never edit the HTML directly.
 
 A build is not delivered until the human holds a clickable link. The output is one fully
 self-contained HTML file (all dependencies inlined, zero network requests), so any host

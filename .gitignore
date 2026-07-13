@@ -1,7 +1,4 @@
 .claude/
 loom-site/
 __pycache__/
-CLAUDE.md
-docs/
-examples/autoharness/
-tests/
+docs/design-harness/canvas.html
