@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
-            docs/design-harness -o _site --title 'design-harness · unified canvas'
+            examples/autoharness -o _site --title 'design-harness · autoharness'
           mv _site/canvas.html _site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
