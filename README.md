@@ -11,11 +11,15 @@
 The human adjudicates, the agent runs the errands.
 
 An [Agent Skill](https://agentskills.io) (Claude Code plugin, works with any
-SKILL.md-compatible agent): drop in reference material and fragmented ideas as you
-go — it files and links them, records how your thinking evolves, and turns the
-accumulated evidence into a system design. Built for vendor selection, literature
+SKILL.md-compatible agent): feed your agent reference material and fragmented ideas
+as you go — it files and links them, records how your thinking evolves, and turns
+the accumulated evidence into a system design. Built for vendor selection, literature
 review, due diligence, competitive analysis — any contested decision that must stand
 on traceable evidence.
+
+Markdown keeps the record; the canvas makes it readable. Nobody rereads a folder of
+files — one glance at the board is enough to survey what you've gathered, retrace
+how a decision formed, and spot the tensions plain text would bury.
 
 [![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
