@@ -11,7 +11,7 @@ Codex 自 2025-12 起原生支持 Agent Skills（同一 SKILL.md 标准），并
 
 ## 目标
 
-Codex 用户一条 `codex plugin marketplace add tigerless-labs/research-decision-support`
+Codex 用户一条 `codex plugin marketplace add tigerless-labs/design-harness`
 （或桌面 app 加市场源）即可安装本 skill；Claude Code 路径零回归。
 
 ## 单元
@@ -24,7 +24,7 @@ Codex 用户一条 `codex plugin marketplace add tigerless-labs/research-decisio
    SKILL.md 目录；两份 marketplace 索引的 plugin 名与 source 路径可解析）；
    README 安装命令断言补 Codex 行。
 3. **代码**：
-   - `plugins/research-decision-support/.codex-plugin/plugin.json`（字段自现有
+   - `plugins/design-harness/.codex-plugin/plugin.json`（字段自现有
      plugin.json 映射 + `"skills": "./skills/"` + `interface` 展示元数据）。
    - 仓库根 `.agents/plugins/marketplace.json`（新格式：`source.source=local`、
      `policy.installation=AVAILABLE`、`policy.authentication=ON_INSTALL`、

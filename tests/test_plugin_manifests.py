@@ -2,12 +2,12 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-PLUGIN_ROOT = REPO / "plugins/research-decision-support"
+PLUGIN_ROOT = REPO / "plugins/design-harness"
 CLAUDE_MANIFEST = PLUGIN_ROOT / ".claude-plugin/plugin.json"
 CODEX_MANIFEST = PLUGIN_ROOT / ".codex-plugin/plugin.json"
 CLAUDE_MARKETPLACE = REPO / ".claude-plugin/marketplace.json"
 CODEX_MARKETPLACE = REPO / ".agents/plugins/marketplace.json"
-SKILL_MD = PLUGIN_ROOT / "skills/research-decision-support/SKILL.md"
+SKILL_MD = PLUGIN_ROOT / "skills/design-harness/SKILL.md"
 
 
 def load(path):
@@ -62,4 +62,4 @@ def test_skill_md_carries_no_host_specific_command_paths():
 
 def test_readme_carries_codex_install():
     text = (REPO / "README.md").read_text(encoding="utf-8")
-    assert "codex plugin marketplace add tigerless-labs/research-decision-support" in text
+    assert "codex plugin marketplace add tigerless-labs/design-harness" in text

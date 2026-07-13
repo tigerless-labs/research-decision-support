@@ -6,7 +6,7 @@ REPO = Path(__file__).resolve().parents[1]
 README = REPO / "README.md"
 STYLES_INDEX = (
     REPO
-    / "plugins/research-decision-support/skills/research-decision-support/canvas/styles/selection-index.json"
+    / "plugins/design-harness/skills/design-harness/canvas/styles/selection-index.json"
 )
 
 
@@ -42,6 +42,6 @@ def test_readme_names_every_shipped_style():
 
 def test_readme_carries_install_and_usage():
     text = readme_text()
-    assert "/plugin marketplace add tigerless-labs/research-decision-support" in text
-    assert "/plugin install research-decision-support" in text
+    assert "/plugin marketplace add tigerless-labs/design-harness" in text
+    assert "/plugin install design-harness" in text
     assert "## Usage" in text

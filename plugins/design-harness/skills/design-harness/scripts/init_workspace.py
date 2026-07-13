@@ -3,7 +3,7 @@ from pathlib import Path
 
 SKELETON = {
     "index.md": (
-        "# research-decision-support workspace\n\n"
+        "# design-harness workspace\n\n"
         "- [sources/](sources/index.md) — ① evidence: one source, one card; the agent files and grades\n"
         "- [ideas/](ideas/index.md) — ② judgment: only the human creates; archived cards go to archive/\n"
         "- [output/](output/index.md) — ③ assembly: human-initiated, form set by target\n"
@@ -50,7 +50,7 @@ def init(workspace):
 
 
 def main(argv):
-    workspace = argv[1] if len(argv) > 1 else "docs/research-decision-support"
+    workspace = argv[1] if len(argv) > 1 else "docs/design-harness"
     created = init(workspace)
     if created:
         print(f"ok: initialized {workspace} — created {', '.join(created)}")

@@ -5,7 +5,7 @@
 - 只断言关系与不变量（集合互补、计数对账、端点存在），不断言会随上游漂移的硬编码值。
 - 每个生成器常驻对抗用例：卡片标题/正文注入 `</script>`、事件属性等，生成页必须以文本呈现。
 - 运行：`python3 -m pytest tests -q`；提交前连同
-  `python3 plugins/research-decision-support/skills/research-decision-support/scripts/check_doc_links.py docs/research-decision-support` 一起过。
+  `python3 plugins/design-harness/skills/design-harness/scripts/check_doc_links.py docs/design-harness` 一起过。
 
 ## 测试地图
 

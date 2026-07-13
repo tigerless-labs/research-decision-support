@@ -1,14 +1,14 @@
 {
-  "name": "research-decision-support",
+  "name": "design-harness",
   "interface": {
-    "displayName": "research-decision-support"
+    "displayName": "design-harness"
   },
   "plugins": [
     {
-      "name": "research-decision-support",
+      "name": "design-harness",
       "source": {
         "source": "local",
-        "path": "./plugins/research-decision-support"
+        "path": "./plugins/design-harness"
       },
       "policy": {
         "installation": "AVAILABLE",

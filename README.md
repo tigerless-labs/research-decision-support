@@ -1,4 +1,4 @@
-# research-decision-support
+# design-harness
 
 **Turn scattered reading and half-formed ideas into a design you can defend.**
 The human adjudicates, the agent runs the errands.
@@ -30,14 +30,14 @@ on traceable evidence.
 Claude Code:
 
 ```
-/plugin marketplace add tigerless-labs/research-decision-support
-/plugin install research-decision-support@research-decision-support
+/plugin marketplace add tigerless-labs/design-harness
+/plugin install design-harness@design-harness
 ```
 
 Codex (CLI and the ChatGPT desktop app share one plugin system):
 
 ```
-codex plugin marketplace add tigerless-labs/research-decision-support
+codex plugin marketplace add tigerless-labs/design-harness
 ```
 
 then install from `/plugins` in the CLI or the desktop app's plugin directory.
@@ -46,8 +46,8 @@ For other SKILL.md-compatible agents, copy the skill folder into your agent's sk
 directory:
 
 ```bash
-git clone https://github.com/tigerless-labs/research-decision-support
-cp -r research-decision-support/plugins/research-decision-support/skills/research-decision-support \
+git clone https://github.com/tigerless-labs/design-harness
+cp -r design-harness/plugins/design-harness/skills/design-harness \
   ~/.claude/skills/
 ```
 
@@ -72,7 +72,7 @@ Render the bundled real-world example (87 cards from an agent-harness research
 project) in ten seconds:
 
 ```bash
-python3 plugins/research-decision-support/skills/research-decision-support/scripts/build_canvas.py \
+python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
   examples/autoharness -o /tmp/canvas
 open /tmp/canvas/canvas.html
 ```

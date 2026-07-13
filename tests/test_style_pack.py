@@ -7,7 +7,7 @@ import pytest
 from check_style_pack import CANONICAL_TOKENS, USAGE_KEYS, check, parse_frontmatter
 
 SKILL_ROOT = Path(__file__).resolve().parents[1] / (
-    "plugins/research-decision-support/skills/research-decision-support")
+    "plugins/design-harness/skills/design-harness")
 SHIPPED_PACK = SKILL_ROOT / "canvas/styles"
 
 LIGHT = {

@@ -1,4 +1,4 @@
-# research-decision-support
+# design-harness
 
 ## 定位
 
@@ -14,12 +14,12 @@ HTML 是用完即弃的投影——只构建到临时目录或 artifact，永不
 ## Key docs (read before changing the relevant area)
 
 - **[docs/](docs/index.md)** — documentation map; single entry point for the whole `docs/` tree.
-- **[docs/research-decision-support/output/](docs/research-decision-support/output/index.md)** — the assembled output (currently: the system design — architecture and the *why*). Start at the spine,
+- **[docs/design-harness/output/](docs/design-harness/output/index.md)** — the assembled output (currently: the system design — architecture and the *why*). Start at the spine,
   then the step you're touching. *(Create these as the design solidifies; keep the index current.)*
-- **[docs/research-decision-support/](docs/research-decision-support/index.md)** — the literature→design workspace: every
+- **[docs/design-harness/](docs/design-harness/index.md)** — the literature→design workspace: every
   cited source, its synthesis into directions, distilled ideas, design assembly, and decisions, in
   five provenance-linked layers (`sources/` `synthesis/` `ideas/` `design/` `decisions/`). The
-  operating procedure is carried by the global **`research-decision-support` skill** — invoke it whenever you
+  operating procedure is carried by the global **`design-harness` skill** — invoke it whenever you
   add a source, compare a direction, or push literature toward design.
 - **[docs/TODO.md](docs/TODO.md)** — tracked follow-ups not yet on the roadmap.
   **Keep this current in real time** (see rule below).
@@ -58,7 +58,7 @@ out of order is *incomplete*.
    green-test point (the natural TDD commit moments) and `git push` after every completed task
    and at every phase gate — progress must never exist only on this machine.
 8. **Sweep docs & indexes.** Confirm whether the change needs updates to the design docs and
-   the doc/file-tree indexes (`docs/research-decision-support/output/index.md`) — update them in the same change.
+   the doc/file-tree indexes (`docs/design-harness/output/index.md`) — update them in the same change.
 9. **Drive CI green.** After opening the PR, watch CI and code-quality checks (CI runs, lint,
    static analysis, doc-automation checks). On any failure, locate, fix, and push immediately
    — repeat until every required check passes.
@@ -77,7 +77,7 @@ out of order is *incomplete*.
   already says. One fact lives in exactly one place; cross-link instead of repeating. If a
   sentence adds no distinct design fact, cut it. When you edit a doc, leave it shorter than
   you found it unless you added a genuinely new idea.
-- **The workspace (`docs/research-decision-support/`) is written in English.** Every doc under it
+- **The workspace (`docs/design-harness/`) is written in English.** Every doc under it
   is English prose (published with the repo). `docs/plans/` stays in Chinese. Keep proper nouns,
   code, identifiers, links, and command runbooks as-is in either tree.
 - **Clear code, no comments.** Code must read clearly on its own — prefer explicit, unambiguous
@@ -96,8 +96,8 @@ out of order is *incomplete*.
   `docs/TODO.md` immediately (don't leave it only in chat). When you finish a TODO,
   remove or check it off. Roadmap-level items go in the design docs; smaller/uncommitted ones
   in `docs/TODO.md`.
-- **Research goes to `research-decision-support/` in real time.** Every new paper or repo you cite or rely
-  on must be summarized into [`docs/research-decision-support/`](docs/research-decision-support/index.md) — one source,
+- **Research goes to `design-harness/` in real time.** Every new paper or repo you cite or rely
+  on must be summarized into [`docs/design-harness/`](docs/design-harness/index.md) — one source,
   one card (arXiv / date / authors + core logic + relevance to the project), filed under the
   sources layer by type (`sources/papers/`, `sources/github/`, `sources/blogs/`, …) and added to
   its index. Never leave a cited source only in chat.
