@@ -9,9 +9,9 @@ review, due diligence, competitive analysis — any contested decision that must
 on traceable evidence.
 
 <p>
-  <img src="docs/assets/canvas-styles/hero.png" width="49%" alt="The canvas — sources, ideas, and output as three worlds on one board">
+  <img src="docs/assets/canvas-styles/pin-and-paper-1.png" width="49%" alt="The whole board at a glance — sources, ideas, and output as three worlds">
   <img src="docs/assets/canvas-styles/output-world.png" width="49%" alt="The output world — assembled artifacts, every card traceable to its evidence">
-  <img src="docs/assets/canvas-styles/pin-and-paper-1.png" width="49%" alt="The whole board at a glance">
+  <img src="docs/assets/canvas-styles/hero.png" width="49%" alt="Mid-zoom — idea cards linked to the evidence that earned them">
   <img src="docs/assets/canvas-styles/doc-viewer.png" width="49%" alt="Double-click an output card to read the assembled document — system diagrams included">
 </p>
 
