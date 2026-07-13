@@ -96,3 +96,13 @@ The switcher is the style's namesake: vertical index tabs attached to the sheet'
 edge, one per gallery page, vertical text, the active tab at full accent strength and
 protruding further than its siblings. Cards render as dotted-rule notebook entries in a
 two-to-three column flow; each entry carries a small accent dot as its page mark.
+
+### single-canvas
+
+Layers take three stationery forms. Sources are index cards: cream stock with a colored
+tab tongue protruding from the top edge in the source accent. Ideas are sticky notes:
+accent-tinted paper with no border, held by a translucent tape strip at the top center.
+Output docs are stamped files: double-line frames (border plus offset outline) with the
+meta line inked in the output accent like a stamp. Cards keep the gentle per-card
+rotation; serif titles throughout. World titles and group labels are italic serif
+mastheads over thin ink rules on the parchment ground; edges are soft warm-ink curves.

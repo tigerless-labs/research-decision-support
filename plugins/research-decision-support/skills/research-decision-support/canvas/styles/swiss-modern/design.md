@@ -96,3 +96,13 @@ the active numeral turns accent-c red, inactive ones stay in accent-d gray. The 
 an asymmetric grid: the first card spans a double cell at display scale, the rest fill
 single cells; every card is a two-pixel-bordered box with an uppercase title and a red
 index mark.
+
+### single-canvas
+
+Layers take three typographic forms, all squared and unrotated. Sources are hard white
+cards with two-pixel ink borders. Ideas are annotation lines: transparent ground, a single
+ink baseline rule, and a solid ink dot as the entry bullet. Output docs are solid ink
+blocks with page-colored text and the meta line in red. The ground shows the construction
+grid; world titles sit on a heavy ink top rule and carry a red superscript ordinal (the
+view's loud red); group labels lead with a solid ink square and underline in ink. Edges
+draw as straight solid ink strokes; selection uses the red outline.

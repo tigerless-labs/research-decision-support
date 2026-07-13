@@ -158,6 +158,21 @@ def test_template_and_default_css_exist_on_disk():
     assert DEFAULT_CSS.exists()
 
 
+def test_template_carries_style_hooks():
+    # Plan-C hook contract: a chrome shell on every card and an index slot on
+    # every world title (hidden unless a style opts in), an edge-shape CSS
+    # variable read at draw time, and a named skin sheet so the runtime
+    # switcher can never clobber the hook defaults.
+    text = TEMPLATE.read_text(encoding="utf-8")
+    assert '"chrome"' in text
+    assert '"idx"' in text
+    assert "--edge-shape" in text
+    assert 'id="skinsheet"' in text
+    assert ".card .chrome{display:none}" in text
+    assert ".wtitle .idx{display:none}" in text
+    assert 'querySelector("style")' not in text
+
+
 def test_build_payload_splits_bodies_from_nodes(workspace, tmp_path):
     html = build(workspace, tmp_path / "proj").read_text(encoding="utf-8")
     line = next(l for l in html.split("\n") if l.startswith("const DATA = "))

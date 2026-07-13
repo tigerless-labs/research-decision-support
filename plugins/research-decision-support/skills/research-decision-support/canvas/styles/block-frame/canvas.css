@@ -17,7 +17,8 @@
 }
 * { box-sizing:border-box; }
 html, body { margin:0; height:100%; overflow:hidden; }
-body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body); }
+body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body);
+  --edge-shape:line; }
 #bar { position:fixed; inset:0 0 auto 0; z-index:20; display:flex; gap:14px;
   align-items:center; flex-wrap:wrap; padding:10px 18px 8px;
   background:var(--page); border-bottom:3px solid var(--grid); }
@@ -61,20 +62,23 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body); }
 #vp.panning { cursor:grabbing; }
 #world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+#edgeSvg path { stroke:var(--grid); stroke-width:3.5px; stroke-dasharray:0; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
-.wtitle .en { font-family:var(--head); font-size:104px; font-weight:900;
-  text-transform:uppercase; letter-spacing:-.02em; color:var(--ink); opacity:.92; }
-.wtitle .zh { font-size:44px; font-weight:900; margin-left:26px; color:var(--ink-2); }
-.glabel { position:absolute; pointer-events:none; font-family:var(--head); font-size:24px;
+.wtitle .en { display:inline-block; font-family:var(--head); font-size:76px;
+  font-weight:900; text-transform:uppercase; letter-spacing:-.02em; color:var(--ink);
+  background:var(--surface); border:3px solid var(--grid); padding:2px 26px;
+  box-shadow:10px 10px 0 var(--grid); }
+.wtitle .zh { font-size:40px; font-weight:900; margin-left:26px; color:var(--ink-2); }
+.glabel { position:absolute; pointer-events:none; font-family:var(--head); font-size:20px;
   font-weight:900; text-transform:uppercase; letter-spacing:.02em; color:var(--ink);
-  white-space:nowrap; }
-.glabel i { font-style:normal; font-family:var(--mono); font-size:15px; font-weight:400;
+  white-space:nowrap; background:var(--wash); border:3px solid var(--grid);
+  padding:1px 12px; box-shadow:5px 5px 0 var(--grid); }
+.glabel i { font-style:normal; font-family:var(--mono); font-size:14px; font-weight:400;
   text-transform:none; color:var(--ink-2); margin-left:10px; }
-.glabel::after { content:""; position:absolute; left:0; right:-6px; bottom:-5px;
-  height:4px; background:var(--grid); }
 .card { position:absolute; padding:12px 13px 10px; cursor:pointer;
   font-size:13px; line-height:1.45; color:var(--ink);
-  border:3px solid var(--grid); border-radius:0; box-shadow:var(--shadow); }
+  border:3px solid var(--grid); border-radius:0; box-shadow:var(--shadow);
+  transform:none !important; }
 .card .t { font-family:var(--head); font-weight:900; font-size:13.5px;
   text-transform:uppercase; letter-spacing:.01em; margin:0 0 5px;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
@@ -83,12 +87,14 @@ body { background:var(--page); color:var(--ink); font:14px/1.5 var(--body); }
 .card .badge { position:absolute; right:8px; top:6px; font-family:var(--mono);
   font-size:9.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-2); }
 .card .badge + .t { margin-top:12px; }
-.card.note { background:color-mix(in srgb, var(--accent-a) 26%, var(--surface)); }
-.card.note::before { content:""; position:absolute; top:-3px; left:-3px; width:13px;
-  height:13px; background:var(--accent-a); border:3px solid var(--grid); }
-.card.slip { background:color-mix(in srgb, var(--accent-b) 22%, var(--surface)); }
-.card.kraft { background:color-mix(in srgb, var(--accent-c) 30%, var(--surface));
-  box-shadow:6px 6px 0 var(--accent-b), 6px 6px 0 3px var(--grid); }
+.card.note { background:color-mix(in srgb, var(--accent-a) 38%, var(--surface)); }
+.card.slip { background:color-mix(in srgb, var(--accent-b) 38%, var(--surface)); }
+.card.slip:nth-child(odd) { transform:rotate(-1.2deg) !important; }
+.card.slip:nth-child(even) { transform:rotate(1deg) !important; }
+.card.kraft { background:color-mix(in srgb, var(--accent-c) 42%, var(--surface)); }
+.card.kraft::after { content:""; position:absolute; top:-13px; right:-11px; width:22px;
+  height:22px; border-radius:50%; background:var(--positive);
+  border:3px solid var(--grid); }
 .card.empty { background:var(--wash); border:3px dashed var(--muted); box-shadow:none;
   color:var(--muted); transform:rotate(-1deg); }
 .card.empty .t, .card.empty .sum { color:var(--ink-2); opacity:.8; }

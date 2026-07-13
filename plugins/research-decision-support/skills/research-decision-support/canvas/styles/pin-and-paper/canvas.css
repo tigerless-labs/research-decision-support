@@ -3,7 +3,7 @@
   --surface:#f8f1d6; --page:#efe56a; --ink:#1f3a8a; --ink-2:#2d4fb8;
   --muted:#7d86ad; --grid:#e0d494; --wash:#f5eca0; --ring:rgba(31,58,138,.28);
   --accent-a:#2d4fb8; --accent-b:#a3552e; --accent-c:#8a6a2e; --accent-d:#c2452e; --positive:#3e7d4e;
-  --kraft:#dcc399; --shadow-ink:rgba(31,58,138,.85); --shadow-soft:rgba(90,70,10,.22);
+  --kraft:#c9a66b; --shadow-soft:rgba(90,70,10,.22);
   --mermaid-bg:#fdfaef; --backdrop:rgba(60,50,10,.5);
   --hand:"Segoe Print","Bradley Hand","Chalkboard SE","Comic Sans MS",cursive,system-ui;
 }
@@ -12,7 +12,7 @@
     --surface:#262214; --page:#171509; --ink:#e8e0bf; --ink-2:#c2b98f;
     --muted:#857d5c; --grid:#3a3520; --wash:#2e2a18; --ring:rgba(232,224,191,.16);
     --accent-a:#8fa3e8; --accent-b:#d08a5a; --accent-c:#c9a66b; --accent-d:#e07a63; --positive:#6da97c;
-    --kraft:#3a3222; --shadow-ink:rgba(232,224,191,.55); --shadow-soft:rgba(0,0,0,.45);
+    --kraft:#3a3222; --shadow-soft:rgba(0,0,0,.45);
     --mermaid-bg:#2e2a18; --backdrop:rgba(0,0,0,.6);
   }
 }
@@ -62,8 +62,12 @@ body { background:var(--page); color:var(--ink); font:14px/1.6 var(--hand); }
 #vp.panning { cursor:grabbing; }
 #world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
-.wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
-.wtitle .en { font-size:104px; font-weight:800; letter-spacing:.06em; color:var(--ink);
+.wtitle { position:absolute; pointer-events:none; white-space:nowrap;
+  transform:rotate(-.5deg); }
+.wtitle::after { content:""; display:block; width:340px; height:6px;
+  background:var(--ink); border-radius:4px; transform:rotate(-.8deg);
+  margin-top:2px; }
+.wtitle .en { font-size:100px; font-weight:800; letter-spacing:.06em; color:var(--ink);
   opacity:.9; }
 .wtitle .zh { font-size:46px; margin-left:26px; color:var(--ink-2); }
 .glabel { position:absolute; pointer-events:none; font-size:26px; font-weight:700;
@@ -85,9 +89,9 @@ body { background:var(--page); color:var(--ink); font:14px/1.6 var(--hand); }
   height:11px; margin-left:-5px; border-radius:50%;
   background:radial-gradient(circle at 35% 30%, #e8c67a, #9a6f2a);
   box-shadow:0 2px 3px var(--ring); }
-.card.slip { background:var(--wash); border:2px dashed var(--accent-b); border-radius:3px; }
+.card.slip { background:var(--wash); border:2px dashed var(--ink); border-radius:4px; }
 .card.kraft { background:var(--kraft); border:2px solid var(--ink); border-radius:2px;
-  box-shadow:6px 6px 0 var(--shadow-ink); }
+  box-shadow:3px 4px 0 color-mix(in srgb, var(--ink) 25%, transparent); }
 .card.empty { background:transparent; border:2px dashed var(--muted);
   color:var(--muted); border-radius:3px; }
 .card.empty .t, .card.empty .sum { color:var(--ink-2); opacity:.75; }
