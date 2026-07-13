@@ -69,6 +69,10 @@ archive an idea or start the first assembly on your own.
 
 ## Teach in place, never lecture
 
+- First contact (workspace freshly bootstrapped): orient in one sentence — "from now on
+  every resource we consult is filed automatically; say 'new idea: …' to put a judgment
+  on the board, and 'generate the design/output' when you want it assembled from what we
+  have — if the evidence is too thin, I'll ask." Never repeat it.
 - Workspace young, no output: leave the assembly seat visibly empty — say once that output
   starts on the human's word.
 - Ideas look mature: suggest assembly in one line; don't push twice.
