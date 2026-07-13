@@ -69,40 +69,56 @@ open /tmp/canvas/canvas.html
 
 ## Canvas Styles
 
-Five skins ship with the canvas. Switch live from the toolbar — the choice sticks in
-your browser. Screenshots below are the bundled example workspace, unretouched.
+Five skins ship with the canvas; switch live from the toolbar, Pin & Paper is the
+default. Screenshots below are this repo's own workspace, unretouched — the board
+view and a close-up for each style.
 
 ### Pin & Paper (default)
 
-![Pin & Paper](docs/assets/canvas-styles/pin-and-paper.png)
+<p>
+  <img src="docs/assets/canvas-styles/pin-and-paper-1.png" width="49%" alt="Pin & Paper — board">
+  <img src="docs/assets/canvas-styles/pin-and-paper-2.png" width="49%" alt="Pin & Paper — close-up">
+</p>
 
 > A handmade pinboard: yellow paper ground, ink-blue hand script, pinned notes,
 > taped slips, and dashed hand-drawn threads between them.
 
 ### Notebook Tabs
 
-![Notebook Tabs](docs/assets/canvas-styles/notebook-tabs.png)
+<p>
+  <img src="docs/assets/canvas-styles/notebook-tabs-1.png" width="49%" alt="Notebook Tabs — board">
+  <img src="docs/assets/canvas-styles/notebook-tabs-2.png" width="49%" alt="Notebook Tabs — close-up">
+</p>
 
 > Warm ivory stationery: serif italic headings, index cards with colored tab
 > tongues, sticky-note ideas, stitched dashed connections.
 
 ### Swiss Modern
 
-![Swiss Modern](docs/assets/canvas-styles/swiss-modern.png)
+<p>
+  <img src="docs/assets/canvas-styles/swiss-modern-1.png" width="49%" alt="Swiss Modern — board">
+  <img src="docs/assets/canvas-styles/swiss-modern-2.png" width="49%" alt="Swiss Modern — close-up">
+</p>
 
 > White, ink, and one red accent: hairline grid, giant grotesk world titles with
 > red ordinals, ruler-straight edges.
 
 ### BlockFrame
 
-![BlockFrame](docs/assets/canvas-styles/block-frame.png)
+<p>
+  <img src="docs/assets/canvas-styles/block-frame-1.png" width="49%" alt="BlockFrame — board">
+  <img src="docs/assets/canvas-styles/block-frame-2.png" width="49%" alt="BlockFrame — close-up">
+</p>
 
 > Neo-brutalist pastel decks: thick borders, hard offset shadows, cyan / pink /
 > yellow card blocks that tilt just enough to feel alive.
 
 ### 8-Bit Orbit
 
-![8-Bit Orbit](docs/assets/canvas-styles/8-bit-orbit.png)
+<p>
+  <img src="docs/assets/canvas-styles/8-bit-orbit-1.png" width="49%" alt="8-Bit Orbit — board">
+  <img src="docs/assets/canvas-styles/8-bit-orbit-2.png" width="49%" alt="8-Bit Orbit — close-up">
+</p>
 
 > A CRT arcade in deep navy — scanlines, neon cyan / yellow / magenta frames, and
 > orthogonal circuit-trace edges. Dark in both color schemes; a CRT has no daylight
