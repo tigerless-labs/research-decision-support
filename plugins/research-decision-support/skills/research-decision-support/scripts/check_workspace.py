@@ -1,15 +1,33 @@
 import sys
 from pathlib import Path
 
-from workspace import card_files, card_links, parse_frontmatter, parse_tags
+from workspace import (LAYERS, broken_frontmatter, card_files, card_links,
+                       parse_frontmatter, parse_tags)
 
 IDEA_REQUIRED = ["id", "type"]
+
+
+def layout_problems(workspace):
+    workspace = Path(workspace).resolve()
+    problems = []
+    for md in sorted(workspace.rglob("*.md")):
+        rel = md.relative_to(workspace)
+        if len(rel.parts) > 1 and rel.parts[0] not in LAYERS:
+            problems.append(
+                f"{rel}: unknown top-level dir — invisible to every projection; "
+                f"move under one of: {', '.join(LAYERS)}")
+    return problems
 
 
 def schema_problems(workspace):
     problems = []
     for md, rel in card_files(workspace):
-        frontmatter = parse_frontmatter(md.read_text(encoding="utf-8"))
+        text = md.read_text(encoding="utf-8")
+        if broken_frontmatter(text):
+            problems.append(
+                f"{rel}: frontmatter opens but never closes — "
+                "it will leak into the rendered body")
+        frontmatter = parse_frontmatter(text)
         if len(parse_tags(frontmatter)) > 1:
             problems.append(f"{rel}: at most one tag per card — split the card")
         if rel.parts[0] != "ideas":
@@ -70,8 +88,8 @@ def cycle_problems(workspace):
 
 def check(workspace):
     workspace = Path(workspace).resolve()
-    return (schema_problems(workspace) + board_inbound_problems(workspace)
-            + cycle_problems(workspace))
+    return (layout_problems(workspace) + schema_problems(workspace)
+            + board_inbound_problems(workspace) + cycle_problems(workspace))
 
 
 def main(argv):

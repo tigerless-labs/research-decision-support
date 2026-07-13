@@ -1,31 +1,39 @@
 # protocol — the portable contract
 
-Everything here is enforced by `scripts/check_workspace.py` and
-`scripts/check_doc_links.py`; when this contract changes, the validators change in the same
-commit.
+The checkable parts are enforced by `scripts/check_workspace.py` and
+`scripts/check_doc_links.py`; when this contract changes, the validators change in the
+same commit.
 
 ## Workspace layout
 
 ```
 <workspace>/
 ├── target.md             the human's acceptance criteria; source of the output form
-├── logs.md               append-only change ledger — the only audit trail (docs stay
-│                         out of git)
-├── index.md              workspace entry point (projection)
-├── sources/              ① evidence: one source, one card; type dirs are thin shells,
-│   ├── index.md            the path is the type (projection)
-│   └── <type>/*.md
-├── ideas/                ② judgment: only the human creates these
-│   ├── index.md            (projection)
-│   ├── archive/            archived state — cards move here, never deleted
-│   └── *.md
-├── output/               ③ assembly: human-initiated; inner layout set by the chosen
-│   ├── index.md            output form (projection)
-│   └── …
-└── board/                free surface: one file, one board (a comparison, anything);
-    ├── index.md            human-owned, no schema (projection index as usual)
-    └── *.md
+├── logs.md               append-only change ledger (see The ledger)
+├── index.md              workspace entry point
+├── sources/<type>/*.md   ① evidence: one source, one card
+├── ideas/*.md            ② judgment (archive/ holds archived cards)
+├── output/…              ③ assembly, laid out by the chosen output form
+└── board/*.md            free surface: one file, one board
 ```
+
+Every layer also holds an `index.md` (see Indexes are projections).
+
+## Rendering contract — the engine's minimum
+
+Everything the projections require. All sections below this one are methodology, freely
+reconfigurable per schema; this section is the engine.
+
+- The four layer names: `sources/` and `ideas/` become canvas nodes, `output/` and
+  `board/` become document panels. An `archive/` path segment excludes; `index.md`
+  excludes.
+- Files are UTF-8 markdown.
+- Frontmatter is optional; when present it must close (`---` … `---`).
+
+Everything else degrades, never breaks: no H1 → filename stem shown; no tag →
+*未分类* group; any source type dir → its name projected verbatim; unresolvable
+link → no edge. Silent data loss is a validator error, never a shrug: markdown under
+an unknown top-level dir, and frontmatter that opens without closing, are INVALID.
 
 ## Card schema
 
@@ -35,14 +43,9 @@ commit.
   `tags` optional. No status field — existence is the live state, location under
   `archive/` is the archived state.
 - `sources/` cards: frontmatter optional; when present, only `tags` is read.
-- `board/` documents: **no schema** — no required frontmatter, no fixed sections; the
-  single-tag rule still applies if tags appear. Boards are **terminal**: they may
-  reference any layer, but sources/ideas/output must never reference a board — distill a
-  board's conclusion into an idea card instead.
-- Principles inside output documents are bullet lists, one principle per bullet — never
-  paragraphs — so each can be cited, edited, and ledgered on its own.
-- In the system-design output form, diagrams **are** the markdown: mermaid blocks with
-  `click` declarations pointing at module files — never prose plus an external image.
+- `board/` documents: **no schema**. Boards are **terminal**: they may reference any
+  layer, but sources/ideas/output must never reference a board — distill a board's
+  conclusion into an idea card instead.
 
 ## Exactly two structured facts
 
@@ -57,6 +60,13 @@ commit.
 
 Everything else — backlinks, distance, coordinates, clusters, index groupings — is derived
 and never enters the truth.
+
+## Output documents
+
+- Principles are bullet lists, one principle per bullet — never paragraphs — so each can
+  be cited, edited, and ledgered on its own.
+- In the system-design form, diagrams **are** the markdown: mermaid blocks with `click`
+  declarations pointing at module files — never prose plus an external image.
 
 ## Indexes are projections
 
