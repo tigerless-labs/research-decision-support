@@ -1,16 +1,19 @@
 ---
 id: drafts-not-state
 type: idea
-tags: [协议]
+tags: [protocol]
 ---
 
-# HTML 不持有事实：浏览器标注是草稿，markdown 是真身
+# HTML holds no facts: browser annotations are drafts, markdown is the source of truth
 
-页面可整体重建而零损失；读中落下的标注存浏览器本地，经导出补丁回流卡片。这保住了
-agent-native 形态（agent 读写 markdown，人看渲染），也避免了引入服务端。与
-[Elicit](../sources/products/elicit.md) 的差异正在于此：它的表格是产品数据库，本项目 的
-"表格"只是 markdown 的投影。
+The page can be rebuilt wholesale with zero loss; annotations dropped while reading live in
+browser-local storage and flow back into the cards via exported patches. This preserves the
+agent-native form (the agent reads and writes markdown, the human views the rendering) and avoids
+introducing a server. This is exactly the difference from
+[Elicit](../sources/products/elicit.md): its tables are the product's database; this project's
+"tables" are only projections of markdown.
 
-**同步纪律**（2026-07-09 人的裁决）：每次 markdown 真身改动，HTML 投影必须
-**同回合重建发布**；修改顺序恒为**先改 markdown、再同步 HTML**；绝对禁止只改
-HTML——投影上不存在"独立编辑"这个动作。
+**Sync discipline** (human adjudication, 2026-07-09): every change to the markdown source of
+truth must be followed by **rebuilding and republishing the HTML projection in the same turn**;
+the editing order is always **markdown first, then sync HTML**; editing only the HTML is strictly
+forbidden -- "independent editing" does not exist as an action on the projection.

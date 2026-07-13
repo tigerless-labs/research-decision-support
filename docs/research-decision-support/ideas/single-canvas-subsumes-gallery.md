@@ -1,17 +1,23 @@
 ---
 id: single-canvas-subsumes-gallery
 type: idea
-tags: [画板]
+tags: [canvas]
 ---
 
-# 融合画布：两模板合并成唯一一种 canvas，各取优点
+# Unified canvas: the two templates merge into the single canvas, taking the best of each
 
-[单画布三团](archive/single-canvas-clustered-graph.md)与[分页画廊](archive/tabbed-gallery-template.md)
-**合并为一种模板**：无限画布做底盘（Figma 式缩放拖拽、三团对应三大块、连线按需），
-画廊的优点全部并入——缩放三档即画廊三页（鸟瞰·团簇 / 分类·tag 组 / 细读·卡片，
-细读档＝画廊网格速读，风格预览 artifact 已实证），搜索+tag 筹码常驻工具栏，
-文档与系统图（mermaid）走弹窗渲染，空态就地教学与注入红队同级保留。
+[Single canvas, three clusters](archive/single-canvas-clustered-graph.md) and the
+[tabbed gallery](archive/tabbed-gallery-template.md) **merge into one template**: an infinite
+canvas as the chassis (Figma-style zoom and pan, three clusters for the three blocks, edges on
+demand), with all of the gallery's strengths folded in -- the three zoom levels are the
+gallery's three pages (bird's-eye clusters / tag groups / close-read cards, where the
+close-read level equals the gallery grid for fast reading, already proven by the style-preview
+artifact), search plus tag chips live permanently in the toolbar, documents and system diagrams
+(mermaid) render in modals, and empty-state in-situ teaching and the injection red-team are
+kept at the same level.
 
-演进轨迹：先判"超集→对齐后归档"，随即收敛为"直接合并"（2026-07-10，人两裁）。
-两张先行模板卡随合并完成而归档；模板集机制保留，库仍可扩。小屏体验与大卡量
-性能是画布侧要清的两项非功能残差。
+Evolution: first ruled "superset, archive after alignment", then converged to "merge outright"
+(2026-07-10, two human adjudications). The two predecessor template cards are archived as the
+merge completes; the template-set mechanism stays, and the library can still grow.
+Small-screen experience and performance at large card counts are the two non-functional
+residuals the canvas side still has to clear.

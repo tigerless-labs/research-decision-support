@@ -4,14 +4,17 @@ type: idea
 tags: [schema]
 ---
 
-# board 自由面：第四目录，一文一板，自由度交给人
+# Board free surface: a fourth directory, one file, one board, freedom belongs to the human
 
-工作区新增 `board/` 目录：人自有的自由版面——每个 md 是一块板，可以是一组对比
-（选项×判据、sources×主题），也可以是任意演算，**无 schema、无必填字段**。人主导
-内容，agent 只在点名时代笔（如"把这三个 source 摆成对比"）。
+The workspace gains a `board/` directory: the human's own freeform surface -- each md file is one
+board, which may be a comparison (options x criteria, sources x themes) or any scratch reasoning,
+**no schema, no required fields**. The human owns the content; the agent only ghostwrites when
+named (e.g. "lay these three sources out as a comparison").
 
-板是**最下游**：板上可向前引用三层取材（[引用规则](single-edge-single-tag.md)照常，
-只准向前、不成环），但 sources/ideas/output 一律不得引用 board——板上长出的结论要
-沉淀成 idea 卡（人创建）才能进提炼流。对比类板的方法学取材见结构化比较组
-（[ACH](../sources/methods/ach.md) 选项×证据矩阵、
-[Synthesis Matrix](../sources/blogs/synthesis-matrix.md) sources×主题惯例）。
+Boards are the **furthest downstream**: a board may reference material forward from the three
+layers (the [reference rules](single-edge-single-tag.md) apply as usual -- forward only, no
+cycles), but sources/ideas/output may never reference a board -- conclusions grown on a board
+must be distilled into idea cards (human-created) before entering the refinement flow. For the
+methodology behind comparison boards see the structured-comparison group
+([ACH](../sources/methods/ach.md) options x evidence matrix,
+[Synthesis Matrix](../sources/blogs/synthesis-matrix.md) sources x themes convention).

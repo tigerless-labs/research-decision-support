@@ -1,18 +1,22 @@
-# board 自由面
+# board — free surface
 
-**职责**：人自有的自由版面——一文一板，对比（选项×判据、sources×主题）或任意演算。
+**Responsibilities**: the human's own free surface — one file, one board; comparisons
+(options × criteria, sources × themes) or any scratch reasoning.
 
-**行为边界**：
+**Behavior boundaries**:
 
-- **无 schema**：不设必填字段与固定段落；自由度交给人。tag 若出现仍守单标上限。
-- **人主导**：人创建、人组织；agent 只在点名时代笔（摆对比、填格子、锚证据）。
-- **最下游**：板可向前引用三层取材；sources / ideas / output 不得引用 board——
-  板上结论沉淀成 idea 卡（人创建）才进提炼流。
-- 不参与 ideas↔output 双向同步；agent 代笔的板变更照常记 logs。
-- index 照常派生；画板以独立 tab 投影全部板文。
+- **No schema**: no required fields, no fixed sections; the freedom belongs to the human.
+  If tags appear they still respect the single-tag cap.
+- **Human-led**: the human creates and organizes; the agent drafts only when asked (lay
+  out a comparison, fill cells, anchor evidence).
+- **The most downstream**: boards may reference the three layers for material; sources /
+  ideas / output must never reference a board — a board's conclusion is distilled into an
+  idea card (human-created) before it enters the flow.
+- Not part of the ideas↔output two-way sync; agent-drafted board changes are ledgered as usual.
+- The index is derived as usual; the canvas projects all board documents in their own tab.
 
-**溯源**：[board 自由面](../../ideas/board-freeform-layer.md) ·
-[引用+tag 两种事实](../../ideas/single-edge-single-tag.md) ·
-[agent 思考不拍板](../../ideas/agent-synthesizes-human-adjudicates.md) ·
-[ACH](../../sources/methods/ach.md)（对比板的矩阵方法学） ·
-[Synthesis Matrix](../../sources/blogs/synthesis-matrix.md)（sources×主题惯例）。
+**Provenance**: [board free surface](../../ideas/board-freeform-layer.md) ·
+[exactly two facts: references + tags](../../ideas/single-edge-single-tag.md) ·
+[the agent thinks but never adjudicates](../../ideas/agent-synthesizes-human-adjudicates.md) ·
+[ACH](../../sources/methods/ach.md) (the matrix methodology behind comparison boards) ·
+[Synthesis Matrix](../../sources/blogs/synthesis-matrix.md) (the sources × themes convention).

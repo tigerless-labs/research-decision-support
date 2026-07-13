@@ -1,29 +1,36 @@
 ---
 id: canvas-fixed-builder-style-css-only
 type: idea
-tags: [画板]
+tags: [canvas]
 ---
 
-# 画布构建收敛为一个固定脚本：工作区路径是唯一必填输入，换风格只换 CSS
+# Canvas builds converge on one fixed script: the workspace path is the only required input, switching styles swaps CSS only
 
-[融合画布](single-canvas-subsumes-gallery.md)的构建方式定形为**一个固定脚本**
-（`build_canvas.py`）：agent 输入工作区路径即渲染出完整画布 HTML，收卡、连线、
-布局、嵌数据全部内建，不存在第二条构建路径。模板（结构 + 交互 JS）与风格
-（CSS）分离——模板留一个 CSS 注入槽，默认灌当前风格；换风格**只换 CSS 文件**
-（`--css` 传入），禁止为观感另开模板或另写脚本。
+How the [unified canvas](single-canvas-subsumes-gallery.md) gets built is now fixed as **one
+script** (`build_canvas.py`): the agent feeds it the workspace path and it renders the complete
+canvas HTML -- card collection, edge derivation, layout, and data embedding are all built in; no
+second build path exists. Template (structure + interaction JS) and style (CSS) are separated --
+the template keeps one CSS injection slot, filled with the current style by default; switching
+styles **swaps only the CSS file** (passed via `--css`); opening another template or writing
+another script for the sake of looks is forbidden.
 
-**实时切换（2026-07-10 再迭代）**：风格选择权在人、就在画布上行使——工具栏
-常驻切换框，整包预编译 CSS 内嵌，换肤零重建；选择是投影层偏好，记在浏览器
-本地而非真身。`--css` 保留为定妆构建（钉死单风格、无切换框）。
+**Live switching (re-iterated 2026-07-10)**: style choice belongs to the human and is exercised
+right on the canvas -- a switcher sits permanently in the toolbar, the full set of precompiled
+CSS is embedded, and reskinning needs zero rebuilds; the choice is a projection-layer preference
+stored in the browser, not in the source of truth. `--css` remains for locked-down builds (pin a
+single style, no switcher).
 
-动机：融合版 UI 曾只活在临时目录与 artifact 里，重发一次靠手工拼接数据，
-schema 不合即整页空白（2026-07-10 踩过）；固定脚本让"md 改动 → 同回合重建
-发布"退化为一条命令，风格包则经由 CSS 槽继续整包可换
-（[风格与画布正交](style-canvas-orthogonality.md)）。
+Motivation: the unified UI once lived only in temp directories and artifacts; republishing meant
+hand-stitching the data, and a schema mismatch blanked the whole page (hit on 2026-07-10); the
+fixed script reduces "md changed, rebuild and publish in the same turn" to a single command,
+while style packs stay swappable wholesale through the CSS slot
+([style-canvas orthogonality](style-canvas-orthogonality.md)).
 
-**预编译（2026-07-10 同日追加）**：与其等选用时现场编译，不如把全部风格的
-CSS 预先编译好入库——每个 style 目录下一份 `canvas.css`（design.md 规格的
-编译产物，规格仍是真身，改规格必重编译），用户选哪个 `--css` 直接指过去，
-零等待。**格式统一（同日再迭代）**：canvas/ 不放任何 CSS——默认风格也回归
-风格包，构建默认＝`styles/pin-and-paper/canvas.css`（画布原生观感），与其余
-风格完全同格、同校验，永不因换风格被改写。
+**Precompilation (added the same day, 2026-07-10)**: rather than compiling on demand at selection
+time, compile every style's CSS ahead of time into the repo -- each style directory carries one
+`canvas.css` (the compiled product of the design.md spec; the spec remains the source of truth,
+and changing the spec forces a recompile), so whichever `--css` the user picks points straight at
+it, zero wait. **Format unification (iterated again the same day)**: canvas/ holds no CSS at all
+-- the default style also returns to a style pack, and the default build =
+`styles/pin-and-paper/canvas.css` (the canvas's native look), identical in format and validation
+to every other style, never rewritten by a style switch.

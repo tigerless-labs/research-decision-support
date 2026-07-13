@@ -1,19 +1,26 @@
-# agent 执行引擎
+# agent — execution engine
 
-**职责**：全部机械劳动的承担者——有思考力，无拍板权。
+**Responsibilities**: bearer of all mechanical labor — has thinking power, no adjudication
+power.
 
-**行为边界**：
+**Behavior boundaries**:
 
-- 跑腿清单＝收录建卡、证据分级、推导连线与 tag 分类（同一步执行——两者都是看
-  关系，产出画板布局的两种输入）、同判断新旧 idea 自动合并（冲突除外）、主张
-  锚定、记 logs、刷已有 output、把人对 output 的改动反向校准进 ideas（代笔，
-  判断属人）、整合碎片观点成决策草案。
-- idea 的创建与 output 的首次装配只能由人触发；归档人与 agent 均可。
-- 来源分歧必须如实上板呈现，不许自行选边。
-- 每项劳动的成本压到零是各方法存活的前提（Grudin 悖论的解法）。
-- 兼任协议的就地教学：ideas 成熟时提示可装配、人过早要 output 时如实报薄而不
-  拒绝、首次生成时说明双向同步、每次同步给回执——提示权归 agent，决定权归人。
+- The errand list = intake and card creation, evidence grading, reference derivation and
+  tag classification (one pass — both are relationship reads, producing the canvas
+  layout's two inputs), auto-merge of same-judgment new/old ideas (conflicts excepted),
+  claim anchoring, ledger writing, refreshing existing output, back-calibrating human
+  output edits into ideas (transcription; judgment is the human's), and consolidating
+  scattered observations into decision drafts.
+- Idea creation and the first output assembly can only be triggered by the human;
+  archival by either human or agent.
+- Source disagreements must go on the board as-is; the agent never picks a side.
+- Driving each labor's cost to zero is the survival precondition of every method (the
+  answer to Grudin's paradox).
+- Doubles as the protocol's in-place teacher: hint that assembly is possible when ideas
+  mature, deliver honestly thin output without refusing when the human asks too early,
+  state the two-way sync at first generation, and give a receipt on every sync — the
+  agent holds the right to hint, the human the right to decide.
 
-**溯源**：[agent 思考不拍板](../../ideas/agent-synthesizes-human-adjudicates.md) ·
-[协议就地教学](../../ideas/protocol-discoverability-in-situ.md) ·
-[IBIS 反面教材](../../sources/methods/ibis-qoc.md)（Grudin 悖论）。
+**Provenance**: [the agent thinks but never adjudicates](../../ideas/agent-synthesizes-human-adjudicates.md) ·
+[protocol taught in place](../../ideas/protocol-discoverability-in-situ.md) ·
+[IBIS as cautionary tale](../../sources/methods/ibis-qoc.md) (Grudin's paradox).

@@ -1,18 +1,19 @@
-# target — output 的验收目标
+# target — acceptance criteria for output
 
-人对 output 的要求在此登记；output 是对本清单的履行，每条要求可核对。要求变更时
-agent 同回合重推 output 受影响部分（与 idea 变更同为刷新触发源）。
+The human's requirements for output are registered here; output is the fulfilment of this
+list, and every requirement is checkable. When a requirement changes, the agent re-derives
+the affected parts of output in the same turn (a refresh trigger, same as idea changes).
 
-## 主旨
+## Purpose
 
-（一段：这个工作区要决策什么、为谁、边界在哪。）
+(One paragraph: what this workspace decides, for whom, and where the boundaries are.)
 
-## 当前要求
+## Current requirements
 
-output 必须包含：
+output must include:
 
-- （每行一条可核对的要求。）
+- (One checkable requirement per line.)
 
-## 履行对照
+## Fulfilment map
 
-- （要求 → output 文件的映射，随装配更新。）
+- (Requirement → output file mapping, updated with each assembly.)

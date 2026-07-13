@@ -1,17 +1,22 @@
 ---
-tags: [对抗偏误]
+tags: [bias-resistance]
 ---
 
-# [方法] 红队 / 魔鬼代言人 — 让批评不再靠勇气
+# [Method] Red team / devil's advocate -- criticism no longer requires courage
 
-军事演习与天主教封圣流程（advocatus diaboli）· 现代安全界制度化惯例。背书：②
-长期制度化实践检验。
+Military exercises and the Catholic canonization process (advocatus diaboli). An institutionalized
+convention in the modern security world. Backing: (2) long-term institutionalized practice
+testing.
 
-核心逻辑：指定专人/专队并**公开授权**其攻击方案——反对是职责不是态度，说错不担责。
-红队全力找漏洞、构造最坏情形，蓝队逐条回应或修补，攻防结果连同未修复项一起进决策
-记录。治的是共识过快与层级压制异见。
+Core logic: designate a person or team and **publicly authorize** them to attack the plan --
+opposition is a duty, not an attitude, and being wrong carries no blame. The red team hunts for
+holes with full force and constructs worst cases; the blue team responds to or patches each one;
+the attack-defense results, together with unfixed items, go into the decision record. It cures
+premature consensus and hierarchical suppression of dissent.
 
-边界：形式化的反对可能沦为仪式（走过场红队）；红队质量决定一切。
+Boundaries: formalized opposition can degenerate into ritual (a going-through-the-motions red
+team); red-team quality determines everything.
 
-**与本项目的关系**：产品已在用其精神——多 verifier 对抗验证就是 agent 化红队；
-可显式化为面板的「反方一栏」。
+**Relation to this project**: the product already runs on its spirit -- multi-verifier adversarial
+verification is an agent-ized red team; it can be made explicit as an "opposition column" on the
+panel.

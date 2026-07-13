@@ -1,35 +1,46 @@
 ---
 id: four-persona-scenarios
 type: idea
-tags: [定位]
+tags: [positioning]
 ---
 
-# 人格场景：同一决策协议，不同证据源与裁决物
+# Persona scenarios: the same decision protocol, different evidence sources and adjudication artifacts
 
-"基于调研的决策"不是科研专属——各类人格跑的是同一条协议（收证据→摆选项→人拍板→
-留痕），差异只在证据源和裁决物。这正是薄 schema 该参数化的两个轴：
+"Research-based decisions" are not researcher-only -- every persona runs the same protocol
+(gather evidence, lay out options, the human adjudicates, leave a trail); the differences are
+only in evidence sources and adjudication artifacts. These are exactly the two axes the thin
+schema should parameterize:
 
-| 人格 | 典型决策 | 证据源 | 裁决物（决定卡长什么样） |
+| Persona | Typical decisions | Evidence sources | Adjudication artifact (what the decision card looks like) |
 |---|---|---|---|
-| **科研者** | 选方向、定方法、争议点站队 | 论文、数据集、基准、同行评审 | 方向对比矩阵 → ADR，引文级溯源 |
-| **软件开发者** | 选型、架构取舍、依赖引入 | 仓库、文档、benchmark、issue 讨论 | drivers × options → ADR，affects 锚定模块 |
-| **vibe coder** | 产品方向、设计意图、功能取舍 | 竞品体验、用户反馈、demo 试跑 | 设计画板元素 ← 决定卡背书（见 creation-canvas 的下游延伸） |
-| **视频创作者** | 选题、标题/封面、叙事结构 | 平台数据、评论区、竞频、趋势工具 | 选题裁决卡：假设（HDD 式）→ 发布即实验 → 数据回填复盘 |
-| **生活决策者** | 跳槽、选校、买房、择城 | offer/学校/房源实数据、亲历者经验帖、政策文件、亲友意见 | PrOACT 式决定卡：目标（drivers）×选项×后果 + 接受的代价；一次性大额、不可逆居多 → 全流程 |
+| **Researcher** | choosing a direction, picking methods, taking sides on disputes | papers, datasets, benchmarks, peer review | direction comparison matrix -> ADR, citation-level provenance |
+| **Software developer** | technology selection, architecture trade-offs, adding dependencies | repos, docs, benchmarks, issue threads | drivers x options -> ADR, affects anchored to modules |
+| **Vibe coder** | product direction, design intent, feature trade-offs | competitor experience, user feedback, demo runs | design canvas elements <- endorsed by decision cards (see creation-canvas's downstream extension) |
+| **Video creator** | topic selection, title/thumbnail, narrative structure | platform data, comment sections, competing channels, trend tools | topic adjudication card: hypothesis (HDD-style) -> publish as experiment -> data backfill review |
+| **Life decision-maker** | changing jobs, choosing schools, buying a home, picking a city | real offer/school/listing data, first-person experience posts, policy documents, advice from family and friends | PrOACT-style decision card: objectives (drivers) x options x consequences + accepted trade-offs; mostly one-shot, high-stakes, irreversible -> full protocol |
 
-共性验证了协议的通用性；差异划出各自的场景 skill：证据分级表不同（科研者综述>论文；
-视频创作者一手平台数据>二手趋势文；生活决策者一手实数据与亲历者经验帖>营销内容——
-中介/招生/雇主话术是天然的利益冲突源，分级必须压低），裁决节奏不同（视频创作者是
-高频 OODA 循环，科研者是低频深思裁决桌；生活决策者频率最低、单次权重最高，且多为
-一类门——不可逆，恰好是全流程最值回票价的人格），但"否决留痕、决定可溯源"全员通吃
-——"为什么没买那套房"和"为什么不用那个框架"一样值钱，生活决策者还多一层独有收益：
-决策日志对抗事后的自我责备与家庭翻案。
+The commonality validates the protocol's generality; the differences carve out each scenario
+skill: evidence grading tables differ (researcher: reviews > papers; video creator: first-hand
+platform data > second-hand trend articles; life decision-maker: first-hand hard data and
+first-person experience posts > marketing content -- agent/admissions/employer talk is an
+inherent conflict-of-interest source and must be graded down), adjudication cadence differs (the
+video creator runs a high-frequency OODA loop, the researcher a low-frequency deliberation
+table; the life decision-maker decides least often with the highest stakes per decision, mostly
+one-way doors -- irreversible, exactly the persona for whom the full protocol pays off most),
+but "vetoes leave a trail, decisions are traceable" wins across the board -- "why we didn't buy
+that apartment" is worth as much as "why we didn't use that framework", and the life
+decision-maker gains one extra benefit of their own: the decision log defends against
+after-the-fact self-blame and family second-guessing.
 
-竞品四簇全部只服务科研人格（见 [sources 索引](../sources/index.md)竞品组），
-其余人格的决策留痕市场为空；生活决策场景另有独立佐证——PrOACT 原著《Smart Choices》
-（见 [PrOACT](../sources/methods/proact.md)）的示例即跳槽/购房级抉择；[sources 索引](../sources/index.md)证明
-底层方法（GTD/ACH/ADR/Shape Up…）本就诞生于不同行业，跨人格是方法的原生属性。
+All four competitor clusters serve only the researcher persona (see the competitors group in the
+[sources index](../sources/index.md)); the decision-traceability market for the other personas
+is empty. The life-decision scenario has independent corroboration -- the PrOACT original,
+Smart Choices (see [PrOACT](../sources/methods/proact.md)), uses job-change and home-purchase
+level choices as its examples; the [sources index](../sources/index.md) shows the underlying
+methods (GTD/ACH/ADR/Shape Up...) were themselves born in different industries -- crossing
+personas is native to the methods.
 
-Builds on [one-engine-many-schemas](one-engine-many-schemas.md)（人格＝schema 的参数化
-维度）；vibe coder 人格的裁决物是创作画板的下游延伸；场景 skills repo 的选品依据。To be weighed in
-[decisions/](index.md)：首发人格选谁。
+Builds on [one-engine-many-schemas](one-engine-many-schemas.md) (persona = a parameterized
+dimension of the schema); the vibe coder persona's adjudication artifact is the creation
+canvas's downstream extension; the selection basis for the scenario skills repo. To be weighed
+in [decisions/](index.md): which persona ships first.

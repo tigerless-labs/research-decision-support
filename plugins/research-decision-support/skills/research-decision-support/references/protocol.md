@@ -31,7 +31,7 @@ reconfigurable per schema; this section is the engine.
 - Frontmatter is optional; when present it must close (`---` … `---`).
 
 Everything else degrades, never breaks: no H1 → filename stem shown; no tag →
-*未分类* group; any source type dir → its name projected verbatim; unresolvable
+*unclassified* group; any source type dir → its name projected verbatim; unresolvable
 link → no edge. Silent data loss is a validator error, never a shrug: markdown under
 an unknown top-level dir, and frontmatter that opens without closing, are INVALID.
 
@@ -70,8 +70,8 @@ and never enters the truth.
 
 ## Indexes are projections
 
-Each layer's `index.md` groups cards by tag as `## TAG：one line on why they belong
-together`, with untagged cards flat at the end after a `---` rule and an `*未分类*` marker.
+Each layer's `index.md` groups cards by tag as `## TAG: one line on why they belong
+together`, with untagged cards flat at the end after a `---` rule and an `*unclassified*` marker.
 Regenerate the touched index in the same turn as any card change. Search goes through the
 index; there is no classification layer.
 

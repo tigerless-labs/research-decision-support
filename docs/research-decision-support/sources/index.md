@@ -1,85 +1,113 @@
-# sources — 证据卡（全类型一张索引）
+# sources -- evidence cards (one index across all types)
 
-类型目录（methods/github/blogs/products）只是薄壳，路径即类型；分类只看 tag——
-小标题即 tag，横跨全部类型；末尾无标题区为未分类。方法卡带背书分级：**①** 实证强 ·
-**②** 长期实践检验 · **③** 理论自洽实证薄 · **④** 流行启发式。
+The type directories (methods/github/blogs/products) are thin shells; the path is the type.
+Classification follows tags alone -- subheadings are tags, spanning all types; the headingless
+section at the end is unclassified. Method cards carry endorsement grades: **(1)** strong
+empirical backing, **(2)** proven by long-term practice, **(3)** theoretically coherent but
+empirically thin, **(4)** popular heuristic.
 
-## 判断处境：拿到问题先搞清是什么局面
+## situation-assessment: when a problem arrives, first figure out what kind of situation it is
 
-- [Cynefin](methods/cynefin.md) ③ — 先判域再选打法；调度器路由候选。
-- [OODA 循环](methods/ooda.md) ③ — 循环周转速度定胜负；快节奏场景变体的提示。
-- [RPD 识别启动决策](methods/rpd.md) ① — 专家凭模式识别直接行动；"何时不必开卡"的依据。
+- [Cynefin](methods/cynefin.md) (3) -- diagnose the domain before picking tactics; routing
+  candidate for the dispatcher.
+- [OODA loop](methods/ooda.md) (3) -- loop turnover speed decides the outcome; a hint for
+  fast-paced scenario variants.
+- [RPD recognition-primed decision](methods/rpd.md) (1) -- experts act directly on pattern
+  recognition; the basis for "when no card is needed".
 
-## 捕获与缓冲：念头涌入，别丢也别囤
+## capture-and-buffer: thoughts flood in -- don't lose them, don't hoard them
 
-- [GTD](methods/gtd.md) ② — inbox 唯一入口、零结构、必清空。
-- [Zettelkasten](methods/zettelkasten.md) ② — 转瞬笔记即弃、三种声音分卡。
+- [GTD](methods/gtd.md) (2) -- a single inbox entry point, zero structure, must be emptied.
+- [Zettelkasten](methods/zettelkasten.md) (2) -- fleeting notes are disposable; three voices on
+  separate cards.
 
-## 证据可信：信息杂，先分级再锚定
+## evidence-credibility: information is messy -- grade it first, then anchor it
 
-- [EBM / GRADE](methods/ebm-grade.md) ① — 证据分级、living review、综合附着于推荐。
-- [Toulmin](methods/toulmin.md) ② — 主张锚定证据的结构性义务。
+- [EBM / GRADE](methods/ebm-grade.md) (1) -- evidence grading, living review, synthesis attached
+  to recommendations.
+- [Toulmin](methods/toulmin.md) (2) -- the structural obligation to anchor claims to evidence.
 
-## 结构化比较：多方案对垒，摆开来比
+## structured-comparison: multiple options facing off -- lay them out and compare
 
-- [PrOACT](methods/proact.md) ③ — 问题→目标→选项→后果→权衡；决定卡展开态原型。
-- [Kepner-Tregoe](methods/kepner-tregoe.md) ② — MUST 杀选项、WANT 加权。
-- [MCDA / AHP](methods/mcda-ahp.md) ③ — 权重数学化；单取敏感性分析。
-- [决策树 / 期望值](methods/decision-tree.md) ② — 概率×收益倒推；多阶段决定视图。
-- [ACH](methods/ach.md) ① — 选项×证据矩阵、强制反证。
+- [PrOACT](methods/proact.md) (3) -- problem -> objectives -> options -> consequences ->
+  trade-offs; prototype for the decision card's expanded state.
+- [Kepner-Tregoe](methods/kepner-tregoe.md) (2) -- MUSTs kill options, WANTs are weighted.
+- [MCDA / AHP](methods/mcda-ahp.md) (3) -- mathematized weights; adopt only the sensitivity
+  analysis.
+- [Decision tree / expected value](methods/decision-tree.md) (2) -- probability x payoff rolled
+  back; multi-stage decision view.
+- [ACH](methods/ach.md) (1) -- options x evidence matrix, forced disconfirmation.
 
-## 对抗偏误：已经有偏爱时强制找反
+## bias-resistance: force the counter-case when a favorite already exists
 
-- [Pre-mortem](methods/premortem.md) ① — 想象已失败再找死因；裁决桌临门动作候选。
-- [反演 Inversion](methods/inversion.md) ④ — 问怎么必死然后避开；"反转"杠杆源头。
-- [WRAP](methods/wrap.md) ③ — 四步各治一偏；决定卡质检单候选。
-- [红队 / 魔鬼代言人](methods/redteam.md) ② — 制度化反对；多 verifier 即 agent 化红队。
-- [HDD](methods/hdd.md) ① — 可证伪表述、否决与采纳同价。
+- [Pre-mortem](methods/premortem.md) (1) -- imagine it has already failed, then find the cause of
+  death; candidate final move at the adjudication table.
+- [Inversion](methods/inversion.md) (4) -- ask how to fail for certain, then avoid it; the source
+  of the "invert" lever.
+- [WRAP](methods/wrap.md) (3) -- four steps, each curing one bias; candidate QA checklist for the
+  decision card.
+- [Red team / devil's advocate](methods/redteam.md) (2) -- institutionalized dissent; multiple
+  verifiers are red-teaming, agentified.
+- [HDD](methods/hdd.md) (1) -- falsifiable statements; rejection and adoption carry equal worth.
 
-## 注意力稀缺：清单淹人，只看成型的
+## attention-scarcity: lists drown people -- look only at what has taken shape
 
-- [Shape Up](methods/shape-up.md) ② — 无 backlog、裁决桌、想法可蒸发。
+- [Shape Up](methods/shape-up.md) (2) -- no backlog, an adjudication table, ideas may evaporate.
 
-## 组织决策：多人参与，先定谁拍板
+## org-decisions: many people involved -- first settle who adjudicates
 
-- [RAPID / DACI](methods/rapid-daci.md) ② — 拍板者唯一；decider 字段候选。
-- [Delphi 法](methods/delphi.md) ① — 匿名多轮收敛；机器 Delphi 已在用。
+- [RAPID / DACI](methods/rapid-daci.md) (2) -- exactly one adjudicator; candidate for a decider
+  field.
+- [Delphi method](methods/delphi.md) (1) -- anonymous multi-round convergence; machine Delphi
+  already in use.
 
-## 决策留痕：决定之后，防遗忘防翻案
+## decision-traceability: after the decision, guard against forgetting and relitigating
 
-- [ADR](methods/adr-method.md) ② — 决策记录结构与 supersede，"极简才存活"。
-- [决策日志](methods/decision-journal.md) ① — 预期封存+复盘校准；与 ADR 互补。
+- [ADR](methods/adr-method.md) (2) -- decision-record structure and supersede; "only the minimal
+  survives".
+- [Decision journal](methods/decision-journal.md) (1) -- seal expectations + calibrate in review;
+  complements ADR.
 
-## 方法存活学：元方向——方法本身为何死为何活
+## method-survivorship: the meta direction -- why methods themselves die or survive
 
-- [IBIS / QOC](methods/ibis-qoc.md) 反面教材 — 多名词 + 人工捕获成本 → 品类死亡
+- [IBIS / QOC](methods/ibis-qoc.md) cautionary tale -- many nouns + manual capture cost -> death
+  of the category
 
-## 自动研究：自动跑完调研全程的 agent，我们的上游或反面
+## auto-research: agents that run the whole research process automatically -- our upstream, or our foil
 
-- [gpt-researcher](github/gpt-researcher.md) — 自动深度研究 agent 头牌（~28k★）。
-- [STORM / Co-STORM](github/storm.md) — 多视角提问知识策展（~27.6k★）。
+- [gpt-researcher](github/gpt-researcher.md) -- the flagship automated deep-research agent
+  (~28k stars).
+- [STORM / Co-STORM](github/storm.md) -- multi-perspective questioning for knowledge curation
+  (~27.6k stars).
 
-## 方法论仓库：以文档为真身分发方法论的同道
+## methodology-repository: fellow travelers distributing methodology with documents as the true source
 
-- [github/spec-kit](github/spec-kit.md) — 方法论仓库天花板（~111k★），SDD 品类发明者。
-- [BMAD-METHOD](github/bmad-method.md) — 角色扮演式方法论（~49k★），文档即真身同道。
-- [frontend-slides](github/frontend-slides.md) — 风格即规格文档 + 三层渐进选型（~25k★），已移植为本 skill 风格包。
+- [github/spec-kit](github/spec-kit.md) -- the ceiling for methodology repositories (~111k stars),
+  inventor of the SDD category.
+- [BMAD-METHOD](github/bmad-method.md) -- role-play methodology (~49k stars); a fellow traveler in
+  documents-as-true-source.
+- [frontend-slides](github/frontend-slides.md) -- style-as-spec documents + three-tier progressive
+  selection (~25k stars); already ported as this skill's style pack.
 
-## 痛点：知识工作里反复被验证的失败模式
+## pain-points: failure modes repeatedly confirmed in knowledge work
 
-- [笔记坟场](blogs/notes-graveyard.md) — second brain 圈 2026 共识痛点。
-- [Tribal knowledge](blogs/tribal-knowledge-why.md) — "why 最先蒸发"的量化与 Slack 坟场。
+- [Notes graveyard](blogs/notes-graveyard.md) -- the 2026 consensus pain point of the second-brain
+  scene.
+- [Tribal knowledge](blogs/tribal-knowledge-why.md) -- quantifying "the why evaporates first",
+  plus the Slack graveyard.
 
-## 竞品：与本产品同赛道或邻赛道的现役产品
+## competitors: active products in this product's lane or adjacent lanes
 
-- [Elicit](products/elicit.md) — 结构化提取矩阵。
-- [InfraNodus](products/infranodus.md) — 文本网络自动成图与空隙识别。
-- [Rayyan / Covidence](products/rayyan.md) — 边读边筛工作流。
-- [Zotero 一族](products/zotero.md) — 文献库底座。
+- [Elicit](products/elicit.md) -- structured extraction matrix.
+- [InfraNodus](products/infranodus.md) -- automatic text-network graphs and gap detection.
+- [Rayyan / Covidence](products/rayyan.md) -- screen-while-reading workflow.
+- [Zotero family](products/zotero.md) -- the reference-library foundation.
 
 ---
 
-*未分类*
+*unclassified*
 
-- [adr-tools / log4brains](github/adr-tooling.md) — ADR 工具族与决策失联痛点。
-- [Synthesis Matrix](blogs/synthesis-matrix.md) — 高校写作中心的综合矩阵惯例。
+- [adr-tools / log4brains](github/adr-tooling.md) -- the ADR tool family and the
+  decision-disconnect pain point.
+- [Synthesis Matrix](blogs/synthesis-matrix.md) -- the synthesis-matrix convention of university
+  writing centers.

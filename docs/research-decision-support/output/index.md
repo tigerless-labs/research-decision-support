@@ -1,11 +1,11 @@
-# output — 装配产物（当前：系统设计）
+# output — assembled artifacts (currently: the system design)
 
-履行 [target](../target.md) 的要求；idea 与 target 变更即同回合刷新
-（[output-auto-refresh](../ideas/output-auto-refresh.md)）。
+Fulfils the requirements in [target](../target.md); idea and target changes trigger a
+same-turn refresh ([output-auto-refresh](../ideas/output-auto-refresh.md)).
 
-- [system](system.md) — 系统流程图 + 系统架构图（同一文档，脊柱）。
-- [file-structure](file-structure.md) — skill v2 文件结构：skill 包与工作区两棵树、模块→文件映射。
-- modules/ — 每模块一份细节：
+- [system](system.md) — system flow diagram + system architecture diagram (one document, the spine).
+- [file-structure](file-structure.md) — skill v2 file structure: the skill package and workspace trees, module→file mapping.
+- modules/ — one detail doc per module:
   [source](modules/source.md) · [idea](modules/idea.md) ·
   [output](modules/output.md) · [board](modules/board.md) ·
   [canvas](modules/canvas.md) · [agent](modules/agent.md) ·

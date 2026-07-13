@@ -1,16 +1,19 @@
 ---
-tags: [竞品]
+tags: [competitors]
 ---
 
-# [产品] Zotero（及 Mendeley/Paperpile 一族）— 文献库底座
+# [Product] Zotero (and the Mendeley/Paperpile family) -- the reference-library foundation
 
-zotero.org · 开源免费，事实上的文献管理标准。
+zotero.org · open source and free, the de facto standard for reference management.
 
-核心逻辑：一键抓取元数据、PDF 标注、集合与标签、全文检索、引文生成；生态位是
-"库"，评测普遍建议以它为底座、把发现/综合工具叠在上面。
+Core logic: one-click metadata capture, PDF annotation, collections and tags, full-text search,
+citation generation; its niche is the "library", and reviews generally recommend using it as the
+foundation with discovery/synthesis tools stacked on top.
 
-边界：标签与笔记是扁平的，不表达"方向—判断—设计"的层级；综合仍要靠外部表格
-（synthesis matrix 惯例是 Excel/Sheets 手工维护）。
+Boundary: tags and notes are flat and cannot express the "direction - judgment - design"
+hierarchy; synthesis still relies on external tables (the synthesis-matrix convention is
+hand-maintained Excel/Sheets).
 
-**与 本项目 的关系**：不竞争、可共存——本项目 的 sources 卡可从 Zotero 导出生成。来源：
-[research paper organizer 对比](https://www.atlasworkspace.ai/blog/research-paper-organizer)。
+**Relevance to this project**: no competition, coexistence -- this project's sources cards can be
+generated from a Zotero export. Source:
+[research paper organizer comparison](https://www.atlasworkspace.ai/blog/research-paper-organizer).

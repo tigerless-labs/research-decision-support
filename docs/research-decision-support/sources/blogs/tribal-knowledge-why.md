@@ -1,20 +1,24 @@
 ---
-tags: [痛点]
+tags: [pain-points]
 ---
 
-# [博客] Tribal knowledge — "why 最先蒸发"的量化与 Slack 坟场
+# [Blog] Tribal knowledge -- quantifying "the why evaporates first", plus the Slack graveyard
 
-多源（Slite/Glue/tribalhabits/领域博客，2025-2026）。
+Multiple sources (Slite/Glue/tribalhabits/domain blogs, 2025-2026).
 
-核心逻辑：工程知识里最先失传的是决策的 why——选了什么、试过什么、为什么弃。典型场景
-"花 3 天逆向工程原设计者 3 分钟能讲清的决策"。决策的权威版本住在 Slack thread / 会议 /
-离职者脑子里。量化：高 tribal knowledge 团队 senior onboarding 12-16 周 vs 有记录团队
-4-6 周（年招 6 人 ≈ $200-300K 损失）；架构咨询延迟 3-5 天 vs 2-4 小时；找知识
-~23 小时/人/月。合规维度：审计证据不能是"离职员工的 Slack thread"。2026 新变量：
-stale 决策记录被 agent 读到后**自信地执行并级联放大**。
+Core logic: the first thing lost from engineering knowledge is the why of decisions -- what was
+chosen, what was tried, why it was dropped. The archetypal scene: "spending 3 days
+reverse-engineering a decision the original designer could explain in 3 minutes". The
+authoritative version of a decision lives in Slack threads / meetings / the heads of people who
+have left. Quantified: senior onboarding in high-tribal-knowledge teams takes 12-16 weeks vs 4-6
+weeks in well-documented teams (hiring 6 per year ~= $200-300K lost); architecture consultations
+delayed 3-5 days vs 2-4 hours; finding knowledge ~23 hours/person/month. Compliance angle: audit
+evidence cannot be "a departed employee's Slack thread". The new 2026 variable: stale decision
+records get read by agents that then **execute them confidently and amplify in cascade**.
 
-**与 本项目 的关系**：decision-log 痛点的存量证据（agent 之前就值钱）；"capture as
-byproduct of work" 是公认解法方向，恰好是 agent-native skill 的形态。来源：
-[Slite: tribal knowledge](https://slite.com/learn/tribal-knowledge)、
-[Glue](https://getglueapp.com/blog/tribal-knowledge-software-teams)、
-[eesel: AI 时代的知识管理](https://www.eesel.ai/blog/enterprise-knowledge-management)。
+**Relevance to this project**: stock evidence for the decision-log pain point (valuable even
+before agents); "capture as byproduct of work" is the acknowledged solution direction, which is
+exactly the shape of an agent-native skill. Sources:
+[Slite: tribal knowledge](https://slite.com/learn/tribal-knowledge),
+[Glue](https://getglueapp.com/blog/tribal-knowledge-software-teams),
+[eesel: knowledge management in the AI era](https://www.eesel.ai/blog/enterprise-knowledge-management).

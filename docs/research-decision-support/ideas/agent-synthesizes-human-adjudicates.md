@@ -1,25 +1,32 @@
 ---
 id: agent-synthesizes-human-adjudicates
 type: idea
-tags: [定位]
+tags: [positioning]
 ---
 
-# agent 有思考力但无拍板权：把人的碎片观点整合成决策候选
+# The agent has thinking power but no adjudication power: it assembles the human's scattered views into decision candidates
 
-分工不是"人思考、agent 干活"——agent 被允许**思考**：聚合人碎片化的观点思路、
-发现其中的矛盾与空隙、组合提炼成完整的决策草案（选项、理由链、反方）。但思考的
-产出永远是**候选**：系统里不存在 agent 能触发的"已采纳"迁移，决策只能由人的动作
-产生。价值主张由此升级——人不必先想清楚再输入，扔碎片就行：**整合成型是 agent 的
-思考，成型之后拍板是人的权力**。
+The division of labor is not "the human thinks, the agent does chores" -- the agent is allowed to
+**think**: aggregate the human's fragmented views and lines of thought, spot the contradictions
+and gaps among them, and compose them into complete decision drafts (options, reasoning chains,
+counterarguments). But what thinking produces is always a **candidate**: nowhere in the system is
+there an "adopted" transition the agent can trigger; decisions arise only from human actions. The
+value proposition upgrades accordingly -- people need not think everything through before typing;
+tossing in fragments is enough: **assembling them into shape is the agent's thinking; once shaped,
+adjudicating is the human's power**.
 
-整合劳动归 agent 才存活是 [IBIS 反面教材](../sources/methods/ibis-qoc.md)（Grudin
-悖论）的直接推论；碎片判断可被聚合成收敛结论有 [Delphi](../sources/methods/delphi.md)
-（匿名多轮收敛、机器 Delphi 已在用）背书；竞品四簇（见
-[sources 索引](../sources/index.md)竞品组）要么只干活不思考（存储/提取），
-要么替人下结论（SciSpace 式编造），"思考但不拍板"的中间位为空。
+That synthesis labor must belong to the agent in order to survive is a direct corollary of the
+[IBIS cautionary tale](../sources/methods/ibis-qoc.md) (Grudin's paradox); that fragmented
+judgments can be aggregated into convergent conclusions is backed by
+[Delphi](../sources/methods/delphi.md) (anonymous multi-round convergence; machine Delphi is
+already in use); the four competitor clusters (see the competitors group in the
+[sources index](../sources/index.md)) either do chores without thinking (storage/extraction) or
+draw conclusions for people (SciSpace-style fabrication) -- the middle position of "thinks but
+does not adjudicate" is empty.
 
-深化 [judgment-provenance-wedge](judgment-provenance-wedge.md)（判断一等的前提是
-拍板权独占归人）；是 [claims-anchor-evidence](claims-anchor-evidence.md)"锚定劳动
-归 agent"的推广——从锚定推广到整合；[creation-canvas](creation-canvas.md) 是这条
-理念的交互现场；[idea-layer-single-entity](idea-layer-single-entity.md)
-的状态机已将"人拍板"编码为唯一晋级动作。
+Deepens [judgment-provenance-wedge](judgment-provenance-wedge.md) (judgment being first-class
+presupposes that adjudication power belongs exclusively to the human); generalizes
+[claims-anchor-evidence](claims-anchor-evidence.md)'s "anchoring labor belongs to the agent" --
+from anchoring to synthesis; [creation-canvas](creation-canvas.md) is where this idea meets the
+user; [idea-layer-single-entity](idea-layer-single-entity.md)'s state machine already encodes
+"the human adjudicates" as the only promotion action.

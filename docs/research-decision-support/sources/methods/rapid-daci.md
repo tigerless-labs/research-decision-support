@@ -1,17 +1,21 @@
 ---
-tags: [组织决策]
+tags: [org-decisions]
 ---
 
-# [方法] RAPID / DACI — 先定谁拍板
+# [Method] RAPID / DACI -- settle who adjudicates first
 
-RAPID＝Bain 咨询；DACI＝Intuit/Atlassian 谱系。背书：② 咨询业/科技业大规模实践，
-无对照研究。
+RAPID = Bain consulting; DACI = Intuit/Atlassian lineage. Backing: (2) large-scale practice in
+consulting and tech, no controlled studies.
 
-核心逻辑：把决策角色显式化——R 建议 / A 同意 / P 执行 / I 供输入 / **D 拍板且必须
-唯一**。I 们供事实与立场，R 汇成提案，D 裁决（不搞全体共识），P 提前在环里保证落地
-不打折。治的是会而不决与决而不行。角色分派先于任何分析方法——角色不清时再好的分析
-也落不了地。
+Core logic: make decision roles explicit -- R recommends / A agrees / P performs / I provides
+input / **D decides and must be unique**. The Is supply facts and positions, the R assembles the
+proposal, the D adjudicates (no whole-group consensus), and the P is in the loop early so
+execution does not get watered down. It cures meetings that decide nothing and decisions that
+execute nothing. Role assignment precedes any analysis method -- when roles are unclear, even the
+best analysis cannot land.
 
-边界：角色表本身可能沦为政治工具；D 唯一在强共识文化里推行困难。
+Boundaries: the role table itself can degenerate into a political tool; a unique D is hard to push
+through in strong-consensus cultures.
 
-**与本项目的关系**：多人工作区的前置需求——决定卡加一个 decider 字段即覆盖其核心。
+**Relation to this project**: a prerequisite for multi-user workspaces -- adding a single decider
+field to the decision card covers its core.

@@ -1,16 +1,21 @@
 ---
-tags: [判断处境]
+tags: [situation-assessment]
 ---
 
-# [方法] RPD 识别启动决策 — 专家不比较选项
+# [Method] RPD, Recognition-Primed Decision -- experts do not compare options
 
-Gary Klein（自然主义决策研究）· 消防指挥员等大量田野实证。背书：① 实证强。
+Gary Klein (naturalistic decision-making research). Extensive field evidence from fire commanders
+and others. Backing: (1) strong empirical support.
 
-核心逻辑：真实高压环境下的专家不做多选项比较——凭模式识别让第一方案自动浮现，
-心理演练一遍（会卡在哪？），通过就执行，卡住就微调或换下一个模式。前提是深经验 +
-熟悉域；新手或新颖问题必须退回结构化比较。
+Core logic: under real high pressure, experts do not compare multiple options -- pattern
+recognition surfaces a first plan automatically, they mentally simulate it once (where will it
+snag?), execute if it passes, and tweak or move to the next pattern if it sticks. The
+preconditions are deep experience + a familiar domain; novices or novel problems must fall back to
+structured comparison.
 
-边界：对专家有效的捷径对新手是陷阱；模式库过时时会自信地做错。
+Boundaries: a shortcut that works for experts is a trap for novices; with a stale pattern library
+it errs confidently.
 
-**与本项目的关系**：为「什么时候不必开决定卡」提供依据——专家+熟悉域=直接行动，
-系统只记一笔轻日志，作为裁决桌的前置分流。
+**Relation to this project**: the basis for "when a decision card is unnecessary" -- expert +
+familiar domain = act directly, and the system records only a light log entry, serving as the
+triage in front of the adjudication table.

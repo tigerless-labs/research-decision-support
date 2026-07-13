@@ -6,15 +6,15 @@
 <style id="skinsheet">/*__CSS__*/</style>
 <div id="bar">
   <h1><!--__TITLE__--></h1>
-  <input id="q" type="search" placeholder="搜索标题或摘要，回车飞过去…" aria-label="搜索">
-  <select id="skin" aria-label="风格"></select>
-  <div id="hint">滚轮缩放 · 拖拽平移 · 单击亮邻边 · 双击进详情 · Esc 清除</div>
+  <input id="q" type="search" placeholder="Search titles or summaries, Enter to fly there…" aria-label="Search">
+  <select id="skin" aria-label="Style"></select>
+  <div id="hint">Scroll to zoom · drag to pan · click to light neighbors · double-click for detail · Esc to clear</div>
 </div>
 <div id="chips"></div>
 <div id="vp"><div id="world">
   <svg id="edgeSvg"></svg>
 </div></div>
-<dialog id="zoom"><div class="tip">滚轮缩放 · 拖拽平移 · 点空白或 Esc 关闭</div><div class="stage"><div class="inner"></div></div></dialog>
+<dialog id="zoom"><div class="tip">Scroll to zoom · drag to pan · click blank or Esc to close</div><div class="stage"><div class="inner"></div></div></dialog>
 <dialog id="dlg"><div class="dlg">
   <aside class="rail" id="rail"></aside>
   <section class="content" id="content"></section>
@@ -170,11 +170,11 @@ addEventListener("keydown", e => { if (e.key === "Escape" && !dlg.open) clearSel
 const chipsEl = document.getElementById("chips");
 let activeTag = "", activeLayer = "", q = "";
 const chips = [];
-const ROWS = [["sources", "证据 · 团 1"], ["ideas", "想法 · 团 2"],
-              ["output", "装配 · 团 3"], ["board", "自由面"]];
+const ROWS = [["sources", "Evidence · World 1"], ["ideas", "Ideas · World 2"],
+              ["output", "Assembly · World 3"], ["board", "Free surface"]];
 const rowTop = el("div", "chiprow");
-const allChip = el("button", "chip on", "全部 " + DATA.nodes.length);
-rowTop.append(el("span", "rowlab", "全部"), allChip);
+const allChip = el("button", "chip on", "All " + DATA.nodes.length);
+rowTop.append(el("span", "rowlab", "All"), allChip);
 chips.push([allChip, "", ""]);
 chipsEl.append(rowTop);
 ROWS.forEach(([layer, label]) => {
@@ -305,7 +305,7 @@ function renderMarkdown(container, text, fromId) {
             });
           });
         }
-        m.title = "点击放大";
+        m.title = "Click to enlarge";
         m.addEventListener("click", e => {
           if (e.target.closest("a")) return;
           openZoom(m.querySelector("svg"));
@@ -371,14 +371,14 @@ function railList(title, hint, entries, current, open) {
         if (m.id !== current) open(m.id); });
       rail.append(a);
     });
-    if (!items.length) rail.append(el("p", "hint", "（无）"));
+    if (!items.length) rail.append(el("p", "hint", "(none)"));
   });
 }
 function topBar(badgeText) {
   content.textContent = "";
   const top = el("div", "top");
   top.append(el("span", "badge", badgeText));
-  const close = el("button", "", "✕ 关闭");
+  const close = el("button", "", "✕ Close");
   close.addEventListener("click", () => dlg.close());
   top.append(close);
   content.append(top);
@@ -389,10 +389,10 @@ function openCard(id) {
   const both = dir => [...new Set(dir[id] || [])].map(i => byId[i]).filter(Boolean);
   const rel = [...new Set([...both(outE), ...both(inE)])];
   const asm = rel.filter(m => m.layer === "output" || m.layer === "board");
-  railList("证据链", "这张卡两侧的来源、想法与装配",
-    [["来源", rel.filter(m => m.layer === "sources")],
-     ["想法", rel.filter(m => m.layer === "ideas")],
-     ["装配（引用本卡）", asm]],
+  railList("Evidence chain", "The sources, ideas, and assembly on both sides of this card",
+    [["Sources", rel.filter(m => m.layer === "sources")],
+     ["Ideas", rel.filter(m => m.layer === "ideas")],
+     ["Assembly (cites this card)", asm]],
     id, openCard);
   topBar(n.layer + (n.tags.length ? " · #" + n.tags[0] : ""));
   const md = el("div", "md");
@@ -404,8 +404,8 @@ function openCard(id) {
 function openDoc(path) {
   const text = ALLDOCS[path]; if (text === undefined) return;
   const family = path.startsWith("board/") ? DATA.board : DATA.output;
-  railList(path.startsWith("board/") ? "board 板文" : "output 文档",
-    path.startsWith("board/") ? "一文一板 · 点击切换" : "装配产物 · 点击切换",
+  railList(path.startsWith("board/") ? "board documents" : "output documents",
+    path.startsWith("board/") ? "one file, one board · click to switch" : "assembled artifacts · click to switch",
     [["", Object.keys(family).map(p => ({ id: p,
         title: p.replace(/^(output|board)\//, "") }))]],
     path, openDoc);

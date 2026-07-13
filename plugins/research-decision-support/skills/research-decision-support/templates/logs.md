@@ -1,6 +1,6 @@
-# logs — append-only 变更账本（覆盖 ideas 与 output 两层）
+# logs — append-only change ledger (covers both the ideas and output layers)
 
-约定：每行 `- 日期 · 卡/文档 · 动作 · 改动（旧 → 新 的最小 delta）· 原因`；
-必须记**改动本身**而不只动作与原因；有 output 后同一变更每层各记一条
-（idea 一行 + output 一行）；只追加，永不改写旧行——docs 不入 git，本账本是
-回溯的唯一依据。
+Convention: each line is `- date · card/doc · action · delta (minimal old → new) · reason`;
+record the **delta itself**, not just the action and reason; once output exists, the same
+change gets one line per layer (one idea line + one output line); append only, never rewrite
+old lines — the docs stay out of git, so this ledger is the only way back.

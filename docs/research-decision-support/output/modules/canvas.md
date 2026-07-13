@@ -1,74 +1,105 @@
-# canvas 画板投影
+# canvas — board projection
 
-**职责**：全部卡片的可视面——帮人理清思路的主战场，胜负手是直观、好看、清晰。
+**Responsibilities**: the visual face of all cards — the main arena where a human clears
+their thinking; the deciding factors are intuitiveness, beauty, clarity.
 
-**规则（模板无关的不变量）**：
+**Rules (template-independent invariants)**:
 
-- 画板**只是可视化层**：基于 markdown 真身的变化而变化（真身动，板即动），
-  自身不持有任何事实，也不接受绕过真身的写入。
-- 连线＝卡内引用（agent 推导即在摘要补引用行）。
-- 布局由引用（引力）与 tag（同团）两种离散事实派生，距离/坐标不入真身。
-- 一卡至多一 tag，聚类无歧义；无 tag 卡落未分类散区。
-- 兼任协议的就地说明书：output 未生成时其位常驻空态占位（教启动权归人），
-  布局顺序即流程顺序，同步时被动更新的一边节点闪亮。
+- The canvas is **only a visualization layer**: it changes as the markdown truth changes
+  (truth moves, board moves), holds no facts of its own, and accepts no writes that bypass
+  the truth.
+- Edges = in-card references (the agent's derivation step adds reference lines to the summary).
+- Layout is derived from two discrete facts — references (gravity) and tags (same cluster);
+  distances/coordinates never enter the truth.
+- At most one tag per card, so clustering is unambiguous; untagged cards land in the
+  unclassified scatter area.
+- Doubles as the protocol's in-place manual: before output exists its seat holds a
+  standing empty-state placeholder (teaching that the launch right is the human's), layout
+  order mirrors process order, and the passively updated side flashes during sync.
 
-**模板（唯一：融合画布——模板集机制退役，画布只此一种、skill 内一层 canvas/ 文件
-即够，风格包挂于其下）**——模板只定信息架构与交互契约，视觉全权归风格包（以 token
-接口分界，见 [file-structure](../file-structure.md)）：
+**Template (exactly one: the unified canvas — the template-set mechanism retired; there is
+only this canvas, one canvas/ layer inside the skill suffices, and the style pack hangs
+under it)** — the template fixes only the information architecture and the interaction
+contract; visuals belong entirely to the style pack (bounded by the token interface, see
+[file-structure](../file-structure.md)):
 
-- **融合画布**＝单画布底盘 + 画廊优点合并：单一无限画布，Figma 式缩放/拖拽，
-  三团对应三大块、团内按 tag 聚小团；缩放三档即画廊三页（鸟瞰·团簇 / 分类·tag 组 /
-  细读·卡片＝网格速读）；空态就地教学、注入红队同级保留。
+- **Unified canvas** = single-canvas base + the gallery's strengths merged: one infinite
+  canvas, Figma-style zoom/pan, three clusters for the three blocks with tag sub-clusters
+  inside; three zoom detents are the gallery's three pages (bird's-eye · clusters /
+  classify · tag groups / close-read · cards = grid skim); empty-state in-place teaching
+  and red-team injection kept at parity.
 
-**融合画布交互契约（人的 UI 裁决，2026-07-10）**：
+**Unified canvas interaction contract (the human's UI adjudication, 2026-07-10)**:
 
-- 布局：三世界横排（证据 / 想法 / 装配），**board 独立板块居三世界正下方居中**。
-- tag 筹码**按团分行**（行首团名标签），搜索常驻工具栏、回车飞到命中卡。
-- 单击语义分档：**鸟瞰档单击卡片＝飞入细读并选中**（小卡无内容，描边无意义）；
-  分类/细读档单击＝亮邻边；双击＝进详情弹窗；连线默认不画。
-- **装配文档参与引用边**：构建时解析 output/board 文档正文链接生成 文档→卡 边，
-  选中文档即亮它装配自的卡；卡详情侧栏含"装配（引用本卡）"派生 backlink 节。
-- **mermaid 图卡内点击放大**：全屏顶层弹出、自动适配视口、滚轮缩放、拖拽平移、
-  点空白或 Esc 关闭；图内 click 点穿保留。
-- **工具栏常驻风格切换框，实时换肤**（人的 UI 裁决，2026-07-10）：选项来自
-  风格包索引，切换即整包换 CSS、零重建；上次选择记在浏览器本地（投影层偏好，
-  不入真身），默认 pin-and-paper。`--css` 定妆构建＝钉死单风格、无切换框。
-- **三层三卡文法**（人的 UI 裁决，2026-07-10）：每个风格必须给三层卡片三种
-  形态（结构、边框、符号等），不允许仅靠 accent 换色区分；各风格的文法定义在
-  其 design.md 的 `### single-canvas` 节，测试不变量守门。
-- **风格钩子**（方案 C，2026-07-13）：模板仍唯一，但把 CSS 够不着的死角开放为
-  常驻钩子——每卡一个 chrome 空壳、世界标题一个序号槽（默认隐藏，风格 CSS 决定
-  显隐与形态）；引用边的形状由风格 CSS 变量声明（曲线/直线，绘制时读取，随换肤
-  即时生效），色/粗/虚线本就可被 CSS 覆盖。换肤槽 style 元素具名，钩子默认样式
-  独立其外、不被换肤覆写。布局级差异（坐标、尺寸）仍为全风格共享，不在钩子射程。
-- mermaid 渲染观感由所选风格驱动、固定两开关，真身与图种不变：
-  `look: handDrawn`（mermaid v11 内置手绘外观），`themeVariables` 渲染时从当前
-  风格 token 动态取（底/边/字/线色 + 字体栈），随切换框即时生效。
+- Layout: three worlds in a row (evidence / ideas / assembly), with the **board block
+  centered directly below the three worlds**.
+- Tag chips **arranged in rows per cluster** (cluster name labels the row); search lives
+  in the toolbar, Enter flies to the hit card.
+- Click semantics by zoom detent: **at bird's-eye, clicking a card = fly into close-read
+  and select it** (small cards have no content, so outlining is meaningless); at
+  classify/close-read detents, click = light neighbors; double-click = detail dialog;
+  edges are not drawn by default.
+- **Assembly documents participate in reference edges**: at build time the output/board
+  document bodies are parsed for links, producing document→card edges; selecting a
+  document lights the cards it was assembled from, and a card's detail rail includes an
+  "Assembly (cites this card)" derived-backlink section.
+- **Mermaid diagrams enlarge on click inside a card**: full-screen top-layer dialog,
+  auto-fit to viewport, scroll to zoom, drag to pan, click blank or Esc to close;
+  in-diagram click-through is preserved.
+- **A standing style switcher in the toolbar, live reskin** (the human's UI adjudication,
+  2026-07-10): options come from the style pack index; switching swaps the whole CSS pack
+  with zero rebuild; the last choice is remembered in the browser (a projection-layer
+  preference, never entering the truth), defaulting to pin-and-paper. A `--css` pinned
+  build = one fixed style, no switcher.
+- **Three layers, three card grammars** (the human's UI adjudication, 2026-07-10): every
+  style must give the three layers three distinct card forms (structure, border, symbols,
+  …), never distinguished by accent color alone; each style defines its grammar in its
+  design.md `### single-canvas` section, guarded by a test invariant.
+- **Style hooks** (option C, 2026-07-13): the template stays singular, but the corners CSS
+  cannot reach are opened as standing hooks — one empty chrome shell per card, one ordinal
+  slot per world title (hidden by default; the style's CSS decides visibility and form);
+  the reference edge's shape is declared by a style CSS variable (curve/straight, read at
+  draw time, taking effect instantly on reskin), while color/weight/dash were always
+  CSS-overridable. The reskin slot's style element is named; hook default styles live
+  outside it and are not overwritten by reskins. Layout-level differences (coordinates,
+  sizes) remain shared across styles, out of hook range.
+- Mermaid rendering look is driven by the selected style behind two fixed switches, truth
+  and diagram kinds unchanged: `look: handDrawn` (mermaid v11's built-in hand-drawn look),
+  and `themeVariables` pulled dynamically from the current style's tokens at render time
+  (background/border/text/line colors + font stack), taking effect instantly with the switcher.
 
-**构建（固定脚本，2026-07-10 定形）**：
+**Build (fixed script, settled 2026-07-10)**:
 
-- 只有一个构建入口 `build_canvas.py`：**工作区路径是唯一必填输入**，一条命令
-  渲染出完整画布 HTML（收卡、推边、布局、嵌数据、内联依赖全内建），不存在
-  第二条构建路径；产物只进临时目录或 artifact，绝不入真身。
-- 模板与风格彻底分离：结构只有 `canvas/template.html`（留 CSS 注入槽，旧设计稿
-  spec 已删——交互契约的唯一真身在本文），全部 CSS 归风格包 `canvas/styles/`；**换风格只换 CSS**（`--css` 传风格文件），
-  禁止为观感复制模板或另写脚本。模板即结构契约：agent 不改 HTML 投影，可写面
-  只有 markdown 真身与风格 CSS。
-- 风格 CSS **预编译入库、格式统一**：每个 style 目录下一份 `canvas.css`
-  （design.md 规格的编译产物——规格是真身，改规格必重编译），选用时 `--css`
-  直接指过去，零等待；校验器查 canonical token 明暗双份齐全、禁外链。默认
-  构建把整包 CSS 随切换框内嵌（默认显示 pin-and-paper——画布的原生观感），
-  `--css` 则只嵌单风格。
-- 待清残差：小屏体验、大卡量性能（默认暗色 palette 已随"默认风格回归风格包"
-  解决——pin-and-paper 自带明暗双份）。两张先行模板（分页画廊/单画布三团）随合并完成归档。
+- There is exactly one build entry, `build_canvas.py`: **the workspace path is the only
+  required input**, and one command renders the complete canvas HTML (card collection,
+  edge derivation, layout, data embedding, dependency inlining all built in); no second
+  build path exists; the artifact goes only to a temp dir or an artifact, never into the truth.
+- Template and style fully separated: structure is only `canvas/template.html` (with a CSS
+  injection slot; the old design-draft spec is deleted — the interaction contract's sole
+  truth is this document), and all CSS belongs to the style pack `canvas/styles/`;
+  **changing style changes only CSS** (`--css` takes the style file); copying the template
+  or writing another script for looks is forbidden. The template is the structural
+  contract: the agent never edits the HTML projection; the writable surfaces are the
+  markdown truth and style CSS only.
+- Style CSS is **precompiled into the repo, one format**: each style dir holds one
+  `canvas.css` (the compiled artifact of the design.md spec — the spec is the truth, so
+  changing the spec means recompiling), `--css` points straight at it with zero wait; the
+  validator checks the canonical tokens exist in both light and dark palettes and bans
+  external reach. The default build embeds the whole pack's CSS with the switcher
+  (initially showing pin-and-paper — the canvas's native look); `--css` embeds a single
+  style only.
+- Residuals to clear: small-screen experience, large-card-count performance (the default
+  dark palette resolved itself when the default style returned to the style pack —
+  pin-and-paper ships both palettes). The two forerunner templates (tabbed gallery /
+  single-canvas three-cluster) were archived when the merge completed.
 
-**溯源**：[单画布超集画廊](../../ideas/single-canvas-subsumes-gallery.md) ·
-[分页画廊模板](../../ideas/archive/tabbed-gallery-template.md) ·
-[引用+tag 两种事实](../../ideas/single-edge-single-tag.md) ·
-[协议就地教学](../../ideas/protocol-discoverability-in-situ.md) ·
-[创作画板](../../ideas/creation-canvas.md) ·
-[单画布三团](../../ideas/archive/single-canvas-clustered-graph.md) ·
-[连线按需显现](../../ideas/canvas-edges-on-demand.md) ·
-[投影不持有事实](../../ideas/drafts-not-state.md) ·
-[风格画布正交](../../ideas/style-canvas-orthogonality.md) ·
-[固定脚本换风格只换 CSS](../../ideas/canvas-fixed-builder-style-css-only.md)。
+**Provenance**: [the single canvas subsumes the gallery](../../ideas/single-canvas-subsumes-gallery.md) ·
+[tabbed gallery template](../../ideas/archive/tabbed-gallery-template.md) ·
+[exactly two facts: references + tags](../../ideas/single-edge-single-tag.md) ·
+[protocol taught in place](../../ideas/protocol-discoverability-in-situ.md) ·
+[creation canvas](../../ideas/creation-canvas.md) ·
+[single canvas, three clusters](../../ideas/archive/single-canvas-clustered-graph.md) ·
+[edges on demand](../../ideas/canvas-edges-on-demand.md) ·
+[projections hold no facts](../../ideas/drafts-not-state.md) ·
+[style–canvas orthogonality](../../ideas/style-canvas-orthogonality.md) ·
+[fixed builder, style is CSS-only](../../ideas/canvas-fixed-builder-style-css-only.md).

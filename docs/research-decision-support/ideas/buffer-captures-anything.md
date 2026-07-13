@@ -1,28 +1,36 @@
 ---
 id: buffer-captures-anything
 type: idea
-tags: [证据]
+tags: [evidence]
 ---
 
-# 缓冲层捕获任意观点：入口零门槛，结构是 agent 事后的事
+# The buffer layer captures any thought: zero-threshold entry, structure is the agent's job afterwards
 
-系统有且只有一个入口——缓冲层（inbox），它接受**任意形态的观点**：一句话念头、
-一个链接、一段牢骚、半成品假设、别人的反对意见。入口处零结构、零分类、零质检——
-捕获动作本身必须比记在备忘录还轻，否则观点就丢在了系统外。结构化全部发生在事后
-且全归 agent：分诊每条进项（催熟成决定候选 / 锚定后归证据库 / 挂为已有决定的选项 /
-蒸发）。与[主张必须锚定证据](claims-anchor-evidence.md)的门禁不冲突而是互补：
-**门禁守的是正式区（证据库、决定卡），缓冲层是门禁前的免检区**——先让观点活下来，
-再决定它配不配进正式区。允许安静蒸发是特性不是缺陷：捕获已完成释放心智的任务，
-保存从来不是承诺。
+The system has exactly one entry point -- the buffer layer (inbox), which accepts **thoughts in
+any shape**: a one-line hunch, a link, a rant, a half-formed hypothesis, someone else's objection.
+At the entry there is zero structure, zero classification, zero quality control -- the capture
+action itself must be lighter than jotting into a notes app, or the thought is lost outside the
+system. All structuring happens afterwards and belongs entirely to the agent, which triages every
+incoming item (ripen it into a decision candidate / anchor it and file it into the evidence base /
+attach it as an option on an existing decision / let it evaporate). This does not conflict with
+the [claims must anchor evidence](claims-anchor-evidence.md) gate -- it complements it: **the gate
+guards the formal zone (evidence base, decision cards); the buffer layer is the inspection-free
+zone before the gate** -- first let the thought survive, then decide whether it deserves the
+formal zone. Allowing quiet evaporation is a feature, not a flaw: capture has already done its job
+of freeing the mind; storage was never a promise.
 
-零门槛捕获+必清空来自 [GTD](../sources/methods/gtd.md)（Zeigarnik：要的是写下来，
-不是存着）；处理后即弃的合法性来自
-[Zettelkasten](../sources/methods/zettelkasten.md)（fleeting notes 不是收藏品）；
-"不清空即坟场"的反面证据见[笔记坟场](../sources/blogs/notes-graveyard.md)；
-蒸发的胆量来自 [Shape Up](../sources/methods/shape-up.md)（重要的想法自己会回来）。
-方法先例见 [GTD](../sources/methods/gtd.md)。
+Zero-threshold capture plus mandatory emptying comes from [GTD](../sources/methods/gtd.md)
+(Zeigarnik: what matters is writing it down, not keeping it); the legitimacy of discarding after
+processing comes from [Zettelkasten](../sources/methods/zettelkasten.md) (fleeting notes are not
+collectibles); for the negative evidence that "unemptied means graveyard" see
+[notes graveyard](../sources/blogs/notes-graveyard.md); the courage to evaporate comes from
+[Shape Up](../sources/methods/shape-up.md) (important ideas come back on their own). For the
+method precedent see [GTD](../sources/methods/gtd.md).
 
-与 [claims-anchor-evidence](claims-anchor-evidence.md) 构成双区结构：缓冲层免检、
-正式区门禁——宽进严出。分诊产物流向证据分级（归证据
-库时自动分级）与决定卡（催熟时）。双区（独立缓冲层）后收敛为 idea 的存在态出生，零门槛与可蒸发的行为不变。To be weighed in
-[decisions/](index.md)：蒸发的时限与是否提醒（默认不提醒不计数，待验证）。
+Forms a two-zone structure with [claims-anchor-evidence](claims-anchor-evidence.md):
+inspection-free buffer, gated formal zone -- easy in, strict out. Triage products flow into
+evidence grading (auto-graded when filed into the evidence base) and into decision cards (when
+ripened). The two-zone design (a separate buffer layer) has since converged into ideas being born
+in the exist state; the zero-threshold and evaporable behaviors are unchanged. To be weighed in
+[decisions/](index.md): the evaporation time limit and whether to remind (default: no reminders,
+no counters -- to be validated).

@@ -1,4 +1,6 @@
-# board — 自由面（一文一板，人自有）
+# board — free surface (one file, one board; the human's own)
 
-每个 md 是一块板：一组对比（选项×判据、sources×主题）或任意演算，无 schema。
-板可向前引用三层取材；三层不引板——板上结论沉淀成 idea 卡再进提炼流。
+Each md is a board: a comparison set (options × criteria, sources × themes) or any scratch
+reasoning, no schema. Boards may reference the three layers for material; the layers never
+reference a board — a board's conclusion is distilled into an idea card before it enters
+the flow.

@@ -1,18 +1,21 @@
 ---
-tags: [结构化比较]
+tags: [structured-comparison]
 ---
 
-# [方法] 决策树 / 期望值 — 概率×收益倒推最优路径
+# [Method] Decision tree / expected value -- probability x payoff, rolled back to the best path
 
-决策分析经典（Raiffa 等，1960s）· 决策分析学科基石。背书：② 学科级长期检验
-（数学上成立，效果取决于概率估计质量）。
+Decision analysis classic (Raiffa et al., 1960s). A cornerstone of the decision analysis
+discipline. Backing: (2) discipline-level long-term testing (mathematically sound; effectiveness
+depends on the quality of probability estimates).
 
-核心逻辑：决策节点（方框）与机会节点（圆圈）交替画树，机会分支标概率、叶子标结果值，
-从叶往根倒推期望（机会节点加权、决策节点取优）。收尾做敏感性检验：关键概率抖动多少
-结论会变。
+Core logic: draw a tree alternating decision nodes (squares) and chance nodes (circles), label
+chance branches with probabilities and leaves with outcome values, then roll expectations back
+from leaves to root (weight at chance nodes, take the best at decision nodes). Finish with a
+sensitivity check: how much must a key probability wobble before the conclusion flips.
 
-边界：概率能被合理估计时才有效——深不确定性（没有分布可言）下会给出伪精确；
-期望值对一次性重大决策的适用性有争议（不可重复即无"期望"）。
+Boundaries: only works when probabilities can be reasonably estimated -- under deep uncertainty
+(no distribution to speak of) it yields false precision; the applicability of expected value to
+one-shot major decisions is contested (no repetition means no "expectation").
 
-**与本项目的关系**：多阶段决定的候选视图；期望倒推与敏感性检验全归 agent，
-概率与价值判断归人。
+**Relation to this project**: a candidate view for multi-stage decisions; expectation rollback and
+sensitivity checks go entirely to the agent, probability and value judgments go to the human.

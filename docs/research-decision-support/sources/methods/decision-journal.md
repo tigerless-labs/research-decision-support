@@ -1,17 +1,21 @@
 ---
-tags: [决策留痕]
+tags: [decision-traceability]
 ---
 
-# [方法] 决策日志 — 切断事后合理化
+# [Method] Decision journal -- cutting off hindsight rationalization
 
-Michael Mauboussin（源自 Kahneman 建议）。背书：① 底层是 hindsight bias——心理学
-最扎实的发现之一（Fischhoff 1975 起）。
+Michael Mauboussin (from a suggestion by Kahneman). Backing: (1) the underlying phenomenon is
+hindsight bias -- one of psychology's most solid findings (Fischhoff 1975 onward).
 
-核心逻辑：决策当下记录决定+理由+预期结果+概率+当时情绪，**封存不改**；结果出来后
-对照当初预期复盘，区分坏运气与坏决策，校准自己的判断模式。不记日志的人永远觉得
-自己当初就料到了。
+Core logic: at the moment of deciding, record the decision + reasons + expected outcome +
+probability + emotional state, then **seal it, no edits**; once results arrive, review against the
+original expectations, separating bad luck from bad decisions and calibrating your own judgment
+patterns. People who keep no journal forever believe they saw it coming all along.
 
-边界：需要长期纪律（正是 agent 该接管的）；复盘频率与诚实度决定价值。
+Boundaries: requires long-term discipline (exactly what the agent should take over); review
+frequency and honesty determine the value.
 
-**与本项目的关系**：决定卡日志的孪生方法——append-only + 预期字段 + 复盘提醒可全套
-吸收；与 [ADR](adr-method.md) 互补：ADR 记给组织，决策日志校准个人。
+**Relation to this project**: the twin method of the decision card's log -- append-only + an
+expectations field + review reminders can be absorbed wholesale; complementary to
+[ADR](adr-method.md): ADR records for the organization, the decision journal calibrates the
+individual.

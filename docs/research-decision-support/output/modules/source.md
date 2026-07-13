@@ -1,18 +1,20 @@
-# source 证据模块
+# source — evidence module
 
-**职责**：参考资料与自身观察的唯一入口；持有全部证据卡，为一切主张提供锚点。
+**Responsibilities**: the sole entry point for reference material and one's own
+observations; holds every evidence card and provides the anchor for every claim.
 
-**行为边界**：
+**Behavior boundaries**:
 
-- agent 自动收录会话中出现的一切来源，一源一卡。
-- 不建主题目录树，类型容器只是薄壳，主题结构由 tag 涌现。
-- 类型目录名不设预设集合：agent 收录时自选（可新建）；画布角标直接投影目录名
-  原文，无类型目录则不显示。
-- 入库即分级（综述>论文>文档>帖子，分级表随场景可配）。
-- tag 分类在推导连线步进行且**可选**——人工主动打或 agent 建议均可；无 tag 的
-  卡合法存在、照常被引用与装配，画板落未分类区待补。
-- 只存"材料说了什么"，判断不入此层。
+- The agent automatically intakes every source that appears in a session, one source one card.
+- No topic directory tree; type containers are thin shells, and topical structure emerges from tags.
+- Type directory names have no preset list: the agent picks (or creates) one at intake;
+  the canvas badge projects the directory name verbatim, and no type dir means no badge.
+- Graded at intake (review > paper > doc > post; the grading table is configurable per scenario).
+- Tag classification happens in the reference-derivation pass and is **optional** — set by
+  the human or suggested by the agent; an untagged card is legal, gets referenced and
+  assembled as usual, and lands in the canvas's unclassified area awaiting a tag.
+- Stores only "what the material says"; judgment never enters this layer.
 
-**溯源**：[tag 自分类](../../ideas/source-tags-self-classify.md) ·
-[证据分级](../../ideas/evidence-grading.md) ·
-[主张锚定](../../ideas/claims-anchor-evidence.md)。
+**Provenance**: [tag self-classification](../../ideas/source-tags-self-classify.md) ·
+[evidence grading](../../ideas/evidence-grading.md) ·
+[claims anchor evidence](../../ideas/claims-anchor-evidence.md).

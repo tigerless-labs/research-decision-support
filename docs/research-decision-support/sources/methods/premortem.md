@@ -1,17 +1,24 @@
 ---
-tags: [对抗偏误]
+tags: [bias-resistance]
 ---
 
-# [方法] Pre-mortem 事前验尸 — 用想象的既成事实解锁反对
+# [Method] Pre-mortem -- an imagined fait accompli unlocks dissent
 
-Gary Klein（HBR 2007）· 底层是前瞻后见实验（Mitchell 等 1989：想象结果已发生再找
-原因，解释能力提升约 30%）。背书：① 实证强。
+Gary Klein (HBR 2007). Grounded in prospective-hindsight experiments (Mitchell et al. 1989:
+imagining the outcome as already having happened before seeking causes improves explanatory
+ability by about 30%). Backing: (1) strong empirical support.
 
-核心逻辑：临拍板前宣布「一年后此方案已彻底失败」，每人**静默独立**写下所有死因
-（不讨论，防从众），汇总按概率×伤害排序，对高危死因补预案或承认该放弃。比「有什么
-风险？」有效得多——它给了反对以安全的形式：批评既成事实不是唱衰同事。
+Core logic: just before the verdict, declare "one year from now this plan has failed completely";
+everyone writes down all causes of death **silently and independently** (no discussion, to prevent
+conformity); the causes are aggregated and ranked by probability x harm, and high-risk causes get
+contingency plans or an admission that the plan should be dropped. Far more effective than "any
+risks?" -- it gives dissent a safe form: critiquing a fait accompli is not badmouthing a
+colleague.
 
-边界：氛围一致看好时最需要也最难发起；死因质量依赖参与者多样性。
+Boundaries: hardest to initiate exactly when the mood is uniformly optimistic and it is needed
+most; the quality of the causes depends on participant diversity.
 
-**与本项目的关系**：裁决桌的临门动作候选——按「采纳」前 agent 自动跑一轮事前验尸，
-把死因摆上面板；多 agent 独立生成死因天然满足「静默独立」。
+**Relation to this project**: a candidate final move at the adjudication table -- before "adopt"
+is pressed, the agent automatically runs a pre-mortem round and puts the causes of death on the
+panel; multiple agents generating causes independently naturally satisfies "silent and
+independent".

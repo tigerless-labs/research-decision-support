@@ -10,9 +10,9 @@ from conftest import XSS_TITLE
 def workspace_with_output(workspace):
     (workspace / "output" / "modules").mkdir()
     (workspace / "output" / "system.md").write_text(
-        "# 系统图\n\n```mermaid\nflowchart LR\n    A[\"one\"] --> B[\"two\"]\n"
+        "# System diagram\n\n```mermaid\nflowchart LR\n    A[\"one\"] --> B[\"two\"]\n"
         "    click A \"modules/mod-one.md\"\n```\n\n"
-        "细节见 [idea one](../ideas/idea-one.md)。\n", encoding="utf-8")
+        "Details in [idea one](../ideas/idea-one.md).\n", encoding="utf-8")
     (workspace / "output" / "modules" / "mod-one.md").write_text(
         "---\nid: mod-one\ntype: module\n---\n# module one\n\nBoundary bullets.\n",
         encoding="utf-8")
@@ -102,7 +102,7 @@ def test_build_is_self_contained_and_escapes_cards(workspace, tmp_path):
 def test_build_embeds_default_css_and_title(workspace, tmp_path):
     html = build(workspace, tmp_path / "proj").read_text(encoding="utf-8")
     assert DEFAULT_CSS.read_text(encoding="utf-8") in html
-    assert f"{workspace.name} · 融合画布" in html
+    assert f"{workspace.name} · unified canvas" in html
 
 
 def test_build_style_is_swapped_by_css_only(workspace, tmp_path):

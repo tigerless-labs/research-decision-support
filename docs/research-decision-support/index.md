@@ -1,10 +1,14 @@
-# research-decision-support 的 research-decision-support
+# research-decision-support's own research-decision-support
 
-本项目自己的文献→设计工作区（吃自己的狗粮）。当前主题：**文献工作台的竞品格局与
-产品差异化**。
+This project's own literature-to-design workspace (dogfooding). Current theme: **the competitive
+landscape of literature workbenches and product differentiation**.
 
-- [sources/](sources/index.md) — 证据卡一张索引（类型目录是薄壳，tag 是分类）。
-- [target.md](target.md) — output 的验收目标（人登记要求，agent 履行并对照）。
-- [logs.md](logs.md) — 变更账本（append-only，覆盖 ideas 与 output 两层，agent 自动记）。
-- [ideas/](ideas/index.md) — 判断卡（人创建，二态：存在/归档）。
-- [output/](output/index.md) — 装配产物（当前：系统设计），与 ideas 永远双向同步。
+- [sources/](sources/index.md) — one index for all evidence cards (type directories are thin
+  shells; tags are the classification).
+- [target.md](target.md) — acceptance criteria for the output (the human registers requirements;
+  the agent fulfils them and maps them back).
+- [logs.md](logs.md) — change ledger (append-only, covering both the ideas and output layers;
+  the agent records automatically).
+- [ideas/](ideas/index.md) — judgment cards (human-created, two states: exists / archived).
+- [output/](output/index.md) — assembled artifacts (currently: the system design), always in
+  two-way sync with ideas.

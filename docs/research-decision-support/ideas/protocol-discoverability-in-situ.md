@@ -1,31 +1,40 @@
 ---
 id: protocol-discoverability-in-situ
 type: idea
-tags: [协议]
+tags: [protocol]
 ---
 
-# 协议就地教学：空态 + 时机提示 + 动作回执，不写手册
+# The protocol teaches in situ: empty states + timely hints + action receipts, no manual
 
-协议规则（output 须人启动、先积累 ideas、双向同步）的可发现性不靠 onboarding
-文档，靠系统自身表面在**时机点上教**：
+Discoverability of the protocol rules (output must be human-initiated, accumulate ideas first,
+two-way sync) relies not on onboarding docs but on the system's own surfaces teaching **at the
+right moments**:
 
-- **空态教启动权**：画板 output 团常驻虚线占位（"output 尚未生成 · 说'生成
-  output'即可"）；agent 在 ideas 出现聚类成熟信号时主动提一句"已可装配，要我
-  生成吗"——提示时机归 agent，按钮永远在人手里。
-- **如实呈现教积累，不设门禁**：人过早要 output 时不拒绝，agent 报状态（"只有
-  N 张 idea、M 张无锚定，装出来会很薄——仍要生成？"），薄的后果上台面，人自己
-  拍板；画板 source → idea → output 的左右布局顺序即流程顺序。
-- **回执教同步**：首次生成 output 时说明一次"此后任改一边我都同步另一边"；之后
-  每次同步给一行回执（改了哪层哪几处、logs 几行），画板上被动更新的一边节点
-  闪亮。
+- **The empty state teaches who initiates**: the canvas's output cluster keeps a permanent
+  dashed placeholder ("output not yet generated - just say 'generate output'"); when the ideas
+  show signals of mature clustering, the agent proactively offers "ready to assemble -- want me
+  to generate?" -- the timing of the hint belongs to the agent, the button stays in the human's
+  hand.
+- **Honest presentation teaches accumulation, with no gate**: when the human asks for output too
+  early, do not refuse; the agent reports the state ("only N idea cards, M of them unanchored --
+  the assembly will be thin. Generate anyway?"), the consequence of thinness is put on the
+  table, and the human adjudicates; the canvas's left-to-right layout of source -> idea ->
+  output is itself the process order.
+- **Receipts teach sync**: on first output generation, explain once that "from now on, whichever
+  side you edit, I sync the other"; after that, every sync gets a one-line receipt (which layer,
+  which spots, how many log lines), and the nodes on the passively updated side flash on the
+  canvas.
 
-三条同构：规则在**它生效的那一刻、在它生效的那个表面**被看见，符合傻瓜式约束；
-提示权归 agent、决定权归人。
+The three are isomorphic: a rule becomes visible **at the moment it takes effect, on the surface
+where it takes effect**, in keeping with the fool-proof constraint; hinting belongs to the
+agent, deciding belongs to the human.
 
-empty state 与 just-in-time 提示是成熟交互惯例（无独立 source 卡，暂记常识级）；
-分工依据见 [agent 思考不拍板](agent-synthesizes-human-adjudicates.md)。
+Empty states and just-in-time hints are mature interaction conventions (no separate source card;
+noted as common knowledge for now); for the division of labor see
+[agent thinks, does not adjudicate](agent-synthesizes-human-adjudicates.md).
 
-所教的三条规则来自 [output-primary-after-generation](output-primary-after-generation.md)；
-空态与闪亮的载体依赖 [创作画板](creation-canvas.md) /
-[单画布三团](archive/single-canvas-clustered-graph.md)；回执与账本行对应
-[logs.md](../logs.md) 的每层一条。
+The three rules being taught come from
+[output-primary-after-generation](output-primary-after-generation.md); the carriers of the
+empty state and the flashing depend on the [creation canvas](creation-canvas.md) /
+[single canvas, three clusters](archive/single-canvas-clustered-graph.md); receipts correspond
+to the one-line-per-layer entries of the ledger, [logs.md](../logs.md).

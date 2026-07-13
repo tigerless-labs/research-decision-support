@@ -1,28 +1,35 @@
 ---
 id: single-canvas-clustered-graph
 type: idea
-tags: [画板]
+tags: [canvas]
 ---
 
-# 单一画布知识图谱：全部卡片一屏三团，团内按 tag 水平分小团
+# Single-canvas knowledge graph: all cards on one screen in three clusters, sub-clustered horizontally by tag
 
-本卡是画板**模板集的一款**（2026-07-09：画板结构改为多模板可选，定 target
-时 agent 问用户风格）。
-所有卡片（source / idea / design）不分页——放在**同一块无限画布**上，交互对标
-Figma：滚轮缩放、空格拖拽平移、自由漫游。组织形式是知识图谱的**三个团**（cluster），
-对应三大块；每个团内部按类别或 tag 再聚**小团**，小团之间**水平排布**——横向扫一眼
-即知这个团里有哪几类，而不是塞成一坨圆球。缩放即语义层级：拉远看三团格局（领域
-地图），拉近看小团分组（类别），贴近读单卡（内容）——一块画布覆盖从鸟瞰到精读的
-全部粒度，取代"每层一个页面"的分页导航。
+This card is **one option in the canvas template set** (2026-07-09: the canvas structure changed
+to multiple selectable templates; when setting the target, the agent asks the user for a style).
+All cards (source / idea / design) are unpaginated -- placed on **the same infinite canvas**,
+with interaction matching Figma: scroll to zoom, space-drag to pan, free roaming. The organizing
+form is a knowledge graph in **three clusters**, matching the three major blocks; inside each
+cluster, cards regroup into **sub-clusters** by category or tag, and sub-clusters are laid out
+**horizontally** -- one horizontal sweep shows which categories a cluster holds, instead of a
+wadded ball of dots. Zoom is the semantic hierarchy: zoom out for the three-cluster picture
+(domain map), zoom in for sub-cluster groups (categories), get close to read a single card
+(content) -- one canvas covers every granularity from bird's-eye to close reading, replacing
+"one page per layer" tabbed navigation.
 
-无限画布交互已被 Figma/Miro/tldraw 商品化为习惯动作，无学习成本；三团对应
-系统三大块（source / idea / output）；小团的类别来源是
-[tag 自分类](../source-tags-self-classify.md)（主题结构涌现，非预设目录）；连线遵守
-[画板连线按需显现](../canvas-edges-on-demand.md)（默认散点场，单击亮邻边）——本卡管
-**布局**（团-小团-水平排布），那张卡管**连线**，互补不重叠。
+Infinite-canvas interaction has been commoditized into habitual gestures by Figma/Miro/tldraw,
+zero learning cost; the three clusters map to the system's three blocks
+(source / idea / output); sub-cluster categories come from
+[tag self-classification](../source-tags-self-classify.md) (thematic structure emerges, not
+preset directories); edges follow [canvas edges on demand](../canvas-edges-on-demand.md) (a
+scatter field by default, single-click lights neighbor edges) -- this card governs **layout**
+(clusters, sub-clusters, horizontal flow), that card governs **edges**; complementary, no
+overlap.
 
-是[创作画板](../creation-canvas.md)的布局层具体化：画板"怎么摆"的答案——三团定大局、
-tag 定小团、水平排布保可扫读。缩放粒度取代了 workbench 的分页（overview/read/
-ideas…各页收敛为同一画布的不同缩放深度）。To be weighed in
-[decisions/](../index.md)：小团水平排布在小团数量多时的换行规则、三团的
-相对方位（左中右 or 品字形）。
+A concretization of the [creation canvas](../creation-canvas.md)'s layout layer: the answer to
+"how the board is arranged" -- three clusters set the big picture, tags set the sub-clusters,
+horizontal flow keeps it scannable. Zoom granularity replaced the workbench's pagination (the
+overview/read/ideas... pages converge into different zoom depths of the same canvas). To be
+weighed in [decisions/](../index.md): the wrapping rule when sub-clusters are numerous; the
+three clusters' relative positions (left-center-right or a triangle).

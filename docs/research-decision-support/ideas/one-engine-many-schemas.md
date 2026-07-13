@@ -4,16 +4,20 @@ type: idea
 tags: [schema]
 ---
 
-# 一个思维引擎，多份薄 schema：本项目 思维模式的多技能化
+# One thinking engine, many thin schemas: turning this project's thinking pattern into multiple skills
 
-可迁移的不是文献工具，是思维模式本身：**三种声音分家**（别人说/我说/我们建）、
-**判断一等且带出处**、**结构从链接长出而非预设**、**append-only 判决**、
-**markdown 真身 + 视图皆投影**。据此不 fork N 个仓库，而是同一引擎（typed cards +
-链接推导 + 站点生成器）配薄 schema（层名、状态枚举、镜头）出多个 skill：
+What transfers is not a literature tool but the thinking pattern itself: **three voices kept
+apart** (what others say / what I say / what we build), **judgments first-class and sourced**,
+**structure grown from links rather than preset**, **append-only verdicts**, **markdown as the
+source of truth with every view a projection**. Accordingly, do not fork N repositories: the
+same engine (typed cards + link derivation + site generator) with thin schemas (layer names,
+status enums, lenses) yields multiple skills:
 
-- **decision-log**：ADR 工具族停在模板/CLI、无证据链无 agent（见
-  [adr-tooling](../sources/github/adr-tooling.md)）——空位最大，优先。
-- **idea-gardener**：[笔记坟场](../sources/blogs/notes-graveyard.md)痛点为真，差异位是
-  想法的生命周期+证据义务，而非"AI 帮你回顾"。
+- **decision-log**: the ADR tool family stops at templates/CLI, with no evidence chain and no
+  agent (see [adr-tooling](../sources/github/adr-tooling.md)) -- the biggest gap, first
+  priority.
+- **idea-gardener**: the [notes graveyard](../sources/blogs/notes-graveyard.md) pain point is
+  real; the differentiator is the idea lifecycle plus evidence obligations, not "AI helps you
+  review".
 
-research-decision-support 只是第一个 schema 实例。
+research-decision-support is only the first schema instance.
