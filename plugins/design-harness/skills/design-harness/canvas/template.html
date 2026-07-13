@@ -247,7 +247,7 @@ function renderMarkdown(container, text, fromId) {
   if (window.mermaid) {
     const rootStyle = getComputedStyle(document.documentElement);
     const tok = name => rootStyle.getPropertyValue(name).trim();
-    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", look: "handDrawn", theme: "neutral", themeVariables: { fontFamily: getComputedStyle(document.body).fontFamily, primaryColor: tok("--surface"), primaryBorderColor: tok("--ink"), primaryTextColor: tok("--ink"), lineColor: tok("--ink-2"), mainBkg: tok("--surface"), nodeBorder: tok("--ink"), edgeLabelBackground: tok("--wash") } });
+    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", look: "handDrawn", theme: "neutral", themeVariables: { fontFamily: getComputedStyle(document.body).fontFamily, primaryColor: tok("--surface"), primaryBorderColor: tok("--ink"), primaryTextColor: tok("--ink"), lineColor: tok("--ink-2"), mainBkg: tok("--surface"), nodeBorder: tok("--ink"), edgeLabelBackground: tok("--wash"), nodeTextColor: tok("--ink"), textColor: tok("--ink"), titleColor: tok("--ink"), clusterBkg: tok("--wash"), clusterBorder: tok("--grid") } });
     const pres = [...container.querySelectorAll(".mermaid")];
     Promise.all(pres.map(p =>
       mermaid.render("mmd" + (mmdSeq++), p.dataset.src || p.textContent)
