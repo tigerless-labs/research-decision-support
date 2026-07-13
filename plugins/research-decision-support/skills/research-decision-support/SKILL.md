@@ -116,6 +116,12 @@ Build only into a temp directory or an artifact — the projection never enters 
 Whenever the markdown truth changes, rebuild and republish the canvas in the same turn;
 never edit the HTML directly.
 
+A build is not delivered until the human holds a clickable link. The output is one fully
+self-contained HTML file (all dependencies inlined, zero network requests), so any host
+works: in a local session give the absolute `file://…/canvas.html` URL (or serve the temp
+dir with a local static server and give that URL); in a hosted/web session publish it as
+an artifact and give that URL, republishing to the same URL on every rebuild.
+
 To pick a style, read [canvas/styles/selection-index.json](canvas/styles/selection-index.json) — never
 bulk-read the pack. Open a style's `design.md` only when (re)compiling its canvas.css —
 the spec is the truth, so whenever a design.md changes, recompile its canvas.css in the
