@@ -80,6 +80,8 @@ out of order is *incomplete*.
 - **workspace `output/` and `docs/plans/` are written in Chinese.** Every doc under those two trees
   must be in Chinese prose. Keep proper nouns, code, identifiers, links, and command runbooks
   as-is — only the prose is Chinese.
+- **Commits and PRs are written in English.** Commit messages, branch names, and PR
+  titles/bodies are English only — no Chinese in git history.
 - **Clear code, no comments.** Code must read clearly on its own — prefer explicit, unambiguous
   names with underscores, and carry intent through structure, naming, tests, and docs. Write no
   comments; if one feels necessary, rename or split until it isn't.
