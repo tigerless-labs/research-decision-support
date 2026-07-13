@@ -119,10 +119,11 @@ never edit the HTML directly.
 A build is not delivered until the human holds a clickable link. The output is one fully
 self-contained HTML file (all dependencies inlined, zero network requests), so any host
 works. **Default delivery is a published HTML link**: publish the file as an artifact (or
-the host's equivalent hosted page) and give that URL, republishing to the same URL on
-every rebuild. The one exception is Claude Code (a local CLI session), where a local link
-works: give the absolute `file://…/canvas.html` URL, or serve the temp dir with a local
-static server and give that URL.
+the host's equivalent hosted page) and give that URL. The one exception is Claude Code (a
+local CLI session), where a local link works: give the absolute `file://…/canvas.html`
+URL, or serve the temp dir with a local static server and give that URL. Either way,
+**every rebuild reuses the existing link**: republish to the same artifact URL, or
+overwrite the same local file path — mint a new link only when the human asks for one.
 
 To pick a style, read [canvas/styles/selection-index.json](canvas/styles/selection-index.json) — never
 bulk-read the pack. Open a style's `design.md` only when (re)compiling its canvas.css —
