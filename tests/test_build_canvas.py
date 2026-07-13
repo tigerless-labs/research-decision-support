@@ -182,3 +182,9 @@ def test_build_payload_splits_bodies_from_nodes(workspace, tmp_path):
     assert "subtypeZh" not in payload
     assert not any("body" in n for n in payload["nodes"])
     assert payload["bodies"]
+
+
+def test_template_opens_on_default_skin_every_time():
+    text = TEMPLATE.read_text(encoding="utf-8")
+    assert "localStorage" not in text
+    assert "STYLES.default" in text

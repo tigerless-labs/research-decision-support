@@ -434,15 +434,11 @@ const STYLES = /*__STYLES__*/null;
     op.value = o.slug; op.textContent = o.name;
     sel.append(op);
   });
-  let cur = null;
-  try { cur = localStorage.getItem("rds-skin"); } catch (e) {}
-  if (!cur || !STYLES.css[cur]) cur = STYLES.default;
   function apply(slug) {
     sheet.textContent = STYLES.css[slug];
     sel.value = slug;
-    try { localStorage.setItem("rds-skin", slug); } catch (e) {}
   }
-  apply(cur);
+  apply(STYLES.default);
   sel.addEventListener("change", () => apply(sel.value));
 })();
 </script>

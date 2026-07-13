@@ -109,8 +109,8 @@ python3 <skill-dir>/scripts/build_canvas.py <workspace> -o <temp-dir> [--css sty
 Visual style is CSS-only and lives entirely in the style pack at `canvas/styles/`: the
 template carries a `/*__CSS__*/` slot and no CSS of its own. Every style ships a precompiled
 `canvas/styles/<slug>/canvas.css`. The default build embeds the whole pack and a toolbar
-style switcher — the human changes skins live, the choice persists in the browser, and
-pin-and-paper (the canvas's native look) is the initial skin. Passing
+style switcher — the human changes skins live for the session, and every open starts on
+pin-and-paper (the canvas's native look). Passing
 `--css canvas/styles/<slug>/canvas.css` builds a pinned single-style canvas with no
 switcher. Never fork the template or the builder for looks.
 
