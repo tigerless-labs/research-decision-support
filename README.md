@@ -15,9 +15,9 @@ SKILL.md-compatible agent) for evidence-based calls: vendor selection, literatur
 review, due diligence, competitive analysis — any contested decision that must stand
 on traceable evidence.
 
-[![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
+[![The canvas — sources, ideas, and output as three worlds on one board](assets/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
-<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own workspace, rebuilt on every merge.</p>
+<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — a real research workspace, rebuilt on every merge.</p>
 
 ## What This Does
 
@@ -77,12 +77,13 @@ Talk to your agent in plain language:
 3. Say go — the ideas assemble into the output your `target.md` declares.
 4. Ask for the canvas — the agent builds the board and hands you a clickable link.
 
-Render this repo's own workspace — the design of this very tool, dogfooded — in ten
-seconds (it's the same board as the [live demo](https://tigerless-labs.github.io/design-harness/)):
+Render the bundled real-world example (87 cards from an agent-harness research
+project) in ten seconds — it's the same board as the
+[live demo](https://tigerless-labs.github.io/design-harness/):
 
 ```bash
 python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
-  docs/design-harness -o /tmp/canvas
+  examples/autoharness -o /tmp/canvas
 open /tmp/canvas/canvas.html
 ```
 
@@ -95,8 +96,8 @@ view and a close-up for each style.
 ### Pin & Paper (default)
 
 <p>
-  <img src="docs/assets/canvas-styles/pin-and-paper-1.png" width="49%" alt="Pin & Paper — board">
-  <img src="docs/assets/canvas-styles/pin-and-paper-2.png" width="49%" alt="Pin & Paper — close-up">
+  <img src="assets/pin-and-paper-1.png" width="49%" alt="Pin & Paper — board">
+  <img src="assets/pin-and-paper-2.png" width="49%" alt="Pin & Paper — close-up">
 </p>
 
 > A handmade pinboard: yellow paper ground, ink-blue hand script, pinned notes,
@@ -105,8 +106,8 @@ view and a close-up for each style.
 ### Notebook Tabs
 
 <p>
-  <img src="docs/assets/canvas-styles/notebook-tabs-1.png" width="49%" alt="Notebook Tabs — board">
-  <img src="docs/assets/canvas-styles/notebook-tabs-2.png" width="49%" alt="Notebook Tabs — close-up">
+  <img src="assets/notebook-tabs-1.png" width="49%" alt="Notebook Tabs — board">
+  <img src="assets/notebook-tabs-2.png" width="49%" alt="Notebook Tabs — close-up">
 </p>
 
 > Warm ivory stationery: serif italic headings, index cards with colored tab
@@ -115,8 +116,8 @@ view and a close-up for each style.
 ### Swiss Modern
 
 <p>
-  <img src="docs/assets/canvas-styles/swiss-modern-1.png" width="49%" alt="Swiss Modern — board">
-  <img src="docs/assets/canvas-styles/swiss-modern-2.png" width="49%" alt="Swiss Modern — close-up">
+  <img src="assets/swiss-modern-1.png" width="49%" alt="Swiss Modern — board">
+  <img src="assets/swiss-modern-2.png" width="49%" alt="Swiss Modern — close-up">
 </p>
 
 > White, ink, and one red accent: hairline grid, giant grotesk world titles with
@@ -125,8 +126,8 @@ view and a close-up for each style.
 ### BlockFrame
 
 <p>
-  <img src="docs/assets/canvas-styles/block-frame-1.png" width="49%" alt="BlockFrame — board">
-  <img src="docs/assets/canvas-styles/block-frame-2.png" width="49%" alt="BlockFrame — close-up">
+  <img src="assets/block-frame-1.png" width="49%" alt="BlockFrame — board">
+  <img src="assets/block-frame-2.png" width="49%" alt="BlockFrame — close-up">
 </p>
 
 > Neo-brutalist pastel decks: thick borders, hard offset shadows, cyan / pink /
@@ -135,8 +136,8 @@ view and a close-up for each style.
 ### 8-Bit Orbit
 
 <p>
-  <img src="docs/assets/canvas-styles/8-bit-orbit-1.png" width="49%" alt="8-Bit Orbit — board">
-  <img src="docs/assets/canvas-styles/8-bit-orbit-2.png" width="49%" alt="8-Bit Orbit — close-up">
+  <img src="assets/8-bit-orbit-1.png" width="49%" alt="8-Bit Orbit — board">
+  <img src="assets/8-bit-orbit-2.png" width="49%" alt="8-Bit Orbit — close-up">
 </p>
 
 > A CRT arcade in deep navy — scanlines, neon cyan / yellow / magenta frames, and
