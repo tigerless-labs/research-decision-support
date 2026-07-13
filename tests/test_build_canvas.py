@@ -173,6 +173,21 @@ def test_template_carries_style_hooks():
     assert 'querySelector("style")' not in text
 
 
+def test_template_maps_every_mermaid_text_surface_to_style_tokens():
+    # Mermaid's built-in themes hardcode flowchart label colors (#333/#000)
+    # and near-white cluster fills, which dark palettes cannot survive; the
+    # template must pin every text and container surface to style tokens so
+    # no theme default reaches the screen (docs/design-harness/output/modules/canvas.md).
+    text = TEMPLATE.read_text(encoding="utf-8")
+    for mapping in ('primaryTextColor: tok("--ink")',
+                    'nodeTextColor: tok("--ink")',
+                    'textColor: tok("--ink")',
+                    'titleColor: tok("--ink")',
+                    'clusterBkg: tok("--wash")',
+                    'clusterBorder: tok("--grid")'):
+        assert mapping in text
+
+
 def test_build_payload_splits_bodies_from_nodes(workspace, tmp_path):
     html = build(workspace, tmp_path / "proj").read_text(encoding="utf-8")
     line = next(l for l in html.split("\n") if l.startswith("const DATA = "))

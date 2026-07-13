@@ -65,8 +65,11 @@ contract; visuals belong entirely to the style pack (bounded by the token interf
   sizes) remain shared across styles, out of hook range.
 - Mermaid rendering look is driven by the selected style behind two fixed switches, truth
   and diagram kinds unchanged: `look: handDrawn` (mermaid v11's built-in hand-drawn look),
-  and `themeVariables` pulled dynamically from the current style's tokens at render time
-  (background/border/text/line colors + font stack), taking effect instantly with the switcher.
+  and `themeVariables` pulled dynamically from the current style's tokens at render time,
+  taking effect instantly with the switcher. The token map must cover **every text and
+  container surface mermaid renders** — node/edge/cluster labels and cluster fills included —
+  because mermaid's built-in themes hardcode label colors that a dark palette cannot survive;
+  no theme default may reach the screen. Guarded by a test invariant.
 
 **Build (fixed script, settled 2026-07-10)**:
 
