@@ -10,10 +10,18 @@ metadata:
 
 # design-harness — the human adjudicates, the agent runs errands
 
-When triggered, operate the workspace at `docs/design-harness/` (or wherever an
-existing workspace lives). Markdown is the **only source of truth**; every other surface —
+When triggered, locate the workspace first — the directory is always named
+`design-harness`; only its location is free. Discovery order: a path the human gives >
+the pointer file `.design-harness/config.json` at the host project root (single field:
+the workspace path) > the default `docs/design-harness/` > a find by directory name.
+Many candidates or none: ask the human — **never initialize a new workspace silently**
+(a wrongly placed init forks the truth). Only the bootstrap writes the pointer; if you
+find a workspace the pointer misses, re-run the bootstrap on it to record it.
+
+Markdown is the **only source of truth**; every other surface —
 indexes, backlinks, layout, the canvas HTML — is a projection that can be regenerated at any
-time and is **never committed**.
+time and is **never committed**. The pointer file is a projection of location, not truth:
+when it is stale or lost, discovery rebuilds it.
 
 Full contract (card schema, facts, sync invariants, ledger format):
 [references/protocol.md](references/protocol.md). Read it once per session before writing.
@@ -75,8 +83,12 @@ archive an idea or start the first assembly on your own.
 `<skill-dir>` below is this skill's own directory, wherever the host agent installed it.
 
 ```bash
-python3 <skill-dir>/scripts/init_workspace.py <workspace>   # idempotent bootstrap
+python3 <skill-dir>/scripts/init_workspace.py <workspace>   # idempotent bootstrap; records the pointer
 ```
+
+Run from the host project root. Without `<workspace>` the tools discover it (pointer →
+default → find by name) and refuse to act on ambiguity; `discover_workspace.py` prints
+what they would resolve.
 
 After **every** write, run both validators:
 

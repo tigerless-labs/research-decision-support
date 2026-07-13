@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 
+from discover_workspace import resolve_or_report
 from workspace import (LAYERS, broken_frontmatter, card_files, card_links,
                        parse_frontmatter, parse_tags)
 
@@ -93,7 +94,9 @@ def check(workspace):
 
 
 def main(argv):
-    workspace = argv[1] if len(argv) > 1 else "docs/design-harness"
+    workspace = argv[1] if len(argv) > 1 else resolve_or_report(".")
+    if workspace is None:
+        return 1
     problems = check(workspace)
     for problem in problems:
         print(f"INVALID {problem}")

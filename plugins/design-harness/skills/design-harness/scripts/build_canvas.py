@@ -4,6 +4,7 @@ import re
 import sys
 from pathlib import Path
 
+from discover_workspace import resolve_or_report
 from workspace import (card_files, card_links, first_paragraph, parse_frontmatter,
                        parse_tags, strip_frontmatter, title_of)
 
@@ -203,11 +204,14 @@ def build(workspace, outdir, css=None, title=None):
 
 
 def main(argv):
-    if len(argv) < 2:
-        print("usage: build_canvas.py <workspace> [-o outdir] "
-              "[--css style.css] [--title 'Page title']")
-        return 1
-    workspace = argv[1]
+    if len(argv) > 1 and not argv[1].startswith("-"):
+        workspace = argv[1]
+    else:
+        workspace = resolve_or_report(".")
+        if workspace is None:
+            print("usage: build_canvas.py [workspace] [-o outdir] "
+                  "[--css style.css] [--title 'Page title']")
+            return 1
     outdir = argv[argv.index("-o") + 1] if "-o" in argv else "/tmp/rds-canvas"
     css = argv[argv.index("--css") + 1] if "--css" in argv else None
     title = argv[argv.index("--title") + 1] if "--title" in argv else None

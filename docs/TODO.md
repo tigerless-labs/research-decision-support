@@ -14,3 +14,4 @@
 - [ ] 其余 7 风格的 `### single-canvas` 定制呈现章节（pin-and-paper 已带，预览 artifact 已给按层卡形方向，随 single-canvas 实现落地）。
 - [ ] skill 解冻时：references/output-forms/system-design.md 的流程图规格更新为"时间轴泳道 flowchart（人上 agent 下、编号之字形左右推进、同步回边）"，与 system.md 现状对齐。
 - [ ] docs 入 git（PR #13）后的陈述清扫："不入 git / docs 不入 git" 残句仍在 output/file-structure.md、logs.md 头部、SKILL.md 等处，逐一改为入 git 后的事实。
+- [ ] build_canvas 空 workspace（零卡片）时 layout 对空集取 max 崩溃——刚 init 的 workspace 首次建画布即触发；随 "check 并入 build" PR 一起修。

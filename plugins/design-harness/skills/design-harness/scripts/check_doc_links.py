@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 
+from discover_workspace import resolve_or_report
 from workspace import local_md_targets
 
 
@@ -16,7 +17,9 @@ def check_links(docs_root):
 
 
 def main(argv):
-    root = argv[1] if len(argv) > 1 else "docs"
+    root = argv[1] if len(argv) > 1 else resolve_or_report(".")
+    if root is None:
+        return 1
     problems = check_links(root)
     for problem in problems:
         print(f"DANGLING {problem}")

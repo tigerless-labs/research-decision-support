@@ -19,7 +19,11 @@ plugins/design-harness/skills/design-harness/
 │       └── system-design.md   first entry: mermaid diagrams (with click-through) + a modules layer
 ├── templates/            card skeletons, one template per kind: source card / idea card / target / logs header
 ├── scripts/
-│   ├── init_workspace.py     workspace bootstrap (idempotent, never overwrites)
+│   ├── init_workspace.py     workspace bootstrap (idempotent, never overwrites); records the
+│   │                         workspace location in the host's pointer file
+│   ├── discover_workspace.py workspace discovery: pointer file → default location → find by
+│   │                         directory name; ambiguity (many or zero hits) is reported, never
+│   │                         resolved silently — pure read, only the bootstrap writes the pointer
 │   ├── check_workspace.py    schema validation: required frontmatter, single tag, forward-only acyclic references
 │   ├── check_doc_links.py    link integrity validation
 │   ├── build_canvas.py       the canvas builder (fixed script): the workspace path is the only
@@ -85,6 +89,11 @@ docs/design-harness/
 
 Every layer index and the canvas HTML are projections: regenerated with the cards, holding
 no facts, never committed.
+
+The workspace directory is always named `design-harness`; only its location is free. The
+host project root carries a pointer file (`.design-harness/config.json`, single field:
+the workspace path) so any runtime finds a relocated workspace instantly. The pointer is
+not truth — it can be lost or stale and discovery rebuilds it from the tree.
 
 ## Module → file mapping
 
