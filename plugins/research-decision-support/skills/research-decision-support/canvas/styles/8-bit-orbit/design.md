@@ -105,3 +105,5 @@ cartridge bricks: thick neon border, hard dark shadow, a pixel corner chip. Idea
 dialog boxes: a thinner border doubled by an outer neon ring, with the blinking block
 cursor appended to the badge as the single permitted animation. Output docs are boss
 stages: thick border, hard shadow, an outer neon glow, and a star prefixed to the badge.
+Edges route at right angles like circuit traces, solid neon; world titles keep the
+letterspaced glow and group labels their block-pixel prefix, all over the scanlines.

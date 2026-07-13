@@ -17,8 +17,9 @@
 }
 * { box-sizing:border-box; }
 html, body { margin:0; height:100%; overflow:hidden; }
-body { color:var(--ink); font:15px/1.5 var(--body);
-  background:linear-gradient(160deg, var(--page), var(--wash) 130%); }
+body { color:var(--ink); font:15px/1.5 var(--body); --edge-shape:line;
+  background:linear-gradient(135deg, var(--page) 0%, var(--wash) 50%, var(--page) 100%); }
+#edgeSvg path { stroke:var(--accent-c); stroke-width:3px; stroke-dasharray:0; }
 #bar { position:fixed; inset:0 0 auto 0; z-index:20; display:flex; gap:14px;
   align-items:center; flex-wrap:wrap; padding:12px 20px 10px;
   background:var(--page); border-bottom:2px solid var(--ink); }
@@ -60,10 +61,12 @@ body { color:var(--ink); font:15px/1.5 var(--body);
 #world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
 .wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
-.wtitle .en { font-family:var(--display); font-size:112px; font-weight:900;
-  letter-spacing:-.01em; text-transform:uppercase; color:var(--ink); opacity:.12; }
-.wtitle .zh { font-size:40px; margin-left:26px; color:var(--accent-c); font-weight:700;
-  letter-spacing:.3em; opacity:.85; }
+.wtitle .idx { display:block; font-size:15px; font-weight:700; color:var(--muted);
+  letter-spacing:.5em; margin-bottom:6px; }
+.wtitle .en { font-family:var(--display); font-size:92px; font-weight:900;
+  letter-spacing:-.02em; text-transform:uppercase; color:var(--ink); line-height:.95; }
+.wtitle .zh { font-size:36px; margin-left:24px; color:var(--accent-c); font-weight:700;
+  letter-spacing:.3em; }
 .glabel { position:absolute; pointer-events:none; font-family:var(--display);
   font-size:22px; font-weight:900; color:var(--ink); white-space:nowrap;
   text-transform:uppercase; letter-spacing:.12em; }

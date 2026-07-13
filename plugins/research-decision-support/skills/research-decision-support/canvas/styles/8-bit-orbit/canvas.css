@@ -19,8 +19,11 @@
 * { box-sizing:border-box; }
 html, body { margin:0; height:100%; overflow:hidden; }
 body { background:var(--page); color:var(--ink); font:13px/1.5 var(--mono);
+  --edge-shape:ortho;
   background-image:repeating-linear-gradient(0deg,
     transparent 0 3px, color-mix(in srgb, var(--ink) 6%, transparent) 3px 5px); }
+#edgeSvg path { stroke:var(--accent-a); stroke-width:3px; stroke-dasharray:0;
+  stroke-linejoin:miter; }
 #bar { position:fixed; inset:0 0 auto 0; z-index:20; display:flex; gap:14px;
   align-items:center; flex-wrap:wrap; padding:10px 18px 8px;
   background:var(--surface); border-bottom:3px solid var(--grid); }

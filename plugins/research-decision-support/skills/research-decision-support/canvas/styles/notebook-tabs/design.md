@@ -104,4 +104,5 @@ tab tongue protruding from the top edge in the source accent. Ideas are sticky n
 accent-tinted paper with no border, held by a translucent tape strip at the top center.
 Output docs are stamped files: double-line frames (border plus offset outline) with the
 meta line inked in the output accent like a stamp. Cards keep the gentle per-card
-rotation; serif titles throughout.
+rotation; serif titles throughout. World titles and group labels are italic serif
+mastheads over thin ink rules on the parchment ground; edges are soft warm-ink curves.

@@ -62,8 +62,12 @@ body { background:var(--page); color:var(--ink); font:14px/1.6 var(--hand); }
 #vp.panning { cursor:grabbing; }
 #world { position:absolute; left:0; top:0; transform-origin:0 0; }
 #edgeSvg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
-.wtitle { position:absolute; pointer-events:none; white-space:nowrap; }
-.wtitle .en { font-size:104px; font-weight:800; letter-spacing:.06em; color:var(--ink);
+.wtitle { position:absolute; pointer-events:none; white-space:nowrap;
+  transform:rotate(-.5deg); }
+.wtitle::after { content:""; display:block; width:340px; height:6px;
+  background:var(--ink); border-radius:4px; transform:rotate(-.8deg);
+  margin-top:2px; }
+.wtitle .en { font-size:100px; font-weight:800; letter-spacing:.06em; color:var(--ink);
   opacity:.9; }
 .wtitle .zh { font-size:46px; margin-left:26px; color:var(--ink-2); }
 .glabel { position:absolute; pointer-events:none; font-size:26px; font-weight:700;

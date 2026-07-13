@@ -105,5 +105,6 @@ and hard shadows throughout.
 Layers are three candy pastels in identical chunky frames: sources fill cyan, ideas fill
 pink and keep the slight per-card tilt, output docs fill yellow and carry the one circular
 badge — a small positive-green dot popped over the top-right corner. Every card keeps the
-3px ink border and hard offset shadow; cluster labels are pastel-filled bordered blocks
-with their own hard shadows.
+3px ink border and hard offset shadow; world titles and group labels are themselves
+bordered blocks with hard shadows — the title on white stock, labels on the pale wash.
+Edges draw as straight heavy ink strokes.

@@ -104,3 +104,5 @@ outline strips: faint translucent fill, hairline ink-mix border, the meta line i
 source accent. Ideas are translucent accent panels: accent-mixed fill with no border and a
 heavier title. Output docs are the full-saturation poster blocks: solid accent ground,
 dark ink text, display-face uppercase titles — the only full-saturation surfaces in view.
+World titles are solid display-black uppercase at poster scale; group labels keep the
+short accent underline bar. Edges draw as straight accent strokes, thick and solid.
