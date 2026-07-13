@@ -72,15 +72,17 @@ archive an idea or start the first assembly on your own.
 
 ## Getting started
 
+`<skill-dir>` below is this skill's own directory, wherever the host agent installed it.
+
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/init_workspace.py <workspace>   # idempotent bootstrap
+python3 <skill-dir>/scripts/init_workspace.py <workspace>   # idempotent bootstrap
 ```
 
 After **every** write, run both validators:
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/check_workspace.py <workspace>
-python3 ${CLAUDE_SKILL_DIR}/scripts/check_doc_links.py <workspace>
+python3 <skill-dir>/scripts/check_workspace.py <workspace>
+python3 <skill-dir>/scripts/check_doc_links.py <workspace>
 ```
 
 ## Target and output forms
@@ -101,7 +103,7 @@ rules (truth-driven, edges = in-card references, layout derived from references 
 in the builder; the workspace path is the only required input.
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/build_canvas.py <workspace> -o <temp-dir> [--css style.css] [--title '...']
+python3 <skill-dir>/scripts/build_canvas.py <workspace> -o <temp-dir> [--css style.css] [--title '...']
 ```
 
 Visual style is CSS-only and lives entirely in the style pack at `canvas/styles/`: the

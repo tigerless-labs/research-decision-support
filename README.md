@@ -27,10 +27,20 @@ on traceable evidence.
 
 ## Installation
 
+Claude Code:
+
 ```
 /plugin marketplace add tigerless-labs/research-decision-support
 /plugin install research-decision-support@research-decision-support
 ```
+
+Codex (CLI and the ChatGPT desktop app share one plugin system):
+
+```
+codex plugin marketplace add tigerless-labs/research-decision-support
+```
+
+then install from `/plugins` in the CLI or the desktop app's plugin directory.
 
 For other SKILL.md-compatible agents, copy the skill folder into your agent's skill
 directory:
