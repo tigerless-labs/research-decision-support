@@ -11,9 +11,9 @@
 The human adjudicates, the agent runs the errands.
 
 An [Agent Skill](https://agentskills.io) (Claude Code plugin, works with any
-SKILL.md-compatible agent): drop in reference material and fragmented ideas as you
-go — it files and links them, records how your thinking evolves, and turns the
-accumulated evidence into a system design. Built for vendor selection, literature
+SKILL.md-compatible agent): feed your agent reference material and fragmented ideas
+as you go — it files and links them, records how your thinking evolves, and turns
+the accumulated evidence into a system design. Built for vendor selection, literature
 review, due diligence, competitive analysis — any contested decision that must stand
 on traceable evidence.
 
