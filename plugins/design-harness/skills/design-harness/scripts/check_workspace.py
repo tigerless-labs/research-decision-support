@@ -93,7 +93,7 @@ def check(workspace):
 
 
 def main(argv):
-    workspace = argv[1] if len(argv) > 1 else "docs/research-decision-support"
+    workspace = argv[1] if len(argv) > 1 else "docs/design-harness"
     problems = check(workspace)
     for problem in problems:
         print(f"INVALID {problem}")

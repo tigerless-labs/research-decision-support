@@ -1,6 +1,6 @@
-# research-decision-support — 文献→设计 工作区
+# design-harness — 文献→设计 工作区
 
-文献到设计的分层结构在此落地。方法、不变量与操作指南由 `research-decision-support` skill 承载。**原子用相对 Markdown 链接互连**（GitHub 可渲染、Obsidian 可反链、可被 `tools/check_doc_links.py` 校验）；`[[ ]]` 不作链接机制。
+文献到设计的分层结构在此落地。方法、不变量与操作指南由 `design-harness` skill 承载。**原子用相对 Markdown 链接互连**（GitHub 可渲染、Obsidian 可反链、可被 `tools/check_doc_links.py` 校验）；`[[ ]]` 不作链接机制。
 
 ## 五层 ↔ 子目录
 

@@ -17,7 +17,7 @@
 3. **tests → code：验证器新增两查**：`check_workspace.py` 报告
    (a) 未知顶层目录下的 md（数据静默丢失）；(b) 以 `---` 开头但无法闭合解析的
    frontmatter（内容污染）。
-4. **验证**：pytest 全绿 + 对 `docs/research-decision-support` 实跑两个校验器 + 实跑
+4. **验证**：pytest 全绿 + 对 `docs/design-harness` 实跑两个校验器 + 实跑
    `build_canvas.py` 确认画布正常。
 
 ## 验收

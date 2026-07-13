@@ -107,7 +107,7 @@ def test_links_pass_on_valid_workspace(workspace):
 
 
 def test_real_workspace_conforms_when_present():
-    real = Path(__file__).resolve().parents[1] / "docs" / "research-decision-support"
+    real = Path(__file__).resolve().parents[1] / "docs" / "design-harness"
     if not (real / "ideas").is_dir():
         return
     assert check(real) == []

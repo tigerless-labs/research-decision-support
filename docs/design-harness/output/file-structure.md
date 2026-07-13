@@ -8,7 +8,7 @@ reused, while every fact stays in the workspace.
 ## Skill package (the kernel)
 
 ```
-plugins/research-decision-support/skills/research-decision-support/
+plugins/design-harness/skills/design-harness/
 ├── SKILL.md              the agent module's full behavior as an operating procedure:
 │                         triggers, the errand list, when to teach in place and the
 │                         receipt phrasing (no resident process)
@@ -62,7 +62,7 @@ plugins/research-decision-support/skills/research-decision-support/
 ## Workspace (the truth)
 
 ```
-docs/research-decision-support/
+docs/design-harness/
 ├── target.md             the human's acceptance criteria for output; source of the output form
 ├── logs.md               append-only change ledger — the docs stay out of git, so the
 │                         ledger is the only way back

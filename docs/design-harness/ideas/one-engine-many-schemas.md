@@ -20,4 +20,4 @@ status enums, lenses) yields multiple skills:
   real; the differentiator is the idea lifecycle plus evidence obligations, not "AI helps you
   review".
 
-research-decision-support is only the first schema instance.
+design-harness is only the first schema instance.

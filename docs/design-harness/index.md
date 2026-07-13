@@ -1,4 +1,4 @@
-# research-decision-support's own research-decision-support
+# design-harness's own design-harness
 
 This project's own literature-to-design workspace (dogfooding). Current theme: **the competitive
 landscape of literature workbenches and product differentiation**.

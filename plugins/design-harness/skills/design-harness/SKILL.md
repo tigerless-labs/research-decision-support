@@ -1,16 +1,16 @@
 ---
-name: research-decision-support
+name: design-harness
 description: A decision board for evidence-based calls — the human adjudicates, the agent runs the errands. Three layers (sources → ideas → output) in plain markdown, kept in permanent two-way sync, projected onto a visual canvas. Use for vendor/tool selection, literature reviews, due diligence, competitive analysis, or any contested call that must stand on traceable evidence — triggers like "file these papers", "put this on the board", "assemble the design", "how do we decide this".
 license: MIT
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/*)
 metadata:
   author: tigerless.ai
-  repository: https://github.com/tigerless-labs/research-decision-support
+  repository: https://github.com/tigerless-labs/design-harness
 ---
 
-# research-decision-support — the human adjudicates, the agent runs errands
+# design-harness — the human adjudicates, the agent runs errands
 
-When triggered, operate the workspace at `docs/research-decision-support/` (or wherever an
+When triggered, operate the workspace at `docs/design-harness/` (or wherever an
 existing workspace lives). Markdown is the **only source of truth**; every other surface —
 indexes, backlinks, layout, the canvas HTML — is a projection that can be regenerated at any
 time and is **never committed**.
