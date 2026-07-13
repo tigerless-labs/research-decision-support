@@ -3,3 +3,4 @@ loom-site/
 __pycache__/
 CLAUDE.md
 docs/
+examples/autoharness/

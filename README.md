@@ -17,7 +17,7 @@ on traceable evidence.
 
 [![The canvas — sources, ideas, and output as three worlds on one board](assets/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
-<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — a real research workspace, rebuilt on every merge.</p>
+<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — a snapshot of a real research workspace (87 cards from an agent-harness project).</p>
 
 ## What This Does
 
@@ -77,13 +77,13 @@ Talk to your agent in plain language:
 3. Say go — the ideas assemble into the output your `target.md` declares.
 4. Ask for the canvas — the agent builds the board and hands you a clickable link.
 
-Render the bundled real-world example (87 cards from an agent-harness research
-project) in ten seconds — it's the same board as the
-[live demo](https://tigerless-labs.github.io/design-harness/):
+Render your own workspace in ten seconds — the
+[demo board](https://tigerless-labs.github.io/design-harness/) is the same
+projection run on a real workspace:
 
 ```bash
 python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
-  examples/autoharness -o /tmp/canvas
+  path/to/your-workspace -o /tmp/canvas
 open /tmp/canvas/canvas.html
 ```
 
@@ -155,8 +155,7 @@ view and a close-up for each style.
 4. Every element of the output must answer "why?" with a link.
 
 This repo is dogfooded on itself: its own design was produced by running the method
-on ~80 sources about decision-making methods. The v1 workbench that taught us the
-schema lives in [`archive/skill-v1/`](archive/skill-v1/).
+on ~80 sources about decision-making methods.
 
 ## License
 
