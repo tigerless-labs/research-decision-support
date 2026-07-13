@@ -4,19 +4,19 @@ name: 8-Bit Orbit
 version: 1
 scheme: dark
 colors-light:
-  surface: "#ffffff"
-  page: "#edf1fb"
-  ink: "#131a3d"
-  ink-2: "#414c7c"
-  muted: "#7480ac"
-  grid: "#c6cfe9"
-  wash: "#e0e6f5"
-  ring: "rgba(0,148,126,0.4)"
-  accent-a: "#00947e"
-  accent-b: "#a08600"
-  accent-c: "#d4008f"
-  accent-d: "#2f6fd0"
-  positive: "#3f9f2c"
+  surface: "#121a42"
+  page: "#0d1334"
+  ink: "#e8ecff"
+  ink-2: "#b9c2e8"
+  muted: "#8f9cc9"
+  grid: "#2e3a6e"
+  wash: "#131c4a"
+  ring: "rgba(0,255,204,0.45)"
+  accent-a: "#00ffcc"
+  accent-b: "#ffe600"
+  accent-c: "#ff00aa"
+  accent-d: "#4fa8ff"
+  positive: "#7cff00"
 colors-dark:
   surface: "#0e1434"
   page: "#0a0f2c"
@@ -61,8 +61,8 @@ colors, chunky borders with hard offset shadows, monospace uppercase everywhere.
 Dark-native and playful. A deep navy void for the page, panel tiles one shade lighter with
 thick square borders and hard-offset block shadows — the CSS equivalent of sprite art.
 Type is monospace, headings uppercase with wide tracking and a faint neon glow allowed on
-titles only. The light fallback is a daylight arcade: pale blue-white ground, ink-navy
-text, the same neon logic at print-safe depth.
+titles only. The style is dark in both schemes — a CRT has no daylight mode; the light
+palette only lifts the navy a shade.
 
 ## Accent roles
 
