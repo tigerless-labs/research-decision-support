@@ -3,6 +3,7 @@ from pathlib import Path
 from check_doc_links import check_links
 from check_workspace import check
 from init_workspace import SKELETON, init
+from workspace import parse_frontmatter, parse_tags
 
 
 def test_init_creates_full_skeleton(tmp_path):
@@ -132,3 +133,42 @@ def test_board_single_tag_rule_still_applies(workspace):
         "---\ntags: [a, b]\n---\n# two tags\n", encoding="utf-8")
     problems = check(workspace)
     assert any("tagged.md" in p and "at most one tag" in p for p in problems)
+
+
+def test_parse_tags_accepts_yaml_block_list(workspace):
+    (workspace / "ideas" / "block-tags.md").write_text(
+        "---\nid: block-tags\ntype: idea\ntags:\n  - flow\n---\n# block list\n",
+        encoding="utf-8")
+    frontmatter = parse_frontmatter(
+        (workspace / "ideas" / "block-tags.md").read_text(encoding="utf-8"))
+    assert parse_tags(frontmatter) == ["flow"]
+    assert check(workspace) == []
+
+
+def test_single_tag_rule_sees_yaml_block_lists(workspace):
+    (workspace / "ideas" / "block-two.md").write_text(
+        "---\nid: block-two\ntype: idea\ntags:\n  - a\n  - b\n---\n# split me\n",
+        encoding="utf-8")
+    problems = check(workspace)
+    assert any("block-two.md" in p and "at most one tag" in p for p in problems)
+
+
+def test_check_flags_markdown_under_unknown_top_level_dir(workspace):
+    (workspace / "source" / "papers").mkdir(parents=True)
+    (workspace / "source" / "papers" / "lost.md").write_text(
+        "# invisible to the canvas\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("source/papers/lost.md" in p and "unknown top-level" in p
+               for p in problems)
+
+
+def test_check_allows_root_level_files(workspace):
+    (workspace / "target.md").write_text("# acceptance\n", encoding="utf-8")
+    assert check(workspace) == []
+
+
+def test_check_flags_unclosed_frontmatter(workspace):
+    (workspace / "sources" / "papers" / "torn.md").write_text(
+        "---\ntags: [x]\n# frontmatter never closes\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("torn.md" in p and "frontmatter" in p for p in problems)

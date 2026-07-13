@@ -27,6 +27,22 @@ commit.
     └── *.md
 ```
 
+## Rendering contract — the engine's minimum
+
+All the projections require. Everything below this section is methodology, freely
+reconfigurable per schema; this section is the engine.
+
+- The four layer names: `sources/` and `ideas/` become canvas nodes, `output/` and
+  `board/` become document panels. An `archive/` path segment excludes; `index.md`
+  excludes.
+- Files are UTF-8 markdown.
+- Frontmatter is optional; when present it must close (`---` … `---`).
+
+Everything else degrades, never breaks: no H1 → filename stem shown; no tag →
+*未分类* group; any source type dir → its name projected verbatim; unresolvable
+link → no edge. Silent data loss is a validator error, never a shrug: markdown under
+an unknown top-level dir, and frontmatter that opens without closing, are INVALID.
+
 ## Card schema
 
 - A card is **frontmatter + title + summary**. No fixed sections; references are inline
@@ -35,10 +51,9 @@ commit.
   `tags` optional. No status field — existence is the live state, location under
   `archive/` is the archived state.
 - `sources/` cards: frontmatter optional; when present, only `tags` is read.
-- `board/` documents: **no schema** — no required frontmatter, no fixed sections; the
-  single-tag rule still applies if tags appear. Boards are **terminal**: they may
-  reference any layer, but sources/ideas/output must never reference a board — distill a
-  board's conclusion into an idea card instead.
+- `board/` documents: **no schema**; the single-tag rule still applies if tags appear.
+  Boards are **terminal**: they may reference any layer, but sources/ideas/output must
+  never reference a board — distill a board's conclusion into an idea card instead.
 - Principles inside output documents are bullet lists, one principle per bullet — never
   paragraphs — so each can be cited, edited, and ledgered on its own.
 - In the system-design output form, diagrams **are** the markdown: mermaid blocks with

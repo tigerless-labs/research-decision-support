@@ -6,6 +6,7 @@ LAYERS = ["sources", "ideas", "output", "board"]
 _MD_LINK = re.compile(r"\]\(\s*([^)\s]+?\.md)(?:#[^)]*)?\s*\)")
 _EXTERNAL = re.compile(r"^[a-z][a-z0-9+.-]*://")
 _FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
+_LIST_ITEM = re.compile(r"\s*-\s+(.+)")
 _TITLE = re.compile(r"^#\s+(.+)$", re.MULTILINE)
 _LINK_TEXT = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 _SUMMARY_LIMIT = 280
@@ -15,12 +16,25 @@ def parse_frontmatter(text):
     match = _FRONTMATTER.match(text)
     if not match:
         return {}
-    fields = {}
+    fields, items, pending = {}, {}, None
     for line in match.group(1).splitlines():
-        if ":" in line and not line.startswith((" ", "\t")):
+        bullet = _LIST_ITEM.match(line)
+        if bullet and pending:
+            items.setdefault(pending, []).append(bullet.group(1).strip())
+        elif ":" in line and not line.startswith((" ", "\t")):
             key, _, value = line.partition(":")
-            fields[key.strip()] = value.strip()
+            key = key.strip()
+            fields[key] = value.strip()
+            pending = None if fields[key] else key
+        else:
+            pending = None
+    for key, values in items.items():
+        fields[key] = "[" + ", ".join(values) + "]"
     return fields
+
+
+def broken_frontmatter(text):
+    return text.startswith("---\n") and not _FRONTMATTER.match(text)
 
 
 def parse_tags(frontmatter):
