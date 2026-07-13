@@ -77,6 +77,10 @@ contract; visuals belong entirely to the style pack (bounded by the token interf
   required input**, and one command renders the complete canvas HTML (card collection,
   edge derivation, layout, data embedding, dependency inlining all built in); no second
   build path exists; the artifact goes only to a temp dir or an artifact, never into the truth.
+- The build validates before it projects: both validators run as a gate, and any problem
+  aborts the build with the full problem list and **no HTML output** — broken truth is
+  never projected, and the failure surfaces where the agent must act on it. A freshly
+  bootstrapped workspace (zero cards) is valid and renders its empty-state canvas.
 - Template and style fully separated: structure is only `canvas/template.html` (with a CSS
   injection slot; the old design-draft spec is deleted — the interaction contract's sole
   truth is this document), and all CSS belongs to the style pack `canvas/styles/`;

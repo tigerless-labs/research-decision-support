@@ -90,7 +90,9 @@ Run from the host project root. Without `<workspace>` the tools discover it (poi
 default → find by name) and refuse to act on ambiguity; `discover_workspace.py` prints
 what they would resolve.
 
-After **every** write, run both validators:
+The canvas build runs both validators as a gate — a failed build prints the problem
+list and produces no HTML; fix the truth and rebuild. After a write with no rebuild
+(rare — rebuilding is the norm), run them yourself:
 
 ```bash
 python3 <skill-dir>/scripts/check_workspace.py <workspace>
