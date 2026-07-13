@@ -363,13 +363,49 @@ def test_builder_default_theme_covers_canonical_tokens():
 
 
 def test_shipped_canvas_css_clears_title_below_badge():
+    # A top-anchored badge must push the title down; a badge parked at the
+    # card's foot (bottom-anchored) needs no title clearance.
     rule = re.compile(
         r"\.card\s+\.badge\s*\+\s*\.t\s*\{[^}]*margin-top\s*:\s*([\d.]+)px")
+    badge_rule = re.compile(r"\.card\s+\.badge\s*\{([^}]*)\}")
     for entry in shipped_index()["styles"]:
         css = (SHIPPED_PACK / entry["slug"] / "canvas.css").read_text(encoding="utf-8")
+        badge = badge_rule.search(css)
+        assert badge, entry["slug"]
+        if "bottom:" in badge.group(1):
+            continue
         match = rule.search(css)
         assert match, entry["slug"]
         assert float(match.group(1)) > 0, entry["slug"]
+
+
+def layer_grammar(css, layer):
+    rules = []
+    for match in re.finditer(r"([^{}]+)\{([^{}]*)\}", css):
+        selector = match.group(1).strip()
+        if f".card.{layer}" not in selector:
+            continue
+        body = re.sub(r"(accent|tint)-[abcd]", r"\1-x", match.group(2))
+        declarations = ";".join(sorted(
+            declaration.strip() for declaration in body.split(";")
+            if declaration.strip()))
+        rules.append((selector.replace(layer, "LAYER"), declarations))
+    return sorted(rules)
+
+
+def test_shipped_layer_card_grammars_differ_beyond_accent_color():
+    # The three layers must be three card *forms*: normalizing away which
+    # accent letter a rule points at must never collapse two layers' grammars
+    # into the same rule set.
+    for entry in shipped_index()["styles"]:
+        css = (SHIPPED_PACK / entry["slug"] / "canvas.css").read_text(encoding="utf-8")
+        grammars = {layer: layer_grammar(css, layer)
+                    for layer in ("note", "slip", "kraft")}
+        for layer, rules in grammars.items():
+            assert rules, (entry["slug"], layer)
+        assert grammars["note"] != grammars["slip"], entry["slug"]
+        assert grammars["slip"] != grammars["kraft"], entry["slug"]
+        assert grammars["note"] != grammars["kraft"], entry["slug"]
 
 
 def test_shipped_previews_are_lighter_than_designs():

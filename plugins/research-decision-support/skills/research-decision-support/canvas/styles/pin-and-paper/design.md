@@ -105,5 +105,6 @@ cards, kraft blocks for finished pieces — with edges and counts inked in blue.
 Layers map to the three card grammars: sources render as pinned cream notes (brass pin,
 soft paper shadow), ideas as dashed-border yellow slips, and output docs as kraft blocks
 with solid ink borders and hard offset shadows — the visibly heaviest stock on the board.
-Cluster labels are handwritten headings with the rotated underline; edges between cards
-are ink-blue strokes. The selected card gains a full ink outline instead of extra shadow.
+Cluster labels are handwritten headings with the rotated underline, and world titles get
+the same hand-drawn rule; edges between cards are dashed ink-blue curves. The selected
+card gains a full ink outline instead of extra shadow.

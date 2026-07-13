@@ -34,7 +34,8 @@
       "preview": "notebook-tabs/preview.md",
       "design": "notebook-tabs/design.md",
       "canvas_renderings": [
-        "tabbed-gallery"
+        "tabbed-gallery",
+        "single-canvas"
       ]
     },
     {
@@ -61,35 +62,8 @@
       "preview": "swiss-modern/preview.md",
       "design": "swiss-modern/design.md",
       "canvas_renderings": [
-        "tabbed-gallery"
-      ]
-    },
-    {
-      "slug": "blue-professional",
-      "name": "Blue Professional",
-      "tagline": "Warm cream canvas with a single saturated cobalt voice; consulting-grade.",
-      "mood": [
-        "professional",
-        "calm",
-        "trustworthy"
-      ],
-      "tone": "polished",
-      "formality": "formal",
-      "density": "comfortable",
-      "scheme": "light",
-      "best_for": [
-        "consulting deliverables",
-        "investor readouts",
-        "executive research synthesis"
-      ],
-      "avoid_for": [
-        "playful workshops",
-        "multi-accent heat"
-      ],
-      "preview": "blue-professional/preview.md",
-      "design": "blue-professional/design.md",
-      "canvas_renderings": [
-        "tabbed-gallery"
+        "tabbed-gallery",
+        "single-canvas"
       ]
     },
     {
@@ -117,61 +91,8 @@
       "preview": "block-frame/preview.md",
       "design": "block-frame/design.md",
       "canvas_renderings": [
-        "tabbed-gallery"
-      ]
-    },
-    {
-      "slug": "terminal-green",
-      "name": "Terminal Green",
-      "tagline": "GitHub-dark terminal session: prompt, cursor, ANSI accents, listing rows.",
-      "mood": [
-        "technical",
-        "hacker",
-        "alive"
-      ],
-      "tone": "candid",
-      "formality": "neutral",
-      "density": "compact",
-      "scheme": "dark",
-      "best_for": [
-        "dev-facing demos",
-        "session walkthroughs"
-      ],
-      "avoid_for": [
-        "print handouts",
-        "non-technical readouts"
-      ],
-      "preview": "terminal-green/preview.md",
-      "design": "terminal-green/design.md",
-      "canvas_renderings": [
-        "tabbed-gallery"
-      ]
-    },
-    {
-      "slug": "bold-signal",
-      "name": "Bold Signal",
-      "tagline": "Charcoal poster with one saturated block and ultra-black display type.",
-      "mood": [
-        "loud",
-        "confident",
-        "high-impact"
-      ],
-      "tone": "dramatic",
-      "formality": "playful",
-      "density": "spacious",
-      "scheme": "dark",
-      "best_for": [
-        "pitch moments",
-        "kickoff energy"
-      ],
-      "avoid_for": [
-        "dense evidence tables",
-        "quiet institutional documents"
-      ],
-      "preview": "bold-signal/preview.md",
-      "design": "bold-signal/design.md",
-      "canvas_renderings": [
-        "tabbed-gallery"
+        "tabbed-gallery",
+        "single-canvas"
       ]
     },
     {
@@ -198,7 +119,8 @@
       "preview": "8-bit-orbit/preview.md",
       "design": "8-bit-orbit/design.md",
       "canvas_renderings": [
-        "tabbed-gallery"
+        "tabbed-gallery",
+        "single-canvas"
       ]
     },
     {

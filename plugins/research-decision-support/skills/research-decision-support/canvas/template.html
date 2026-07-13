@@ -2,7 +2,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><!--__TITLE__--></title>
-<style>/*__CSS__*/</style>
+<style>.card .chrome{display:none}.wtitle .idx{display:none}</style>
+<style id="skinsheet">/*__CSS__*/</style>
 <div id="bar">
   <h1><!--__TITLE__--></h1>
   <input id="q" type="search" placeholder="搜索标题或摘要，回车飞过去…" aria-label="搜索">
@@ -31,11 +32,12 @@ const svg = document.getElementById("edgeSvg");
 const el = (t, c, x) => { const n = document.createElement(t);
   if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; };
 
-DATA.worlds.forEach(w => {
+DATA.worlds.forEach((w, i) => {
   const d = el("div", "wtitle");
   d.style.left = w.x + "px"; d.style.top = w.y + "px";
+  const idx = el("span", "idx", String(i + 1).padStart(2, "0"));
   const en = el("span", "en", w.en), zh = el("span", "zh", w.zh);
-  d.append(en, zh); world.append(d);
+  d.append(idx, en, zh); world.append(d);
 });
 DATA.labels.forEach(l => {
   const d = el("div", "glabel", l.t);
@@ -49,6 +51,9 @@ DATA.nodes.forEach((n, i) => {
   c.style.left = n.x + "px"; c.style.top = n.y + "px";
   c.style.width = n.w + "px"; c.style.height = n.h + "px";
   c.style.transform = "rotate(" + (((i * 137) % 7 - 3) * .5) + "deg)";
+  const chrome = el("span", "chrome");
+  chrome.append(document.createElement("i"));
+  c.append(chrome);
   const badge = (n.subtype || "") +
     (n.tags.length ? " #" + n.tags[0] : "");
   if (badge.trim()) c.append(el("span", "badge", badge.trim()));
@@ -125,8 +130,17 @@ function select(id) {
     const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
     const x1 = me.x + me.w / 2, y1 = me.y + me.h / 2;
     const x2 = n.x + n.w / 2, y2 = n.y + n.h / 2;
-    const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - 60 - Math.abs(x2 - x1) * .06;
-    p.setAttribute("d", `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
+    const shape = getComputedStyle(document.body)
+      .getPropertyValue("--edge-shape").trim() || "curve";
+    if (shape === "line") {
+      p.setAttribute("d", `M${x1},${y1} L${x2},${y2}`);
+    } else if (shape === "ortho") {
+      const midx = (x1 + x2) / 2;
+      p.setAttribute("d", `M${x1},${y1} L${midx},${y1} L${midx},${y2} L${x2},${y2}`);
+    } else {
+      const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - 60 - Math.abs(x2 - x1) * .06;
+      p.setAttribute("d", `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
+    }
     p.setAttribute("fill", "none");
     p.setAttribute("stroke", "var(--ink)");
     p.setAttribute("stroke-width", "2.5");
@@ -414,7 +428,7 @@ const STYLES = /*__STYLES__*/null;
 (function () {
   const sel = document.getElementById("skin");
   if (!STYLES) { sel.style.display = "none"; return; }
-  const sheet = document.querySelector("style");
+  const sheet = document.getElementById("skinsheet");
   STYLES.options.forEach(o => {
     const op = document.createElement("option");
     op.value = o.slug; op.textContent = o.name;
