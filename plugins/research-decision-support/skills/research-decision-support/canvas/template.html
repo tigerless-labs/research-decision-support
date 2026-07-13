@@ -49,7 +49,7 @@ DATA.nodes.forEach((n, i) => {
   c.style.left = n.x + "px"; c.style.top = n.y + "px";
   c.style.width = n.w + "px"; c.style.height = n.h + "px";
   c.style.transform = "rotate(" + (((i * 137) % 7 - 3) * .5) + "deg)";
-  const badge = (DATA.subtypeZh[n.subtype] || "") +
+  const badge = (n.subtype || "") +
     (n.tags.length ? " #" + n.tags[0] : "");
   if (badge.trim()) c.append(el("span", "badge", badge.trim()));
   c.append(el("p", "t", n.title.replace(/^\[[^\]]*\]\s*/, "")));

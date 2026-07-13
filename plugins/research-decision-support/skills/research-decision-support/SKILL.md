@@ -20,7 +20,10 @@ Full contract (card schema, facts, sync invariants, ledger format):
 
 ## The three layers
 
-1. **sources/** — evidence. One source, one card. The agent files and grades these freely.
+1. **sources/** — evidence. One source, one card, filed under `sources/<type>/`. The agent
+   files and grades these freely, and picks the type dir itself — no preset list; name it
+   for what the source is (papers, github, podcasts, …) and create new dirs as needed. The
+   dir name is projected verbatim as the card's canvas badge.
 2. **ideas/** — judgment. **Only the human creates ideas.** Two states: live (the file
    exists) and archived (moved to `ideas/archive/`, never deleted). When a new idea repeats
    an old one's judgment, merge them automatically; if they conflict, put both on the board
