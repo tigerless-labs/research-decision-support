@@ -1,0 +1,20 @@
+{
+  "name": "research-decision-support",
+  "interface": {
+    "displayName": "research-decision-support"
+  },
+  "plugins": [
+    {
+      "name": "research-decision-support",
+      "source": {
+        "source": "local",
+        "path": "./plugins/research-decision-support"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
