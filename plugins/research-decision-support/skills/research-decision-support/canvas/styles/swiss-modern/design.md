@@ -100,8 +100,9 @@ index mark.
 ### single-canvas
 
 Layers take three typographic forms, all squared and unrotated. Sources are hard white
-cards with two-pixel ink borders. Ideas are annotation lines: transparent ground, a single
-ink baseline rule, and a solid ink dot as the entry bullet. Output docs are solid ink
+cards with two-pixel ink borders. Ideas are annotation lines: page-colored ground (reads
+as bare page yet occludes edge strokes passing beneath), a single ink baseline rule, and a
+solid ink dot as the entry bullet. Output docs are solid ink
 blocks with page-colored text and the meta line in red. The ground shows the construction
 grid; world titles sit on a heavy ink top rule and carry a red superscript ordinal (the
 view's loud red); group labels lead with a solid ink square and underline in ink. Edges
