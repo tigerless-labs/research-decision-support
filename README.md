@@ -19,7 +19,7 @@ on traceable evidence.
 
 [![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
-<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — a snapshot of a real research workspace (87 cards from an agent-harness project).</p>
+<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own design workspace, dogfooded, rebuilt from the markdown on every merge.</p>
 
 ## What This Does
 
