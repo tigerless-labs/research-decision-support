@@ -15,7 +15,9 @@ SKILL.md-compatible agent) for evidence-based calls: vendor selection, literatur
 review, due diligence, competitive analysis — any contested decision that must stand
 on traceable evidence.
 
-![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)
+[![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
+
+<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own workspace, rebuilt on every merge.</p>
 
 ## What This Does
 
@@ -75,12 +77,12 @@ Talk to your agent in plain language:
 3. Say go — the ideas assemble into the output your `target.md` declares.
 4. Ask for the canvas — the agent builds the board and hands you a clickable link.
 
-Render the bundled real-world example (87 cards from an agent-harness research
-project) in ten seconds:
+Render this repo's own workspace — the design of this very tool, dogfooded — in ten
+seconds (it's the same board as the [live demo](https://tigerless-labs.github.io/design-harness/)):
 
 ```bash
 python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
-  examples/autoharness -o /tmp/canvas
+  docs/design-harness -o /tmp/canvas
 open /tmp/canvas/canvas.html
 ```
 
