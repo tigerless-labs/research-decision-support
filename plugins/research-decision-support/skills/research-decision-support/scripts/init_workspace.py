@@ -4,30 +4,33 @@ from pathlib import Path
 SKELETON = {
     "index.md": (
         "# research-decision-support workspace\n\n"
-        "- [sources/](sources/index.md) — ① 证据：一源一卡，agent 收录并分级\n"
-        "- [ideas/](ideas/index.md) — ② 判断：只有人能创建；归档卡入 archive/\n"
-        "- [output/](output/index.md) — ③ 装配：由人启动，形态由 target 决定\n"
-        "- [target.md](target.md) — output 的验收目标\n"
-        "- [logs.md](logs.md) — append-only 变更账本，回溯的唯一依据\n"
+        "- [sources/](sources/index.md) — ① evidence: one source, one card; the agent files and grades\n"
+        "- [ideas/](ideas/index.md) — ② judgment: only the human creates; archived cards go to archive/\n"
+        "- [output/](output/index.md) — ③ assembly: human-initiated, form set by target\n"
+        "- [target.md](target.md) — acceptance criteria for output\n"
+        "- [logs.md](logs.md) — append-only change ledger, the only way back\n"
     ),
     "target.md": (
-        "# target — output 的验收目标\n\n"
-        "人对 output 的要求在此登记；output 是对本清单的履行，每条要求可核对。\n"
-        "要求变更时 agent 同回合重推 output 受影响部分。\n\n"
-        "## 主旨\n\n## 当前要求\n\n## 履行对照\n"
+        "# target — acceptance criteria for output\n\n"
+        "The human's requirements for output are registered here; output fulfils this list,\n"
+        "and every requirement is checkable. When a requirement changes, the agent re-derives\n"
+        "the affected parts of output in the same turn.\n\n"
+        "## Purpose\n\n## Current requirements\n\n## Fulfilment map\n"
     ),
     "logs.md": (
-        "# logs — append-only 变更账本（覆盖 ideas 与 output 两层）\n\n"
-        "约定：每行 `- 日期 · 卡/文档 · 动作 · 改动（旧 → 新 的最小 delta）· 原因`；\n"
-        "必须记**改动本身**；有 output 后同一变更每层各记一条；只追加，永不改写旧行。\n"
+        "# logs — append-only change ledger (covers both the ideas and output layers)\n\n"
+        "Convention: each line is `- date · card/doc · action · delta (minimal old → new) · reason`;\n"
+        "record the **delta itself**; once output exists, one line per layer per change;\n"
+        "append only, never rewrite old lines.\n"
     ),
-    "sources/index.md": "# sources — 证据卡（tag 小标题分组，投影随卡重生成）\n",
-    "ideas/index.md": "# ideas — 人创建，二态（存在 / 归档）\n",
-    "output/index.md": "# output — 装配产物（形态由 target 决定）\n",
+    "sources/index.md": "# sources — evidence cards (grouped under tag headings; projection regenerated with the cards)\n",
+    "ideas/index.md": "# ideas — human-created, two states (live / archived)\n",
+    "output/index.md": "# output — assembled artifacts (form set by target)\n",
     "board/index.md": (
-        "# board — 自由面（一文一板，人自有）\n\n"
-        "每个 md 是一块板：一组对比或任意演算，无 schema。板可向前引用三层取材；\n"
-        "三层不引板——板上结论沉淀成 idea 卡再进提炼流。\n"
+        "# board — free surface (one file, one board; the human's own)\n\n"
+        "Each md is a board: a comparison set or any scratch reasoning, no schema. Boards may\n"
+        "reference the three layers for material; the layers never reference a board — a\n"
+        "board's conclusion is distilled into an idea card before it enters the flow.\n"
     ),
 }
 

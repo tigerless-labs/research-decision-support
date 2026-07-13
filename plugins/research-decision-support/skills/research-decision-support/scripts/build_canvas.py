@@ -54,8 +54,8 @@ def collect(workspace):
 def groups_of(nodes):
     by = {}
     for n in nodes:
-        by.setdefault(n["tags"][0] if n["tags"] else "未分类", []).append(n)
-    ordered = sorted(by.items(), key=lambda kv: (kv[0] == "未分类", -len(kv[1]), kv[0]))
+        by.setdefault(n["tags"][0] if n["tags"] else "unclassified", []).append(n)
+    ordered = sorted(by.items(), key=lambda kv: (kv[0] == "unclassified", -len(kv[1]), kv[0]))
     return ordered
 
 
@@ -88,9 +88,9 @@ def layout(data):
         return max(wmax, 1150)
 
     x0 = 0
-    x0 += place_world("证据", "WORLD 1 · SOURCES", groups_of(src),
+    x0 += place_world("Evidence", "WORLD 1 · SOURCES", groups_of(src),
                       "note", CH, x0, 0) + WORLD_GAP
-    x0 += place_world("想法", "WORLD 2 · IDEAS", groups_of(idea),
+    x0 += place_world("Ideas", "WORLD 2 · IDEAS", groups_of(idea),
                       "slip", CH, x0, 0) + WORLD_GAP
 
     docs = []
@@ -98,7 +98,7 @@ def layout(data):
         docs.append({"id": path, "layer": "output", "subtype": "", "g": "kraft",
                      "title": title_of(text, Path(path).stem),
                      "tags": [], "summary": first_paragraph(text), "body": ""})
-    total = x0 + place_world("装配", "WORLD 3 · OUTPUT", [("output 装配产物", docs)],
+    total = x0 + place_world("Assembly", "WORLD 3 · OUTPUT", [("output — assembled artifacts", docs)],
                              None, DH, x0, 0)
 
     board_docs = []
@@ -109,11 +109,12 @@ def layout(data):
     if not board_docs:
         board_docs = [
             {"id": "__board_empty__", "layer": "board", "subtype": "", "g": "empty",
-             "title": "还没有板——一文一板，自由度在你",
-             "tags": [], "summary": "开一块对比或演算板：直接在 board/ 下写 md，或说一声"
-                                    "「把 X 和 Y 摆成对比」由 agent 代笔。", "body": ""}]
+             "title": "No boards yet — one file, one board; the freedom is yours",
+             "tags": [], "summary": "Open a comparison or scratch board: write an md under"
+                                    " board/, or say \"lay X and Y out as a comparison\""
+                                    " and the agent drafts it.", "body": ""}]
     bottom = max(q["y"] + q["h"] for q in placed) + 470
-    place_world("自由面 · 一文一板", "BOARD", [("board 板文", board_docs)],
+    place_world("Free surface", "BOARD", [("board documents", board_docs)],
                 None, DH, max(0, (total - 1150) // 2), bottom)
     return placed, labels, worlds
 
@@ -183,7 +184,7 @@ def build(workspace, outdir, css=None, title=None):
     css_file = Path(css).resolve() if css else DEFAULT_CSS
     skins = None if css else style_pack_skins()
     html = (TEMPLATE.read_text(encoding="utf-8")
-            .replace("<!--__TITLE__-->", title or f"{workspace.name} · 融合画布")
+            .replace("<!--__TITLE__-->", title or f"{workspace.name} · unified canvas")
             .replace("/*__CSS__*/", css_file.read_text(encoding="utf-8"))
             .replace("/*__STYLES__*/null", embed_json(skins) if skins else "null")
             .replace("/*__MARKED__*/", (VENDOR / "marked.min.js").read_text(encoding="utf-8"))
