@@ -20,7 +20,8 @@ plugins/design-harness/skills/design-harness/
 ├── templates/            card skeletons, one template per kind: source card / idea card / target / logs header
 ├── scripts/
 │   ├── init_workspace.py     workspace bootstrap (idempotent, never overwrites); records the
-│   │                         workspace location in the host's pointer file
+│   │                         workspace location in the host's pointer file, then runs both
+│   │                         validators itself — one command, fails nonzero on any problem
 │   ├── discover_workspace.py workspace discovery: pointer file → default location → find by
 │   │                         directory name; ambiguity (many or zero hits) is reported, never
 │   │                         resolved silently — pure read, only the bootstrap writes the pointer

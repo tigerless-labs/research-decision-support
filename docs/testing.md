@@ -11,7 +11,7 @@
 
 | 测试文件 | 覆盖 |
 |---|---|
-| tests/test_workspace_tools.py | 初始化器幂等 + 校验器契约（ideas 必填、单 tag、status 退役、引用向前无环、未知顶层目录、未闭合 frontmatter）+ tags 块列表解析 + 悬链检查 |
+| tests/test_workspace_tools.py | 初始化器幂等、init 单命令自跑双校验（干净通过 / 坏卡与悬链非零退出）+ 校验器契约（ideas 必填、单 tag、status 退役、引用向前无环、未知顶层目录、未闭合 frontmatter）+ tags 块列表解析 + 悬链检查 |
 | tests/test_discover_workspace.py | 发现协议：config 指针优先、失效/畸形 config 回退（fail-safe）、默认位置、按名扫描（结构校验拒同名冒充、跳过隐藏/依赖目录）、多候选与零候选歧义上报、指针读写往返（仓内相对/仓外绝对）、无参 init 发现已有 workspace 时不新建且补写指针 |
 | tests/test_build_canvas.py | 收集器不变量（排除 archive/index、frontmatter tag、引用边、output 文档）+ 单文件自包含 + 注入防护 + 投影护栏（拒写工作区）+ 校验前置门（坏卡/悬链→拒建且零产出）+ 空 workspace 空态渲染 + 模板注册表 |
 | tests/test_style_pack.py | 风格包校验器：索引↔目录双射、schema、色值白名单、禁外链红队用例、canvas_renderings 存在性+章节对应、画板模板 token 集与 schema 锁定、卡片 badge–标题间距不变量 |

@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+from check_doc_links import main as check_doc_links_main
+from check_workspace import main as check_workspace_main
 from discover_workspace import DEFAULT_LOCATION, discover, record_workspace
 
 SKELETON = {
@@ -68,7 +70,9 @@ def main(argv):
         print(f"ok: initialized {workspace} — created {', '.join(created)}")
     else:
         print(f"ok: {workspace} already complete, nothing touched")
-    return 0
+    verdicts = [check_workspace_main([argv[0], str(workspace)]),
+                check_doc_links_main([argv[0], str(workspace)])]
+    return 1 if any(verdicts) else 0
 
 
 if __name__ == "__main__":
