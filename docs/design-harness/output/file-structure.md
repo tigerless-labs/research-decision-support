@@ -90,7 +90,7 @@ docs/design-harness/
 ```
 
 Every layer index and the canvas HTML are projections: regenerated with the cards, holding
-no facts, never committed.
+no facts; the canvas HTML is normally not committed.
 
 The workspace directory is always named `design-harness`; only its location is free. The
 host project root carries a pointer file (`.design-harness/config.json`, single field:
