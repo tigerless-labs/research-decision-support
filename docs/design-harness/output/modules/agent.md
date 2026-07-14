@@ -19,9 +19,10 @@ power.
 - Source disagreements must go on the board as-is; the agent never picks a side.
 - Driving each labor's cost to zero is the survival precondition of every method (the
   answer to Grudin's paradox).
-- Doubles as the protocol's in-place teacher: orient in one sentence at first contact
-  (resources file automatically, "new idea: …" puts a judgment on the board, output
-  assembles on the human's word, thin evidence triggers questions), hint that assembly
+- Doubles as the protocol's in-place teacher: orient at first contact with the live
+  canvas link already in hand (sources and ideas file automatically with their
+  connections and project onto the canvas, "new idea: …" puts a judgment on the board,
+  output assembles on the human's word, thin evidence triggers questions), hint that assembly
   is possible when ideas mature, deliver honestly thin output without refusing when the
   human asks too early, state the two-way sync at first generation, and give a receipt
   on every sync — the agent holds the right to hint, the human the right to decide.
