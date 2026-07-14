@@ -114,9 +114,47 @@ DATA.edges.forEach(e => {
   (outE[e.from] = outE[e.from] || []).push(e.to);
   (inE[e.to] = inE[e.to] || []).push(e.from);
 });
+const SVGNS = "http://www.w3.org/2000/svg";
+const conflictLayer = document.createElementNS(SVGNS, "g");
+const selLayer = document.createElementNS(SVGNS, "g");
+svg.append(conflictLayer, selLayer);
+const CONFLICT_EDGES = DATA.edges.filter(e => e.kind === "conflict");
+const conflictPairs = new Set(CONFLICT_EDGES.flatMap(e =>
+  [e.from + "→" + e.to, e.to + "→" + e.from]));
+const CONFLICT_STROKE = "var(--edge-conflict, #d0342c)";
+function edgePath(a, b, stroke) {
+  const p = document.createElementNS(SVGNS, "path");
+  const x1 = a.x + a.w / 2, y1 = a.y + a.h / 2;
+  const x2 = b.x + b.w / 2, y2 = b.y + b.h / 2;
+  const shape = getComputedStyle(document.body)
+    .getPropertyValue("--edge-shape").trim() || "curve";
+  if (shape === "line") {
+    p.setAttribute("d", `M${x1},${y1} L${x2},${y2}`);
+  } else if (shape === "ortho") {
+    const midx = (x1 + x2) / 2;
+    p.setAttribute("d", `M${x1},${y1} L${midx},${y1} L${midx},${y2} L${x2},${y2}`);
+  } else {
+    const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - 60 - Math.abs(x2 - x1) * .06;
+    p.setAttribute("d", `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
+  }
+  p.setAttribute("fill", "none");
+  p.setAttribute("stroke", stroke);
+  p.setAttribute("stroke-width", "2.5");
+  p.setAttribute("stroke-dasharray", "7 6");
+  p.setAttribute("opacity", ".85");
+  return p;
+}
+function drawConflicts() {
+  conflictLayer.textContent = "";
+  CONFLICT_EDGES.forEach(e => {
+    const a = byId[e.from], b = byId[e.to];
+    if (a && b) conflictLayer.append(edgePath(a, b, CONFLICT_STROKE));
+  });
+}
+drawConflicts();
 let selected = null;
 function clearSel() {
-  selected = null; svg.textContent = "";
+  selected = null; selLayer.textContent = "";
   Object.values(cardEls).forEach(c => c.classList.remove("sel", "nb"));
 }
 function select(id) {
@@ -127,26 +165,9 @@ function select(id) {
   nbs.forEach(t => {
     const n = byId[t]; if (!n) return;
     cardEls[t].classList.add("nb");
-    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const x1 = me.x + me.w / 2, y1 = me.y + me.h / 2;
-    const x2 = n.x + n.w / 2, y2 = n.y + n.h / 2;
-    const shape = getComputedStyle(document.body)
-      .getPropertyValue("--edge-shape").trim() || "curve";
-    if (shape === "line") {
-      p.setAttribute("d", `M${x1},${y1} L${x2},${y2}`);
-    } else if (shape === "ortho") {
-      const midx = (x1 + x2) / 2;
-      p.setAttribute("d", `M${x1},${y1} L${midx},${y1} L${midx},${y2} L${x2},${y2}`);
-    } else {
-      const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - 60 - Math.abs(x2 - x1) * .06;
-      p.setAttribute("d", `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
-    }
-    p.setAttribute("fill", "none");
-    p.setAttribute("stroke", "var(--ink)");
-    p.setAttribute("stroke-width", "2.5");
-    p.setAttribute("stroke-dasharray", "7 6");
-    p.setAttribute("opacity", ".85");
-    svg.append(p);
+    const stroke = conflictPairs.has(id + "→" + t)
+      ? CONFLICT_STROKE : "var(--ink)";
+    selLayer.append(edgePath(me, n, stroke));
   });
 }
 world.addEventListener("click", e => {
@@ -437,6 +458,7 @@ const STYLES = /*__STYLES__*/null;
   function apply(slug) {
     sheet.textContent = STYLES.css[slug];
     sel.value = slug;
+    drawConflicts();
   }
   apply(STYLES.default);
   sel.addEventListener("change", () => apply(sel.value));

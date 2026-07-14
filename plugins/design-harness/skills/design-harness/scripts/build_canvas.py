@@ -7,8 +7,8 @@ from pathlib import Path
 from check_doc_links import check_links
 from check_workspace import check
 from discover_workspace import resolve_or_report
-from workspace import (card_files, card_links, first_paragraph, parse_frontmatter,
-                       parse_tags, strip_frontmatter, title_of)
+from workspace import (card_files, card_links, first_paragraph, parse_conflicts,
+                       parse_frontmatter, parse_tags, strip_frontmatter, title_of)
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
 VENDOR = Path(__file__).resolve().parent / "vendor"
@@ -26,7 +26,7 @@ def collect(workspace):
     workspace = Path(workspace).resolve()
     cards = {str(rel): md for md, rel in card_files(workspace, ["sources", "ideas"])
              if "archive" not in rel.parts}
-    nodes, edges = [], []
+    nodes, edges, idea_ids, contested = [], [], {}, []
     for rel, md in cards.items():
         text = md.read_text(encoding="utf-8")
         frontmatter = parse_frontmatter(text)
@@ -43,6 +43,14 @@ def collect(workspace):
         for target in dict.fromkeys(card_links(md, rel, workspace, cards)):
             if target != rel:
                 edges.append({"from": rel, "to": target})
+        if parts[0] == "ideas":
+            if frontmatter.get("id"):
+                idea_ids[frontmatter["id"]] = rel
+            contested.extend((rel, target) for target in parse_conflicts(frontmatter))
+    for rel, target in contested:
+        target_rel = idea_ids.get(target)
+        if target_rel and target_rel != rel:
+            edges.append({"from": rel, "to": target_rel, "kind": "conflict"})
     def docs_of(layer):
         docs = {}
         for md in sorted((workspace / layer).rglob("*.md")):

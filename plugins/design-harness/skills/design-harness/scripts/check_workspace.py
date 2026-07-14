@@ -3,7 +3,7 @@ from pathlib import Path
 
 from discover_workspace import resolve_or_report
 from workspace import (LAYERS, broken_frontmatter, card_files, card_links,
-                       parse_frontmatter, parse_tags)
+                       parse_conflicts, parse_frontmatter, parse_tags)
 
 IDEA_REQUIRED = ["id", "type"]
 
@@ -40,6 +40,37 @@ def schema_problems(workspace):
             problems.append(
                 f"{rel}: retired field: status — two states only "
                 "(existence = live, archive/ = archived)")
+    return problems
+
+
+def conflict_problems(workspace):
+    cards = [(rel, parse_frontmatter(md.read_text(encoding="utf-8")))
+             for md, rel in card_files(workspace)]
+    idea_ids = {
+        state: {fm.get("id") for rel, fm in cards
+                if rel.parts[0] == "ideas" and ("archive" in rel.parts) == archived}
+        for state, archived in (("live", False), ("archived", True))}
+    problems = []
+    for rel, fm in cards:
+        conflicts = parse_conflicts(fm)
+        if not conflicts:
+            continue
+        if rel.parts[0] != "ideas":
+            problems.append(f"{rel}: conflicts is an ideas-only field — "
+                            "only judgments contend")
+            continue
+        if "archive" in rel.parts:
+            continue
+        for target in conflicts:
+            if target == fm.get("id"):
+                problems.append(f"{rel}: conflicts with itself — remove the entry")
+            elif target in idea_ids["archived"]:
+                problems.append(
+                    f"{rel}: conflict target {target} is archived — already "
+                    "adjudicated, remove the entry")
+            elif target not in idea_ids["live"]:
+                problems.append(
+                    f"{rel}: conflict target {target} resolves to no live idea card")
     return problems
 
 
@@ -90,7 +121,8 @@ def cycle_problems(workspace):
 def check(workspace):
     workspace = Path(workspace).resolve()
     return (layout_problems(workspace) + schema_problems(workspace)
-            + board_inbound_problems(workspace) + cycle_problems(workspace))
+            + conflict_problems(workspace) + board_inbound_problems(workspace)
+            + cycle_problems(workspace))
 
 
 def main(argv):

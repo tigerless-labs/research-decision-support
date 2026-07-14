@@ -37,10 +37,18 @@ def broken_frontmatter(text):
     return text.startswith("---\n") and not _FRONTMATTER.match(text)
 
 
-def parse_tags(frontmatter):
-    raw = frontmatter.get("tags", "")
+def _list_field(frontmatter, key):
+    raw = frontmatter.get(key, "")
     inner = raw[1:-1] if raw.startswith("[") and raw.endswith("]") else raw
-    return [tag.strip().strip("'\"") for tag in inner.split(",") if tag.strip()]
+    return [item.strip().strip("'\"") for item in inner.split(",") if item.strip()]
+
+
+def parse_tags(frontmatter):
+    return _list_field(frontmatter, "tags")
+
+
+def parse_conflicts(frontmatter):
+    return _list_field(frontmatter, "conflicts")
 
 
 def strip_frontmatter(text):
