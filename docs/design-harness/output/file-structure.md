@@ -27,7 +27,8 @@ plugins/design-harness/skills/design-harness/
 │   ├── check_workspace.py    schema validation: required frontmatter, single tag, forward-only acyclic references
 │   ├── check_doc_links.py    link integrity validation
 │   ├── build_canvas.py       the canvas builder (fixed script): the workspace path is the only
-│   │                         required input; reads the truth → collects cards / derives edges /
+│   │                         required input; runs both validators as a gate (problems abort
+│   │                         the build, no HTML) → collects cards / derives edges /
 │   │                         lays out / embeds data into a single-file HTML in one step;
 │   │                         --css swaps the style; writes only to temp dirs or artifacts
 │   ├── check_style_pack.py   style pack validation (schema, dual palettes, no external reach,

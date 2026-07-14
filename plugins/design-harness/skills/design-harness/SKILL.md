@@ -69,6 +69,10 @@ archive an idea or start the first assembly on your own.
 
 ## Teach in place, never lecture
 
+- First contact (workspace freshly bootstrapped): orient in one sentence — "from now on
+  every resource we consult is filed automatically; say 'new idea: …' to put a judgment
+  on the board, and 'generate the design/output' when you want it assembled from what we
+  have — if the evidence is too thin, I'll ask." Never repeat it.
 - Workspace young, no output: leave the assembly seat visibly empty — say once that output
   starts on the human's word.
 - Ideas look mature: suggest assembly in one line; don't push twice.
@@ -90,7 +94,9 @@ Run from the host project root. Without `<workspace>` the tools discover it (poi
 default → find by name) and refuse to act on ambiguity; `discover_workspace.py` prints
 what they would resolve.
 
-After **every** write, run both validators:
+The canvas build runs both validators as a gate — a failed build prints the problem
+list and produces no HTML; fix the truth and rebuild. After a write with no rebuild
+(rare — rebuilding is the norm), run them yourself:
 
 ```bash
 python3 <skill-dir>/scripts/check_workspace.py <workspace>

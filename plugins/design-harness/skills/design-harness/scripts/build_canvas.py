@@ -4,6 +4,8 @@ import re
 import sys
 from pathlib import Path
 
+from check_doc_links import check_links
+from check_workspace import check
 from discover_workspace import resolve_or_report
 from workspace import (card_files, card_links, first_paragraph, parse_frontmatter,
                        parse_tags, strip_frontmatter, title_of)
@@ -114,7 +116,7 @@ def layout(data):
              "tags": [], "summary": "Open a comparison or scratch board: write an md under"
                                     " board/, or say \"lay X and Y out as a comparison\""
                                     " and the agent drafts it.", "body": ""}]
-    bottom = max(q["y"] + q["h"] for q in placed) + 470
+    bottom = max((q["y"] + q["h"] for q in placed), default=0) + 470
     place_world("Free surface", "BOARD", [("board documents", board_docs)],
                 None, DH, max(0, (total - 1150) // 2), bottom)
     return placed, labels, worlds
@@ -163,6 +165,17 @@ def style_pack_skins():
     return {"default": DEFAULT_STYLE, "options": options, "css": sheets}
 
 
+def validate_or_refuse(workspace):
+    problems = ([f"INVALID {p}" for p in check(workspace)]
+                + [f"DANGLING {p}" for p in check_links(workspace)])
+    if problems:
+        for problem in problems:
+            print(problem)
+        raise ValueError(
+            f"{len(problems)} problem(s) in {workspace} — broken truth is never "
+            f"projected; fix the cards, then rebuild")
+
+
 def build(workspace, outdir, css=None, title=None):
     workspace = Path(workspace).resolve()
     outdir = Path(outdir).resolve()
@@ -170,6 +183,7 @@ def build(workspace, outdir, css=None, title=None):
         raise ValueError(
             f"refusing to write into the workspace: the canvas is a projection "
             f"and never enters the truth ({outdir})")
+    validate_or_refuse(workspace)
     data = collect(workspace)
     placed, labels, worlds = layout(data)
     data["edges"] = data["edges"] + doc_edges(data, {p["id"] for p in placed})
