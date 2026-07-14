@@ -18,9 +18,8 @@ Many candidates or none: ask the human — **never initialize a new workspace si
 (a wrongly placed init forks the truth). Only the bootstrap writes the pointer; if you
 find a workspace the pointer misses, re-run the bootstrap on it to record it.
 
-Markdown is the **only source of truth**; every other surface —
-indexes, backlinks, layout, the canvas HTML — is a projection that can be regenerated at any
-time and is **never committed**. The pointer file is a projection of location, not truth:
+Markdown is the **only source of truth**; the canvas HTML is a projection that can be
+regenerated at any time and is normally not committed. The pointer file is a projection of location, not truth:
 when it is stale or lost, discovery rebuilds it.
 
 Full contract (card schema, facts, sync invariants, ledger format):
@@ -43,9 +42,7 @@ Full contract (card schema, facts, sync invariants, ledger format):
 Plus one free surface: **board/** — the human's own boards, one markdown file per board
 (a comparison matrix, a theme grid, any scratch reasoning). **No schema, no required
 fields** — the freedom belongs to the human; you edit a board only when asked ("lay these
-three sources out as a comparison"). Boards may reference the three layers; **nothing may
-reference a board** — it is terminal, and a board's conclusions must be distilled into an
-idea card (human-created) to enter the flow.
+three sources out as a comparison").
 
 ## The sync invariant (never break this)
 
@@ -94,15 +91,9 @@ Run from the host project root. Without `<workspace>` the tools discover it (poi
 default → find by name) and refuse to act on ambiguity; `discover_workspace.py` prints
 what they would resolve.
 
-Bootstrap runs both validators itself and fails nonzero on any problem, and the canvas
-build runs them as a gate — a failed build prints the problem list and produces no HTML;
-fix the truth and rebuild. After a write with no rebuild (rare — rebuilding is the norm),
-run them yourself:
-
-```bash
-python3 <skill-dir>/scripts/check_workspace.py <workspace>
-python3 <skill-dir>/scripts/check_doc_links.py <workspace>
-```
+Both validators are built in: bootstrap runs them itself and fails nonzero on any problem,
+and every canvas build runs them as a gate — a failed build prints the problem list and
+produces no HTML; fix the truth and rebuild.
 
 ## Target and output forms
 
@@ -125,30 +116,25 @@ in the builder; the workspace path is the only required input.
 python3 <skill-dir>/scripts/build_canvas.py <workspace> -o <temp-dir> [--css style.css] [--title '...']
 ```
 
-Visual style is CSS-only and lives entirely in the style pack at `canvas/styles/`: the
-template carries a `/*__CSS__*/` slot and no CSS of its own. Every style ships a precompiled
-`canvas/styles/<slug>/canvas.css`. The default build embeds the whole pack and a toolbar
-style switcher — the human changes skins live for the session, and every open starts on
-pin-and-paper (the canvas's native look). Passing
-`--css canvas/styles/<slug>/canvas.css` builds a pinned single-style canvas with no
-switcher. Never fork the template or the builder for looks.
+Visual style is CSS-only and lives entirely in the style pack at `canvas/styles/`; the
+template carries a `/*__CSS__*/` slot and no CSS of its own. The default build embeds the
+whole pack and a toolbar switcher (top right) — the human picks and changes skins there
+live (every open starts on pin-and-paper, the native look); your only job is to point at
+the switcher once. `--css canvas/styles/<slug>/canvas.css` pins a single style, no
+switcher — to name a slug, read
+[canvas/styles/selection-index.json](canvas/styles/selection-index.json), never bulk-read
+the pack. Never fork the template or the builder for looks; when a style's `design.md`
+changes, recompile its `canvas.css` in the same change — the spec is the truth (the pack
+validator checks both palettes and bans external reach).
 
 Build into a temp directory, an artifact, or a fixed `canvas.html` beside the workspace
-(gitignore it; the builder refuses to write inside the workspace itself) — the projection
-never enters version control. Whenever the markdown truth
-changes, rebuild and republish the canvas in the same turn; never edit the HTML directly.
+(gitignore it; the builder refuses to write inside the workspace itself). Whenever the
+markdown truth changes, rebuild and republish in the same turn; never edit the HTML
+directly.
 
 A build is not delivered until the human holds a clickable link. The output is one fully
-self-contained HTML file (all dependencies inlined, zero network requests), so any host
-works. **Default delivery is a published HTML link**: publish the file as an artifact (or
-the host's equivalent hosted page) and give that URL. The one exception is Claude Code (a
-local CLI session), where a local link works: give the absolute `file://…/canvas.html`
-URL, or serve the temp dir with a local static server and give that URL. Either way,
-**every rebuild reuses the existing link**: republish to the same artifact URL, or
-overwrite the same local file path — mint a new link only when the human asks for one.
-
-To pick a style, read [canvas/styles/selection-index.json](canvas/styles/selection-index.json) — never
-bulk-read the pack. Open a style's `design.md` only when (re)compiling its canvas.css —
-the spec is the truth, so whenever a design.md changes, recompile its canvas.css in the
-same change (the pack validator checks token coverage in both palettes and bans external
-reach).
+self-contained HTML file (all dependencies inlined, zero network requests). **Default
+delivery is a published HTML link**: publish as an artifact (or the host's hosted page)
+and give that URL; in Claude Code (a local CLI session) a local link works — the absolute
+`file://…/canvas.html` URL or a local static server. **Every rebuild reuses the existing
+link** — mint a new one only when the human asks.
