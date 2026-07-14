@@ -87,16 +87,17 @@ archive an idea or start the first assembly on your own.
 `<skill-dir>` below is this skill's own directory, wherever the host agent installed it.
 
 ```bash
-python3 <skill-dir>/scripts/init_workspace.py <workspace>   # idempotent bootstrap; records the pointer
+python3 <skill-dir>/scripts/init_workspace.py <workspace>   # bootstrap + pointer + both validators
 ```
 
 Run from the host project root. Without `<workspace>` the tools discover it (pointer →
 default → find by name) and refuse to act on ambiguity; `discover_workspace.py` prints
 what they would resolve.
 
-The canvas build runs both validators as a gate — a failed build prints the problem
-list and produces no HTML; fix the truth and rebuild. After a write with no rebuild
-(rare — rebuilding is the norm), run them yourself:
+Bootstrap runs both validators itself and fails nonzero on any problem, and the canvas
+build runs them as a gate — a failed build prints the problem list and produces no HTML;
+fix the truth and rebuild. After a write with no rebuild (rare — rebuilding is the norm),
+run them yourself:
 
 ```bash
 python3 <skill-dir>/scripts/check_workspace.py <workspace>

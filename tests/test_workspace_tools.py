@@ -3,6 +3,7 @@ from pathlib import Path
 from check_doc_links import check_links
 from check_workspace import check
 from init_workspace import SKELETON, init
+from init_workspace import main as init_main
 from workspace import parse_frontmatter, parse_tags
 
 
@@ -23,6 +24,38 @@ def test_init_is_idempotent_and_never_clobbers(tmp_path):
     marker.write_text("# my customized index\n", encoding="utf-8")
     assert init(root) == []
     assert marker.read_text(encoding="utf-8") == "# my customized index\n"
+
+
+def test_init_main_bootstraps_and_validates_in_one_command(tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+    assert init_main(["init_workspace.py", "docs/design-harness"]) == 0
+    out = capsys.readouterr().out
+    assert out.count("ok:") >= 3
+    assert "INVALID" not in out
+    assert "DANGLING" not in out
+
+
+def test_init_main_fails_nonzero_on_invalid_card(tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+    ws = tmp_path / "docs" / "design-harness"
+    (ws / "ideas").mkdir(parents=True)
+    (ws / "ideas" / "bad.md").write_text(
+        "---\ntags: [x]\n---\n# no id, no type\n", encoding="utf-8")
+    assert init_main(["init_workspace.py", str(ws)]) == 1
+    out = capsys.readouterr().out
+    assert any("INVALID" in line and "bad.md" in line for line in out.splitlines())
+
+
+def test_init_main_fails_nonzero_on_dangling_link(tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+    ws = tmp_path / "docs" / "design-harness"
+    (ws / "ideas").mkdir(parents=True)
+    (ws / "ideas" / "dangler.md").write_text(
+        "---\nid: dangler\ntype: idea\n---\n# d\n\n[gone](missing.md)\n",
+        encoding="utf-8")
+    assert init_main(["init_workspace.py", str(ws)]) == 1
+    out = capsys.readouterr().out
+    assert any("DANGLING" in line and "missing.md" in line for line in out.splitlines())
 
 
 def test_check_passes_valid_workspace(workspace):
