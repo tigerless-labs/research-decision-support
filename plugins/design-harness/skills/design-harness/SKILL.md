@@ -4,7 +4,7 @@ description: A decision board for evidence-based calls — the human adjudicates
 license: MIT
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/*)
 metadata:
-  author: tigerless.ai
+  author: tigerless-labs
   repository: https://github.com/tigerless-labs/design-harness
 ---
 
