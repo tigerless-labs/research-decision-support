@@ -8,7 +8,7 @@
     {
       "name": "design-harness",
       "source": "./plugins/design-harness",
-      "description": "Step one of vibe coding — turn scattered reading and half-formed ideas into a design you can defend. Three markdown layers (sources → ideas → output) in permanent two-way sync on a visual canvas; the human adjudicates, the agent runs errands."
+      "description": "Step one of vibe coding — turn scattered reading and half-formed ideas into a design you can defend. Three markdown layers (sources → ideas → output) synced on the human's command on a visual canvas; the human adjudicates, the agent runs errands."
     }
   ]
 }

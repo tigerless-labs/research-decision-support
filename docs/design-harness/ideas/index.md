@@ -33,8 +33,11 @@ heading-less section at the end is unclassified.
 
 - [Idea layer single entity, iterated in place](idea-layer-single-entity.md) -- ADR: single
   entity + log; its state-machine subdivision has been simplified to two states (logs 2026-07-09).
-- [References + tags, two kinds of facts](single-edge-single-tag.md) -- the only relation is the
-  reference, the only classification is the tag; distances and coordinates are all derived.
+- [References + tags, minimal facts](single-edge-single-tag.md) -- references forward-only and
+  acyclic, tags single and optional; distances and coordinates are all derived (its "exactly
+  two" exclusivity superseded 2026-07-14).
+- [Conflicts get a schema](conflict-schema-red-edges.md) -- optional `conflicts: [<id>]` on the
+  newer card, red edges on the canvas; the field lives exactly as long as the conflict.
 - [One engine, many schemas](one-engine-many-schemas.md) -- switching scenarios swaps the schema,
   not the engine.
 - [Board free surface](board-freeform-layer.md) -- a fourth directory, one file, one board;
@@ -42,10 +45,11 @@ heading-less section at the end is unclassified.
 
 ## sync: the consistency discipline between ideas and output
 
-- [Output auto-refreshes with ideas](output-auto-refresh.md) -- existing output never lags behind
-  judgments.
-- [Output is primary](output-primary-after-generation.md) -- the human initiates generation; after
-  generation the two layers stay in two-way sync forever, and conflicts resolve in output's favor.
+- [Sync on command, layers independent](sync-on-command-layers-independent.md) -- ideas diverge,
+  output converges; re-derivation only on the human's word; back-transcription stays automatic.
+- [Output is human-initiated, ideas become the decision record](output-primary-after-generation.md)
+  -- first assembly on the human's word; direct output edits calibrate backward into ideas; the
+  idea layer keeps provenance and rejected paths.
 
 ## canvas: shape and behavior of the visualization layer
 
@@ -70,6 +74,14 @@ heading-less section at the end is unclassified.
   in markdown are mermaid visual format, not prose with attached images.
 - [Principles as bullets, not paragraphs](principles-as-bullets.md) -- one bullet, one principle;
   each can be referenced / modified / ledgered on its own.
+
+## skill: how the operating skill discovers and binds workspaces
+
+- [Many workspaces, freely named](workspaces-many-and-freely-named.md) -- multiple workspaces per
+  host, any directory name; the config pointer is the registry, discovery never trusts the name.
+- [SKILL.md and protocol fuse into one file](skill-and-protocol-single-file.md) -- structure →
+  workflow → disciplines → quickstart; definitions before procedures, "never" rules close the
+  body; templates inline, big option sets stay as references.
 
 ---
 

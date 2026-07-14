@@ -8,7 +8,9 @@ their thinking; the deciding factors are intuitiveness, beauty, clarity.
 - The canvas is **only a visualization layer**: it changes as the markdown truth changes
   (truth moves, board moves), holds no facts of its own, and accepts no writes that bypass
   the truth.
-- Edges = in-card references (the agent's derivation step adds reference lines to the summary).
+- Edges = in-card references (the agent's derivation step adds reference lines to the
+  summary), plus conflict edges from the `conflicts` frontmatter — drawn **red**, a template
+  base default every style pack inherits and may override.
 - Layout is derived from two discrete facts — references (gravity) and tags (same cluster);
   distances/coordinates never enter the truth.
 - At most one tag per card, so clustering is unambiguous; untagged cards land in the
@@ -101,6 +103,7 @@ contract; visuals belong entirely to the style pack (bounded by the token interf
   single-canvas three-cluster) were archived when the merge completed.
 
 **Provenance**: [the single canvas subsumes the gallery](../../ideas/single-canvas-subsumes-gallery.md) ·
+[conflicts get a schema](../../ideas/conflict-schema-red-edges.md) ·
 [tabbed gallery template](../../ideas/archive/tabbed-gallery-template.md) ·
 [exactly two facts: references + tags](../../ideas/single-edge-single-tag.md) ·
 [protocol taught in place](../../ideas/protocol-discoverability-in-situ.md) ·

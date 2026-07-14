@@ -1,7 +1,8 @@
 # output — assembled artifacts (currently: the system design)
 
-Fulfils the requirements in [target](../target.md); idea and target changes trigger a
-same-turn refresh ([output-auto-refresh](../ideas/output-auto-refresh.md)).
+Fulfils the requirements in [target](../target.md); idea and target changes re-derive the
+affected elements **on the human's command**
+([sync on command](../ideas/sync-on-command-layers-independent.md)).
 
 - [system](system.md) — system flow diagram + system architecture diagram (one document, the spine).
 - [file-structure](file-structure.md) — skill v2 file structure: the skill package and workspace trees, module→file mapping.

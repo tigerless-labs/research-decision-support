@@ -24,4 +24,4 @@ misfits).
 
 Tag uniqueness comes from [single-edge-single-tag](single-edge-single-tag.md); tagging timing
 and optionality, see [source-tags-self-classify](source-tags-self-classify.md); the never-lags
-discipline matches [output-auto-refresh](output-auto-refresh.md).
+discipline matches [output-auto-refresh](archive/output-auto-refresh.md).

@@ -1,7 +1,7 @@
 <h1 align="center">design-harness</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/release-v0.8.5-brightgreen.svg" alt="release" />
+  <img src="https://img.shields.io/badge/release-v0.9.0-brightgreen.svg" alt="release" />
   <img src="https://img.shields.io/badge/agent-Claude%20Code%20%7C%20Codex-blue.svg" alt="agent" />
   <img src="https://img.shields.io/badge/format-SKILL.md-lightgrey.svg" alt="format" />
   <img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="license MIT" />
@@ -29,7 +29,8 @@ you add lands on the board, one glance away from any decision's why.
 - **Ideas are yours alone** — only a human creates an idea card; the agent links it
   to evidence, clusters neighbors, and surfaces conflicts instead of picking a side.
 - **Output assembles on your word** — one command turns surviving ideas into the
-  deliverable, and from then on ideas and output stay in permanent two-way sync.
+  deliverable, and every later sync runs on your word too; edit output directly and
+  it flows back into ideas.
 - **Everything is traceable** — every design element links back through ideas to the
   sources that earned it, with an append-only log on every card.
 - **Plain Markdown, no lock-in** — three folders in your repo; versionable,

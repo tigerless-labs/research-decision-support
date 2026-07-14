@@ -14,15 +14,20 @@ the rejected paths, the judgment corpus reused across outputs).
   subdirectory, logged, never deleted.
 - When a new idea repeats an existing card's judgment (duplicate/increment), the agent
   **auto-merges** it into the old card and ledgers it; a conflict is not mergeable — the
-  disagreement goes on the board as-is for the human to adjudicate.
-- **Permanent two-way sync** with output: a human idea lands in both layers the same turn;
-  a human output edit is back-calibrated into this layer by the agent (transcription; the
-  judgment stays the human's).
+  newer card declares it in its `conflicts` frontmatter (red edge on the canvas) and the
+  disagreement waits as-is for the human to adjudicate; the field lives exactly as long
+  as the conflict.
+- **Independent of output; sync runs on the human's command**: ideas diverge freely (may
+  contradict, may pile up); idea → output re-derivation happens only when the human orders
+  a sync. A human output edit is back-calibrated into this layer automatically (transcription;
+  the judgment stays the human's).
 - Each node carries an append-only log (birth/update/merge/supersede; pending); the layer
   ledger [logs.md](../../logs.md) records every card change (including body updates) — until
   node-level logs land, it is the only trace of idea changes.
 
-**Provenance**: [output primary](../../ideas/output-primary-after-generation.md) ·
+**Provenance**: [sync on command](../../ideas/sync-on-command-layers-independent.md) ·
+[conflicts get a schema](../../ideas/conflict-schema-red-edges.md) ·
+[output primary](../../ideas/output-primary-after-generation.md) ·
 [single-entity ADR](../../ideas/idea-layer-single-entity.md) (its state-machine breakdown
 was simplified to two states; see logs 2026-07-09) ·
 [the agent thinks but never adjudicates](../../ideas/agent-synthesizes-human-adjudicates.md) ·
