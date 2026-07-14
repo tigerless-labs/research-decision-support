@@ -234,3 +234,35 @@ def test_build_renders_freshly_initialized_workspace(tmp_path):
     init(root)
     html = build(root, tmp_path / "proj").read_text(encoding="utf-8")
     assert "No boards yet" in html
+
+
+def test_collect_projects_conflicts_as_kind_edges(workspace):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [idea-one]\n---\n"
+        "# Challenger\n\nDisputes the first judgment.\n", encoding="utf-8")
+    data = collect(workspace)
+    assert {"from": "ideas/challenger.md", "to": "ideas/idea-one.md",
+            "kind": "conflict"} in data["edges"]
+    assert {"from": "ideas/idea-two.md", "to": "ideas/idea-one.md"} in data["edges"]
+
+
+def test_collect_never_projects_unresolvable_or_archived_conflicts(workspace):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [idea-old, no-such-id]\n---\n"
+        "# Challenger\n\nBoth targets are out of the live set.\n", encoding="utf-8")
+    data = collect(workspace)
+    assert not [e for e in data["edges"] if e.get("kind") == "conflict"]
+
+
+def test_template_draws_conflict_edges_red():
+    text = TEMPLATE.read_text(encoding="utf-8")
+    assert "var(--edge-conflict" in text
+    assert "#d0342c" in text
+
+
+def test_build_embeds_conflict_edges(workspace, tmp_path):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [idea-one]\n---\n"
+        "# Challenger\n\nDisputes the first judgment.\n", encoding="utf-8")
+    html = build(workspace, tmp_path / "proj").read_text(encoding="utf-8")
+    assert '"kind": "conflict"' in html

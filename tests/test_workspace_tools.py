@@ -205,3 +205,58 @@ def test_check_flags_unclosed_frontmatter(workspace):
         "---\ntags: [x]\n# frontmatter never closes\n", encoding="utf-8")
     problems = check(workspace)
     assert any("torn.md" in p and "frontmatter" in p for p in problems)
+
+
+def test_parse_conflicts_reads_optional_list_field():
+    from workspace import parse_conflicts
+    with_field = parse_frontmatter(
+        "---\nid: x\ntype: idea\nconflicts: [a-card, b-card]\n---\n# t\n")
+    without_field = parse_frontmatter("---\nid: x\ntype: idea\n---\n# t\n")
+    assert parse_conflicts(with_field) == ["a-card", "b-card"]
+    assert parse_conflicts(without_field) == []
+
+
+def test_check_accepts_conflict_resolving_to_live_idea(workspace):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [idea-one]\n---\n"
+        "# Challenger\n\nDisputes the first judgment.\n", encoding="utf-8")
+    assert check(workspace) == []
+
+
+def test_check_flags_unresolvable_conflict_target(workspace):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [no-such-id]\n---\n"
+        "# Challenger\n\nDisputes a ghost.\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("challenger" in p and "no-such-id" in p for p in problems)
+
+
+def test_check_flags_conflict_with_archived_target_as_adjudicated(workspace):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [idea-old]\n---\n"
+        "# Challenger\n\nDisputes a settled judgment.\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("idea-old" in p and "adjudicated" in p for p in problems)
+
+
+def test_check_flags_self_conflict(workspace):
+    (workspace / "ideas" / "challenger.md").write_text(
+        "---\nid: challenger\ntype: idea\nconflicts: [challenger]\n---\n"
+        "# Challenger\n\nDisputes itself.\n", encoding="utf-8")
+    problems = check(workspace)
+    assert any("challenger" in p and "itself" in p for p in problems)
+
+
+def test_check_flags_conflicts_field_outside_ideas(workspace):
+    (workspace / "sources" / "papers" / "delta.md").write_text(
+        "---\nconflicts: [idea-one]\n---\n# Delta paper\n\nA source never contends.\n",
+        encoding="utf-8")
+    problems = check(workspace)
+    assert any("delta.md" in p and "conflicts" in p for p in problems)
+
+
+def test_check_ignores_conflicts_on_archived_cards(workspace):
+    (workspace / "ideas" / "archive" / "idea-settled.md").write_text(
+        "---\nid: idea-settled\ntype: idea\nconflicts: [no-such-id]\n---\n"
+        "# Settled\n\nHistory keeps its frontmatter.\n", encoding="utf-8")
+    assert check(workspace) == []
