@@ -10,7 +10,7 @@ Every output change is one **re-ignition**; ignition automatically separates the
 assembly completes, all current ideas are archived (`ideas/archive/`), their judgments and
 references **consolidated and inherited** by output, with no hot reloading afterwards --
 [two-way sync](../output-primary-after-generation.md) and
-[hot refresh](../output-auto-refresh.md) are superseded by this card. If output exists,
+[hot refresh](output-auto-refresh.md) are superseded by this card. If output exists,
 ignition updates it (assembly input = current output + target + new ideas on the work surface,
 which may be zero cards -- a pure format change just registers in target); if not, ignition
 creates it. **Completeness obligation**: every exist-state card must be either inherited or

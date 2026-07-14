@@ -17,13 +17,13 @@ structural cure for "document rot" -- rot's root cause is update labor nobody ow
 explicitly to the agent and pin it to the idea-change trigger, and the product cannot go stale.
 
 The precedent for rolling updates is the living review of
-[EBM/GRADE](../sources/methods/ebm-grade.md) (re-assess conclusions as new evidence appears);
+[EBM/GRADE](../../sources/methods/ebm-grade.md) (re-assess conclusions as new evidence appears);
 "any inventory needing manual upkeep will rot" is the
-[IBIS cautionary tale](../sources/methods/ibis-qoc.md) (Grudin's paradox -- update labor must
+[IBIS cautionary tale](../../sources/methods/ibis-qoc.md) (Grudin's paradox -- update labor must
 belong to the agent); the premise that projections must be regenerable is
-[drafts-not-state](drafts-not-state.md).
+[drafts-not-state](../drafts-not-state.md).
 
-Same pipeline as the [creation canvas](creation-canvas.md)'s "carrying decisions downward into
+Same pipeline as the [creation canvas](../creation-canvas.md)'s "carrying decisions downward into
 design". This rule refreshes only **existing** output; first generation is initiated by the
 human. To be weighed: refresh granularity (element-level vs full re-derivation) and the
 degradation behavior on failure.

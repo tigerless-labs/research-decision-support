@@ -1,7 +1,7 @@
 # File structure — the design→disk mapping
 
 The skill v2 file layout: two trees — the **skill package** (portable kernel, distributed
-with the plugin, read-only) and the **workspace** (one per project, writable, not in git).
+with the plugin, read-only) and the **workspace** (writable, many per host).
 Splitting the trees decouples protocol from runtime: the kernel can be moved wholesale and
 reused, while every fact stays in the workspace.
 
@@ -9,15 +9,15 @@ reused, while every fact stays in the workspace.
 
 ```
 plugins/design-harness/skills/design-harness/
-├── SKILL.md              the agent module's full behavior as an operating procedure:
-│                         triggers, the errand list, when to teach in place and the
-│                         receipt phrasing (no resident process)
+├── SKILL.md              the single operating-and-contract doc, four sections in order:
+│                         structure (layout, layers, card schemas with inline skeletons, the
+│                         three facts, rendering contract, canvas anatomy) → workflow
+│                         (discover → ingest → transcribe → sync on command → assemble →
+│                         project, teach-in-place attached) → disciplines (the "never" list,
+│                         ledger format, validator gate) → quickstart (command runbook)
 ├── references/
-│   ├── protocol.md       the human-readable form of the protocol contract: card schema,
-│   │                     the two facts (references + tags), sync invariants, ledger discipline
 │   └── output-forms/     the output form library (recommended set), one form one spec
 │       └── system-design.md   first entry: mermaid diagrams (with click-through) + a modules layer
-├── templates/            card skeletons, one template per kind: source card / idea card / target / logs header
 ├── scripts/
 │   ├── init_workspace.py     workspace bootstrap (idempotent, never overwrites); records the
 │   │                         workspace location in the host's pointer file, then runs both
@@ -25,7 +25,8 @@ plugins/design-harness/skills/design-harness/
 │   ├── discover_workspace.py workspace discovery: pointer file → default location → find by
 │   │                         directory name; ambiguity (many or zero hits) is reported, never
 │   │                         resolved silently — pure read, only the bootstrap writes the pointer
-│   ├── check_workspace.py    schema validation: required frontmatter, single tag, forward-only acyclic references
+│   ├── check_workspace.py    schema validation: required frontmatter, single tag, forward-only
+│   │                         acyclic references, conflicts targets resolve
 │   ├── check_doc_links.py    link integrity validation
 │   ├── build_canvas.py       the canvas builder (fixed script): the workspace path is the only
 │   │                         required input; runs both validators as a gate (problems abort
@@ -59,9 +60,9 @@ plugins/design-harness/skills/design-harness/
   the layer→accent semantic binding is written once, in SKILL.md's rendering section.
   The canvas_renderings multi-canvas selector retired along with the template set;
   a style's custom presentation section now targets the unified canvas directly.
-- **One contract, two readings**: references/protocol.md is read by humans and agents,
-  and check_workspace.py is its machine-executable form — same origin, so changing the
-  contract means changing the validator.
+- **One contract, two readings**: SKILL.md's structure and disciplines sections are read by
+  humans and agents, and check_workspace.py is their machine-executable form — same origin,
+  so changing the contract means changing the validator.
 - **The form library is open**: adding an output form = adding one spec to
   output-forms/, engine untouched (one engine, many schemas).
 
@@ -92,19 +93,21 @@ docs/design-harness/
 Every layer index and the canvas HTML are projections: regenerated with the cards, holding
 no facts; the canvas HTML is normally not committed.
 
-The workspace directory is always named `design-harness`; only its location is free. The
-host project root carries a pointer file (`.design-harness/config.json`, single field:
-the workspace path) so any runtime finds a relocated workspace instantly. The pointer is
-not truth — it can be lost or stale and discovery rebuilds it from the tree.
+A host may hold **many workspaces under any directory names**. The host project root
+carries the registry (`.design-harness/config.json`) recording every workspace path;
+discovery trusts the registry, never the directory name. The registry is not truth — it
+can be lost or stale and discovery rebuilds it from the tree.
 
 ## Module → file mapping
 
 - source / idea / output → the workspace's three layer dirs (behavior boundaries in [modules/](modules/source.md)).
 - canvas → build_canvas.py + canvas/ (including styles/).
 - agent → SKILL.md.
-- protocol → references/protocol.md + templates/ + the two validators + the workspace's logs.md.
+- protocol → SKILL.md's structure and disciplines sections + the two validators + the workspace's logs.md.
 
-**Provenance**: [protocol decoupled from runtime](../ideas/runtime-agnostic-protocol.md) ·
+**Provenance**: [SKILL.md and protocol fuse into one file](../ideas/skill-and-protocol-single-file.md) ·
+[many workspaces, freely named](../ideas/workspaces-many-and-freely-named.md) ·
+[protocol decoupled from runtime](../ideas/runtime-agnostic-protocol.md) ·
 [one engine, many schemas](../ideas/one-engine-many-schemas.md) ·
 [projections hold no facts](../ideas/drafts-not-state.md) ·
 [tabbed gallery template](../ideas/archive/tabbed-gallery-template.md) ·

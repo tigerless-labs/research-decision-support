@@ -14,7 +14,7 @@ flowchart TB
   subgraph GT["agent (runs the errands)"]
     B["Intake · grade<br/>sources are not equal-weight"]
     C["Derive references · tag classification<br/>fill in evidence anchors"]
-    E["Assemble output<br/>same-turn refresh of affected elements"]
+    E["Assemble output<br/>re-derives affected elements on the human's word"]
     K["Back-calibrate ideas<br/>transcribes; the judgment stays the human's"]
     V["Move card to ideas/archive/<br/>logged, never deleted"]
     L["Write logs · regenerate each layer's index — every idea create/update / assembly / calibration / archival is ledgered alike"]
@@ -25,7 +25,7 @@ flowchart TB
   P -- "backward sync" --> K
   R --> V
   B -- "supports" --> C
-  C -- "forward sync" --> E
+  C -- "forward sync on command" --> E
   C --> L
   E --> L
   K --> L
@@ -52,14 +52,14 @@ flowchart TB
         IDEA["② idea — middle layer<br/>only the human creates · two states live/archived · append-only logs"]
         OUT["③ output — integration layer<br/>form set by target · elements link back to ideas and logs, then through to sources"]
         SRC --> IDEA
-        IDEA <-->|"permanent two-way sync: forward re-derive / backward calibrate · conflicts resolve toward output"| OUT
+        IDEA <-->|"sync on the human's command: forward re-derive on order · backward calibrate automatic"| OUT
     end
     BOARD["board — free surface<br/>the human's own boards · one file, one board: comparisons or any scratch reasoning · no schema"]
     BOARD -.references the three layers forward only · conclusions distilled into ideas before entering the flow.-> FLOW
     subgraph XCUT["Cross-cutting"]
         CANVAS["canvas — board projection<br/>visualization layer only · sole active template: the unified canvas (single-canvas base + gallery strengths)"]
         AGENT["agent — execution engine<br/>thinks but never adjudicates · intake/link/anchor/back-calibrate/ledger/refresh"]
-        PROTO["protocol — contract and ledger<br/>markdown as truth · exactly two facts: references + tags · logs · derived indexes"]
+        PROTO["protocol — contract and ledger<br/>markdown as truth · three facts: references + tags + conflicts · logs · derived indexes"]
     end
     CANVAS -.projects.-> FLOW
     AGENT -.intake/link/anchor/ledger/refresh.-> FLOW

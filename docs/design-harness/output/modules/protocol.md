@@ -10,10 +10,12 @@ rules, change ledger.
   order always markdown first then HTML; editing only the HTML is forbidden.
 - Frontmatter carries the schema (enforced by the validator); a card's structure =
   frontmatter + **title + summary**, no fixed sections, references inline in the summary.
-- Exactly two structured facts: **references** (the sole association — links in the card
-  body, **forward only**, pointing at the evidence and prior cards this card stands on;
-  "who cites me" is a projection-derived backlink, never written) and **tags** (the sole
-  classification: single layer, at most one per card, optional, no directory tree).
+- Exactly three structured facts: **references** (links in the card body, **forward only**,
+  pointing at the evidence and prior cards this card stands on; "who cites me" is a
+  projection-derived backlink, never written), **tags** (the sole classification: single
+  layer, at most one per card, optional, no directory tree), and **conflicts** (an optional
+  frontmatter field on the **newer** card naming the prior cards it contends with; it lives
+  exactly as long as the conflict — the human's adjudication removes it).
 - Distances/coordinates are projection-derived quantities, never in the truth.
 - Each layer's index is also a derived projection: grouped under tag headings
   (`TAG: one line on why they belong together`), unclassified cards flat at the end,
@@ -30,7 +32,8 @@ rules, change ledger.
 (append-only + supersede, "immutable, only status changes") and the
 [decision journal](../../sources/methods/decision-journal.md) (record expectations at the
 time to prevent hindsight polish; tier-① empirical) ·
-[exactly two facts: references + tags](../../ideas/single-edge-single-tag.md) ·
+[references + tags, minimal facts](../../ideas/single-edge-single-tag.md) ·
+[conflicts get a schema](../../ideas/conflict-schema-red-edges.md) ·
 [tags in the layer index](../../ideas/tags-in-layer-index.md) ·
 [protocol not bound to a runtime](../../ideas/runtime-agnostic-protocol.md) ·
 [one engine, many schemas](../../ideas/one-engine-many-schemas.md) ·

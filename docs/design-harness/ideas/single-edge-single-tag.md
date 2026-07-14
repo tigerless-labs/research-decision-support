@@ -4,11 +4,16 @@ type: idea
 tags: [schema]
 ---
 
-# Globally only two kinds of structured facts: the reference (only relation) + the tag (only classification)
+# Structured facts stay minimal: the reference (association) + the tag (only classification)
 
-There is **only one relation** between cards: a markdown link in card A's body pointing to card
-B is one edge; the surrounding text may carry a one-line semantic note, but the system defines
-no relation-type enum (no dependency / mutual-exclusion / support typed edges). References go
+(Slimmed 2026-07-14: the "exactly two" exclusivity was superseded by the human's
+conflict-schema adjudication — a third fact, the `conflicts` frontmatter field, joined the set.
+The minimalism principle itself stands: no open-ended relation-type enum.)
+
+The reference is the association between cards: a markdown link in card A's body pointing to
+card B is one edge; the surrounding text may carry a one-line semantic note, but the system
+defines no relation-type enum (no dependency / support typed edges — conflict alone earned a
+dedicated fact). References go
 **forward only**: a card may point only at what it stands on (evidence, predecessor cards it
 depends on or revises); "whom I support / who cites me" are downstream relations and are never
 written down -- backlinks are derived by projection scans, never double-written. A reference may

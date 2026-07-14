@@ -15,14 +15,17 @@ deliverable, and the primary work surface once generated.
   (mermaid, with click-through declarations) — not prose plus an external image.
 - The first assembly is **human-initiated**; before output exists, the human's ideas land
   in the idea layer only.
-- Once generated, in **permanent two-way sync** with the idea layer: an idea change
-  re-derives the affected elements the same turn (re-derive, don't rewrite the whole
-  document); an output change is back-calibrated into ideas by the agent; conflicts
-  resolve toward output.
+- **The convergent layer**: ideas diverge, output converges — divergence between the two
+  is information (what has not yet been adjudicated into the design), not an error. Idea
+  and target changes re-derive the affected elements **only on the human's command**
+  (re-derive, don't rewrite the whole document; direct apply with a receipt, a diff first
+  for large changes); an output change is back-calibrated into ideas automatically; the
+  agent may hint once when output lags, never nagging.
 - Every element links back to the idea that assembled it and its logs, then clicks
   through to the source.
 
-**Provenance**: [diagrams as the native format](../../ideas/diagrams-in-markdown-native-format.md) ·
+**Provenance**: [sync on command](../../ideas/sync-on-command-layers-independent.md) ·
+[diagrams as the native format](../../ideas/diagrams-in-markdown-native-format.md) ·
 [output primary](../../ideas/output-primary-after-generation.md) ·
-[output auto-refresh](../../ideas/output-auto-refresh.md) ·
+[output auto-refresh](../../ideas/archive/output-auto-refresh.md) ·
 [the judgment-provenance wedge](../../ideas/judgment-provenance-wedge.md).
