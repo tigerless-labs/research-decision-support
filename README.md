@@ -1,7 +1,7 @@
 <h1 align="center">design-harness</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/release-v0.9.1-brightgreen.svg" alt="release" />
+  <img src="https://img.shields.io/badge/release-v0.9.2-brightgreen.svg" alt="release" />
   <img src="https://img.shields.io/badge/agent-Claude%20Code%20%7C%20Codex-blue.svg" alt="agent" />
   <img src="https://img.shields.io/badge/format-SKILL.md-lightgrey.svg" alt="format" />
   <img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="license MIT" />

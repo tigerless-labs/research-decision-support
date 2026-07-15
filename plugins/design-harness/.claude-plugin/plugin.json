@@ -1,7 +1,7 @@
 {
   "name": "design-harness",
   "description": "Step one of vibe coding — turn scattered reading and half-formed ideas into a design you can defend. Three markdown layers (sources → ideas → output) synced on the human's command on a visual canvas; the human adjudicates, the agent runs errands.",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "author": {
     "name": "tigerless.ai",
     "email": "saas@tigerless.com"
