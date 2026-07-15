@@ -60,6 +60,17 @@ def test_skill_md_carries_no_host_specific_command_paths():
     assert "CLAUDE_SKILL_DIR" not in body
 
 
+def test_skill_md_asks_for_target_at_bootstrap_and_again_at_assembly():
+    body = SKILL_MD.read_text(encoding="utf-8").split("---", 2)[2]
+    workflow = body.split("## Workflow")[1]
+    discover_step = workflow.split("**Ingest evidence**")[0]
+    assert "target.md" in discover_step
+    assert "ask" in discover_step
+    assemble_step = workflow.split("**Assemble**")[1].split("**Project and deliver**")[0]
+    assert "target.md" in assemble_step
+    assert "ask" in assemble_step
+
+
 def test_skill_md_ties_delivery_target_to_registry():
     body = SKILL_MD.read_text(encoding="utf-8").split("---", 2)[2]
     delivery_step = body.split("build_canvas.py")[1]

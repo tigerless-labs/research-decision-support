@@ -154,6 +154,18 @@ def test_build_refuses_to_write_into_the_workspace(workspace):
         build(workspace, workspace / "output")
 
 
+def test_build_html_suffix_writes_that_file_not_a_directory(workspace, tmp_path):
+    out = build(workspace, tmp_path / "proj" / "my-canvas.html")
+    assert out == tmp_path / "proj" / "my-canvas.html"
+    assert out.is_file()
+    assert "<html" in out.read_text(encoding="utf-8")
+
+
+def test_build_refuses_html_target_inside_the_workspace(workspace):
+    with pytest.raises(ValueError, match="projection"):
+        build(workspace, workspace / "canvas.html")
+
+
 def test_template_and_default_css_exist_on_disk():
     assert TEMPLATE.exists()
     assert DEFAULT_CSS.exists()

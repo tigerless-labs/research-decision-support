@@ -187,6 +187,8 @@ def validate_or_refuse(workspace):
 def build(workspace, outdir, css=None, title=None):
     workspace = Path(workspace).resolve()
     outdir = Path(outdir).resolve()
+    out_file = outdir if outdir.suffix == ".html" else outdir / "canvas.html"
+    outdir = out_file.parent
     if outdir == workspace or outdir.is_relative_to(workspace):
         raise ValueError(
             f"refusing to write into the workspace: the canvas is a projection "
@@ -217,12 +219,11 @@ def build(workspace, outdir, css=None, title=None):
                      if needs_mermaid else "")
             .replace("/*__DATA__*/null", embed_json(payload)))
     outdir.mkdir(parents=True, exist_ok=True)
-    out = outdir / "canvas.html"
-    out.write_text(html, encoding="utf-8")
-    print(f"ok: {out} — {len(placed)} nodes, {len(data['edges'])} edges, "
+    out_file.write_text(html, encoding="utf-8")
+    print(f"ok: {out_file} — {len(placed)} nodes, {len(data['edges'])} edges, "
           f"{len(worlds)} worlds, mermaid={needs_mermaid}, "
           f"skin={'switcher:' + str(len(skins['options'])) if skins else css_file.name}")
-    return out
+    return out_file
 
 
 def main(argv):
@@ -231,7 +232,7 @@ def main(argv):
     else:
         workspace = resolve_or_report(".")
         if workspace is None:
-            print("usage: build_canvas.py [workspace] [-o outdir] "
+            print("usage: build_canvas.py [workspace] [-o outdir|out.html] "
                   "[--css style.css] [--title 'Page title']")
             return 1
     outdir = argv[argv.index("-o") + 1] if "-o" in argv else "/tmp/rds-canvas"
