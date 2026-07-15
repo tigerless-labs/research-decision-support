@@ -55,3 +55,10 @@ def test_readme_carries_install_and_usage():
     assert "/plugin marketplace add tigerless-labs/design-harness" in text
     assert "/plugin install design-harness" in text
     assert "## Usage" in text
+
+
+def test_readme_carries_update_commands():
+    text = readme_text()
+    assert "/plugin marketplace update design-harness" in text
+    assert "/plugin update design-harness@design-harness" in text
+    assert "codex plugin marketplace upgrade" in text
