@@ -95,8 +95,10 @@ no facts; the canvas HTML is normally not committed.
 
 A host may hold **many workspaces under any directory names**. The host project root
 carries the registry (`.design-harness/config.json`) recording every workspace path;
-discovery trusts the registry, never the directory name. The registry is not truth — it
-can be lost or stale and discovery rebuilds it from the tree.
+discovery trusts the registry, never the directory name. The registry may also record
+the canvas delivery target (output path or published link) so rebuilds across sessions
+land on the same file and link. The registry is not truth — it can be lost or stale and
+discovery rebuilds it from the tree.
 
 ## Module → file mapping
 

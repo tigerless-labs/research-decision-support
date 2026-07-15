@@ -60,6 +60,13 @@ def test_skill_md_carries_no_host_specific_command_paths():
     assert "CLAUDE_SKILL_DIR" not in body
 
 
+def test_skill_md_ties_delivery_target_to_registry():
+    body = SKILL_MD.read_text(encoding="utf-8").split("---", 2)[2]
+    delivery_step = body.split("build_canvas.py")[1]
+    assert '"canvas"' in delivery_step
+    assert "config.json" in delivery_step
+
+
 def test_readme_carries_codex_install():
     text = (REPO / "README.md").read_text(encoding="utf-8")
     assert "codex plugin marketplace add tigerless-labs/design-harness" in text

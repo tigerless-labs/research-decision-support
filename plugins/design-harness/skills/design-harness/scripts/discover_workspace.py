@@ -33,14 +33,26 @@ def configured_workspace(root):
     return candidate if looks_like_workspace(candidate) else None
 
 
+def existing_config(config_file):
+    if not config_file.is_file():
+        return {}
+    try:
+        loaded = json.loads(config_file.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return loaded if isinstance(loaded, dict) else {}
+
+
 def record_workspace(root, workspace):
     root, workspace = Path(root).resolve(), Path(workspace).resolve()
     config_file = root / CONFIG_RELPATH
     config_file.parent.mkdir(parents=True, exist_ok=True)
     stored = (workspace.relative_to(root).as_posix()
               if workspace.is_relative_to(root) else str(workspace))
+    config = existing_config(config_file)
+    config["workspace"] = stored
     config_file.write_text(
-        json.dumps({"workspace": stored}, indent=2) + "\n", encoding="utf-8")
+        json.dumps(config, indent=2) + "\n", encoding="utf-8")
     return config_file
 
 
