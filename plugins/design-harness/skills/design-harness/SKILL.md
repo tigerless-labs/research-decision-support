@@ -185,7 +185,9 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    `docs/design-harness/`. More than one candidate, or zero: ask — **never initialize a
    new workspace silently** (init in the wrong place forks the truth). Only the
    bootstrap writes the registry; on finding a workspace the registry missed, re-run the
-   bootstrap to record it. Scripts run at the host project root (`<skill-dir>` is
+   bootstrap to record it. A fresh bootstrap ends by asking the human for the target
+   (purpose and acceptance criteria, in the human's words) — transcribe the answer into
+   `target.md`, never invent one; the human may defer. Scripts run at the host project root (`<skill-dir>` is
    wherever this skill is installed):
 
    ```bash
@@ -207,7 +209,8 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    twice.
 4. **Assemble**: first assembly is human-initiated; the form comes from `target.md` +
    the output-forms library — when the human sets a target, recommend a form from the
-   library; the first is **system-design** (mermaid diagrams are the markdown body
+   library; if `target.md` is still blank when assembly is called for, ask for the
+   target once more before recommending; the first is **system-design** (mermaid diagrams are the markdown body
    itself, plus a `modules/` layer, one module per file). Anchor every output claim to
    evidence; write principles as bullet lists, one principle per bullet — so each can be
    referenced, edited, and ledgered on its own; in the system-design form the diagram
