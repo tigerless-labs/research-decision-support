@@ -223,9 +223,10 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    ```
 
    Without `<workspace>` the tool discovers on its own (registry → default location) and
-   refuses to act on ambiguity. Build targets are a temp dir, an artifact, or the fixed
-   `canvas.html` beside the workspace (gitignore it; the builder refuses to write inside
-   the workspace). A build is not delivered until the human holds a clickable link. The
+   refuses to act on ambiguity. `-o` takes a directory (the file lands inside as
+   `canvas.html`) or a `.html` path written as-is. Build targets are a temp dir, an
+   artifact, or the fixed `canvas.html` beside the workspace (gitignore it; the builder
+   refuses to write inside the workspace). A build is not delivered until the human holds a clickable link. The
    product is one fully self-contained HTML file (all dependencies inlined, zero network
    requests). **The default delivery is a published HTML link**: publish as an artifact
    (or the host's hosted pages) and hand over that URL; in Claude Code (a local CLI

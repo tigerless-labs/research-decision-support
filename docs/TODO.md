@@ -15,5 +15,4 @@
 - [ ] skill 解冻时：references/output-forms/system-design.md 的流程图规格更新为"时间轴泳道 flowchart（人上 agent 下、编号之字形左右推进、同步回边）"，与 system.md 现状对齐。
 - [ ] docs 入 git（PR #13）后的陈述清扫："不入 git / docs 不入 git" 残句仍在 output/file-structure.md、logs.md 头部、SKILL.md 等处，逐一改为入 git 后的事实。
 - [ ] workspace 发现脚本对齐（idea 卡 workspaces-many-and-freely-named；文档已先行随 v0.9.0）：init_workspace.py/discover_workspace.py 支持注册表多条目、目录名自由、移除按名查找——tests 先行，走 worktree+PR。
-- [ ] build_canvas -o 后缀守卫：`-o foo.html` 现按目录处理生成 foo.html/canvas.html；以 .html 结尾时应写该文件本身（用户实测踩坑，2026-07-15）。
 - [ ] build 统计行把 `__board_empty__` 占位节点计入 nodes 数（空工作区报 "1 nodes"、5 卡+空 board 报 "6 nodes"，误导排查）；统计应只数真卡，占位另计。
