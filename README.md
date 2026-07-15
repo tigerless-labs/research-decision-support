@@ -64,6 +64,25 @@ cp -r design-harness/plugins/design-harness/skills/design-harness \
   ~/.claude/skills/
 ```
 
+### Updating
+
+Claude Code — refresh the marketplace, then update the plugin:
+
+```
+/plugin marketplace update design-harness
+/plugin update design-harness@design-harness
+```
+
+(Or enable auto-update for this marketplace under `/plugin` → Marketplaces.)
+
+Codex — refresh the marketplace snapshot, then update from `/plugins`:
+
+```
+codex plugin marketplace upgrade
+```
+
+Manual copy — `git pull` the clone and re-run the `cp -r` above.
+
 ## Usage
 
 Talk to your agent in plain language:
