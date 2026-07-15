@@ -228,7 +228,10 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    (or the host's hosted pages) and hand over that URL; in Claude Code (a local CLI
    session) a local link suffices — an absolute `file://…/canvas.html` URL or a local
    static server. **Every rebuild reuses the existing link** — mint a new one only when
-   the human asks.
+   the human asks. So the link survives the session: record the delivery target — the
+   HTML output path or the published link — under a `"canvas"` key in the
+   `.design-harness/config.json` registry, and read it back before building; later
+   sessions then rebuild the same file and republish the same link.
 
 ### Teach in place, never lecture
 

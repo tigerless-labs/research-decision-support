@@ -102,6 +102,29 @@ def test_record_roundtrip_stores_absolute_outside_root(tmp_path):
     assert configured_workspace(root).resolve() == outside.resolve()
 
 
+def test_record_preserves_unrelated_config_keys(tmp_path):
+    root = host(tmp_path, "research/design-harness")
+    workspace = root / "research" / "design-harness"
+    (root / CONFIG_RELPATH).parent.mkdir(parents=True)
+    (root / CONFIG_RELPATH).write_text(
+        json.dumps({"workspace": "stale/path", "canvas": "docs/canvas.html"}),
+        encoding="utf-8")
+    config = record_workspace(root, workspace)
+    stored = json.loads(config.read_text(encoding="utf-8"))
+    assert stored["canvas"] == "docs/canvas.html"
+    assert configured_workspace(root).resolve() == workspace.resolve()
+
+
+def test_record_over_malformed_config_still_writes_pointer(tmp_path):
+    root = host(tmp_path, "research/design-harness")
+    workspace = root / "research" / "design-harness"
+    (root / CONFIG_RELPATH).parent.mkdir(parents=True)
+    for garbage in ("not json {", "[]"):
+        (root / CONFIG_RELPATH).write_text(garbage, encoding="utf-8")
+        record_workspace(root, workspace)
+        assert configured_workspace(root).resolve() == workspace.resolve()
+
+
 def test_init_main_no_arg_adopts_existing_workspace(tmp_path, monkeypatch, capsys):
     root = host(tmp_path, "research/design-harness")
     monkeypatch.chdir(root)
