@@ -7,7 +7,8 @@
   <img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="license MIT" />
 </p>
 
-**Turn scattered reading and half-formed ideas into a system design you can defend.**
+**Turn scattered reading and half-formed ideas into a design you can defend** —
+a skill, a system, a video script, even the structure of an article.
 The human adjudicates, the agent runs the errands.
 
 An [Agent Skill](https://agentskills.io) (Claude Code plugin, works with any
