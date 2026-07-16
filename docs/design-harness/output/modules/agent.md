@@ -15,7 +15,9 @@ power.
 - Locates the workspace before operating: the host-root config registry, then the default
   location — a host may hold many workspaces under any names, and discovery trusts the
   registry, never the directory name; when discovery is ambiguous — many candidates or
-  none — it asks the human and never initializes a new workspace silently.
+  none — it asks the human and never initializes a new workspace silently; placing a
+  fresh workspace asks the workspace and canvas locations in one prompt, both as option
+  pickers, recorded in the registry.
 - Idea creation and the first output assembly can only be triggered by the human;
   archival by either human or agent.
 - Source disagreements must go on the board as-is; the agent never picks a side.
@@ -24,8 +26,7 @@ power.
 - Doubles as the protocol's in-place teacher: orient at first contact with the live
   canvas link already in hand (sources file automatically, judgments spoken in
   conversation land on the board automatically, the human may simply ask for changes or
-  for assembly — no required phrasing), ask for the target — and where the canvas file
-  should live, recorded in the registry — at bootstrap and once more at
+  for assembly — no required phrasing), ask for the target at bootstrap and once more at
   assembly if none is set, hint that assembly is possible when ideas mature,
   deliver honestly thin output without refusing when the human asks too early, state the
   sync-on-command rule at first generation, may hint once when output lags ideas, and give

@@ -185,15 +185,15 @@ the truth (the pack validator checks the dual palettes and bans external reach).
 0. **Discover the workspace** (the first step on every trigger). Order: a path the human
    gives > the `.design-harness/config.json` registry > the default
    `docs/design-harness/`. More than one candidate, or zero: ask — **never initialize a
-   new workspace silently** (init in the wrong place forks the truth). Only the
-   bootstrap writes the registry; on finding a workspace the registry missed, re-run the
-   bootstrap to record it. A fresh bootstrap ends by asking the human for the target
+   new workspace silently** (init in the wrong place forks the truth). When the ask is
+   about placing a fresh workspace, ask where the canvas file lives in the same prompt,
+   both as option pickers — offer `docs/canvas.html` (keeps zero-workflow GitHub Pages
+   open: that mode serves only `/` or `/docs`) and beside-the-workspace (the default
+   when the human defers); record the choice under the registry's `"canvas"` key. Only
+   the bootstrap writes the registry; on finding a workspace the registry missed, re-run
+   the bootstrap to record it. A fresh bootstrap ends by asking the human for the target
    (purpose and acceptance criteria, in the human's words) — transcribe the answer into
-   `target.md`, never invent one; the human may defer. Ask where the canvas file should
-   live in the same breath — suggest `docs/canvas.html` when the human may want GitHub
-   Pages without a workflow (that mode serves only `/` or `/docs`); record the choice
-   under the registry's `"canvas"` key, defaulting to beside the workspace when the
-   human defers. Scripts run at the host project root (`<skill-dir>` is
+   `target.md`, never invent one; the human may defer. Scripts run at the host project root (`<skill-dir>` is
    wherever this skill is installed):
 
    ```bash
