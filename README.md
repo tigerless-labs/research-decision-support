@@ -1,7 +1,7 @@
 <h1 align="center">design-harness</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/release-v0.9.2-brightgreen.svg" alt="release" />
+  <img src="https://img.shields.io/badge/release-v0.10.0-brightgreen.svg" alt="release" />
   <img src="https://img.shields.io/badge/agent-Claude%20Code%20%7C%20Codex-blue.svg" alt="agent" />
   <img src="https://img.shields.io/badge/format-SKILL.md-lightgrey.svg" alt="format" />
   <img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="license MIT" />
@@ -21,7 +21,7 @@ you add lands on the board, one glance away from any decision's why.
 
 [![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
-<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own design workspace, dogfooded, rebuilt from the markdown on every merge.</p>
+<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own design workspace, dogfooded, rebuilt from the markdown on every merge. It's also our answer to "why is the design like this?" — send the link.</p>
 
 ## What This Does
 
@@ -37,7 +37,8 @@ you add lands on the board, one glance away from any decision's why.
 - **Plain Markdown, no lock-in** — three folders in your repo; versionable,
   greppable, renders on GitHub. The agent is just the runtime.
 - **One visual canvas** — a self-contained HTML projection of the whole board: no
-  server, no dependencies, rebuilt on demand and thrown away.
+  server, no dependencies, rebuilt from the markdown on demand. Commit it, and whoever
+  gets the repo gets the board.
 
 ## Installation
 
@@ -111,6 +112,22 @@ python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
 open /tmp/canvas/canvas.html
 ```
 
+## Share the Why
+
+The board is not just where you think — it's how you show someone else why the design
+is what it is. The canvas is one self-contained HTML file, so commit it beside your
+workspace:
+
+```bash
+python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py \
+  path/to/your-workspace -o docs
+git add docs/canvas.html
+```
+
+Whoever gets the repo opens one file and gets the whole board — every card one click
+from the evidence that earned it. Want a URL instead? Serve the same file with hosted
+pages, the way [this repo does](https://tigerless-labs.github.io/design-harness/).
+
 ## Canvas Styles
 
 Five skins ship with the canvas; switch live from the toolbar, Pin & Paper is the
@@ -173,7 +190,8 @@ view and a close-up for each style.
 1. The human adjudicates, the agent runs the errands — agents execute well and judge
    poorly, and a wrong design costs the whole branch of code built on it.
 2. Markdown is the only source of truth — every other surface, the canvas included,
-   is a disposable projection.
+   is a projection: rebuilt wholesale from the markdown, committed and shared or thrown
+   away, never the place facts live.
 3. Rejected ideas are archived with their reasons, never deleted — six months later,
    "why didn't we do X?" has an answer.
 4. Every element of the output must answer "why?" with a link.

@@ -8,8 +8,10 @@
 不在射程内。与把思维模型当 AI 推理透镜的同类项目不同，我们交付有状态的决策协议，产出
 是人的选择加理由——版本化、留痕可溯，以决策速度和可追溯性衡量，而非 AI 准确率。
 
-仓库以分发为先：README 钩子和活例子（`examples/autoharness/`）为传播性优化。生成的
-HTML 是用完即弃的投影——只构建到临时目录或 artifact，永不入库。
+仓库以分发为先：README 钩子和活例子（`examples/autoharness/`）为传播性优化。画布兼作
+分享载体——向别人讲清"我为什么这么设计"；生成的 HTML 是投影（不承载事实、随时由
+markdown 重建），可入库分享，本仓库自身提交 `docs/canvas.html`；truth 改动后同一变更内
+重建它。
 
 ## Key docs (read before changing the relevant area)
 

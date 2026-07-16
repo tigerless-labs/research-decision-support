@@ -71,8 +71,8 @@ plugins/design-harness/skills/design-harness/
 ```
 docs/design-harness/
 ├── target.md             the human's acceptance criteria for output; source of the output form
-├── logs.md               append-only change ledger — the docs stay out of git, so the
-│                         ledger is the only way back
+├── logs.md               append-only change ledger — for a workspace outside git it is
+│                         the only way back
 ├── index.md              workspace entry point (derived)
 ├── sources/              ① evidence layer: one source, one card; type dirs are thin shells, path = type
 │   ├── index.md              derived: grouped under tag headings, unclassified flat at the end

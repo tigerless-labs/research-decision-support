@@ -24,7 +24,7 @@ rules, change ledger.
   index, and there is no classification layer.
 - [logs.md](../../logs.md) is the append-only change ledger covering both the ideas and
   output layers; each line records **the delta itself** (the minimal old → new), not just
-  the action and reason — the docs stay out of git, so the ledger is the only way back.
+  the action and reason — for a workspace outside git the ledger is the only way back.
 - The protocol binds no runtime: bind the contract, not the host; the CLI is the first
   host, not the form itself; one engine can be configured with many thin schemas to serve
   different persona scenarios.
