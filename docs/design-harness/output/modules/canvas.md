@@ -106,7 +106,7 @@ contract; visuals belong entirely to the style pack (bounded by the token interf
   pin-and-paper ships both palettes). The two forerunner templates (tabbed gallery /
   single-canvas three-cluster) were archived when the merge completed.
 
-**Provenance**: [the single canvas subsumes the gallery](../../ideas/single-canvas-subsumes-gallery.md) ·
+**Provenance**: [the single canvas subsumes the gallery](../../ideas/archive/single-canvas-subsumes-gallery.md) ·
 [conflicts get a schema](../../ideas/conflict-schema-red-edges.md) ·
 [tabbed gallery template](../../ideas/archive/tabbed-gallery-template.md) ·
 [exactly two facts: references + tags](../../ideas/single-edge-single-tag.md) ·

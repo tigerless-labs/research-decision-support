@@ -23,7 +23,7 @@ action per idea, violating the product tenet of "structure as simple as possible
 few as possible".
 
 **Preserved obligations** (the layer is cut, the behavior is not): zero-threshold birth --
-[buffer-captures-anything](buffer-captures-anything.md)'s capture behavior converges into the
+[buffer-captures-anything](archive/buffer-captures-anything.md)'s capture behavior converges into the
 exist state; evaporation stays allowed -- archiving keeps the log instead of deleting;
 [claims-anchor-evidence](claims-anchor-evidence.md)'s anchoring obligation falls on claims put
 on the board in output, with no promotion gate remaining.

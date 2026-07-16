@@ -15,8 +15,6 @@ heading-less section at the end is unclassified.
 
 ## evidence: how material comes in, how it gets graded, how claims are anchored
 
-- [Buffer captures anything](buffer-captures-anything.md) -- zero-threshold entry; structure is the
-  agent's job afterwards.
 - [Claims anchor evidence](claims-anchor-evidence.md) -- claims put on the board in output must
   anchor back to sources.
 - [Evidence grading](evidence-grading.md) -- sources are not equal-weighted; grading is
@@ -56,8 +54,6 @@ heading-less section at the end is unclassified.
 - [Creation canvas](creation-canvas.md) -- the canvas replaces the decision model as the form.
 - [Canvas as sharing medium](canvas-shareable-committable.md) -- commit the built HTML; handing
   over the board hands over the reasoning.
-- [Unified canvas](single-canvas-subsumes-gallery.md) -- the two templates merge into the single
-  canvas, taking the best of each.
 - [Fixed script, styles swap CSS only](canvas-fixed-builder-style-css-only.md) -- one script, one
   required input renders the canvas; the template keeps a CSS slot.
 - [Edges appear on demand](canvas-edges-on-demand.md) -- none drawn by default; a single click
@@ -84,9 +80,3 @@ heading-less section at the end is unclassified.
 - [SKILL.md and protocol fuse into one file](skill-and-protocol-single-file.md) -- structure →
   workflow → disciplines → quickstart; definitions before procedures, "never" rules close the
   body; templates inline, big option sets stay as references.
-
----
-
-*unclassified*
-
-- [Read-tag-judge loop](read-tag-judge-loop.md) -- the minimal loop of human-agent interaction.

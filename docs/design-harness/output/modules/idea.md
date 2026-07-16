@@ -31,4 +31,4 @@ the rejected paths, the judgment corpus reused across outputs).
 [single-entity ADR](../../ideas/idea-layer-single-entity.md) (its state-machine breakdown
 was simplified to two states; see logs 2026-07-09) ·
 [the agent thinks but never adjudicates](../../ideas/agent-synthesizes-human-adjudicates.md) ·
-[the buffer captures anything](../../ideas/buffer-captures-anything.md).
+[the buffer captures anything](../../ideas/archive/buffer-captures-anything.md).

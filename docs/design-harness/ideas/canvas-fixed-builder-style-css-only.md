@@ -6,7 +6,7 @@ tags: [canvas]
 
 # Canvas builds converge on one fixed script: the workspace path is the only required input, switching styles swaps CSS only
 
-How the [unified canvas](single-canvas-subsumes-gallery.md) gets built is now fixed as **one
+How the [unified canvas](archive/single-canvas-subsumes-gallery.md) gets built is now fixed as **one
 script** (`build_canvas.py`): the agent feeds it the workspace path and it renders the complete
 canvas HTML -- card collection, edge derivation, layout, and data embedding are all built in; no
 second build path exists. Template (structure + interaction JS) and style (CSS) are separated --
