@@ -2,11 +2,13 @@
 
 The committed canvas is fully self-contained — Pages only has to serve it, never rebuild
 it. The canvas path below is never guessed: read it from the `"canvas"` key in
-`.design-harness/config.json` (the human chose it at bootstrap; ask if it's missing).
+`.design-harness/config.json` (missing key → ask the human with option pickers). Then
+**check where it sits** — at the repo root or under `docs/`, both routes below work;
+anywhere else, only the Actions route works, because deploy-from-branch serves nothing
+but `/` and `/docs`.
 
-**Deploy from branch (zero workflow).** GitHub serves only `/` (repo root) or `/docs` in
-this mode — usable only when the canvas lives in one of them; otherwise take the Actions
-path. Enable once — ask the human, or run it yourself with their approval:
+**Deploy from branch (zero workflow; canvas at `/` or under `docs/` only).** Enable
+once — ask the human, or run it yourself with their approval:
 
 ```bash
 gh api repos/<owner>/<repo>/pages -X POST \
