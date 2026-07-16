@@ -24,7 +24,8 @@ power.
 - Doubles as the protocol's in-place teacher: orient at first contact with the live
   canvas link already in hand (sources file automatically, judgments spoken in
   conversation land on the board automatically, the human may simply ask for changes or
-  for assembly — no required phrasing), ask for the target at bootstrap and once more at
+  for assembly — no required phrasing), ask for the target — and where the canvas file
+  should live, recorded in the registry — at bootstrap and once more at
   assembly if none is set, hint that assembly is possible when ideas mature,
   deliver honestly thin output without refusing when the human asks too early, state the
   sync-on-command rule at first generation, may hint once when output lags ideas, and give

@@ -189,7 +189,11 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    bootstrap writes the registry; on finding a workspace the registry missed, re-run the
    bootstrap to record it. A fresh bootstrap ends by asking the human for the target
    (purpose and acceptance criteria, in the human's words) — transcribe the answer into
-   `target.md`, never invent one; the human may defer. Scripts run at the host project root (`<skill-dir>` is
+   `target.md`, never invent one; the human may defer. Ask where the canvas file should
+   live in the same breath — suggest `docs/canvas.html` when the human may want GitHub
+   Pages without a workflow (that mode serves only `/` or `/docs`); record the choice
+   under the registry's `"canvas"` key, defaulting to beside the workspace when the
+   human defers. Scripts run at the host project root (`<skill-dir>` is
    wherever this skill is installed):
 
    ```bash
