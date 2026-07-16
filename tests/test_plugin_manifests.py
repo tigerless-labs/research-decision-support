@@ -71,6 +71,15 @@ def test_skill_md_asks_for_target_at_bootstrap_and_again_at_assembly():
     assert "ask" in assemble_step
 
 
+def test_skill_md_decouples_ideas_and_output():
+    text = SKILL_MD.read_text(encoding="utf-8")
+    body = text.split("---", 2)[2]
+    assert "decoupled" in body
+    assert "back-transcribe" not in body
+    assert "back-transcribed" not in body
+    assert "order a sync" not in body
+
+
 def test_skill_md_ties_delivery_target_to_registry():
     body = SKILL_MD.read_text(encoding="utf-8").split("---", 2)[2]
     delivery_step = body.split("build_canvas.py")[1]

@@ -19,6 +19,6 @@ Adjudicated 2026-07-14, superseding the automatic two-way sync invariant:
 - With no automatic sync, conflicts surface only at sync moments with the human present — the
   automatic "output wins" rule retires.
 
-Supersedes [output auto-refreshes with ideas](archive/output-auto-refresh.md) (archived on the
+Supersedes [output auto-refreshes with ideas](output-auto-refresh.md) (archived on the
 human's call) and the permanent two-way half of
-[output is primary](output-primary-after-generation.md) (slimmed in place).
+[output is primary](../output-primary-after-generation.md) (slimmed in place).

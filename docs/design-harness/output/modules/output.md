@@ -15,16 +15,17 @@ deliverable, and the primary work surface once generated.
   (mermaid, with click-through declarations) — not prose plus an external image.
 - The first assembly is **human-initiated**; before output exists, the human's ideas land
   in the idea layer only.
-- **The convergent layer**: ideas diverge, output converges — divergence between the two
-  is information (what has not yet been adjudicated into the design), not an error. Idea
-  and target changes re-derive the affected elements **only on the human's command**
-  (re-derive, don't rewrite the whole document; direct apply with a receipt, a diff first
-  for large changes); an output change is back-calibrated into ideas automatically; the
-  agent may hint once when output lags, never nagging.
+- **The convergent layer, decoupled from ideas**: ideas diverge, output converges —
+  divergence between the two is information (what has not yet been adjudicated into the
+  design), not an error. Idea and target changes carry no obligation here; re-derivation
+  happens **only at human-ordered assembly** (re-derive the affected elements, never
+  rewrite the whole document; apply with a receipt, a diff first for large changes), and
+  an output edit stays in output. The agent may remind once when output falls far
+  behind the ideas, never nagging.
 - Every element links back to the idea that assembled it and its logs, then clicks
   through to the source.
 
-**Provenance**: [sync on command](../../ideas/sync-on-command-layers-independent.md) ·
+**Provenance**: [layers decoupled](../../ideas/layers-decoupled-drift-reminder.md) ·
 [diagrams as the native format](../../ideas/diagrams-in-markdown-native-format.md) ·
 [output primary](../../ideas/output-primary-after-generation.md) ·
 [output auto-refresh](../../ideas/archive/output-auto-refresh.md) ·

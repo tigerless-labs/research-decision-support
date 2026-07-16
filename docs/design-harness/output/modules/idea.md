@@ -17,15 +17,14 @@ the rejected paths, the judgment corpus reused across outputs).
   newer card declares it in its `conflicts` frontmatter (red edge on the canvas) and the
   disagreement waits as-is for the human to adjudicate; the field lives exactly as long
   as the conflict.
-- **Independent of output; sync runs on the human's command**: ideas diverge freely (may
-  contradict, may pile up); idea → output re-derivation happens only when the human orders
-  a sync. A human output edit is back-calibrated into this layer automatically (transcription;
-  the judgment stays the human's).
+- **Decoupled from output**: ideas diverge freely (may contradict, may pile up); nothing
+  here obliges an output change, and an output edit stays in output — the layers
+  reconnect only at human-ordered assembly.
 - Each node carries an append-only log (birth/update/merge/supersede; pending); the layer
   ledger [logs.md](../../logs.md) records every card change (including body updates) — until
   node-level logs land, it is the only trace of idea changes.
 
-**Provenance**: [sync on command](../../ideas/sync-on-command-layers-independent.md) ·
+**Provenance**: [layers decoupled](../../ideas/layers-decoupled-drift-reminder.md) ·
 [conflicts get a schema](../../ideas/conflict-schema-red-edges.md) ·
 [output primary](../../ideas/output-primary-after-generation.md) ·
 [single-entity ADR](../../ideas/idea-layer-single-entity.md) (its state-machine breakdown

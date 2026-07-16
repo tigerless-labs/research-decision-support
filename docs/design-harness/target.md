@@ -2,8 +2,8 @@
 
 The human's requirements for the output are registered here; the output is the fulfilment of this
 list, and every requirement is checkable. Target changes follow the same discipline as idea
-changes ([sync on command](ideas/sync-on-command-layers-independent.md)): the agent re-derives
-the affected parts of the output when the human orders a sync.
+changes ([layers decoupled](ideas/layers-decoupled-drift-reminder.md)): the agent re-derives
+the affected parts of the output only at human-ordered assembly.
 
 ## Purpose
 
