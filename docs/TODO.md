@@ -14,3 +14,4 @@
 - [ ] skill 解冻时：references/output-forms/system-design.md 的流程图规格更新为"时间轴泳道 flowchart（人上 agent 下、编号之字形左右推进、同步回边）"，与 system.md 现状对齐。
 - [ ] workspace 发现脚本对齐（idea 卡 workspaces-many-and-freely-named；文档已先行随 v0.9.0）：init_workspace.py/discover_workspace.py 支持注册表多条目、目录名自由、移除按名查找——tests 先行，走 worktree+PR。
 - [ ] build 统计行把 `__board_empty__` 占位节点计入 nodes 数（空工作区报 "1 nodes"、5 卡+空 board 报 "6 nodes"，误导排查）；统计应只数真卡，占位另计。
+- [ ] `.design-harness/config.json` 的 workspace 指针指向已消失的 /tmp scratchpad 路径（历史测试遗留）；应重跑 bootstrap 修正为 `docs/design-harness`，同时补上 `"canvas"` 键（现 docs/canvas.html 已入库）。
