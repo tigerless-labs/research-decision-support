@@ -45,8 +45,8 @@ heading-less section at the end is unclassified.
 
 ## sync: the consistency discipline between ideas and output
 
-- [Sync on command, layers independent](sync-on-command-layers-independent.md) -- ideas diverge,
-  output converges; re-derivation only on the human's word; back-transcription stays automatic.
+- [Layers decoupled, drift reminder only](layers-decoupled-drift-reminder.md) -- no sync either
+  way; layers reconnect only at human-ordered assembly; one far-behind reminder, never nagging.
 - [Output is human-initiated, ideas become the decision record](output-primary-after-generation.md)
   -- first assembly on the human's word; direct output edits calibrate backward into ideas; the
   idea layer keeps provenance and rejected paths.

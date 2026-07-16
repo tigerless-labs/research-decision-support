@@ -10,5 +10,5 @@ landscape of literature workbenches and product differentiation**.
 - [logs.md](logs.md) — change ledger (append-only, covering both the ideas and output layers;
   the agent records automatically).
 - [ideas/](ideas/index.md) — judgment cards (human-created, two states: exists / archived).
-- [output/](output/index.md) — assembled artifacts (currently: the system design), always in
-  two-way sync with ideas.
+- [output/](output/index.md) — assembled artifacts (currently: the system design), decoupled
+  from ideas; reassembled on the human's word.

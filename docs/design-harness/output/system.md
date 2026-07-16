@@ -15,20 +15,18 @@ flowchart TB
     B["Intake · grade<br/>sources are not equal-weight"]
     C["Derive references · tag classification<br/>fill in evidence anchors"]
     E["Assemble output<br/>re-derives affected elements on the human's word"]
-    K["Back-calibrate ideas<br/>transcribes; the judgment stays the human's"]
     V["Move card to ideas/archive/<br/>logged, never deleted"]
-    L["Write logs · regenerate each layer's index — every idea create/update / assembly / calibration / archival is ledgered alike"]
+    L["Write logs · regenerate each layer's index — every idea create/update / assembly / output edit / archival is ledgered alike"]
   end
   M --> B
   A --> C
   O --> E
-  P -- "backward sync" --> K
+  P --> L
   R --> V
   B -- "supports" --> C
-  C -- "forward sync on command" --> E
+  C -- "assembly only, on the human's word" --> E
   C --> L
   E --> L
-  K --> L
   V --> L
   click M "modules/source.md"
   click B "modules/source.md"
@@ -36,7 +34,6 @@ flowchart TB
   click C "modules/idea.md"
   click R "modules/idea.md"
   click V "modules/idea.md"
-  click K "modules/idea.md"
   click O "modules/output.md"
   click P "modules/output.md"
   click E "modules/output.md"
@@ -52,13 +49,13 @@ flowchart TB
         IDEA["② idea — middle layer<br/>only the human creates · two states live/archived · append-only logs"]
         OUT["③ output — integration layer<br/>form set by target · elements link back to ideas and logs, then through to sources"]
         SRC --> IDEA
-        IDEA <-->|"sync on the human's command: forward re-derive on order · backward calibrate automatic"| OUT
+        IDEA -->|"decoupled: assembly only, on the human's word · one far-behind reminder"| OUT
     end
     BOARD["board — free surface<br/>the human's own boards · one file, one board: comparisons or any scratch reasoning · no schema"]
     BOARD -.references the three layers forward only · conclusions distilled into ideas before entering the flow.-> FLOW
     subgraph XCUT["Cross-cutting"]
         CANVAS["canvas — board projection<br/>visualization layer only · sole active template: the unified canvas (single-canvas base + gallery strengths)"]
-        AGENT["agent — execution engine<br/>thinks but never adjudicates · intake/link/anchor/back-calibrate/ledger/refresh"]
+        AGENT["agent — execution engine<br/>thinks but never adjudicates · intake/link/anchor/ledger/refresh"]
         PROTO["protocol — contract and ledger<br/>markdown as truth · three facts: references + tags + conflicts · logs · derived indexes"]
     end
     CANVAS -.projects.-> FLOW

@@ -7,9 +7,6 @@ tags: [sync]
 # Output is human-initiated; after generation the idea layer becomes the decision record
 
 Assembly of output is **initiated by the human**; idea changes never trigger first generation.
-When the human edits output directly, the agent **calibrates backward** into ideas (updating
-existing cards or ghostwriting new ones; a ghostwritten card is still the human's judgment --
-the agent merely transcribes, so "only humans create ideas" is not violated).
 
 The idea layer is not abolished once output exists; it changes roles: from work surface to
 **decision record** -- (1) the provenance chain (output element -> idea -> source) is the
@@ -25,4 +22,5 @@ attempts, the irreversible-decision scenarios of
 [four-persona-scenarios](four-persona-scenarios.md).
 
 (Slimmed 2026-07-14: the "permanent two-way sync, conflicts resolve in output's favor" half was
-superseded by the human's sync-on-command adjudication; sync now runs only on the human's word.)
+superseded by the human's sync-on-command adjudication. Slimmed again 2026-07-16: automatic
+backward calibration retired — the layers are fully decoupled.)

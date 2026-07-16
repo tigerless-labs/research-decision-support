@@ -1,6 +1,6 @@
 ---
 name: design-harness
-description: A decision board for evidence-based calls — the human adjudicates, the agent runs the errands. Three layers (sources → ideas → output) in plain markdown, synced on the human's command, projected onto a visual canvas. Use for vendor/tool selection, literature reviews, due diligence, competitive analysis, or any contested call that must stand on traceable evidence — triggers like "file these papers", "put this on the board", "assemble the design", "how do we decide this".
+description: A decision board for evidence-based calls — the human adjudicates, the agent runs the errands. Three layers (sources → ideas → output) in plain markdown, decoupled and assembled on the human's command, projected onto a visual canvas. Use for vendor/tool selection, literature reviews, due diligence, competitive analysis, or any contested call that must stand on traceable evidence — triggers like "file these papers", "put this on the board", "assemble the design", "how do we decide this".
 license: MIT
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/*)
 metadata:
@@ -54,8 +54,8 @@ layer.
    conflicting one puts both on the board for the human to pick.
 3. **output/ — assembly, the convergent layer.** **First assembly is human-initiated**;
    its form comes from [references/output-forms/](references/output-forms/system-design.md)
-   and the human's `target.md`. Ideas diverge, output converges: output changes only on
-   the human's word (see "Workflow · Sync").
+   and the human's `target.md`. Ideas diverge, output converges — the layers are
+   decoupled: output changes only on the human's word (see Workflow steps 3–4).
 
 One free surface besides: **board/** — the human's own boards, one markdown file per
 board (comparison matrices, theme grids, any scratch reasoning). **No schema, no
@@ -200,18 +200,20 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    idea cards automatically; same-judgment cards merge automatically, conflicts go on
    the board for the human to pick; derive references and tag classification (one
    pass — both are relationship reads).
-3. **Sync (on the human's command, never automatic)**: idea → output re-derivation runs
-   only when the human orders it — apply directly with a one-line receipt, a diff first
-   for large changes; re-derive the affected elements, never rewrite the whole document.
-   A human edit to output is itself an adjudication: back-transcribe it into idea cards
-   automatically (transcription only). Target changes follow the same discipline as idea
-   changes. When output lags you may hint once ("output is N ideas behind"), never
-   twice.
-4. **Assemble**: first assembly is human-initiated; the form comes from `target.md` +
-   the output-forms library — when the human sets a target, recommend a form from the
-   library; if `target.md` is still blank when assembly is called for, ask for the
-   target once more before recommending; the first is **system-design** (mermaid diagrams are the markdown body
-   itself, plus a `modules/` layer, one module per file). Anchor every output claim to
+3. **Layers stay decoupled (no sync, either direction)**: an idea or target change
+   carries no obligation toward output, and a human edit to output stays in output —
+   nothing is re-derived, nothing flows back into idea cards. The layers reconnect only
+   when the human orders an assembly (step 4). One duty across the gap: when output has
+   fallen far behind the ideas — many judgments landed since the last assembly — you may
+   say so once ("output is N ideas behind"), never twice.
+4. **Assemble**: the only moment the layers reconnect, and every assembly is
+   human-initiated; the form comes from `target.md` + the output-forms library — when
+   the human sets a target, recommend a form from the library; if `target.md` is still
+   blank when assembly is called for, ask for the target once more before recommending;
+   the first form is **system-design** (mermaid diagrams are the markdown body
+   itself, plus a `modules/` layer, one module per file). Re-derive the affected
+   elements, never rewrite the whole document — apply with a one-line receipt, a diff
+   first for large changes. Anchor every output claim to
    evidence; write principles as bullet lists, one principle per bullet — so each can be
    referenced, edited, and ledgered on its own; in the system-design form the diagram
    IS the markdown body: mermaid blocks carry `click` declarations into module files.
@@ -250,9 +252,10 @@ the truth (the pack validator checks the dual palettes and bans external reach).
 - Ideas look mature: suggest assembly in one sentence; never push twice.
 - The human asks for output too early: comply, deliver the honestly thin result, and say
   which ideas are missing — never refuse.
-- First assembly: state the sync rule in one sentence ("from here output updates only
-  when you order a sync; edit output directly and I back-transcribe it into ideas").
-- Every sync: give a one-line receipt of what was re-derived or back-transcribed.
+- First assembly: state the decoupling rule in one sentence ("from here ideas and output
+  live independently; output changes only when you order an assembly, and I'll only
+  speak up if it falls far behind").
+- Every assembly: give a one-line receipt of what was re-derived.
 
 ## Disciplines
 

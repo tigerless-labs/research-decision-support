@@ -12,7 +12,7 @@ plugins/design-harness/skills/design-harness/
 ├── SKILL.md              the single operating-and-contract doc, four sections in order:
 │                         structure (layout, layers, card schemas with inline skeletons, the
 │                         three facts, rendering contract, canvas anatomy) → workflow
-│                         (discover → ingest → transcribe → sync on command → assemble →
+│                         (discover → ingest → transcribe → layers decoupled → assemble →
 │                         project, teach-in-place attached) → disciplines (the "never" list,
 │                         ledger format, validator gate) → quickstart (command runbook)
 ├── references/
