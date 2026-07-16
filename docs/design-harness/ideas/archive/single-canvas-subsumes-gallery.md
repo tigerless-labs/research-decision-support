@@ -6,8 +6,8 @@ tags: [canvas]
 
 # Unified canvas: the two templates merge into the single canvas, taking the best of each
 
-[Single canvas, three clusters](archive/single-canvas-clustered-graph.md) and the
-[tabbed gallery](archive/tabbed-gallery-template.md) **merge into one template**: an infinite
+[Single canvas, three clusters](single-canvas-clustered-graph.md) and the
+[tabbed gallery](tabbed-gallery-template.md) **merge into one template**: an infinite
 canvas as the chassis (Figma-style zoom and pan, three clusters for the three blocks, edges on
 demand), with all of the gallery's strengths folded in -- the three zoom levels are the
 gallery's three pages (bird's-eye clusters / tag groups / close-read cards, where the

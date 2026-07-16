@@ -23,7 +23,7 @@ from synthesis links, not directories (see the workbench state ownership (the ol
 design, removed with the redesign)).
 
 Builds on [one-engine-many-schemas](one-engine-many-schemas.md) (structure grows from links)
-and [read-tag-judge-loop](read-tag-judge-loop.md) (tagging while reading is where the
+and [read-tag-judge-loop](archive/read-tag-judge-loop.md) (tagging while reading is where the
 classification action lands); orthogonal to [evidence-grading](evidence-grading.md) -- tags
 govern theme, grades govern trust. To be weighed in [decisions/](index.md): whether the tag
 vocabulary should converge, and who converges it.

@@ -33,10 +33,10 @@ first) still holds.
 
 Builds on [judgment-provenance-wedge](judgment-provenance-wedge.md) (the canvas is where
 judgment-to-decision becomes visible; node logs are provenance turned into UI),
-[read-tag-judge-loop](read-tag-judge-loop.md) (judgments dropped while reading are the material
+[read-tag-judge-loop](archive/read-tag-judge-loop.md) (judgments dropped while reading are the material
 that goes on the board), [drafts-not-state](drafts-not-state.md) (the board is a projection,
 markdown is the source of truth), and [one-engine-many-schemas](one-engine-many-schemas.md) (the
 canvas is the engine's view layer; swapping domains swaps schema and board);
-[buffer-captures-anything](buffer-captures-anything.md)'s triage products are the on-ramp to the
+[buffer-captures-anything](archive/buffer-captures-anything.md)'s triage products are the on-ramp to the
 board. To be weighed in [decisions/](../index.md): how the canvas hands off to decision cards;
 the derivation criteria for automatic linking.
