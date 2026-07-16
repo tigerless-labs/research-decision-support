@@ -16,8 +16,9 @@ plugins/design-harness/skills/design-harness/
 │                         project, teach-in-place attached) → disciplines (the "never" list,
 │                         ledger format, validator gate) → quickstart (command runbook)
 ├── references/
-│   └── output-forms/     the output form library (recommended set), one form one spec
-│       └── system-design.md   first entry: mermaid diagrams (with click-through) + a modules layer
+│   ├── output-forms/     the output form library (recommended set), one form one spec
+│   │   └── system-design.md   first entry: mermaid diagrams (with click-through) + a modules layer
+│   └── publish-canvas-github-pages.md   serving the committed canvas over GitHub Pages
 ├── scripts/
 │   ├── init_workspace.py     workspace bootstrap (idempotent, never overwrites); records the
 │   │                         workspace location in the host's pointer file, then runs both
@@ -71,8 +72,8 @@ plugins/design-harness/skills/design-harness/
 ```
 docs/design-harness/
 ├── target.md             the human's acceptance criteria for output; source of the output form
-├── logs.md               append-only change ledger — the docs stay out of git, so the
-│                         ledger is the only way back
+├── logs.md               append-only change ledger — for a workspace outside git it is
+│                         the only way back
 ├── index.md              workspace entry point (derived)
 ├── sources/              ① evidence layer: one source, one card; type dirs are thin shells, path = type
 │   ├── index.md              derived: grouped under tag headings, unclassified flat at the end
@@ -91,7 +92,7 @@ docs/design-harness/
 ```
 
 Every layer index and the canvas HTML are projections: regenerated with the cards, holding
-no facts; the canvas HTML is normally not committed.
+no facts; the canvas HTML sits beside the workspace and may be committed for sharing.
 
 A host may hold **many workspaces under any directory names**. The host project root
 carries the registry (`.design-harness/config.json`) recording every workspace path;

@@ -17,3 +17,4 @@
 | tests/test_style_pack.py | 风格包校验器：索引↔目录双射、schema、色值白名单、禁外链红队用例、canvas_renderings 存在性+章节对应、画板模板 token 集与 schema 锁定、卡片 badge–标题间距不变量 |
 | tests/test_plugin_manifests.py | 双 plugin manifest（Claude/Codex 布局）字段同步（name/version/description/license）+ README Codex 安装命令 |
 | tests/test_readme.py | README 不变量：每风格至少一图、本地图片存在、点名全部风格、安装/用法章节、release 徽章版本 == plugin.json 版本 |
+| tests/test_committed_canvas.py | 入库画布不变量：docs/canvas.html 被 git 跟踪且不被 gitignore、内容与 workspace 同步（每张存活卡的 id 均出现在投影中，防"改真相忘重建"） |

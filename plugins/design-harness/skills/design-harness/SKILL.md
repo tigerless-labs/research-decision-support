@@ -161,7 +161,9 @@ is INVALID.
 ### Canvas — the only projection surface
 
 The canvas is the human's main thinking surface and **only a projection** — it holds no
-facts and accepts no writes that bypass markdown. There is exactly one canvas — the
+facts and accepts no writes that bypass markdown. It doubles as the sharing surface:
+every card links back to its evidence, so handing someone the board hands them the
+reasoning behind the design. There is exactly one canvas — the
 unified canvas ([template](canvas/template.html); its interaction contract lives in the
 workspace's canvas module doc) — and exactly one builder: the rules (truth-driven,
 edges = in-card references, layout derived from references + tags) are built in, and
@@ -183,9 +185,14 @@ the truth (the pack validator checks the dual palettes and bans external reach).
 0. **Discover the workspace** (the first step on every trigger). Order: a path the human
    gives > the `.design-harness/config.json` registry > the default
    `docs/design-harness/`. More than one candidate, or zero: ask — **never initialize a
-   new workspace silently** (init in the wrong place forks the truth). Only the
-   bootstrap writes the registry; on finding a workspace the registry missed, re-run the
-   bootstrap to record it. A fresh bootstrap ends by asking the human for the target
+   new workspace silently** (init in the wrong place forks the truth). The canvas path
+   follows the same rule: whichever of the two locations the registry is missing —
+   the workspace, or the `"canvas"` key — is asked as an option picker, one prompt when
+   both are missing; canvas options are `docs/canvas.html` (keeps zero-workflow GitHub
+   Pages open: that mode serves only `/` or `/docs`) and beside-the-workspace; record
+   the choice under the registry's `"canvas"` key. Only
+   the bootstrap writes the registry; on finding a workspace the registry missed, re-run
+   the bootstrap to record it. A fresh bootstrap ends by asking the human for the target
    (purpose and acceptance criteria, in the human's words) — transcribe the answer into
    `target.md`, never invent one; the human may defer. Scripts run at the host project root (`<skill-dir>` is
    wherever this skill is installed):
@@ -224,12 +231,14 @@ the truth (the pack validator checks the dual palettes and bans external reach).
 
    Without `<workspace>` the tool discovers on its own (registry → default location) and
    refuses to act on ambiguity. `-o` takes a directory (the file lands inside as
-   `canvas.html`) or a `.html` path written as-is. Build targets are a temp dir, an
-   artifact, or the fixed `canvas.html` beside the workspace (gitignore it; the builder
-   refuses to write inside the workspace). A build is not delivered until the human holds a clickable link. The
+   `canvas.html`) or a `.html` path written as-is. Build targets are the fixed
+   `canvas.html` beside the workspace — commit it when the workspace lives in git, so
+   whoever gets the repo gets the board — or a temp dir or artifact for throwaway views;
+   the builder refuses to write inside the workspace either way. A build is not delivered until the human holds a clickable link. The
    product is one fully self-contained HTML file (all dependencies inlined, zero network
    requests). **The default delivery is a published HTML link**: publish as an artifact
-   (or the host's hosted pages) and hand over that URL; in Claude Code (a local CLI
+   or the host's hosted pages ([GitHub Pages recipe](references/publish-canvas-github-pages.md))
+   and hand over that URL; in Claude Code (a local CLI
    session) a local link suffices — an absolute `file://…/canvas.html` URL or a local
    static server. **Every rebuild reuses the existing link** — mint a new one only when
    the human asks. So the link survives the session: record the delivery target — the
@@ -260,8 +269,10 @@ the truth (the pack validator checks the dual palettes and bans external reach).
   your own, never initiate first assembly on your own, never touch output outside the
   human's command.
 - **Markdown first**: change the truth first, then rebuild every affected projection
-  (indexes, canvas HTML) in the same turn; never edit a projection directly; projections
-  are disposable — build to a temp dir or an artifact, never commit them.
+  (indexes, canvas HTML) in the same turn; never edit a projection directly. Projections
+  hold no facts and rebuild wholesale from markdown — committing one (the shared canvas)
+  never promotes it to truth, and a committed canvas rides in the same change as the
+  truth edit that made it stale.
 - **The ledger**: `logs.md` is append-only and covers both ideas **and** output. Every
   change, one line per touched layer:
 

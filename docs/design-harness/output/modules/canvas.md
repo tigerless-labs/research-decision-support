@@ -1,7 +1,8 @@
 # canvas — board projection
 
 **Responsibilities**: the visual face of all cards — the main arena where a human clears
-their thinking; the deciding factors are intuitiveness, beauty, clarity.
+their thinking, and the sharing surface that lets someone else walk the reasoning behind the
+design; the deciding factors are intuitiveness, beauty, clarity.
 
 **Rules (template-independent invariants)**:
 
@@ -78,7 +79,10 @@ contract; visuals belong entirely to the style pack (bounded by the token interf
 - There is exactly one build entry, `build_canvas.py`: **the workspace path is the only
   required input**, and one command renders the complete canvas HTML (card collection,
   edge derivation, layout, data embedding, dependency inlining all built in); no second
-  build path exists; the artifact goes only to a temp dir or an artifact, never into the truth.
+  build path exists. The target is a temp dir, an artifact, or the fixed `canvas.html`
+  beside the workspace — committable, so sharing the repo shares the board; the builder
+  refuses to write inside the workspace, keeping the projection out of the truth
+  ([why](../../ideas/canvas-shareable-committable.md)).
 - The build validates before it projects: both validators run as a gate, and any problem
   aborts the build with the full problem list and **no HTML output** — broken truth is
   never projected, and the failure surfaces where the agent must act on it. A freshly

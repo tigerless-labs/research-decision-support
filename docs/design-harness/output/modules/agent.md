@@ -15,7 +15,9 @@ power.
 - Locates the workspace before operating: the host-root config registry, then the default
   location — a host may hold many workspaces under any names, and discovery trusts the
   registry, never the directory name; when discovery is ambiguous — many candidates or
-  none — it asks the human and never initializes a new workspace silently.
+  none — it asks the human and never initializes a new workspace silently; any location
+  the registry lacks — workspace or canvas — is asked as an option picker (one prompt
+  when both are missing) and recorded in the registry, never guessed.
 - Idea creation and the first output assembly can only be triggered by the human;
   archival by either human or agent.
 - Source disagreements must go on the board as-is; the agent never picks a side.

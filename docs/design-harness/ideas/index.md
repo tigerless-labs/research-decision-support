@@ -54,6 +54,8 @@ heading-less section at the end is unclassified.
 ## canvas: shape and behavior of the visualization layer
 
 - [Creation canvas](creation-canvas.md) -- the canvas replaces the decision model as the form.
+- [Canvas as sharing medium](canvas-shareable-committable.md) -- commit the built HTML; handing
+  over the board hands over the reasoning.
 - [Unified canvas](single-canvas-subsumes-gallery.md) -- the two templates merge into the single
   canvas, taking the best of each.
 - [Fixed script, styles swap CSS only](canvas-fixed-builder-style-css-only.md) -- one script, one
