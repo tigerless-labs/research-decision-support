@@ -16,8 +16,9 @@ plugins/design-harness/skills/design-harness/
 │                         project, teach-in-place attached) → disciplines (the "never" list,
 │                         ledger format, validator gate) → quickstart (command runbook)
 ├── references/
-│   └── output-forms/     the output form library (recommended set), one form one spec
-│       └── system-design.md   first entry: mermaid diagrams (with click-through) + a modules layer
+│   ├── output-forms/     the output form library (recommended set), one form one spec
+│   │   └── system-design.md   first entry: mermaid diagrams (with click-through) + a modules layer
+│   └── publish-canvas-github-pages.md   serving the committed canvas over GitHub Pages
 ├── scripts/
 │   ├── init_workspace.py     workspace bootstrap (idempotent, never overwrites); records the
 │   │                         workspace location in the host's pointer file, then runs both

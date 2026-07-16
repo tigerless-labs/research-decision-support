@@ -21,7 +21,7 @@ you add lands on the board, one glance away from any decision's why.
 
 [![The canvas — sources, ideas, and output as three worlds on one board](docs/assets/canvas-styles/hero.png)](https://tigerless-labs.github.io/design-harness/)
 
-<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own design workspace, dogfooded, rebuilt from the markdown on every merge. It's also our answer to "why is the design like this?" — send the link.</p>
+<p align="center"><strong><a href="https://tigerless-labs.github.io/design-harness/">▶ Click the board to open the live canvas</a></strong> — this repo's own design workspace, dogfooded — Pages serves the committed <code>docs/canvas.html</code> as-is. It's also our answer to "why is the design like this?" — send the link.</p>
 
 ## What This Does
 

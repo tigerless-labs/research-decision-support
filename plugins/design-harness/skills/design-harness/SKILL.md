@@ -232,7 +232,8 @@ the truth (the pack validator checks the dual palettes and bans external reach).
    the builder refuses to write inside the workspace either way. A build is not delivered until the human holds a clickable link. The
    product is one fully self-contained HTML file (all dependencies inlined, zero network
    requests). **The default delivery is a published HTML link**: publish as an artifact
-   (or the host's hosted pages) and hand over that URL; in Claude Code (a local CLI
+   or the host's hosted pages ([GitHub Pages recipe](references/publish-canvas-github-pages.md))
+   and hand over that URL; in Claude Code (a local CLI
    session) a local link suffices — an absolute `file://…/canvas.html` URL or a local
    static server. **Every rebuild reuses the existing link** — mint a new one only when
    the human asks. So the link survives the session: record the delivery target — the
