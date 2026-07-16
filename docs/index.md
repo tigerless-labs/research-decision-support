@@ -6,4 +6,4 @@
 - [testing.md](testing.md) — 测试约定与测试地图。
 - [TODO.md](TODO.md) — 未上路线图的跟进项。
 
-生成的画板 HTML 不入库（投影随建随弃）：`python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py docs/design-harness -o /tmp/rds-canvas --template tabbed-gallery`。
+画板 HTML 是投影、可入库分享（本仓库提交为 [canvas.html](canvas.html)），重建：`python3 plugins/design-harness/skills/design-harness/scripts/build_canvas.py docs/design-harness -o docs`。

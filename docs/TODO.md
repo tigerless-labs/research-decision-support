@@ -1,7 +1,6 @@
 # TODO
 
 - [ ] 配置 CI：pytest + check_doc_links + check_workspace + check_style_pack（remote/PR 流程已在用）。
-- [ ] 发布时用 Pages CI 现场生成 demo 站（HTML 不入库，README 挂链接）——demo 源待定（examples/autoharness 仍是 v1 四层 schema）。
 - [ ] examples/autoharness 迁 v2 三层 schema（现为 v1 格式，v2 校验器不适用；README 活例子依赖它）。
 - [ ] read 页导出补丁的自动落盘工具（现靠 agent 手动写回）。
 - [ ] examples/autoharness 4 条预存悬链（plans/roadmap、experiments/E6）— master 上已存在，非 design 迁移引入

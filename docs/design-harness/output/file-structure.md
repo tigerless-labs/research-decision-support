@@ -91,7 +91,7 @@ docs/design-harness/
 ```
 
 Every layer index and the canvas HTML are projections: regenerated with the cards, holding
-no facts; the canvas HTML is normally not committed.
+no facts; the canvas HTML sits beside the workspace and may be committed for sharing.
 
 A host may hold **many workspaces under any directory names**. The host project root
 carries the registry (`.design-harness/config.json`) recording every workspace path;

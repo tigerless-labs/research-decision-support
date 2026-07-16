@@ -5,7 +5,8 @@ rules, change ledger.
 
 **Behavior boundaries**:
 
-- Markdown is the only truth; every interface is a projection and never enters the repo.
+- Markdown is the only truth; every interface is a projection — it holds no facts, rebuilds
+  wholesale from markdown, and may be committed and shared without ever becoming truth.
 - Projection sync discipline: a truth change rebuilds its projections the same turn, the
   order always markdown first then HTML; editing only the HTML is forbidden.
 - Frontmatter carries the schema (enforced by the validator); a card's structure =
